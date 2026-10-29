@@ -99,5 +99,6 @@ Keyboard (laptop): `1`–`6` select · `Enter` check / next · `N` next · `I` I
 * The estimated score assumes the real exam resembles this bank; treat it as a trend, not a promise.
 * Sync needs a (free) Supabase project you create yourself; free projects pause after 7 days without
   traffic (a scheduled GitHub Action pings it twice a week; no data is lost if it does pause).
-* On iPhone, the home-screen app and Safari have separate storage: sign in inside the installed app.
+* On iPhone, the home-screen app and Safari have separate storage: sign in inside the installed app
+  (email + password; emailed codes need a custom SMTP server on Supabase's free plan).
 * Lessons are concise cheat-sheets written for this app, not a replacement for the slides.

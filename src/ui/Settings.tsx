@@ -16,6 +16,8 @@ function SyncCard() {
   const [email, setEmail] = useState('');
   const [code, setCode] = useState('');
   const [step, setStep] = useState<'email' | 'code'>('email');
+  const [method, setMethod] = useState<'password' | 'code'>('password');
+  const [password, setPassword] = useState('');
   const [msg, setMsg] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const run = async (fn: () => Promise<void>) => {
@@ -39,11 +41,68 @@ function SyncCard() {
           sync.
         </p>
       )}
-      {syncBackend !== 'none' && !auth.user && (
+      {syncBackend !== 'none' && !auth.user && method === 'password' && (
         <>
           <p className="small muted" style={{ margin: 0 }}>
-            Sign in with your email: you receive a 6-digit code (type it here — works inside the installed app) or a link. Use the same email on every
-            device.
+            Use the same email and password on every device. The first time, tap <b>Create account</b> and click the confirmation link Supabase emails you
+            (any browser), then come back and <b>Sign in</b>.
+          </p>
+          <form
+            className="stack"
+            style={{ gap: 8 }}
+            onSubmit={(e) => {
+              e.preventDefault();
+              void run(async () => {
+                await authApi.signInWithPassword(email.trim(), password);
+                setMsg('Signed in. Syncing…');
+              });
+            }}
+          >
+            <input type="email" required placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="username" />
+            <input
+              type="password"
+              required
+              minLength={8}
+              placeholder="Password (8+ characters)"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              autoComplete="current-password"
+            />
+            <div className="row">
+              <button className="btn primary" disabled={busy}>
+                Sign in
+              </button>
+              <button
+                type="button"
+                className="btn"
+                disabled={busy || !email.includes('@') || password.length < 8}
+                onClick={() =>
+                  void run(async () => {
+                    const signedIn = await authApi.signUp(email.trim(), password);
+                    setMsg(
+                      signedIn
+                        ? 'Account created and signed in. Syncing…'
+                        : 'Account created. Open the confirmation email (check spam), click the link once, then come back here and Sign in.',
+                    );
+                  })
+                }
+              >
+                Create account
+              </button>
+              <button type="button" className="btn ghost small" onClick={() => setMethod('code')}>
+                Use an email code instead
+              </button>
+            </div>
+          </form>
+        </>
+      )}
+      {syncBackend !== 'none' && !auth.user && method === 'code' && (
+        <>
+          <p className="small muted" style={{ margin: 0 }}>
+            Email code / link sign-in (needs a custom email template with the code; otherwise open the emailed link on this same device).{' '}
+            <button type="button" className="btn ghost small" onClick={() => setMethod('password')}>
+              Back to password
+            </button>
           </p>
           {step === 'email' ? (
             <form

@@ -54,6 +54,26 @@ async function initAuth() {
 }
 
 export const authApi = {
+  /** Email + password: works inside an installed iOS PWA and needs no custom email template. */
+  async signInWithPassword(email: string, password: string) {
+    if (!supabase) throw new Error('Sync is not configured');
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) {
+      if (/not confirmed/i.test(error.message)) throw new Error('Email not confirmed yet: click the link in the confirmation email first (check spam).');
+      throw new Error(error.message);
+    }
+  },
+  /** Returns true when the account is usable immediately (email confirmation disabled in Supabase). */
+  async signUp(email: string, password: string): Promise<boolean> {
+    if (!supabase) throw new Error('Sync is not configured');
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: { emailRedirectTo: location.origin + location.pathname },
+    });
+    if (error) throw new Error(error.message);
+    return !!data.session;
+  },
   async sendCode(email: string) {
     if (!supabase) throw new Error('Sync is not configured');
     const { error } = await supabase.auth.signInWithOtp({

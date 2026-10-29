@@ -65,12 +65,12 @@ taken, sync cursor) lives in a small key-value store in the same IndexedDB.
 
 ## Sync — choice and justification
 
-**Choice: Supabase free tier** (managed Postgres + Auth), email one-time code / magic link,
-static app on GitHub Pages.
+**Choice: Supabase free tier** (managed Postgres + Auth), email + password sign-in (an email
+one-time code is also supported when a custom SMTP server is configured), static app on GitHub Pages.
 
 | Option | Verdict |
 |---|---|
-| **Supabase** | ✅ Free tier (500 MB DB, 50 000 monthly users), real Postgres with row-level security, email OTP codes that work *inside* an installed iOS PWA, no server to run. Downside: free projects pause after 7 days without traffic → mitigated by the twice-weekly GitHub Actions ping (`.github/workflows/keepalive.yml`), and even when paused nothing is lost (data stays, the app keeps working offline and syncs after a one-click "Restore"). |
+| **Supabase** | ✅ Free tier (500 MB DB, 50 000 monthly users), real Postgres with row-level security, email + password sign-in that works *inside* an installed iOS PWA (no redirect), no server to run. Downside: free projects pause after 7 days without traffic → mitigated by the twice-weekly GitHub Actions ping (`.github/workflows/keepalive.yml`), and even when paused nothing is lost (data stays, the app keeps working offline and syncs after a one-click "Restore"). |
 | Firebase Firestore | Good free tier and no pausing, but Google sign-in redirects/popups and email *links* are unreliable in iOS standalone PWAs (the link opens Safari, which has a separate storage), and listener re-reads after 30 min offline burn the read quota. |
 | CouchDB/PouchDB, Gun, CRDT relays | Need a server you host, or immature free hosting. |
 | GitHub Gist / Dropbox file | Whole-file overwrite → real conflict risk, token handling in the browser. |

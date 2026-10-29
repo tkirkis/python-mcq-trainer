@@ -64,23 +64,16 @@ gh repo create python-mcq-trainer --public --source . --push
    *West EU (Paris)*). Wait ~2 minutes until it is ready.
 2. **SQL Editor → New query**: paste the whole content of [`supabase/schema.sql`](../supabase/schema.sql)
    → **Run**. It creates the append-only `events` table with row-level security.
-3. **Authentication → Sign In / Providers → Email**: keep *Enable Email provider* on.
-   (Keep "Confirm email" on.)
-4. **Authentication → Emails → Templates → Magic Link**: replace the body with the following so
-   the email contains a 6-digit code you can type in the installed app (links open Safari, not the
-   home-screen app, on iPhone):
-
-   ```html
-   <h2>Your PyQuiz code</h2>
-   <p>Code: <strong>{{ .Token }}</strong></p>
-   <p>Or open this link on the same device: <a href="{{ .ConfirmationURL }}">sign in</a></p>
-   ```
-
-   Do the same for the **Confirm signup** template (used the very first time).
-5. **Authentication → URL Configuration**: *Site URL* = your app URL from step 2
+3. Nothing to change in **Authentication → Sign In / Providers → Email**: the Email provider and
+   "Confirm email" are on by default. You sign in with **email + password**, which works inside the
+   installed iPhone app and needs no custom email. (Supabase no longer lets free projects edit email
+   templates without your own SMTP server, so the optional "email code" method only works if you
+   add SMTP under *Authentication → Emails → SMTP Settings*.)
+4. *(nothing to do — kept for numbering)*
+5. **Authentication → URL Configuration** (under *CONFIGURATION*): *Site URL* = your app URL from step 2
    (e.g. `https://<user>.github.io/python-mcq-trainer/`); add the same URL and
    `http://localhost:5173/` under *Redirect URLs*.
-6. **Project Settings → API**: copy the **Project URL** and the **anon public** key (this key is
+6. **Project Settings** (gear icon, bottom left) → **API Keys** / **Data API**: copy the **Project URL** and the **anon public** key (this key is
    meant to be public; your data is protected by row-level security).
    - GitHub repository → **Settings → Secrets and variables → Actions → Variables** →
      *New repository variable*: `SUPABASE_URL` = the URL, `SUPABASE_ANON_KEY` = the key.
@@ -91,9 +84,10 @@ gh repo create python-mcq-trainer --public --source . --push
      printf 'VITE_SUPABASE_URL=%s\nVITE_SUPABASE_ANON_KEY=%s\n' 'https://xxxx.supabase.co' 'eyJ...' > .env.local
      ```
 
-7. Open the app → ⚙︎ Settings → *Sync between devices* → your email → **Send code** → type the
-   code → **Verify**. The pill at the top turns to **Synced**. Do the same on every device with the
-   same email.
+7. Open the app → ⚙︎ Settings → *Sync between devices* → your email + a password (8+ characters)
+   → **Create account**. Click the link in the confirmation email once (any browser; check spam),
+   then back in the app → **Sign in**. The pill at the top turns to **Synced**. On every other
+   device: same email and password → **Sign in** (no email needed).
 8. Optional, once all your devices are signed in: **Authentication → Sign In / Providers →**
    disable *Allow new users to sign up*, so nobody else can create an account on your project.
 
@@ -106,7 +100,7 @@ project*. Nothing is lost meanwhile — the app keeps working offline and upload
 
 **iPhone (Safari):** open the app URL → Share button → **Add to Home Screen** → Add. Launch it
 from the home screen (it runs full screen and offline), then sign in inside the app (Settings →
-code by email). Note: the home-screen app has its own storage, separate from Safari tabs — sign
+email + password). Note: the home-screen app has its own storage, separate from Safari tabs — sign
 in there, not in Safari.
 
 **Android (Chrome):** open the URL → ⋮ menu → **Install app** (or *Add to Home screen*).
@@ -127,8 +121,9 @@ New versions are downloaded in the background and used at the next launch.
 
 | Problem | Fix |
 |---|---|
-| Pill says **Sign in to sync** | Settings → enter email → code. |
-| No email arrives | Check spam. Supabase's built-in mailer sends only a few emails per hour: wait a bit. |
+| Pill says **Sign in to sync** | Settings → email + password → Sign in. |
+| No confirmation email | Check spam. Supabase's built-in mailer sends only a few emails per hour: wait a bit. |
+| "Email not confirmed" | Click the link in the confirmation email first, then Sign in again. |
 | **Sync error** | Tap the pill → Settings shows the message. Usually the project is paused (restore it) or the SQL of step 3.2 was not run. |
 | App shows old questions | Close and reopen the app (the update applies at the next launch). |
 | `npm run build` fails on verification | A question's marked answer does not match real Python: run `npm run verify` and fix the JSON. |
