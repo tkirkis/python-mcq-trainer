@@ -41,7 +41,8 @@ GitHub Pages is free for **public** repositories (and for private ones with GitH
 students get free with the GitHub Student Developer Pack). The repository contains no secret and
 no slide text, only the questions and lessons written for this app.
 
-🔑 You are already logged in to the GitHub CLI (`gh auth status`). Then:
+🔑 Log in to the GitHub CLI once with permission to push workflows (`gh auth login`, then
+`gh auth refresh -s workflow`), and from the project folder:
 
 ```bash
 gh repo create python-mcq-trainer --public --source . --push
@@ -54,7 +55,7 @@ gh repo create python-mcq-trainer --public --source . --push
 3. Your app is at `https://<your-github-username>.github.io/python-mcq-trainer/`.
 
 *Alternative without GitHub:* `npm run build`, then drag the `dist` folder onto
-<https://app.netlify.com/drop> (free account). For sync, put the two variables of step 3.6 in a
+<https://app.netlify.com/drop> (free account). For sync, put the two variables of step 3.5 in a
 `.env.local` file before building.
 
 ## 3. Turn on sync between laptop and phone (Supabase, 10 min)
@@ -69,11 +70,10 @@ gh repo create python-mcq-trainer --public --source . --push
    installed iPhone app and needs no custom email. (Supabase no longer lets free projects edit email
    templates without your own SMTP server, so the optional "email code" method only works if you
    add SMTP under *Authentication → Emails → SMTP Settings*.)
-4. *(nothing to do — kept for numbering)*
-5. **Authentication → URL Configuration** (under *CONFIGURATION*): *Site URL* = your app URL from step 2
+4. **Authentication → URL Configuration** (under *CONFIGURATION*): *Site URL* = your app URL from step 2
    (e.g. `https://<user>.github.io/python-mcq-trainer/`); add the same URL and
    `http://localhost:5173/` under *Redirect URLs*.
-6. **Project Settings** (gear icon, bottom left) → **API Keys** / **Data API**: copy the **Project URL** and the **anon public** key (this key is
+5. **Project Settings** (gear icon, bottom left) → **API Keys** / **Data API**: copy the **Project URL** and the **anon public** key (this key is
    meant to be public; your data is protected by row-level security).
    - GitHub repository → **Settings → Secrets and variables → Actions → Variables** →
      *New repository variable*: `SUPABASE_URL` = the URL, `SUPABASE_ANON_KEY` = the key.
@@ -84,11 +84,11 @@ gh repo create python-mcq-trainer --public --source . --push
      printf 'VITE_SUPABASE_URL=%s\nVITE_SUPABASE_ANON_KEY=%s\n' 'https://xxxx.supabase.co' 'eyJ...' > .env.local
      ```
 
-7. Open the app → ⚙︎ Settings → *Sync between devices* → your email + a password (8+ characters)
+6. Open the app → ⚙︎ Settings → *Sync between devices* → your email + a password (8+ characters)
    → **Create account**. Click the link in the confirmation email once (any browser; check spam),
    then back in the app → **Sign in**. The pill at the top turns to **Synced**. On every other
    device: same email and password → **Sign in** (no email needed).
-8. Optional, once all your devices are signed in: **Authentication → Sign In / Providers →**
+7. Optional, once all your devices are signed in: **Authentication → Sign In / Providers →**
    disable *Allow new users to sign up*, so nobody else can create an account on your project.
 
 **Keep-alive.** Free Supabase projects pause after 7 days without any request. The workflow

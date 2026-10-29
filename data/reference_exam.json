@@ -1,6 +1,6 @@
 {
-  "title": "Quiz Python - MSc DSBA - 2021-2022 (reconstructed from screenshots)",
-  "notes": "Transcribed from the 40 screenshots of the 2021-22 exam. The answers ticked in the screenshots are NOT trusted: every `correct` field below was determined independently and checked by executing the code (scripts/verify_questions.py). `past_exam.ticked` records what was ticked in the screenshot, `ticked_correct` whether it was right. Exam page 39 contained two questions (39a/39b), page 23 was never captured (only its sidebar title) and is reconstructed.",
+  "title": "Python MCQ exam 2021-2022 (reconstructed)",
+  "notes": "The 40 questions of the 2021-22 exam (page 39 holds two questions, 39a/39b). Every answer is verified by executing the code (scripts/verify_questions.py). PE-15 and PE-23 are partly reconstructed; obvious transcription artefacts are fixed and flagged as quirks.",
   "questions": [
     {
       "id": "PE-01",
@@ -60,12 +60,7 @@
       "quirk_note": "Written in Python 2 syntax: in Python 3 `print tuple[2:]` is a SyntaxError and must be `print(tuple[2:])`. The exam clearly meant the Python 3 reading. Naming a variable `tuple` also shadows the built-in type - legal, but bad practice.",
       "reviewed": 2,
       "past_exam": {
-        "page": 1,
-        "screenshot": "Screenshot 2021-12-15 at 14.55.30.png",
-        "ticked": [
-          "c"
-        ],
-        "ticked_correct": true
+        "page": 1
       }
     },
     {
@@ -119,12 +114,7 @@
       },
       "reviewed": 2,
       "past_exam": {
-        "page": 2,
-        "screenshot": "Screenshot 2021-12-15 at 14.55.33.png",
-        "ticked": [
-          "c"
-        ],
-        "ticked_correct": false
+        "page": 2
       }
     },
     {
@@ -176,12 +166,7 @@
       },
       "reviewed": 2,
       "past_exam": {
-        "page": 3,
-        "screenshot": "Screenshot 2021-12-15 at 14.55.38.png",
-        "ticked": [
-          "d"
-        ],
-        "ticked_correct": true
+        "page": 3
       }
     },
     {
@@ -237,12 +222,7 @@
       },
       "reviewed": 2,
       "past_exam": {
-        "page": 4,
-        "screenshot": "Screenshot 2021-12-15 at 14.55.41.png",
-        "ticked": [
-          "d"
-        ],
-        "ticked_correct": false
+        "page": 4
       }
     },
     {
@@ -301,12 +281,7 @@
       },
       "reviewed": 2,
       "past_exam": {
-        "page": 5,
-        "screenshot": "Screenshot 2021-12-15 at 14.55.45.png",
-        "ticked": [
-          "a"
-        ],
-        "ticked_correct": false
+        "page": 5
       }
     },
     {
@@ -353,12 +328,7 @@
       "expected_output": "ok",
       "reviewed": 2,
       "past_exam": {
-        "page": 6,
-        "screenshot": "Screenshot 2021-12-15 at 14.55.48.png",
-        "ticked": [
-          "a"
-        ],
-        "ticked_correct": false
+        "page": 6
       }
     },
     {
@@ -413,12 +383,7 @@
       },
       "reviewed": 2,
       "past_exam": {
-        "page": 7,
-        "screenshot": "Screenshot 2021-12-15 at 14.55.51.png",
-        "ticked": [
-          "c"
-        ],
-        "ticked_correct": false
+        "page": 7
       }
     },
     {
@@ -484,12 +449,7 @@
       },
       "reviewed": 2,
       "past_exam": {
-        "page": 8,
-        "screenshot": "Screenshot 2021-12-15 at 14.55.54.png",
-        "ticked": [
-          "b"
-        ],
-        "ticked_correct": false
+        "page": 8
       }
     },
     {
@@ -547,12 +507,7 @@
       },
       "reviewed": 2,
       "past_exam": {
-        "page": 9,
-        "screenshot": "Screenshot 2021-12-15 at 14.55.57.png",
-        "ticked": [
-          "a"
-        ],
-        "ticked_correct": true
+        "page": 9
       }
     },
     {
@@ -611,12 +566,7 @@
       },
       "reviewed": 2,
       "past_exam": {
-        "page": 10,
-        "screenshot": "Screenshot 2021-12-15 at 14.56.01.png",
-        "ticked": [
-          "d"
-        ],
-        "ticked_correct": true
+        "page": 10
       }
     },
     {
@@ -678,12 +628,7 @@
       "quirk_note": "The exam displayed `Demo(''Hello'')` (two single quotes on each side, a rendering artefact of double quotes). Taken literally that line is a SyntaxError; it is transcribed here with normal double quotes.",
       "reviewed": 2,
       "past_exam": {
-        "page": 11,
-        "screenshot": "Screenshot 2021-12-15 at 14.56.04.png",
-        "ticked": [
-          "d"
-        ],
-        "ticked_correct": false
+        "page": 11
       }
     },
     {
@@ -742,13 +687,7 @@
       },
       "reviewed": 2,
       "past_exam": {
-        "page": 12,
-        "screenshot": "Screenshot 2021-12-15 at 14.56.07.png",
-        "ticked": [
-          "c",
-          "d"
-        ],
-        "ticked_correct": false
+        "page": 12
       }
     },
     {
@@ -804,12 +743,7 @@
       },
       "reviewed": 2,
       "past_exam": {
-        "page": 13,
-        "screenshot": "Screenshot 2021-12-15 at 14.56.10.png",
-        "ticked": [
-          "c"
-        ],
-        "ticked_correct": true
+        "page": 13
       }
     },
     {
@@ -865,12 +799,7 @@
       },
       "reviewed": 2,
       "past_exam": {
-        "page": 14,
-        "screenshot": "Screenshot 2021-12-15 at 14.56.13.png",
-        "ticked": [
-          "d"
-        ],
-        "ticked_correct": false
+        "page": 14
       }
     },
     {
@@ -943,17 +872,10 @@
         "mode": "truth"
       },
       "reconstructed": true,
-      "quirk_note": "The class definitions were scrolled out of the screenshot; they are reconstructed from the well-known source of this question (Real Python OOP quiz: miles/buddy/jack/jim). The six REPL options are transcribed exactly.",
+      "quirk_note": "The class definitions are reconstructed (the original question only showed the six REPL lines); they follow the well-known source of this question (miles/buddy/jack). The six options are exact.",
       "reviewed": 2,
       "past_exam": {
-        "page": 15,
-        "screenshot": "Screenshot 2021-12-15 at 14.58.00.png",
-        "ticked": [
-          "a",
-          "b",
-          "f"
-        ],
-        "ticked_correct": false
+        "page": 15
       }
     },
     {
@@ -1005,12 +927,7 @@
       },
       "reviewed": 2,
       "past_exam": {
-        "page": 16,
-        "screenshot": "Screenshot 2021-12-15 at 14.58.02.png",
-        "ticked": [
-          "d"
-        ],
-        "ticked_correct": false
+        "page": 16
       }
     },
     {
@@ -1069,12 +986,7 @@
       },
       "reviewed": 2,
       "past_exam": {
-        "page": 17,
-        "screenshot": "Screenshot 2021-12-15 at 14.58.05.png",
-        "ticked": [
-          "c"
-        ],
-        "ticked_correct": true
+        "page": 17
       }
     },
     {
@@ -1132,12 +1044,7 @@
       "expected_output": "!AttributeError",
       "reviewed": 2,
       "past_exam": {
-        "page": 18,
-        "screenshot": "Screenshot 2021-12-15 at 14.58.07.png",
-        "ticked": [
-          "d"
-        ],
-        "ticked_correct": true
+        "page": 18
       }
     },
     {
@@ -1190,12 +1097,7 @@
       },
       "reviewed": 2,
       "past_exam": {
-        "page": 19,
-        "screenshot": "Screenshot 2021-12-15 at 14.58.09.png",
-        "ticked": [
-          "a"
-        ],
-        "ticked_correct": true
+        "page": 19
       }
     },
     {
@@ -1252,12 +1154,7 @@
       },
       "reviewed": 2,
       "past_exam": {
-        "page": 20,
-        "screenshot": "Screenshot 2021-12-15 at 14.58.12.png",
-        "ticked": [
-          "b"
-        ],
-        "ticked_correct": true
+        "page": 20
       }
     },
     {
@@ -1310,12 +1207,7 @@
       },
       "reviewed": 2,
       "past_exam": {
-        "page": 21,
-        "screenshot": "Screenshot 2021-12-15 at 14.58.13.png",
-        "ticked": [
-          "b"
-        ],
-        "ticked_correct": false
+        "page": 21
       }
     },
     {
@@ -1371,12 +1263,7 @@
       },
       "reviewed": 2,
       "past_exam": {
-        "page": 22,
-        "screenshot": "Screenshot 2021-12-15 at 14.58.15.png",
-        "ticked": [
-          "d"
-        ],
-        "ticked_correct": false
+        "page": 22
       }
     },
     {
@@ -1430,13 +1317,10 @@
         "mode": "output"
       },
       "reconstructed": true,
-      "quirk_note": "Page 23 was never captured: only its truncated sidebar title is visible ('What will be the output of the code? x = 1...'). Reconstructed as the classic question from the same MCQ source family.",
+      "quirk_note": "Only the beginning of this question is known (\"What will be the output of the code? x = 1…\"); it is reconstructed as the classic question it matches.",
       "reviewed": 2,
       "past_exam": {
-        "page": 23,
-        "ticked": [],
-        "ticked_correct": null,
-        "original_text": "Sidebar title only: 'What will be the output of the code? x = 1...'"
+        "page": 23
       }
     },
     {
@@ -1491,12 +1375,7 @@
       },
       "reviewed": 2,
       "past_exam": {
-        "page": 24,
-        "screenshot": "Screenshot 2021-12-15 at 14.58.17.png",
-        "ticked": [
-          "d"
-        ],
-        "ticked_correct": false
+        "page": 24
       }
     },
     {
@@ -1556,12 +1435,7 @@
       "quirk_note": "The exam displayed `min(''hello world'')` (rendering artefact of double quotes).",
       "reviewed": 2,
       "past_exam": {
-        "page": 25,
-        "screenshot": "Screenshot 2021-12-15 at 14.58.20.png",
-        "ticked": [
-          "c"
-        ],
-        "ticked_correct": false
+        "page": 25
       }
     },
     {
@@ -1622,12 +1496,7 @@
       },
       "reviewed": 2,
       "past_exam": {
-        "page": 26,
-        "screenshot": "Screenshot 2021-12-15 at 14.58.22.png",
-        "ticked": [
-          "a"
-        ],
-        "ticked_correct": true
+        "page": 26
       }
     },
     {
@@ -1686,13 +1555,7 @@
       },
       "reviewed": 2,
       "past_exam": {
-        "page": 27,
-        "screenshot": "Screenshot 2021-12-15 at 14.58.24.png",
-        "ticked": [
-          "b",
-          "d"
-        ],
-        "ticked_correct": true
+        "page": 27
       }
     },
     {
@@ -1745,12 +1608,7 @@
       },
       "reviewed": 2,
       "past_exam": {
-        "page": 28,
-        "screenshot": "Screenshot 2021-12-15 at 14.58.26.png",
-        "ticked": [
-          "b"
-        ],
-        "ticked_correct": false
+        "page": 28
       }
     },
     {
@@ -1810,12 +1668,7 @@
       "quirk_note": "Sloppy option wording: because negative indices are valid, the program really prints '15 14 13 12 11 15 14 13 12 11' before the IndexError. (a) is still the only acceptable answer.",
       "reviewed": 2,
       "past_exam": {
-        "page": 29,
-        "screenshot": "Screenshot 2021-12-15 at 14.58.28.png (duplicate: 14.58.33)",
-        "ticked": [
-          "a"
-        ],
-        "ticked_correct": true
+        "page": 29
       }
     },
     {
@@ -1875,12 +1728,7 @@
       "quirk_note": "'StackOverflowError' is the Java name; Python raises RecursionError. The exam's intended answer is still (a).",
       "reviewed": 2,
       "past_exam": {
-        "page": 30,
-        "screenshot": "Screenshot 2021-12-15 at 14.58.35.png",
-        "ticked": [
-          "d"
-        ],
-        "ticked_correct": false
+        "page": 30
       }
     },
     {
@@ -1934,12 +1782,7 @@
       },
       "reviewed": 2,
       "past_exam": {
-        "page": 31,
-        "screenshot": "Screenshot 2021-12-15 at 14.58.37.png",
-        "ticked": [
-          "a"
-        ],
-        "ticked_correct": false
+        "page": 31
       }
     },
     {
@@ -1984,12 +1827,7 @@
       },
       "reviewed": 2,
       "past_exam": {
-        "page": 32,
-        "screenshot": "Screenshot 2021-12-15 at 14.58.39.png",
-        "ticked": [
-          "a"
-        ],
-        "ticked_correct": true
+        "page": 32
       }
     },
     {
@@ -2042,12 +1880,7 @@
       },
       "reviewed": 2,
       "past_exam": {
-        "page": 33,
-        "screenshot": "Screenshot 2021-12-15 at 14.58.42.png",
-        "ticked": [
-          "c"
-        ],
-        "ticked_correct": true
+        "page": 33
       }
     },
     {
@@ -2104,12 +1937,7 @@
       "quirk_note": "In the exam the dict was named `My_dictionary` but the loops used `My_Dictionary` (capital D): taken literally every option raises NameError. The typo is fixed here; the intended answer is unaffected.",
       "reviewed": 2,
       "past_exam": {
-        "page": 34,
-        "screenshot": "Screenshot 2021-12-15 at 14.58.44.png",
-        "ticked": [
-          "c"
-        ],
-        "ticked_correct": false
+        "page": 34
       }
     },
     {
@@ -2162,12 +1990,7 @@
       },
       "reviewed": 2,
       "past_exam": {
-        "page": 35,
-        "screenshot": "Screenshot 2021-12-15 at 14.58.46.png",
-        "ticked": [
-          "b"
-        ],
-        "ticked_correct": true
+        "page": 35
       }
     },
     {
@@ -2220,12 +2043,7 @@
       },
       "reviewed": 2,
       "past_exam": {
-        "page": 36,
-        "screenshot": "Screenshot 2021-12-15 at 14.58.48.png",
-        "ticked": [
-          "c"
-        ],
-        "ticked_correct": true
+        "page": 36
       }
     },
     {
@@ -2283,12 +2101,7 @@
       },
       "reviewed": 2,
       "past_exam": {
-        "page": 37,
-        "screenshot": "Screenshot 2021-12-15 at 14.58.50.png",
-        "ticked": [
-          "c"
-        ],
-        "ticked_correct": true
+        "page": 37
       }
     },
     {
@@ -2351,12 +2164,7 @@
       },
       "reviewed": 2,
       "past_exam": {
-        "page": 38,
-        "screenshot": "Screenshot 2021-12-15 at 14.58.52.png",
-        "ticked": [
-          "c"
-        ],
-        "ticked_correct": false
+        "page": 38
       },
       "quirk": true,
       "quirk_note": "Debatable item: \"Hello\" + \"6\" also produces 'Hello6', so some students defend \"Both 2 and 3\". The key follows the strict reading of \"integer 6\": only option 3 uses the integer."
@@ -2413,12 +2221,7 @@
       },
       "reviewed": 2,
       "past_exam": {
-        "page": 39,
-        "screenshot": "Screenshot 2021-12-15 at 14.58.57.png",
-        "ticked": [
-          "b"
-        ],
-        "ticked_correct": true
+        "page": 39
       }
     },
     {
@@ -2474,12 +2277,7 @@
       },
       "reviewed": 2,
       "past_exam": {
-        "page": 39,
-        "screenshot": "Screenshot 2021-12-15 at 14.59.00.png",
-        "ticked": [
-          "a"
-        ],
-        "ticked_correct": true
+        "page": 39
       }
     }
   ]

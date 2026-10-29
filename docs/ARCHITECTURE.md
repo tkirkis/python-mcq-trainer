@@ -63,17 +63,13 @@ the same state — this is what makes the sync conflict-free.
 In-progress state that only matters on one device (current practice session, mock exam being
 taken, sync cursor) lives in a small key-value store in the same IndexedDB.
 
-## Sync — choice and justification
+## Sync
 
-**Choice: Supabase free tier** (managed Postgres + Auth), email + password sign-in (an email
-one-time code is also supported when a custom SMTP server is configured), static app on GitHub Pages.
-
-| Option | Verdict |
-|---|---|
-| **Supabase** | ✅ Free tier (500 MB DB, 50 000 monthly users), real Postgres with row-level security, email + password sign-in that works *inside* an installed iOS PWA (no redirect), no server to run. Downside: free projects pause after 7 days without traffic → mitigated by the twice-weekly GitHub Actions ping (`.github/workflows/keepalive.yml`), and even when paused nothing is lost (data stays, the app keeps working offline and syncs after a one-click "Restore"). |
-| Firebase Firestore | Good free tier and no pausing, but Google sign-in redirects/popups and email *links* are unreliable in iOS standalone PWAs (the link opens Safari, which has a separate storage), and listener re-reads after 30 min offline burn the read quota. |
-| CouchDB/PouchDB, Gun, CRDT relays | Need a server you host, or immature free hosting. |
-| GitHub Gist / Dropbox file | Whole-file overwrite → real conflict risk, token handling in the browser. |
+Sync uses a free **Supabase** project (managed Postgres + Auth) with email + password sign-in, which
+works inside an installed iOS PWA (no redirect); an emailed one-time code is also supported when a
+custom SMTP server is configured. Free projects pause after 7 days without requests: the
+`.github/workflows/keepalive.yml` workflow pings the database twice a week, and even while paused the
+app keeps working offline and uploads afterwards.
 
 **Protocol** (`src/lib/sync/engine.ts`, `src/lib/sync/remotes.ts`):
 

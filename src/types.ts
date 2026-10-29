@@ -25,7 +25,7 @@ export interface Question {
   quirk?: boolean;
   quirkNote?: string;
   reconstructed?: boolean;
-  pastExam?: { page: number; ticked: string[]; tickedCorrect: boolean | null };
+  pastExam?: { page: number };
 }
 
 export interface Topic {

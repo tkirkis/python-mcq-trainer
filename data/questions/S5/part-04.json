@@ -69,7 +69,7 @@
     "difficulty": 3,
     "source": "generated",
     "stem": "What happens in the below code?",
-    "code": "class Person:\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n\nclass Student(Person):\n    def __init__(self, name, age, school):\n        super().__init__(self, name, age)\n        self.school = school\n\ns = Student('Tom', 20, 'ESSEC')\nprint(s.name)",
+    "code": "class Person:\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n\nclass Student(Person):\n    def __init__(self, name, age, school):\n        super().__init__(self, name, age)\n        self.school = school\n\ns = Student('Tom', 20, 'Uni')\nprint(s.name)",
     "options": [
       {
         "id": "a",

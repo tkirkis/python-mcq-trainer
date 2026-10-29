@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Spread the position of the correct answer evenly over a, b, c, d (per chapter).
 
-Question writers (human or LLM) tend to put the right answer first; a student would learn
-"when in doubt, pick a". This script moves the correct option of single-choice questions
+Keeps the answer position from becoming a hint: if one letter is correct too often, a student
+learns "when in doubt, pick a". This script moves the correct option of single-choice questions
 in data/questions/ by swapping it with another option, relabels ids a, b, c... and remaps
 `correct` and `distractor_notes`. Per-option fields (`out`, `probe`, `mono`) travel with
 their option, so verification is unaffected (re-run scripts/verify_questions.py anyway).

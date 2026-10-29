@@ -59,7 +59,7 @@ for (const q of questions) {
     ...(q.quirk ? { quirk: true } : {}),
     ...(q.quirk_note ? { quirkNote: q.quirk_note } : {}),
     ...(q.reconstructed ? { reconstructed: true } : {}),
-    ...(q.past_exam ? { pastExam: { page: q.past_exam.page, ticked: q.past_exam.ticked ?? [], tickedCorrect: q.past_exam.ticked_correct ?? null } } : {}),
+    ...(q.past_exam ? { pastExam: { page: q.past_exam.page } } : {}),
   });
 }
 

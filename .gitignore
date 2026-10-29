@@ -11,3 +11,6 @@ playwright-report/
 .DS_Store
 dist-e2e/
 data/verification_report.json
+
+# copies created by iCloud/Finder sync conflicts ("file 2.md")
+* [0-9].*

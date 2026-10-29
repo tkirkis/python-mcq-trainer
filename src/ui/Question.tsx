@@ -110,9 +110,7 @@ export function Explanation({ q, ok, idk }: { q: Question; ok?: boolean; idk?: b
       </div>
       {q.pastExam && (
         <div className="small muted">
-          2021-22 exam, page {q.pastExam.page}. Ticked in the screenshot:{' '}
-          {q.pastExam.ticked.length ? q.pastExam.ticked.join(', ') : '—'}{' '}
-          {q.pastExam.tickedCorrect === null ? '' : q.pastExam.tickedCorrect ? '(right)' : '(wrong)'}
+          From the 2021-22 exam, question {q.pastExam.page}.
         </div>
       )}
     </div>

@@ -1,21 +1,21 @@
-# PyQuiz — Python MCQ exam trainer (MSc DSBA)
+# PyQuiz — Python MCQ exam trainer
 
-An offline-first web app (installable on phone and laptop) to prepare the 40-question / 1-hour
-MCQ exam of the MSc DSBA Python course (F. Popineau, slides of 31/08/2025).
+An offline-first web app, installable on phone and laptop, to prepare a 40-question / 1-hour
+Python multiple-choice exam. **Live app: <https://tkirkis.github.io/python-mcq-trainer/>**
 
-* **Learn** each chapter: a cheat-sheet lesson per topic, then questions easy → hard with instant
-  feedback (why the answer is right, why each distractor is wrong, slide pages).
-* **Practice** with filters (chapter, topic, difficulty, type, weak spots, due, never seen,
-  2021-22 exam only) in 5 / 10 / 20 / endless sessions; **Smart practice** for the commute.
-* **Mock exams** that copy the real platform: 40 questions, 60-minute timer, sidebar, ANSWER /
-  I DON'T KNOW, no feedback until the end, resume after interruption, results per chapter, full
-  review, "retry only my mistakes". Variants: *same as last year*, *full syllabus*,
-  *reference replay* (the reconstructed 2021-22 exam), *hard mode*.
+* **Learn** chapter by chapter: a cheat-sheet lesson per topic, then questions easy → hard with
+  instant feedback — why the answer is right, why each distractor is wrong, which slides to reread.
+* **Practice** with filters (chapter, topic, difficulty, type, weak spots, due for review, never seen,
+  past exam only) in 5 / 10 / 20 / endless sessions, or **Smart practice** for a 10-minute commute.
+* **Mock exams** that reproduce the real quiz platform: 40 questions, 60-minute timer, question
+  sidebar, ANSWER / I DON'T KNOW, no feedback until the end, resume after an interruption, results per
+  chapter, full review and "retry only my mistakes". Variants: *same as last year*, *full syllabus*,
+  *reference replay* (the 2021-22 exam) and *hard mode*.
 * **Spaced repetition**: every wrong, skipped or guessed answer enters a Leitner review queue.
-* **Dashboard**: accuracy and mastery heatmap, estimated exam score with an honest range, mock
-  history, streak and daily goal, confidence check (lucky guesses / overconfidence), most missed.
-* **Sync** between devices (free Supabase), conflict-free (append-only events, union merge), with a
-  status pill; works fully offline and without an account too.
+* **Progress**: mastery heatmap, estimated exam score with an honest range, mock history, streak and
+  daily goal, confidence check (lucky guesses and overconfidence), most-missed questions.
+* **Sync** between devices with a free Supabase project (optional): conflict-free, works offline,
+  status shown in the top bar. Export / import a JSON backup at any time.
 
 ## The question bank
 
@@ -31,20 +31,26 @@ MCQ exam of the MSc DSBA Python course (F. Popineau, slides of 31/08/2025).
 | S8 Web applications | 279–319 | 60 | 0 | 10 | 22 / 27 / 11 | 33 (55%) |
 | **Total** | 1–319 | **840** | 40 | 134 (16%) | 259 / 379 / 202 | **783 (93%)** |
 
-S6–S8 (not tested last year): 242 questions (29%). The other 57 are conceptual (HTTP, PEP 8, MVC, …) and were reviewed independently twice. Every question was also re-read by a second, independent reviewer (no wrong answer key found; 44 questions tightened).
+* **Every answer key is checked by running the code.** `scripts/verify_questions.py` executes each
+  question in a sandboxed `python -I` subprocess (NumPy, Pandas, Matplotlib and Flask included),
+  compares the real output with the marked option and fails if a wrong option also matches. Questions
+  that cannot be executed (HTTP, PEP 8, MVC, …) are reviewed twice. The build stops on any failure.
+* Every question has been reviewed twice; S6–S8 are also verified on NumPy 2.1 / pandas 2.2.
+* The 2021-22 exam is included as [`data/reference_exam.json`](data/reference_exam.json); its format,
+  patterns and the blueprint used by the mock exams are described in
+  [`docs/exam_analysis.md`](docs/exam_analysis.md).
+* Add your own questions: [`docs/QUESTION_AUTHORING.md`](docs/QUESTION_AUTHORING.md).
 
-Every answer key is checked by `scripts/verify_questions.py`, which **executes** the snippet of
-each question in a sandboxed `python -I` subprocess (NumPy/Pandas/Matplotlib/Flask included) and
-compares the real output with the marked option — and fails if a wrong option also matches. The
-few purely conceptual questions were reviewed twice. The build refuses to run if anything fails.
+## Use it
 
-* Past exam: `data/reference_exam.json` — the 2021-22 exam rebuilt from the screenshots. The
-  answers ticked in the screenshots were **not** trusted (they were right on 19 of 39 questions);
-  each page records what was ticked and whether it was right.
-* Analysis of the exam (format, topics, traps, gap analysis, blueprint): [`docs/exam_analysis.md`](docs/exam_analysis.md).
-* Add your own questions: [`docs/QUESTION_AUTHORING.md`](docs/QUESTION_AUTHORING.md) (JSON + `npm run verify`).
+Open the live app and install it: on iPhone, Safari → Share → **Add to Home Screen**; on Android,
+Chrome → ⋮ → **Install app**; on a laptop, the install icon in the address bar. After the first visit
+everything works offline. Sync is optional: Settings → *Sync between devices*.
 
-## Quick start
+Keyboard on a laptop: `1`–`6` select · `Enter` check / next · `N` next · `I` I don't know ·
+`G` guess / `U` unsure · in mock exams `←` `→` navigate.
+
+## Run your own copy
 
 ```bash
 npm run setup
@@ -54,19 +60,15 @@ npm run setup
 npm run dev
 ```
 
-Deployment (GitHub Pages), sync (Supabase) and phone installation, step by step: [`docs/SETUP.md`](docs/SETUP.md).
-How it works: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md). Plan: [`docs/PLAN.md`](docs/PLAN.md).
-Progress log: [`CHANGELOG.md`](CHANGELOG.md).
-
 | Command | |
 |---|---|
 | `npm run verify` | execute and check every question |
-| `npm test` | unit tests (scoring, Leitner, estimates, mock blueprint, sync convergence) |
-| `npm run e2e` | Playwright: feedback, multi-select, keyboard, mock timer/resume, offline, two-device sync |
-| `npm run build` | strict verification + type-check + production build (`dist/`) |
+| `npm test` | unit tests: scoring, spaced repetition, score estimate, mock blueprint, sync convergence |
+| `npm run e2e` | browser tests: feedback, multi-select, keyboard, mock timer and resume, offline, two-device sync |
+| `npm run build` | strict verification + type-check + production build into `dist/` |
 
-Keyboard (laptop): `1`–`6` select · `Enter` check / next · `N` next · `I` I don't know ·
-`G` guess / `U` unsure (confidence) · in mocks `←` `→` navigate.
+Deployment on GitHub Pages, Supabase sync and phone installation: [`docs/SETUP.md`](docs/SETUP.md).
+How it works: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md). Release notes: [`CHANGELOG.md`](CHANGELOG.md).
 
 ## Screenshots
 
@@ -77,28 +79,19 @@ Keyboard (laptop): `1`–`6` select · `Enter` check / next · `N` next · `I` I
 | Feedback | ![](docs/screenshots/phone/3-feedback.png) | ![](docs/screenshots/desktop/3-feedback.png) |
 | Mock exam | ![](docs/screenshots/phone/4-mock-exam.png) | ![](docs/screenshots/desktop/4-mock-exam.png) |
 | Results | ![](docs/screenshots/phone/5-mock-results.png) | ![](docs/screenshots/desktop/5-mock-results.png) |
-| Dashboard | ![](docs/screenshots/phone/6-dashboard.png) | ![](docs/screenshots/desktop/6-dashboard.png) |
+| Progress | ![](docs/screenshots/phone/6-dashboard.png) | ![](docs/screenshots/desktop/6-dashboard.png) |
 
-## Assumptions and open questions
+## Good to know
 
-* **Scoring of the real exam is unknown** (negative marking? partial credit for "select all"?).
-  Default: +1 correct, 0 wrong, 0 "I don't know", select-all all-or-nothing. All four are settings
-  (Settings → Exam scoring) and every mock records the rules it used.
-* The 2025-26 exam is assumed to keep last year's format (40 × 1 point, 1 hour, online quiz).
-  The *full syllabus* mock assumes the new sessions (NumPy/Pandas, Pythonic/testing, Web) may be
-  tested; the *same as last year* mock does not.
-* Questions are written for Python 3 (verified on 3.13; S6–S8 also on NumPy 2.1 / pandas 2.2).
-  A handful reproduce last year's quirks (Python 2 `print`, typos) and say so (`quirk`).
-
-## Known limitations
-
-* Two past-exam items are partly reconstructed (page 23 was never captured; page 15's class
-  definitions were off-screen) — flagged in the app and in the analysis.
-* Conceptual questions (HTTP, PEP 8, MVC, …) cannot be executed; they were double-reviewed against
-  the slides/docs instead.
-* The estimated score assumes the real exam resembles this bank; treat it as a trend, not a promise.
-* Sync needs a (free) Supabase project you create yourself; free projects pause after 7 days without
-  traffic (a scheduled GitHub Action pings it twice a week; no data is lost if it does pause).
-* On iPhone, the home-screen app and Safari have separate storage: sign in inside the installed app
-  (email + password; emailed codes need a custom SMTP server on Supabase's free plan).
-* Lessons are concise cheat-sheets written for this app, not a replacement for the slides.
+* **Scoring.** The default is +1 correct, 0 wrong, 0 "I don't know", and "select all that apply" is
+  all-or-nothing. Negative marking and partial credit can be enabled in Settings → *Exam scoring*;
+  every mock exam records the rules it used.
+* **Mock variants.** *Same as last year* follows the 2021-22 chapter weights; *full syllabus* also
+  covers NumPy/Pandas, Pythonic code/testing and web applications.
+* **Python version.** Questions follow Python 3 semantics. A few past-exam questions keep quirks of the
+  original (e.g. Python 2 `print`) and say so.
+* **Estimated score.** It assumes the real exam resembles this bank: read it as a trend.
+* **Sync.** Uses your own free Supabase project; free projects pause after 7 days without traffic, so a
+  scheduled workflow pings it twice a week. On iPhone, sign in inside the installed app (it has its
+  own storage, separate from Safari).
+* **Lessons** are concise cheat-sheets that point to the course slides; they do not replace them.

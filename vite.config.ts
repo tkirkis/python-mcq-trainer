@@ -14,7 +14,7 @@ export default defineConfig({
       manifest: {
         name: 'PyQuiz — Python MCQ exam trainer',
         short_name: 'PyQuiz',
-        description: 'Offline-first Python MCQ trainer for the MSc DSBA Python exam',
+        description: 'Offline-first Python MCQ exam trainer',
         theme_color: '#1f2937',
         background_color: '#111827',
         display: 'standalone',
