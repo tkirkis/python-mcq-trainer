@@ -55,7 +55,7 @@
         "france_lite.map": "Nantes:300:500\nAngers:400:450\n--\nNantes:Angers:90\n"
       }
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0042",
@@ -116,7 +116,7 @@
       },
       "probe_template": "f = __OPTION_RAW__\nprint(f.writable())"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0043",
@@ -172,7 +172,7 @@
         "alpha.txt": "abcdefgh\n"
       }
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0044",
@@ -227,7 +227,7 @@
         "data.txt": "x\n"
       }
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0045",
@@ -283,7 +283,7 @@
         "cafe.txt": "café"
       }
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0046",
@@ -335,7 +335,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0047",
@@ -390,7 +390,7 @@
         "code.txt": "12345\n"
       }
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0048",
@@ -449,7 +449,7 @@
       "mode": "truth",
       "probe_template": "try:\n    __OPTION_RAW__\n    print(False)\nexcept FileNotFoundError:\n    print(True)"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0049",
@@ -501,7 +501,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0050",
@@ -555,7 +555,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0051",
@@ -609,7 +609,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0052",
@@ -657,7 +657,7 @@
       "b",
       "d"
     ],
-    "explanation": "JSON handles dicts with string keys, lists (tuples are converted to lists), strings, numbers, `True`/`False` and `None` (written `null`). Sets and bytes have no JSON equivalent: `json.dumps` raises `TypeError` (\"not JSON serializable\").",
+    "explanation": "JSON handles dicts (non-string keys such as ints are written as strings), lists (tuples are converted to lists), strings, numbers, `True`/`False` and `None` (written `null`). Sets and bytes have no JSON equivalent: `json.dumps` raises `TypeError` (\"not JSON serializable\").",
     "distractor_notes": {
       "c": "Sets are not JSON serializable (`TypeError`): convert them with `list()` first.",
       "e": "bytes are not JSON serializable: decode them to `str` first."
@@ -669,7 +669,7 @@
       "mode": "truth",
       "probe_template": "import json\ntry:\n    json.dumps(__OPTION_RAW__)\n    print(True)\nexcept TypeError:\n    print(False)"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0053",
@@ -724,7 +724,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0054",
@@ -779,7 +779,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0055",
@@ -843,7 +843,7 @@
         "data.json": "[1, 2]"
       }
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0056",
@@ -897,7 +897,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0057",
@@ -950,7 +950,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0058",
@@ -1004,7 +1004,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0059",
@@ -1061,7 +1061,7 @@
         "greet.py": "print(\"loading greet\")\nname = \"greet\"\n"
       }
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0060",
@@ -1119,6 +1119,6 @@
         "tools.py": "print(\"tools:\", __name__)\nif __name__ == \"__main__\":\n    print(\"running tools\")\n"
       }
     },
-    "reviewed": 1
+    "reviewed": 2
   }
 ]

@@ -3,882 +3,2337 @@
   "notes": "Transcribed from the 40 screenshots of the 2021-22 exam. The answers ticked in the screenshots are NOT trusted: every `correct` field below was determined independently and checked by executing the code (scripts/verify_questions.py). `past_exam.ticked` records what was ticked in the screenshot, `ticked_correct` whether it was right. Exam page 39 contained two questions (39a/39b), page 23 was never captured (only its sidebar title) and is reconstructed.",
   "questions": [
     {
-      "id": "PE-01", "chapter": "S2", "topic": "slicing", "tags": ["tuple", "slicing", "python2"],
-      "type": "single", "difficulty": 1, "source": "past_exam",
+      "id": "PE-01",
+      "chapter": "S2",
+      "topic": "slicing",
+      "tags": [
+        "tuple",
+        "slicing",
+        "python2"
+      ],
+      "type": "single",
+      "difficulty": 1,
+      "source": "past_exam",
       "stem": "What is the output of `print tuple[2:]` if `tuple = ( 'abcd', 786 , 2.23, 'john', 70.2 )`?",
       "code": null,
       "options": [
-        {"id": "a", "text": "('abcd', 786 , 2.23, 'john', 70.2)", "mono": true, "out": "('abcd', 786, 2.23, 'john', 70.2)"},
-        {"id": "b", "text": "(786, 2.23)", "mono": true},
-        {"id": "c", "text": "(2.23, 'john', 70.2)", "mono": true},
-        {"id": "d", "text": "abcd", "mono": true}
+        {
+          "id": "a",
+          "text": "('abcd', 786 , 2.23, 'john', 70.2)",
+          "mono": true,
+          "out": "('abcd', 786, 2.23, 'john', 70.2)"
+        },
+        {
+          "id": "b",
+          "text": "(786, 2.23)",
+          "mono": true
+        },
+        {
+          "id": "c",
+          "text": "(2.23, 'john', 70.2)",
+          "mono": true
+        },
+        {
+          "id": "d",
+          "text": "abcd",
+          "mono": true
+        }
       ],
-      "correct": ["c"],
+      "correct": [
+        "c"
+      ],
       "explanation": "`tuple[2:]` starts at index 2 (the third element, 2.23) and runs to the end, so the slice is `(2.23, 'john', 70.2)`. Slicing a tuple returns a tuple.",
       "distractor_notes": {
         "a": "That is `tuple[:]` or `tuple[0:]` - the whole tuple. Index 2 is the *third* element.",
         "b": "Looks like `tuple[1:3]`: wrong start (1 instead of 2) and an end bound that was never written.",
         "d": "That is `tuple[0]`, a single element, not a slice."
       },
-      "slides": [90, 93],
-      "verify": {"mode": "output", "code": "tuple = ( 'abcd', 786 , 2.23, 'john', 70.2 )\nprint(tuple[2:])"},
+      "slides": [
+        90,
+        93
+      ],
+      "verify": {
+        "mode": "output",
+        "code": "tuple = ( 'abcd', 786 , 2.23, 'john', 70.2 )\nprint(tuple[2:])"
+      },
       "quirk": true,
       "quirk_note": "Written in Python 2 syntax: in Python 3 `print tuple[2:]` is a SyntaxError and must be `print(tuple[2:])`. The exam clearly meant the Python 3 reading. Naming a variable `tuple` also shadows the built-in type - legal, but bad practice.",
       "reviewed": 2,
-      "past_exam": {"page": 1, "screenshot": "Screenshot 2021-12-15 at 14.55.30.png", "ticked": ["c"], "ticked_correct": true}
+      "past_exam": {
+        "page": 1,
+        "screenshot": "Screenshot 2021-12-15 at 14.55.30.png",
+        "ticked": [
+          "c"
+        ],
+        "ticked_correct": true
+      }
     },
     {
-      "id": "PE-02", "chapter": "S5", "topic": "args-kwargs-advanced", "tags": ["*args", "**kwargs", "default-arguments"],
-      "type": "single", "difficulty": 2, "source": "past_exam",
+      "id": "PE-02",
+      "chapter": "S5",
+      "topic": "args-kwargs-advanced",
+      "tags": [
+        "*args",
+        "**kwargs",
+        "default-arguments"
+      ],
+      "type": "single",
+      "difficulty": 2,
+      "source": "past_exam",
       "stem": "What will be the output of the following code?",
       "code": "def total(initial =5, *num, **key):\n    count = initial\n    for n in num:\n        count+=n\n    for k in key:\n        count+=key[k]\n    return count\nprint(total(100,2,3, clouds=50, stars=100))",
       "options": [
-        {"id": "a", "text": "155"},
-        {"id": "b", "text": "255"},
-        {"id": "c", "text": "160"},
-        {"id": "d", "text": "260"}
+        {
+          "id": "a",
+          "text": "155"
+        },
+        {
+          "id": "b",
+          "text": "255"
+        },
+        {
+          "id": "c",
+          "text": "160"
+        },
+        {
+          "id": "d",
+          "text": "260"
+        }
       ],
-      "correct": ["b"],
+      "correct": [
+        "b"
+      ],
       "explanation": "The first positional argument 100 binds to `initial` (overriding the default 5). The remaining positional arguments 2 and 3 are collected in the tuple `num`, and the keyword arguments go to the dict `key` = {'clouds': 50, 'stars': 100}. Iterating over a dict gives its keys, and `key[k]` gives the values: 100 + 2 + 3 + 50 + 100 = 255.",
       "distractor_notes": {
         "a": "100 + 2 + 3 + 50: forgets one of the keyword arguments.",
         "c": "5 + 2 + 3 + 50 + 100: keeps the default 5 and drops the 100. A positional argument always overrides the default of the first parameter.",
         "d": "5 + 100 + 2 + 3 + 50 + 100: assumes 100 goes into *num and `initial` keeps its default. Positional arguments fill named parameters first."
       },
-      "slides": [120, 207, 208],
-      "verify": {"mode": "output"},
+      "slides": [
+        120,
+        207,
+        208
+      ],
+      "verify": {
+        "mode": "output"
+      },
       "reviewed": 2,
-      "past_exam": {"page": 2, "screenshot": "Screenshot 2021-12-15 at 14.55.33.png", "ticked": ["c"], "ticked_correct": false}
+      "past_exam": {
+        "page": 2,
+        "screenshot": "Screenshot 2021-12-15 at 14.55.33.png",
+        "ticked": [
+          "c"
+        ],
+        "ticked_correct": false
+      }
     },
     {
-      "id": "PE-03", "chapter": "S1", "topic": "syntax-basics", "tags": ["pass", "keywords"],
-      "type": "single", "difficulty": 1, "source": "past_exam",
+      "id": "PE-03",
+      "chapter": "S1",
+      "topic": "syntax-basics",
+      "tags": [
+        "pass",
+        "keywords"
+      ],
+      "type": "single",
+      "difficulty": 1,
+      "source": "past_exam",
       "stem": "Which of the following statement is used when a statement is required syntactically but you do not want any command or code to execute?",
       "code": null,
       "options": [
-        {"id": "a", "text": "break"},
-        {"id": "b", "text": "continue"},
-        {"id": "c", "text": "None of the above."},
-        {"id": "d", "text": "pass"}
+        {
+          "id": "a",
+          "text": "break"
+        },
+        {
+          "id": "b",
+          "text": "continue"
+        },
+        {
+          "id": "c",
+          "text": "None of the above."
+        },
+        {
+          "id": "d",
+          "text": "pass"
+        }
       ],
-      "correct": ["d"],
+      "correct": [
+        "d"
+      ],
       "explanation": "`pass` is the empty statement: it does nothing and exists precisely to fill a block that is syntactically required (e.g. `if not os.path.exists(p): pass`, an empty function or class body).",
       "distractor_notes": {
         "a": "`break` exits the enclosing loop - it does something, and is only allowed inside a loop.",
         "b": "`continue` jumps to the next loop iteration - only valid inside a loop.",
         "c": "`pass` is exactly this statement."
       },
-      "slides": [40],
-      "verify": {"mode": "manual", "reference": "Slide 40 (empty code block via the pass statement); Python reference 7.4 'The pass statement'"},
+      "slides": [
+        40
+      ],
+      "verify": {
+        "mode": "manual",
+        "reference": "Slide 40 (empty code block via the pass statement); Python reference 7.4 'The pass statement'"
+      },
       "reviewed": 2,
-      "past_exam": {"page": 3, "screenshot": "Screenshot 2021-12-15 at 14.55.38.png", "ticked": ["d"], "ticked_correct": true}
+      "past_exam": {
+        "page": 3,
+        "screenshot": "Screenshot 2021-12-15 at 14.55.38.png",
+        "ticked": [
+          "d"
+        ],
+        "ticked_correct": true
+      }
     },
     {
-      "id": "PE-04", "chapter": "S1", "topic": "loops", "tags": ["while", "infinite-loop", "string-literal"],
-      "type": "single", "difficulty": 2, "source": "past_exam",
+      "id": "PE-04",
+      "chapter": "S1",
+      "topic": "loops",
+      "tags": [
+        "while",
+        "infinite-loop",
+        "string-literal"
+      ],
+      "type": "single",
+      "difficulty": 2,
+      "source": "past_exam",
       "stem": "What will be the output of the code?",
       "code": "q = 'ILovePython'\nr = 'P'\nwhile r in q:\n    print('r', end=' ')",
       "options": [
-        {"id": "a", "text": "I L o v e P y t h o n"},
-        {"id": "b", "text": "r r r r r r r r...", "out": "!Timeout"},
-        {"id": "c", "text": "ILovePython"},
-        {"id": "d", "text": "P P P P"}
+        {
+          "id": "a",
+          "text": "I L o v e P y t h o n"
+        },
+        {
+          "id": "b",
+          "text": "r r r r r r r r...",
+          "out": "!Timeout"
+        },
+        {
+          "id": "c",
+          "text": "ILovePython"
+        },
+        {
+          "id": "d",
+          "text": "P P P P"
+        }
       ],
-      "correct": ["b"],
+      "correct": [
+        "b"
+      ],
       "explanation": "`'P' in 'ILovePython'` is True and nothing in the loop body changes `r` or `q`, so the condition stays True forever: an infinite loop. The body prints the string literal `'r'` (in quotes), not the variable `r`, so the output is an endless `r r r r ...`.",
       "distractor_notes": {
         "a": "Would require iterating over q (`for c in q: print(c, end=' ')`). A while loop does not iterate over anything.",
         "c": "Nothing prints q.",
         "d": "Two mistakes: `'r'` is a string literal, not the variable r (which holds 'P'), and the loop never stops after 4 iterations."
       },
-      "slides": [36, 39],
-      "verify": {"mode": "output", "timeout": 2, "prefix": "r r r r r r r r"},
+      "slides": [
+        36,
+        39
+      ],
+      "verify": {
+        "mode": "output",
+        "timeout": 2,
+        "prefix": "r r r r r r r r"
+      },
       "reviewed": 2,
-      "past_exam": {"page": 4, "screenshot": "Screenshot 2021-12-15 at 14.55.41.png", "ticked": ["d"], "ticked_correct": false}
+      "past_exam": {
+        "page": 4,
+        "screenshot": "Screenshot 2021-12-15 at 14.55.41.png",
+        "ticked": [
+          "d"
+        ],
+        "ticked_correct": false
+      }
     },
     {
-      "id": "PE-05", "chapter": "S1", "topic": "strings", "tags": ["concatenation", "dunder", "__add__"],
-      "type": "single", "difficulty": 2, "source": "past_exam",
+      "id": "PE-05",
+      "chapter": "S1",
+      "topic": "strings",
+      "tags": [
+        "concatenation",
+        "dunder",
+        "__add__"
+      ],
+      "type": "single",
+      "difficulty": 2,
+      "source": "past_exam",
       "stem": "How can we concatenate two strings into a third string?",
       "code": null,
       "options": [
-        {"id": "a", "text": "Str3 = Str1.concat(Str2)", "mono": true},
-        {"id": "b", "text": "Str3 = Str1.__add__(Str2)", "mono": true},
-        {"id": "c", "text": "Str3 = Str1*Str2", "mono": true},
-        {"id": "d", "text": "Str3 = Str1 + + Str2", "mono": true}
+        {
+          "id": "a",
+          "text": "Str3 = Str1.concat(Str2)",
+          "mono": true
+        },
+        {
+          "id": "b",
+          "text": "Str3 = Str1.__add__(Str2)",
+          "mono": true
+        },
+        {
+          "id": "c",
+          "text": "Str3 = Str1*Str2",
+          "mono": true
+        },
+        {
+          "id": "d",
+          "text": "Str3 = Str1 + + Str2",
+          "mono": true
+        }
       ],
-      "correct": ["b"],
+      "correct": [
+        "b"
+      ],
       "explanation": "`a + b` on strings is implemented by the special method `str.__add__`, so `Str1.__add__(Str2)` is exactly `Str1 + Str2`. (In real code you would simply write `Str1 + Str2` or an f-string.)",
       "distractor_notes": {
         "a": "Python strings have no `.concat()` method (that is Java/JavaScript): AttributeError.",
         "c": "`*` between two strings is a TypeError; `*` only works as str * int (repetition).",
         "d": "Parsed as `Str1 + (+Str2)`: unary plus is not defined for strings -> TypeError."
       },
-      "slides": [30, 192],
-      "verify": {"mode": "truth", "setup": "Str1 = 'Hello'\nStr2 = 'World'", "probe_template": "__OPTION_RAW__\nprint(Str3 == 'HelloWorld')"},
+      "slides": [
+        30,
+        192
+      ],
+      "verify": {
+        "mode": "truth",
+        "setup": "Str1 = 'Hello'\nStr2 = 'World'",
+        "probe_template": "__OPTION_RAW__\nprint(Str3 == 'HelloWorld')"
+      },
       "reviewed": 2,
-      "past_exam": {"page": 5, "screenshot": "Screenshot 2021-12-15 at 14.55.45.png", "ticked": ["a"], "ticked_correct": false}
+      "past_exam": {
+        "page": 5,
+        "screenshot": "Screenshot 2021-12-15 at 14.55.45.png",
+        "ticked": [
+          "a"
+        ],
+        "ticked_correct": false
+      }
     },
     {
-      "id": "PE-06", "chapter": "S1", "topic": "conditionals", "tags": ["elif", "short-circuit", "KeyError", "dict"],
-      "type": "single", "difficulty": 2, "source": "past_exam",
+      "id": "PE-06",
+      "chapter": "S1",
+      "topic": "conditionals",
+      "tags": [
+        "elif",
+        "short-circuit",
+        "KeyError",
+        "dict"
+      ],
+      "type": "single",
+      "difficulty": 2,
+      "source": "past_exam",
       "stem": "True or False: the following if/elif/else statement will raise a KeyError exception.",
       "code": "d = {'a': 0, 'b': 1, 'c': 0}\n\nif d['a'] > 0:\n    print('ok')\nelif d['b'] > 0:\n    print('ok')\nelif d['c'] > 0:\n    print('ok')\nelif d['d'] > 0:\n    print('ok')\nelse:\n    print('not ok')",
       "options": [
-        {"id": "a", "text": "True", "out": null},
-        {"id": "b", "text": "False", "out": null}
+        {
+          "id": "a",
+          "text": "True",
+          "out": null
+        },
+        {
+          "id": "b",
+          "text": "False",
+          "out": null
+        }
       ],
-      "correct": ["b"],
+      "correct": [
+        "b"
+      ],
       "explanation": "Conditions of an if/elif chain are evaluated in order and evaluation stops at the first true one. `d['a'] > 0` is False, `d['b'] > 0` is True -> prints 'ok' and the chain is finished. `d['d']` (the missing key) is never evaluated, so no KeyError is raised.",
       "distractor_notes": {
         "a": "Only true if `d['d']` were evaluated. The elif chain stops at the first branch whose condition is true (here the 'b' branch)."
       },
-      "slides": [34, 97],
-      "verify": {"mode": "output"},
+      "slides": [
+        34,
+        97
+      ],
+      "verify": {
+        "mode": "output"
+      },
       "expected_output": "ok",
       "reviewed": 2,
-      "past_exam": {"page": 6, "screenshot": "Screenshot 2021-12-15 at 14.55.48.png", "ticked": ["a"], "ticked_correct": false}
+      "past_exam": {
+        "page": 6,
+        "screenshot": "Screenshot 2021-12-15 at 14.55.48.png",
+        "ticked": [
+          "a"
+        ],
+        "ticked_correct": false
+      }
     },
     {
-      "id": "PE-07", "chapter": "S1", "topic": "strings", "tags": ["indexing", "negative-index"],
-      "type": "single", "difficulty": 1, "source": "past_exam",
+      "id": "PE-07",
+      "chapter": "S1",
+      "topic": "strings",
+      "tags": [
+        "indexing",
+        "negative-index"
+      ],
+      "type": "single",
+      "difficulty": 1,
+      "source": "past_exam",
       "stem": "What is the output for:",
       "code": "'python'[-3]",
       "options": [
-        {"id": "a", "text": "'o'"},
-        {"id": "b", "text": "'t'"},
-        {"id": "c", "text": "Negative index error.", "out": "!IndexError"},
-        {"id": "d", "text": "'h'"}
+        {
+          "id": "a",
+          "text": "'o'"
+        },
+        {
+          "id": "b",
+          "text": "'t'"
+        },
+        {
+          "id": "c",
+          "text": "Negative index error.",
+          "out": "!IndexError"
+        },
+        {
+          "id": "d",
+          "text": "'h'"
+        }
       ],
-      "correct": ["d"],
+      "correct": [
+        "d"
+      ],
       "explanation": "Negative indices count from the end: -1 is 'n', -2 is 'o', -3 is 'h'. In general `s[-k]` is `s[len(s) - k]`, here `'python'[3]` = 'h'.",
       "distractor_notes": {
         "a": "That is index -2: off by one when counting from the end.",
         "b": "That is index 2 (or -4): counted from the wrong end.",
         "c": "Negative indices are perfectly valid in Python as long as -len(s) <= i < 0."
       },
-      "slides": [30, 87, 90],
-      "verify": {"mode": "output", "code": "print(repr('python'[-3]))"},
+      "slides": [
+        30,
+        87,
+        90
+      ],
+      "verify": {
+        "mode": "output",
+        "code": "print(repr('python'[-3]))"
+      },
       "reviewed": 2,
-      "past_exam": {"page": 7, "screenshot": "Screenshot 2021-12-15 at 14.55.51.png", "ticked": ["c"], "ticked_correct": false}
+      "past_exam": {
+        "page": 7,
+        "screenshot": "Screenshot 2021-12-15 at 14.55.51.png",
+        "ticked": [
+          "c"
+        ],
+        "ticked_correct": false
+      }
     },
     {
-      "id": "PE-08", "chapter": "S3", "topic": "files-io", "tags": ["open", "file-modes"],
-      "type": "multi", "difficulty": 1, "source": "past_exam",
+      "id": "PE-08",
+      "chapter": "S3",
+      "topic": "files-io",
+      "tags": [
+        "open",
+        "file-modes"
+      ],
+      "type": "multi",
+      "difficulty": 1,
+      "source": "past_exam",
       "stem": "Given the file `data.txt`, which of the following is the correct way to open the file for reading as a **text** file? Select all that apply.",
       "code": null,
       "options": [
-        {"id": "a", "text": "open('data.txt', 'w')", "mono": true},
-        {"id": "b", "text": "open('data.txt', 'r')", "mono": true},
-        {"id": "c", "text": "open('data.txt')", "mono": true},
-        {"id": "d", "text": "open('data.txt', 'wb')", "mono": true},
-        {"id": "e", "text": "open('data.txt', 'rb')", "mono": true}
+        {
+          "id": "a",
+          "text": "open('data.txt', 'w')",
+          "mono": true
+        },
+        {
+          "id": "b",
+          "text": "open('data.txt', 'r')",
+          "mono": true
+        },
+        {
+          "id": "c",
+          "text": "open('data.txt')",
+          "mono": true
+        },
+        {
+          "id": "d",
+          "text": "open('data.txt', 'wb')",
+          "mono": true
+        },
+        {
+          "id": "e",
+          "text": "open('data.txt', 'rb')",
+          "mono": true
+        }
       ],
-      "correct": ["b", "c"],
+      "correct": [
+        "b",
+        "c"
+      ],
       "explanation": "The default mode of `open()` is `'r'` (read, text), so `open('data.txt')` and `open('data.txt', 'r')` are the same thing. Adding `b` switches to binary mode (bytes instead of str); `w` opens for writing (and truncates the file!).",
       "distractor_notes": {
         "a": "'w' opens for writing and empties the file immediately.",
         "d": "'wb' = write + binary.",
         "e": "'rb' reads, but in binary mode: you get bytes, not text."
       },
-      "slides": [133],
-      "verify": {"mode": "truth", "setup": "", "files": {"data.txt": "hello\n"}, "probe_template": "f = __OPTION_RAW__\nprint(f.readable() and not f.writable() and 'b' not in f.mode)"},
+      "slides": [
+        133
+      ],
+      "verify": {
+        "mode": "truth",
+        "setup": "",
+        "files": {
+          "data.txt": "hello\n"
+        },
+        "probe_template": "f = __OPTION_RAW__\nprint(f.readable() and not f.writable() and 'b' not in f.mode)"
+      },
       "reviewed": 2,
-      "past_exam": {"page": 8, "screenshot": "Screenshot 2021-12-15 at 14.55.54.png", "ticked": ["b"], "ticked_correct": false}
+      "past_exam": {
+        "page": 8,
+        "screenshot": "Screenshot 2021-12-15 at 14.55.54.png",
+        "ticked": [
+          "b"
+        ],
+        "ticked_correct": false
+      }
     },
     {
-      "id": "PE-09", "chapter": "S7", "topic": "functional", "tags": ["lambda", "SyntaxError"],
-      "type": "single", "difficulty": 2, "source": "past_exam",
+      "id": "PE-09",
+      "chapter": "S7",
+      "topic": "functional",
+      "tags": [
+        "lambda",
+        "SyntaxError"
+      ],
+      "type": "single",
+      "difficulty": 2,
+      "source": "past_exam",
       "stem": "What is the output of the following code snippet:",
       "code": "func = lambda x: return x\nprint(func(2))",
       "options": [
-        {"id": "a", "text": "SyntaxError", "out": "!SyntaxError"},
-        {"id": "b", "text": "x"},
-        {"id": "c", "text": "2.0"},
-        {"id": "d", "text": "0"},
-        {"id": "e", "text": "2"}
+        {
+          "id": "a",
+          "text": "SyntaxError",
+          "out": "!SyntaxError"
+        },
+        {
+          "id": "b",
+          "text": "x"
+        },
+        {
+          "id": "c",
+          "text": "2.0"
+        },
+        {
+          "id": "d",
+          "text": "0"
+        },
+        {
+          "id": "e",
+          "text": "2"
+        }
       ],
-      "correct": ["a"],
+      "correct": [
+        "a"
+      ],
       "explanation": "The body of a lambda must be a single *expression*; its value is returned implicitly. `return` is a statement and is not allowed inside a lambda, so the file does not even compile: SyntaxError. `lambda x: x` would print 2.",
       "distractor_notes": {
         "b": "Would need a string 'x'; and the code never runs anyway.",
         "c": "Nothing converts to float here.",
-        "e": "That is what `lambda x: x` would print - the trap is the forbidden `return`."
+        "e": "That is what `lambda x: x` would print - the trap is the forbidden `return`.",
+        "d": "No arithmetic happens; and the code never runs anyway."
       },
-      "slides": [253, 205],
-      "verify": {"mode": "output"},
+      "slides": [
+        253,
+        205
+      ],
+      "verify": {
+        "mode": "output"
+      },
       "reviewed": 2,
-      "past_exam": {"page": 9, "screenshot": "Screenshot 2021-12-15 at 14.55.57.png", "ticked": ["a"], "ticked_correct": true}
+      "past_exam": {
+        "page": 9,
+        "screenshot": "Screenshot 2021-12-15 at 14.55.57.png",
+        "ticked": [
+          "a"
+        ],
+        "ticked_correct": true
+      }
     },
     {
-      "id": "PE-10", "chapter": "S1", "topic": "syntax-basics", "tags": ["indentation", "IndentationError", "truthiness"],
-      "type": "single", "difficulty": 1, "source": "past_exam",
+      "id": "PE-10",
+      "chapter": "S1",
+      "topic": "syntax-basics",
+      "tags": [
+        "indentation",
+        "IndentationError",
+        "truthiness"
+      ],
+      "type": "single",
+      "difficulty": 1,
+      "source": "past_exam",
       "stem": "Which one of the following if statements will not execute successfully:",
       "code": null,
       "options": [
-        {"id": "a", "text": "if (1, 2):\n\n    print('foo')", "mono": true},
-        {"id": "b", "text": "if (1, 2):\n    print('foo')", "mono": true},
-        {"id": "c", "text": "if (1, 2):\n                print('foo')", "mono": true},
-        {"id": "d", "text": "if (1, 2):\nprint('foo')", "mono": true}
+        {
+          "id": "a",
+          "text": "if (1, 2):\n\n    print('foo')",
+          "mono": true
+        },
+        {
+          "id": "b",
+          "text": "if (1, 2):\n    print('foo')",
+          "mono": true
+        },
+        {
+          "id": "c",
+          "text": "if (1, 2):\n                print('foo')",
+          "mono": true
+        },
+        {
+          "id": "d",
+          "text": "if (1, 2):\nprint('foo')",
+          "mono": true
+        }
       ],
-      "correct": ["d"],
-      "explanation": "The body of an `if` must be an indented block. In (d) `print` is not indented -> IndentationError (a SyntaxError). Blank lines inside a block (a) are fine, and the amount of indentation (b: 4 spaces, c: 16 spaces) does not matter as long as it is consistent within the block. A non-empty tuple is truthy, so the other three print 'foo'.",
+      "correct": [
+        "d"
+      ],
+      "explanation": "The body of an `if` must be an indented block. In (d) `print` is not indented -> IndentationError (a SyntaxError). Blank lines inside a block (a) are fine in a script (only the interactive >>> prompt treats a blank line as the end of the block), and the amount of indentation (b: 4 spaces, c: 16 spaces) does not matter as long as it is consistent within the block. A non-empty tuple is truthy, so the other three print 'foo'.",
       "distractor_notes": {
-        "a": "Blank lines are ignored by the parser.",
+        "a": "Blank lines are ignored by the parser in a script (in the interactive prompt a blank line would end the block).",
         "b": "Standard 4-space indentation.",
         "c": "Unusual but legal: any consistent indentation works."
       },
-      "slides": [35, 34],
-      "verify": {"mode": "truth", "setup": "", "probe_template": "try:\n    exec(compile(__OPTION__, 'q', 'exec'))\n    print(False)\nexcept SyntaxError:\n    print(True)"},
+      "slides": [
+        35,
+        34
+      ],
+      "verify": {
+        "mode": "truth",
+        "setup": "",
+        "probe_template": "try:\n    exec(compile(__OPTION__, 'q', 'exec'))\n    print(False)\nexcept SyntaxError:\n    print(True)"
+      },
       "reviewed": 2,
-      "past_exam": {"page": 10, "screenshot": "Screenshot 2021-12-15 at 14.56.01.png", "ticked": ["d"], "ticked_correct": true}
+      "past_exam": {
+        "page": 10,
+        "screenshot": "Screenshot 2021-12-15 at 14.56.01.png",
+        "ticked": [
+          "d"
+        ],
+        "ticked_correct": true
+      }
     },
     {
-      "id": "PE-11", "chapter": "S5", "topic": "classes-objects", "tags": ["self", "NameError", "scope", "method-name"],
-      "type": "single", "difficulty": 2, "source": "past_exam",
+      "id": "PE-11",
+      "chapter": "S5",
+      "topic": "classes-objects",
+      "tags": [
+        "self",
+        "NameError",
+        "scope",
+        "method-name"
+      ],
+      "type": "single",
+      "difficulty": 2,
+      "source": "past_exam",
       "stem": "Analyze the code given below?",
       "code": "class Demo:\n   def __init__(self,d):\n      self.d=d\n   def print(self):\n      print(d)\na = Demo(\"Hello\")\na.print()",
       "options": [
-        {"id": "a", "text": "Syntax Error.", "probe": "try:\n    compile(SRC, 'q', 'exec')\n    print(False)\nexcept SyntaxError:\n    print(True)"},
-        {"id": "b", "text": "Program will print \"Hello\" if we change `print(d)` to `print(self.d)`.", "probe": "import io, contextlib\nbuf = io.StringIO()\nwith contextlib.redirect_stdout(buf):\n    exec(SRC.replace('print(d)', 'print(self.d)'), {})\nprint(buf.getvalue().strip() == 'Hello')"},
-        {"id": "c", "text": "Program has an error because class A does not have a constructor.", "probe": "ns = {}\nexec(SRC.split('a = Demo')[0], ns)\nprint('A' in ns or '__init__' not in vars(ns['Demo']))"},
-        {"id": "d", "text": "You cannot use `print(self)` as a function name.", "probe": "class T:\n    def print(self):\n        return 42\nprint(T().print() != 42)"}
+        {
+          "id": "a",
+          "text": "Syntax Error.",
+          "probe": "try:\n    compile(SRC, 'q', 'exec')\n    print(False)\nexcept SyntaxError:\n    print(True)"
+        },
+        {
+          "id": "b",
+          "text": "Program will print \"Hello\" if we change `print(d)` to `print(self.d)`.",
+          "probe": "import io, contextlib\nbuf = io.StringIO()\nwith contextlib.redirect_stdout(buf):\n    exec(SRC.replace('print(d)', 'print(self.d)'), {})\nprint(buf.getvalue().strip() == 'Hello')"
+        },
+        {
+          "id": "c",
+          "text": "Program has an error because class A does not have a constructor.",
+          "probe": "ns = {}\nexec(SRC.split('a = Demo')[0], ns)\nprint('A' in ns or '__init__' not in vars(ns['Demo']))"
+        },
+        {
+          "id": "d",
+          "text": "You cannot use `print(self)` as a function name.",
+          "probe": "class T:\n    def print(self):\n        return 42\nprint(T().print() != 42)"
+        }
       ],
-      "correct": ["b"],
+      "correct": [
+        "b"
+      ],
       "explanation": "The code compiles, but `a.print()` fails with NameError: name 'd' is not defined. Inside a method, `d` is looked up as a local, then global, then built-in name - instance attributes are only reachable through `self` (`self.d`). With `print(self.d)` it prints Hello. Naming a method `print` is legal: inside the method, `print(...)` still refers to the built-in function, because the class body is not an enclosing scope for methods.",
       "distractor_notes": {
         "a": "Nothing is syntactically wrong; the error happens at run time (NameError).",
         "c": "There is no class A, and Demo does define `__init__`.",
         "d": "Methods may shadow built-in names such as `print`; `a.print()` calls the method and `print(...)` inside still calls the built-in."
       },
-      "slides": [189, 191, 169],
-      "verify": {"mode": "truth", "setup": "SRC = 'class Demo:\\n   def __init__(self,d):\\n      self.d=d\\n   def print(self):\\n      print(d)\\na = Demo(\"Hello\")\\na.print()\\n'"},
+      "slides": [
+        189,
+        191,
+        169
+      ],
+      "verify": {
+        "mode": "truth",
+        "setup": "SRC = 'class Demo:\\n   def __init__(self,d):\\n      self.d=d\\n   def print(self):\\n      print(d)\\na = Demo(\"Hello\")\\na.print()\\n'"
+      },
       "quirk": true,
       "quirk_note": "The exam displayed `Demo(''Hello'')` (two single quotes on each side, a rendering artefact of double quotes). Taken literally that line is a SyntaxError; it is transcribed here with normal double quotes.",
       "reviewed": 2,
-      "past_exam": {"page": 11, "screenshot": "Screenshot 2021-12-15 at 14.56.04.png", "ticked": ["d"], "ticked_correct": false}
+      "past_exam": {
+        "page": 11,
+        "screenshot": "Screenshot 2021-12-15 at 14.56.04.png",
+        "ticked": [
+          "d"
+        ],
+        "ticked_correct": false
+      }
     },
     {
-      "id": "PE-12", "chapter": "S7", "topic": "functional", "tags": ["map", "lambda", "NameError", "case-sensitivity"],
-      "type": "multi", "difficulty": 2, "source": "past_exam",
+      "id": "PE-12",
+      "chapter": "S7",
+      "topic": "functional",
+      "tags": [
+        "map",
+        "lambda",
+        "NameError",
+        "case-sensitivity"
+      ],
+      "type": "multi",
+      "difficulty": 2,
+      "source": "past_exam",
       "stem": "Consider the following list as an input:\n\n`numbers = [1, 2, 3]`\n\n`map()` allows you to apply a function to every item of an iterable. Which of the following programs won't have an error? Select all that apply.",
       "code": "numbers = [1, 2, 3]",
       "options": [
-        {"id": "a", "text": "list(map(lambda x: x % 2 == 0, numbers))", "mono": true},
-        {"id": "b", "text": "list(map(lambda x: x, Numbers))", "mono": true},
-        {"id": "c", "text": "list(map(lambda x: x, numbers))", "mono": true},
-        {"id": "d", "text": "map(lambda x: x, numbers)", "mono": true}
+        {
+          "id": "a",
+          "text": "list(map(lambda x: x % 2 == 0, numbers))",
+          "mono": true
+        },
+        {
+          "id": "b",
+          "text": "list(map(lambda x: x, Numbers))",
+          "mono": true
+        },
+        {
+          "id": "c",
+          "text": "list(map(lambda x: x, numbers))",
+          "mono": true
+        },
+        {
+          "id": "d",
+          "text": "map(lambda x: x, numbers)",
+          "mono": true
+        }
       ],
-      "correct": ["a", "c", "d"],
+      "correct": [
+        "a",
+        "c",
+        "d"
+      ],
       "explanation": "(a) maps each number to a boolean -> [False, True, False], no error. (c) -> [1, 2, 3]. (d) simply creates a lazy map object - also no error. Only (b) fails: names are case-sensitive and `Numbers` is not defined -> NameError.",
       "distractor_notes": {
         "b": "`Numbers` != `numbers`: Python names are case-sensitive -> NameError."
       },
-      "slides": [253],
-      "verify": {"mode": "truth", "setup": "numbers = [1, 2, 3]", "probe_template": "__OPTION_RAW__\nprint(True)"},
+      "slides": [
+        253
+      ],
+      "verify": {
+        "mode": "truth",
+        "setup": "numbers = [1, 2, 3]",
+        "probe_template": "__OPTION_RAW__\nprint(True)"
+      },
       "reviewed": 2,
-      "past_exam": {"page": 12, "screenshot": "Screenshot 2021-12-15 at 14.56.07.png", "ticked": ["c", "d"], "ticked_correct": false}
+      "past_exam": {
+        "page": 12,
+        "screenshot": "Screenshot 2021-12-15 at 14.56.07.png",
+        "ticked": [
+          "c",
+          "d"
+        ],
+        "ticked_correct": false
+      }
     },
     {
-      "id": "PE-13", "chapter": "S2", "topic": "function-arguments", "tags": ["default-arguments", "keyword-arguments", "print-sep"],
-      "type": "single", "difficulty": 1, "source": "past_exam",
+      "id": "PE-13",
+      "chapter": "S2",
+      "topic": "function-arguments",
+      "tags": [
+        "default-arguments",
+        "keyword-arguments",
+        "print-sep"
+      ],
+      "type": "single",
+      "difficulty": 1,
+      "source": "past_exam",
       "stem": "Find the output of the code?",
       "code": "def f(a, b = 1, c = 2):\n   print('a is: ',a, 'b is: ', b, 'c is: ', c)\nf(2, c = 2)\nf(c = 100, a = 110)",
       "options": [
-        {"id": "a", "text": "a is:  110 b is:  0 c is:  100\na is:  110 b is:  0 c is:  100", "mono": true},
-        {"id": "b", "text": "a is:  0 b is:  2 c is:  2\na is:  110 b is:  0 c is:  100", "mono": true},
-        {"id": "c", "text": "a is:  2 b is:  1 c is:  2\na is:  110 b is:  1 c is:  100", "mono": true},
-        {"id": "d", "text": "a is:  2 b is:  2 c is:  2\na is:  110 b is:  2 c is:  100", "mono": true}
+        {
+          "id": "a",
+          "text": "a is:  110 b is:  0 c is:  100\na is:  110 b is:  0 c is:  100",
+          "mono": true
+        },
+        {
+          "id": "b",
+          "text": "a is:  0 b is:  2 c is:  2\na is:  110 b is:  0 c is:  100",
+          "mono": true
+        },
+        {
+          "id": "c",
+          "text": "a is:  2 b is:  1 c is:  2\na is:  110 b is:  1 c is:  100",
+          "mono": true
+        },
+        {
+          "id": "d",
+          "text": "a is:  2 b is:  2 c is:  2\na is:  110 b is:  2 c is:  100",
+          "mono": true
+        }
       ],
-      "correct": ["c"],
+      "correct": [
+        "c"
+      ],
       "explanation": "Call 1: a=2 (positional), b keeps its default 1, c=2. Call 2: keyword arguments can be given in any order: a=110, c=100, b defaults to 1. (There are two spaces after each colon because the string ends with a space and print adds a separator space.)",
       "distractor_notes": {
         "a": "Ignores the first call and invents b=0: defaults are 1 and 2, never 0.",
         "b": "Swaps positional binding: 2 goes to the first parameter a, not to b.",
         "d": "Confuses b with c: `c = 2` sets c only; b keeps its default 1."
       },
-      "slides": [82],
-      "verify": {"mode": "output"},
+      "slides": [
+        82
+      ],
+      "verify": {
+        "mode": "output"
+      },
       "reviewed": 2,
-      "past_exam": {"page": 13, "screenshot": "Screenshot 2021-12-15 at 14.56.10.png", "ticked": ["c"], "ticked_correct": true}
+      "past_exam": {
+        "page": 13,
+        "screenshot": "Screenshot 2021-12-15 at 14.56.10.png",
+        "ticked": [
+          "c"
+        ],
+        "ticked_correct": true
+      }
     },
     {
-      "id": "PE-14", "chapter": "S2", "topic": "tuples", "tags": ["immutability", "TypeError"],
-      "type": "single", "difficulty": 1, "source": "past_exam",
+      "id": "PE-14",
+      "chapter": "S2",
+      "topic": "tuples",
+      "tags": [
+        "immutability",
+        "TypeError"
+      ],
+      "type": "single",
+      "difficulty": 1,
+      "source": "past_exam",
       "stem": "What is output of following code:",
       "code": "a = (1, 2)\na[0] +=1",
       "options": [
-        {"id": "a", "text": "(1,1,2)", "out": "(1, 1, 2)"},
-        {"id": "b", "text": "SyntaxError", "out": "!SyntaxError"},
-        {"id": "c", "text": "TypeError", "out": "!TypeError"},
-        {"id": "d", "text": "2"}
+        {
+          "id": "a",
+          "text": "(1,1,2)",
+          "out": "(1, 1, 2)"
+        },
+        {
+          "id": "b",
+          "text": "SyntaxError",
+          "out": "!SyntaxError"
+        },
+        {
+          "id": "c",
+          "text": "TypeError",
+          "out": "!TypeError"
+        },
+        {
+          "id": "d",
+          "text": "2"
+        }
       ],
-      "correct": ["c"],
+      "correct": [
+        "c"
+      ],
       "explanation": "Tuples are immutable: `a[0] += 1` tries to assign to an item of the tuple -> TypeError: 'tuple' object does not support item assignment. The syntax itself is valid (it would work on a list), so it is not a SyntaxError.",
       "distractor_notes": {
         "a": "Would be insertion; += on an element never inserts, and tuples cannot change anyway.",
         "b": "The statement is syntactically valid; the failure happens at run time.",
         "d": "Would be the value of a[0] after the increment if `a` were a list - but tuples are immutable."
       },
-      "slides": [93, 62],
-      "verify": {"mode": "output", "code": "a = (1, 2)\na[0] +=1\nprint(a)"},
+      "slides": [
+        93,
+        62
+      ],
+      "verify": {
+        "mode": "output",
+        "code": "a = (1, 2)\na[0] +=1\nprint(a)"
+      },
       "reviewed": 2,
-      "past_exam": {"page": 14, "screenshot": "Screenshot 2021-12-15 at 14.56.13.png", "ticked": ["d"], "ticked_correct": false}
+      "past_exam": {
+        "page": 14,
+        "screenshot": "Screenshot 2021-12-15 at 14.56.13.png",
+        "ticked": [
+          "d"
+        ],
+        "ticked_correct": false
+      }
     },
     {
-      "id": "PE-15", "chapter": "S5", "topic": "inheritance", "tags": ["isinstance", "subclass"],
-      "type": "multi", "difficulty": 2, "source": "past_exam",
+      "id": "PE-15",
+      "chapter": "S5",
+      "topic": "inheritance",
+      "tags": [
+        "isinstance",
+        "subclass"
+      ],
+      "type": "multi",
+      "difficulty": 2,
+      "source": "past_exam",
       "stem": "Let be the following definitions. Given this code, which of the following REPL (Python prompt) outputs are correct? (Select all that apply.)",
       "code": "class Dog:\n    species = \"Canis familiaris\"\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n\nclass JackRussellTerrier(Dog):\n    pass\n\nclass Dachshund(Dog):\n    pass\n\nclass Bulldog(Dog):\n    pass\n\nmiles = JackRussellTerrier(\"Miles\", 4)\nbuddy = Dachshund(\"Buddy\", 9)\njack = Bulldog(\"Jack\", 3)",
       "options": [
-        {"id": "a", "text": ">>> isinstance(jack, Dog)\nFalse", "mono": true, "probe": "print(isinstance(jack, Dog) == False)"},
-        {"id": "b", "text": ">>> isinstance(buddy, Bulldog)\nTrue", "mono": true, "probe": "print(isinstance(buddy, Bulldog) == True)"},
-        {"id": "c", "text": ">>> isinstance(miles, Dog)\nTrue", "mono": true, "probe": "print(isinstance(miles, Dog) == True)"},
-        {"id": "d", "text": ">>> isinstance(miles, Bulldog)\nFalse", "mono": true, "probe": "print(isinstance(miles, Bulldog) == False)"},
-        {"id": "e", "text": ">>> isinstance(jack, Dachshund)\nFalse", "mono": true, "probe": "print(isinstance(jack, Dachshund) == False)"},
-        {"id": "f", "text": ">>> isinstance(miles, Dog)\nFalse", "mono": true, "probe": "print(isinstance(miles, Dog) == False)"}
+        {
+          "id": "a",
+          "text": ">>> isinstance(jack, Dog)\nFalse",
+          "mono": true,
+          "probe": "print(isinstance(jack, Dog) == False)"
+        },
+        {
+          "id": "b",
+          "text": ">>> isinstance(buddy, Bulldog)\nTrue",
+          "mono": true,
+          "probe": "print(isinstance(buddy, Bulldog) == True)"
+        },
+        {
+          "id": "c",
+          "text": ">>> isinstance(miles, Dog)\nTrue",
+          "mono": true,
+          "probe": "print(isinstance(miles, Dog) == True)"
+        },
+        {
+          "id": "d",
+          "text": ">>> isinstance(miles, Bulldog)\nFalse",
+          "mono": true,
+          "probe": "print(isinstance(miles, Bulldog) == False)"
+        },
+        {
+          "id": "e",
+          "text": ">>> isinstance(jack, Dachshund)\nFalse",
+          "mono": true,
+          "probe": "print(isinstance(jack, Dachshund) == False)"
+        },
+        {
+          "id": "f",
+          "text": ">>> isinstance(miles, Dog)\nFalse",
+          "mono": true,
+          "probe": "print(isinstance(miles, Dog) == False)"
+        }
       ],
-      "correct": ["c", "d", "e"],
+      "correct": [
+        "c",
+        "d",
+        "e"
+      ],
       "explanation": "`isinstance(obj, C)` is True if obj's class is C *or a subclass of C*. All three breeds inherit from Dog, so every dog is an instance of Dog (c true, a and f false). Sibling classes are unrelated: a JackRussellTerrier is not a Bulldog (d true) and a Bulldog is not a Dachshund (e true); a Dachshund is not a Bulldog (b false).",
       "distractor_notes": {
         "a": "jack is a Bulldog, and Bulldog inherits from Dog -> True.",
         "b": "buddy is a Dachshund; Dachshund and Bulldog are siblings, not parent/child.",
         "f": "Contradicts (c): isinstance accepts parent classes."
       },
-      "slides": [194, 195],
-      "verify": {"mode": "truth"},
+      "slides": [
+        194,
+        195
+      ],
+      "verify": {
+        "mode": "truth"
+      },
       "reconstructed": true,
       "quirk_note": "The class definitions were scrolled out of the screenshot; they are reconstructed from the well-known source of this question (Real Python OOP quiz: miles/buddy/jack/jim). The six REPL options are transcribed exactly.",
       "reviewed": 2,
-      "past_exam": {"page": 15, "screenshot": "Screenshot 2021-12-15 at 14.58.00.png", "ticked": ["a", "b", "f"], "ticked_correct": false}
+      "past_exam": {
+        "page": 15,
+        "screenshot": "Screenshot 2021-12-15 at 14.58.00.png",
+        "ticked": [
+          "a",
+          "b",
+          "f"
+        ],
+        "ticked_correct": false
+      }
     },
     {
-      "id": "PE-16", "chapter": "S1", "topic": "conditionals", "tags": ["control-structures", "definition"],
-      "type": "single", "difficulty": 1, "source": "past_exam",
+      "id": "PE-16",
+      "chapter": "S1",
+      "topic": "conditionals",
+      "tags": [
+        "control-structures",
+        "definition"
+      ],
+      "type": "single",
+      "difficulty": 1,
+      "source": "past_exam",
       "stem": "In a Python program, a control structure:",
       "code": null,
       "options": [
-        {"id": "a", "text": "Manages the input and output of control characters"},
-        {"id": "b", "text": "Dictates what happens before the program starts and after it terminates"},
-        {"id": "c", "text": "Directs the order of execution of the statements in the program"},
-        {"id": "d", "text": "Defines program-specific data structures"}
+        {
+          "id": "a",
+          "text": "Manages the input and output of control characters"
+        },
+        {
+          "id": "b",
+          "text": "Dictates what happens before the program starts and after it terminates"
+        },
+        {
+          "id": "c",
+          "text": "Directs the order of execution of the statements in the program"
+        },
+        {
+          "id": "d",
+          "text": "Defines program-specific data structures"
+        }
       ],
-      "correct": ["c"],
+      "correct": [
+        "c"
+      ],
       "explanation": "Control structures (if/elif/else, while, for, try/except, break/continue) change the flow of the program: they decide which statements run, how many times and in which order. Without them execution would be purely linear.",
       "distractor_notes": {
         "a": "Word association with 'control'; control characters (\\n, \\t) are unrelated.",
         "b": "Nothing in a program 'happens before it starts'.",
         "d": "Data structures (list, dict, classes...) organise data, not execution order."
       },
-      "slides": [32],
-      "verify": {"mode": "manual", "reference": "Slide 32 'Control structures: change the flow of the program'"},
+      "slides": [
+        32
+      ],
+      "verify": {
+        "mode": "manual",
+        "reference": "Slide 32 'Control structures: change the flow of the program'"
+      },
       "reviewed": 2,
-      "past_exam": {"page": 16, "screenshot": "Screenshot 2021-12-15 at 14.58.02.png", "ticked": ["d"], "ticked_correct": false}
+      "past_exam": {
+        "page": 16,
+        "screenshot": "Screenshot 2021-12-15 at 14.58.02.png",
+        "ticked": [
+          "d"
+        ],
+        "ticked_correct": false
+      }
     },
     {
-      "id": "PE-17", "chapter": "S3", "topic": "exceptions", "tags": ["try-except-else", "IOError", "files"],
-      "type": "single", "difficulty": 2, "source": "past_exam",
+      "id": "PE-17",
+      "chapter": "S3",
+      "topic": "exceptions",
+      "tags": [
+        "try-except-else",
+        "IOError",
+        "files"
+      ],
+      "type": "single",
+      "difficulty": 2,
+      "source": "past_exam",
       "stem": "What will be the output of the following code snippet?",
       "code": "try:\n    f = open(\"testfile\", \"r\")\n    f.write(\"This is the test file for exception handling!!\")\nexcept IOError:\n    print (\"Error: could not find a file or read data\")\nelse:\n    print (\"content is written in the file successfully\")",
       "options": [
-        {"id": "a", "text": "IOError", "mono": true, "out": "!OSError"},
-        {"id": "b", "text": "content is written in the file successfully", "mono": true},
-        {"id": "c", "text": "Error: could not find a file or read data", "mono": true},
-        {"id": "d", "text": "This is the test file for exception handling!!", "mono": true}
+        {
+          "id": "a",
+          "text": "IOError",
+          "mono": true,
+          "out": "!OSError"
+        },
+        {
+          "id": "b",
+          "text": "content is written in the file successfully",
+          "mono": true
+        },
+        {
+          "id": "c",
+          "text": "Error: could not find a file or read data",
+          "mono": true
+        },
+        {
+          "id": "d",
+          "text": "This is the test file for exception handling!!",
+          "mono": true
+        }
       ],
-      "correct": ["c"],
+      "correct": [
+        "c"
+      ],
       "explanation": "Either way the except branch runs. If 'testfile' does not exist, `open` raises FileNotFoundError. If it exists, it was opened in read mode, so `f.write` raises io.UnsupportedOperation. Both are subclasses of OSError, and `IOError` is just another name for OSError in Python 3 - so the message 'Error: could not find a file or read data' is printed and the else branch is skipped.",
       "distractor_notes": {
         "a": "The exception is caught by `except IOError`, so it does not propagate.",
         "b": "The else branch only runs if the try block raised nothing.",
         "d": "write() never prints anything to the screen; it would write into the file."
       },
-      "slides": [139, 140, 133],
-      "verify": {"mode": "output"},
+      "slides": [
+        139,
+        140,
+        133
+      ],
+      "verify": {
+        "mode": "output"
+      },
       "reviewed": 2,
-      "past_exam": {"page": 17, "screenshot": "Screenshot 2021-12-15 at 14.58.05.png", "ticked": ["c"], "ticked_correct": true}
+      "past_exam": {
+        "page": 17,
+        "screenshot": "Screenshot 2021-12-15 at 14.58.05.png",
+        "ticked": [
+          "c"
+        ],
+        "ticked_correct": true
+      }
     },
     {
-      "id": "PE-18", "chapter": "S5", "topic": "inheritance", "tags": ["__init__", "super", "AttributeError"],
-      "type": "single", "difficulty": 2, "source": "past_exam",
+      "id": "PE-18",
+      "chapter": "S5",
+      "topic": "inheritance",
+      "tags": [
+        "__init__",
+        "super",
+        "AttributeError"
+      ],
+      "type": "single",
+      "difficulty": 2,
+      "source": "past_exam",
       "stem": "What happens in the below code?",
       "code": "class A:\n    def __init__(self, i=100):\n        self.i=i\nclass B(A):\n    def __init__(self,j=0):\n        self.j=j\ndef main():\n    b= B()\n    print(b.i)\n    print(b.j)\nmain()",
       "options": [
-        {"id": "a", "text": "The data field `j` cannot be accessed by object b.", "out": null},
-        {"id": "b", "text": "Class B needs an Argument.", "out": null},
-        {"id": "c", "text": "Class B inherits all the data fields of class A.", "out": null},
-        {"id": "d", "text": "An AttributeError occurs because class B is inheriting class A but the data field `i` in A is not inherited.", "out": null}
+        {
+          "id": "a",
+          "text": "The data field `j` cannot be accessed by object b.",
+          "out": null
+        },
+        {
+          "id": "b",
+          "text": "Class B needs an Argument.",
+          "out": null
+        },
+        {
+          "id": "c",
+          "text": "Class B inherits all the data fields of class A.",
+          "out": null
+        },
+        {
+          "id": "d",
+          "text": "An AttributeError occurs because class B is inheriting class A but the data field `i` in A is not inherited.",
+          "out": null
+        }
       ],
-      "correct": ["d"],
+      "correct": [
+        "d"
+      ],
       "explanation": "B defines its own `__init__`, which overrides A's and never calls `super().__init__()`. So `A.__init__` never runs and `self.i` is never created: `print(b.i)` raises AttributeError: 'B' object has no attribute 'i'. Strictly speaking, attributes are not 'inherited': they are created by `__init__`. Methods are inherited, instance attributes exist only if some code assigns them. Adding `super().__init__()` in B fixes it (prints 100 then 0).",
       "distractor_notes": {
         "a": "`j` is set by B.__init__; the failure happens before, at `b.i`.",
         "b": "j has a default value (0), so `B()` is a valid call.",
         "c": "Methods are inherited, but A.__init__ is overridden and never called, so `i` does not exist on b."
       },
-      "slides": [194, 195],
-      "verify": {"mode": "output"},
+      "slides": [
+        194,
+        195
+      ],
+      "verify": {
+        "mode": "output"
+      },
       "expected_output": "!AttributeError",
       "reviewed": 2,
-      "past_exam": {"page": 18, "screenshot": "Screenshot 2021-12-15 at 14.58.07.png", "ticked": ["d"], "ticked_correct": true}
+      "past_exam": {
+        "page": 18,
+        "screenshot": "Screenshot 2021-12-15 at 14.58.07.png",
+        "ticked": [
+          "d"
+        ],
+        "ticked_correct": true
+      }
     },
     {
-      "id": "PE-19", "chapter": "S2", "topic": "lists", "tags": ["membership", "not in"],
-      "type": "single", "difficulty": 1, "source": "past_exam",
+      "id": "PE-19",
+      "chapter": "S2",
+      "topic": "lists",
+      "tags": [
+        "membership",
+        "not in"
+      ],
+      "type": "single",
+      "difficulty": 1,
+      "source": "past_exam",
       "stem": "What will be the output of the below given code?",
       "code": "colors = ['white', 'Black', 'Grey']\nx = 'Red' not in colors\nprint(x)",
       "options": [
-        {"id": "a", "text": "True"},
-        {"id": "b", "text": "Yes"},
-        {"id": "c", "text": "No"},
-        {"id": "d", "text": "Error: \"not in\" not defined", "out": "!SyntaxError"}
+        {
+          "id": "a",
+          "text": "True"
+        },
+        {
+          "id": "b",
+          "text": "Yes"
+        },
+        {
+          "id": "c",
+          "text": "No"
+        },
+        {
+          "id": "d",
+          "text": "Error: \"not in\" not defined",
+          "out": "!SyntaxError"
+        }
       ],
-      "correct": ["a"],
+      "correct": [
+        "a"
+      ],
       "explanation": "`not in` is the negated membership operator. 'Red' is not an element of the list, so the expression is the boolean True, and print shows `True`.",
       "distractor_notes": {
         "b": "Python booleans print as True/False, never Yes/No.",
         "c": "Same: and the membership test is negated, so the value is True anyway.",
         "d": "`not in` is a standard operator (as is `is not`)."
       },
-      "slides": [88, 28],
-      "verify": {"mode": "output"},
+      "slides": [
+        88,
+        28
+      ],
+      "verify": {
+        "mode": "output"
+      },
       "reviewed": 2,
-      "past_exam": {"page": 19, "screenshot": "Screenshot 2021-12-15 at 14.58.09.png", "ticked": ["a"], "ticked_correct": true}
+      "past_exam": {
+        "page": 19,
+        "screenshot": "Screenshot 2021-12-15 at 14.58.09.png",
+        "ticked": [
+          "a"
+        ],
+        "ticked_correct": true
+      }
     },
     {
-      "id": "PE-20", "chapter": "S2", "topic": "sets", "tags": ["remove", "discard", "KeyError"],
-      "type": "single", "difficulty": 1, "source": "past_exam",
+      "id": "PE-20",
+      "chapter": "S2",
+      "topic": "sets",
+      "tags": [
+        "remove",
+        "discard",
+        "KeyError"
+      ],
+      "type": "single",
+      "difficulty": 1,
+      "source": "past_exam",
       "stem": "Suppose we have a set `a = {10,9,8,7}`, and we execute `a.remove(14)`. What will happen?",
       "code": null,
       "options": [
-        {"id": "a", "text": "Method is executed but no exception is raised.", "out": ""},
-        {"id": "b", "text": "Exception KeyError is raised.", "out": "!KeyError"},
-        {"id": "c", "text": "There doesn't exist such method as remove.", "out": "!AttributeError"},
-        {"id": "d", "text": "We cannot remove an element from set.", "out": null}
+        {
+          "id": "a",
+          "text": "Method is executed but no exception is raised.",
+          "out": ""
+        },
+        {
+          "id": "b",
+          "text": "Exception KeyError is raised.",
+          "out": "!KeyError"
+        },
+        {
+          "id": "c",
+          "text": "There doesn't exist such method as remove.",
+          "out": "!AttributeError"
+        },
+        {
+          "id": "d",
+          "text": "We cannot remove an element from set.",
+          "out": null
+        }
       ],
-      "correct": ["b"],
+      "correct": [
+        "b"
+      ],
       "explanation": "`set.remove(x)` raises KeyError when x is not in the set. Use `set.discard(x)` if you want 'remove if present, otherwise do nothing'.",
       "distractor_notes": {
         "a": "That is the behaviour of `discard`, not `remove`.",
         "c": "Sets do have remove(), discard() and pop().",
         "d": "Sets are mutable: add/remove/discard/pop all modify them."
       },
-      "slides": [100],
-      "verify": {"mode": "output", "code": "a = {10,9,8,7}\na.remove(14)"},
+      "slides": [
+        100
+      ],
+      "verify": {
+        "mode": "output",
+        "code": "a = {10,9,8,7}\na.remove(14)"
+      },
       "reviewed": 2,
-      "past_exam": {"page": 20, "screenshot": "Screenshot 2021-12-15 at 14.58.12.png", "ticked": ["b"], "ticked_correct": true}
+      "past_exam": {
+        "page": 20,
+        "screenshot": "Screenshot 2021-12-15 at 14.58.12.png",
+        "ticked": [
+          "b"
+        ],
+        "ticked_correct": true
+      }
     },
     {
-      "id": "PE-21", "chapter": "S4", "topic": "aliasing", "tags": ["mutability", "function-arguments", "list"],
-      "type": "single", "difficulty": 2, "source": "past_exam",
+      "id": "PE-21",
+      "chapter": "S4",
+      "topic": "aliasing",
+      "tags": [
+        "mutability",
+        "function-arguments",
+        "list"
+      ],
+      "type": "single",
+      "difficulty": 2,
+      "source": "past_exam",
       "stem": "What will be the output of the code when it will be executed?",
       "code": "def func(values):\n   values[0] = 'a'\nv =[ 'b', 'c' , 'd']\nfunc(v)\nprint(v)",
       "options": [
-        {"id": "a", "text": "['b', 'c', 'd', 'a']"},
-        {"id": "b", "text": "['b', 'c', 'd']"},
-        {"id": "c", "text": "['a', 'c', 'd']"},
-        {"id": "d", "text": "['a', 'b', 'c', 'd']"}
+        {
+          "id": "a",
+          "text": "['b', 'c', 'd', 'a']"
+        },
+        {
+          "id": "b",
+          "text": "['b', 'c', 'd']"
+        },
+        {
+          "id": "c",
+          "text": "['a', 'c', 'd']"
+        },
+        {
+          "id": "d",
+          "text": "['a', 'b', 'c', 'd']"
+        }
       ],
-      "correct": ["c"],
+      "correct": [
+        "c"
+      ],
       "explanation": "The parameter `values` is bound to the very same list object as `v` (arguments are passed by object reference). `values[0] = 'a'` mutates that shared list in place, replacing the first element, so the change is visible through `v`.",
       "distractor_notes": {
         "a": "Item assignment replaces an element; it does not append.",
         "b": "Would be true if the function rebound the name (`values = [...]`) instead of mutating the list, or if lists were passed by copy.",
         "d": "Item assignment does not insert."
       },
-      "slides": [173, 174],
-      "verify": {"mode": "output"},
+      "slides": [
+        173,
+        174
+      ],
+      "verify": {
+        "mode": "output"
+      },
       "reviewed": 2,
-      "past_exam": {"page": 21, "screenshot": "Screenshot 2021-12-15 at 14.58.13.png", "ticked": ["b"], "ticked_correct": false}
+      "past_exam": {
+        "page": 21,
+        "screenshot": "Screenshot 2021-12-15 at 14.58.13.png",
+        "ticked": [
+          "b"
+        ],
+        "ticked_correct": false
+      }
     },
     {
-      "id": "PE-22", "chapter": "S2", "topic": "dicts", "tags": ["membership", "keys", "nested-if"],
-      "type": "single", "difficulty": 2, "source": "past_exam",
+      "id": "PE-22",
+      "chapter": "S2",
+      "topic": "dicts",
+      "tags": [
+        "membership",
+        "keys",
+        "nested-if"
+      ],
+      "type": "single",
+      "difficulty": 2,
+      "source": "past_exam",
       "stem": "What is the output of the following snippet:",
       "code": "if 'bar' in {'foo': 1, 'bar': 2, 'baz': 3}:\n    print(1)\n    print(2)\n    if 'a' in { 23: 'a', 42: 'b', 67: 'c'}:\n        print(3)\nprint(4)",
       "options": [
-        {"id": "a", "text": "4", "mono": true},
-        {"id": "b", "text": "1\n2\n4", "mono": true},
-        {"id": "c", "text": "1\n2\n3\n4", "mono": true},
-        {"id": "d", "text": "It does not generate any output.", "out": ""}
+        {
+          "id": "a",
+          "text": "4",
+          "mono": true
+        },
+        {
+          "id": "b",
+          "text": "1\n2\n4",
+          "mono": true
+        },
+        {
+          "id": "c",
+          "text": "1\n2\n3\n4",
+          "mono": true
+        },
+        {
+          "id": "d",
+          "text": "It does not generate any output.",
+          "out": ""
+        }
       ],
-      "correct": ["b"],
+      "correct": [
+        "b"
+      ],
       "explanation": "`in` on a dict tests the **keys**. 'bar' is a key of the first dict -> 1 and 2 are printed. 'a' is a *value* of the second dict, not a key (its keys are 23, 42, 67) -> 3 is not printed. `print(4)` is outside both ifs and always runs.",
       "distractor_notes": {
         "a": "'bar' is a key, so the first block runs.",
         "c": "'a' is a value, not a key: `'a' in d.values()` would be True, `'a' in d` is False.",
         "d": "print(4) is not inside the if, so something is always printed."
       },
-      "slides": [97],
-      "verify": {"mode": "output"},
+      "slides": [
+        97
+      ],
+      "verify": {
+        "mode": "output"
+      },
       "reviewed": 2,
-      "past_exam": {"page": 22, "screenshot": "Screenshot 2021-12-15 at 14.58.15.png", "ticked": ["d"], "ticked_correct": false}
+      "past_exam": {
+        "page": 22,
+        "screenshot": "Screenshot 2021-12-15 at 14.58.15.png",
+        "ticked": [
+          "d"
+        ],
+        "ticked_correct": false
+      }
     },
     {
-      "id": "PE-23", "chapter": "S1", "topic": "loops", "tags": ["for", "iterable", "TypeError"],
-      "type": "single", "difficulty": 2, "source": "past_exam",
+      "id": "PE-23",
+      "chapter": "S1",
+      "topic": "loops",
+      "tags": [
+        "for",
+        "iterable",
+        "TypeError"
+      ],
+      "type": "single",
+      "difficulty": 2,
+      "source": "past_exam",
       "stem": "What will be the output of the code?",
       "code": "x = 123\nfor i in x:\n    print(i)",
       "options": [
-        {"id": "a", "text": "1\n2\n3", "mono": true},
-        {"id": "b", "text": "123"},
-        {"id": "c", "text": "TypeError: 'int' object is not iterable", "out": "!TypeError"},
-        {"id": "d", "text": "None of the mentioned", "out": null}
+        {
+          "id": "a",
+          "text": "1\n2\n3",
+          "mono": true
+        },
+        {
+          "id": "b",
+          "text": "123"
+        },
+        {
+          "id": "c",
+          "text": "TypeError: 'int' object is not iterable",
+          "out": "!TypeError"
+        },
+        {
+          "id": "d",
+          "text": "None of the mentioned",
+          "out": null
+        }
       ],
-      "correct": ["c"],
+      "correct": [
+        "c"
+      ],
       "explanation": "A for loop needs an iterable (string, list, range, dict...). An int is not iterable, so the loop raises TypeError immediately. To loop over the digits you would write `for i in str(x):` (prints 1, 2, 3).",
       "distractor_notes": {
         "a": "That would be `for i in str(x)` or `for i in '123'`.",
         "b": "That would be `print(x)` - nothing is iterated.",
         "d": "There is a matching option: the TypeError."
       },
-      "slides": [37],
-      "verify": {"mode": "output"},
+      "slides": [
+        37
+      ],
+      "verify": {
+        "mode": "output"
+      },
       "reconstructed": true,
       "quirk_note": "Page 23 was never captured: only its truncated sidebar title is visible ('What will be the output of the code? x = 1...'). Reconstructed as the classic question from the same MCQ source family.",
       "reviewed": 2,
-      "past_exam": {"page": 23, "ticked": [], "ticked_correct": null, "original_text": "Sidebar title only: 'What will be the output of the code? x = 1...'"}
+      "past_exam": {
+        "page": 23,
+        "ticked": [],
+        "ticked_correct": null,
+        "original_text": "Sidebar title only: 'What will be the output of the code? x = 1...'"
+      }
     },
     {
-      "id": "PE-24", "chapter": "S1", "topic": "operators", "tags": ["division", "float", "type"],
-      "type": "single", "difficulty": 1, "source": "past_exam",
+      "id": "PE-24",
+      "chapter": "S1",
+      "topic": "operators",
+      "tags": [
+        "division",
+        "float",
+        "type"
+      ],
+      "type": "single",
+      "difficulty": 1,
+      "source": "past_exam",
       "stem": "What will be the output of the following code?",
       "code": "print(type(1/2))",
       "options": [
-        {"id": "a", "text": "<class 'float'>"},
-        {"id": "b", "text": "0.5"},
-        {"id": "c", "text": "<class 'int'>"},
-        {"id": "d", "text": "NameError: '½' is not defined.", "out": "!NameError"}
+        {
+          "id": "a",
+          "text": "<class 'float'>"
+        },
+        {
+          "id": "b",
+          "text": "0.5"
+        },
+        {
+          "id": "c",
+          "text": "<class 'int'>"
+        },
+        {
+          "id": "d",
+          "text": "NameError: '½' is not defined.",
+          "out": "!NameError"
+        }
       ],
-      "correct": ["a"],
+      "correct": [
+        "a"
+      ],
       "explanation": "In Python 3, `/` is true division and always returns a float (1/2 = 0.5, even 4/2 = 2.0). `type()` returns the class, printed as `<class 'float'>`. Floor division `//` would give an int for int operands.",
       "distractor_notes": {
         "b": "That is `print(1/2)`; here we print the type of the value.",
         "c": "Python 2 behaviour (1/2 == 0), or confusion with `//`.",
         "d": "1/2 is an arithmetic expression, not a name."
       },
-      "slides": [24, 28, 27],
-      "verify": {"mode": "output"},
+      "slides": [
+        24,
+        28,
+        27
+      ],
+      "verify": {
+        "mode": "output"
+      },
       "reviewed": 2,
-      "past_exam": {"page": 24, "screenshot": "Screenshot 2021-12-15 at 14.58.17.png", "ticked": ["d"], "ticked_correct": false}
+      "past_exam": {
+        "page": 24,
+        "screenshot": "Screenshot 2021-12-15 at 14.58.17.png",
+        "ticked": [
+          "d"
+        ],
+        "ticked_correct": false
+      }
     },
     {
-      "id": "PE-25", "chapter": "S1", "topic": "strings", "tags": ["min", "unicode", "comparison"],
-      "type": "single", "difficulty": 2, "source": "past_exam",
+      "id": "PE-25",
+      "chapter": "S1",
+      "topic": "strings",
+      "tags": [
+        "min",
+        "unicode",
+        "comparison"
+      ],
+      "type": "single",
+      "difficulty": 2,
+      "source": "past_exam",
       "stem": "What is output for `min(\"hello world\")`?",
       "code": null,
       "options": [
-        {"id": "a", "text": "e", "out": "'e'"},
-        {"id": "b", "text": "a blank space character", "out": "' '"},
-        {"id": "c", "text": "None of the above.", "out": null},
-        {"id": "d", "text": "w", "out": "'w'"}
+        {
+          "id": "a",
+          "text": "e",
+          "out": "'e'"
+        },
+        {
+          "id": "b",
+          "text": "a blank space character",
+          "out": "' '"
+        },
+        {
+          "id": "c",
+          "text": "None of the above.",
+          "out": null
+        },
+        {
+          "id": "d",
+          "text": "w",
+          "out": "'w'"
+        }
       ],
-      "correct": ["b"],
+      "correct": [
+        "b"
+      ],
       "explanation": "`min` iterates over the characters and compares them by Unicode code point. The space ' ' has code 32, smaller than any letter ('d' = 100, 'e' = 101, ...), so the minimum is the blank space.",
       "distractor_notes": {
         "a": "'e' is the smallest *letter* of 'hello'... but 'd' (from 'world') is smaller, and the space is smaller still.",
         "c": "The space is a character of the string and it is the minimum.",
         "d": "'w' is the maximum, not the minimum."
       },
-      "slides": [31, 28],
-      "verify": {"mode": "output", "code": "print(repr(min(\"hello world\")))"},
+      "slides": [
+        31,
+        28
+      ],
+      "verify": {
+        "mode": "output",
+        "code": "print(repr(min(\"hello world\")))"
+      },
       "quirk": true,
       "quirk_note": "The exam displayed `min(''hello world'')` (rendering artefact of double quotes).",
       "reviewed": 2,
-      "past_exam": {"page": 25, "screenshot": "Screenshot 2021-12-15 at 14.58.20.png", "ticked": ["c"], "ticked_correct": false}
+      "past_exam": {
+        "page": 25,
+        "screenshot": "Screenshot 2021-12-15 at 14.58.20.png",
+        "ticked": [
+          "c"
+        ],
+        "ticked_correct": false
+      }
     },
     {
-      "id": "PE-26", "chapter": "S2", "topic": "conversions", "tags": ["int", "conversion", "which-is-false"],
-      "type": "single", "difficulty": 1, "source": "past_exam",
+      "id": "PE-26",
+      "chapter": "S2",
+      "topic": "conversions",
+      "tags": [
+        "int",
+        "conversion",
+        "which-is-false"
+      ],
+      "type": "single",
+      "difficulty": 1,
+      "source": "past_exam",
       "stem": "Which of the following is a **false** statement in python?",
       "code": null,
       "options": [
-        {"id": "a", "text": "None of the above", "probe": "print(int('144')==144 and int(144.0)==144 and int(144)==144)"},
-        {"id": "b", "text": "int('144')==144", "mono": true, "probe": "print(not (int('144')==144))"},
-        {"id": "c", "text": "int(144.0)==144", "mono": true, "probe": "print(not (int(144.0)==144))"},
-        {"id": "d", "text": "int(144)==144", "mono": true, "probe": "print(not (int(144)==144))"}
+        {
+          "id": "a",
+          "text": "None of the above",
+          "probe": "print(int('144')==144 and int(144.0)==144 and int(144)==144)"
+        },
+        {
+          "id": "b",
+          "text": "int('144')==144",
+          "mono": true,
+          "probe": "print(not (int('144')==144))"
+        },
+        {
+          "id": "c",
+          "text": "int(144.0)==144",
+          "mono": true,
+          "probe": "print(not (int(144.0)==144))"
+        },
+        {
+          "id": "d",
+          "text": "int(144)==144",
+          "mono": true,
+          "probe": "print(not (int(144)==144))"
+        }
       ],
-      "correct": ["a"],
+      "correct": [
+        "a"
+      ],
       "explanation": "All three expressions are True: `int()` parses the numeric string '144', truncates the float 144.0 to 144, and leaves the int unchanged. Since no listed statement is false, the answer is 'None of the above'.",
       "distractor_notes": {
         "b": "int() accepts strings that contain an integer literal.",
         "c": "int() truncates floats toward zero: int(144.0) == 144.",
         "d": "int of an int is the same int."
       },
-      "slides": [107, 28],
-      "verify": {"mode": "truth", "setup": ""},
+      "slides": [
+        107,
+        28
+      ],
+      "verify": {
+        "mode": "truth",
+        "setup": ""
+      },
       "reviewed": 2,
-      "past_exam": {"page": 26, "screenshot": "Screenshot 2021-12-15 at 14.58.22.png", "ticked": ["a"], "ticked_correct": true}
+      "past_exam": {
+        "page": 26,
+        "screenshot": "Screenshot 2021-12-15 at 14.58.22.png",
+        "ticked": [
+          "a"
+        ],
+        "ticked_correct": true
+      }
     },
     {
-      "id": "PE-27", "chapter": "S1", "topic": "conditionals", "tags": ["one-line-if", "compound-statements", "SyntaxError"],
-      "type": "multi", "difficulty": 2, "source": "past_exam",
+      "id": "PE-27",
+      "chapter": "S1",
+      "topic": "conditionals",
+      "tags": [
+        "one-line-if",
+        "compound-statements",
+        "SyntaxError"
+      ],
+      "type": "multi",
+      "difficulty": 2,
+      "source": "past_exam",
       "stem": "Which of the following are valid if/else statements in Python, assuming x and y are defined appropriately:",
       "code": null,
       "options": [
-        {"id": "a", "text": "if x < y: print('foo') else: print('bar')", "mono": true},
-        {"id": "b", "text": "if x < y: print('foo'); print('bar'); print('baz')", "mono": true},
-        {"id": "c", "text": "if x < y: if x > 10: print('foo')", "mono": true},
-        {"id": "d", "text": "if x < y: print('foo')\nelif y < x: print('bar')\nelse: print('baz')", "mono": true}
+        {
+          "id": "a",
+          "text": "if x < y: print('foo') else: print('bar')",
+          "mono": true
+        },
+        {
+          "id": "b",
+          "text": "if x < y: print('foo'); print('bar'); print('baz')",
+          "mono": true
+        },
+        {
+          "id": "c",
+          "text": "if x < y: if x > 10: print('foo')",
+          "mono": true
+        },
+        {
+          "id": "d",
+          "text": "if x < y: print('foo')\nelif y < x: print('bar')\nelse: print('baz')",
+          "mono": true
+        }
       ],
-      "correct": ["b", "d"],
+      "correct": [
+        "b",
+        "d"
+      ],
       "explanation": "After the colon, an if may be followed on the same line by one or more *simple* statements separated by `;` (b), and each clause of an if/elif/else can be written on its own line that way (d). But `else:` must start its own line (a is a SyntaxError), and a compound statement such as another `if` cannot follow the colon on the same line (c is a SyntaxError).",
       "distractor_notes": {
         "a": "`else` cannot be on the same line as the if clause.",
         "c": "Nested compound statements need their own indented line."
       },
-      "slides": [34, 35],
-      "verify": {"mode": "truth", "setup": "x, y = 1, 2", "probe_template": "try:\n    compile(__OPTION__, 'q', 'exec')\n    print(True)\nexcept SyntaxError:\n    print(False)"},
+      "slides": [
+        34,
+        35
+      ],
+      "verify": {
+        "mode": "truth",
+        "setup": "x, y = 1, 2",
+        "probe_template": "try:\n    compile(__OPTION__, 'q', 'exec')\n    print(True)\nexcept SyntaxError:\n    print(False)"
+      },
       "reviewed": 2,
-      "past_exam": {"page": 27, "screenshot": "Screenshot 2021-12-15 at 14.58.24.png", "ticked": ["b", "d"], "ticked_correct": true}
+      "past_exam": {
+        "page": 27,
+        "screenshot": "Screenshot 2021-12-15 at 14.58.24.png",
+        "ticked": [
+          "b",
+          "d"
+        ],
+        "ticked_correct": true
+      }
     },
     {
-      "id": "PE-28", "chapter": "S1", "topic": "strings", "tags": ["join", "list-to-string"],
-      "type": "single", "difficulty": 1, "source": "past_exam",
+      "id": "PE-28",
+      "chapter": "S1",
+      "topic": "strings",
+      "tags": [
+        "join",
+        "list-to-string"
+      ],
+      "type": "single",
+      "difficulty": 1,
+      "source": "past_exam",
       "stem": "What is output for:",
       "code": "a = ['he', 'she', 'we']\n' '.join(a)",
       "options": [
-        {"id": "a", "text": "['heshewe']"},
-        {"id": "b", "text": "['he she we']"},
-        {"id": "c", "text": "'he she we'"},
-        {"id": "d", "text": "'heshewe'"}
+        {
+          "id": "a",
+          "text": "['heshewe']"
+        },
+        {
+          "id": "b",
+          "text": "['he she we']"
+        },
+        {
+          "id": "c",
+          "text": "'he she we'"
+        },
+        {
+          "id": "d",
+          "text": "'heshewe'"
+        }
       ],
-      "correct": ["c"],
+      "correct": [
+        "c"
+      ],
       "explanation": "`sep.join(iterable)` returns a single **string** made of the items separated by `sep`. Here the separator is a space, so the result is 'he she we'.",
       "distractor_notes": {
         "a": "join returns a str, not a list, and the separator is a space.",
         "b": "join returns a str, not a list containing a str.",
         "d": "That is `''.join(a)` (empty separator). Look closely: there is a space between the quotes."
       },
-      "slides": [31, 106],
-      "verify": {"mode": "output", "code": "a = ['he', 'she', 'we']\nprint(repr(' '.join(a)))"},
+      "slides": [
+        31,
+        106
+      ],
+      "verify": {
+        "mode": "output",
+        "code": "a = ['he', 'she', 'we']\nprint(repr(' '.join(a)))"
+      },
       "reviewed": 2,
-      "past_exam": {"page": 28, "screenshot": "Screenshot 2021-12-15 at 14.58.26.png", "ticked": ["b"], "ticked_correct": false}
+      "past_exam": {
+        "page": 28,
+        "screenshot": "Screenshot 2021-12-15 at 14.58.26.png",
+        "ticked": [
+          "b"
+        ],
+        "ticked_correct": false
+      }
     },
     {
-      "id": "PE-29", "chapter": "S4", "topic": "recursion", "tags": ["negative-index", "IndexError", "no-base-case"],
-      "type": "single", "difficulty": 3, "source": "past_exam",
+      "id": "PE-29",
+      "chapter": "S4",
+      "topic": "recursion",
+      "tags": [
+        "negative-index",
+        "IndexError",
+        "no-base-case"
+      ],
+      "type": "single",
+      "difficulty": 3,
+      "source": "past_exam",
       "stem": "What is the out of the code?",
       "code": "def rev_func(x,length):\n   print(x[length-1],end=' ')\n   rev_func(x,length-1)\nx=[11, 12, 13, 14, 15]\nrev_func(x,5)",
       "options": [
-        {"id": "a", "text": "Program displays 15 14 13 12 11 and then raises an index out of range exception.", "out": null},
-        {"id": "b", "text": "Program displays 15 14 13 12 11.", "out": "15 14 13 12 11"},
-        {"id": "c", "text": "The program runs fine without error.", "out": null},
-        {"id": "d", "text": "Program displays 11 12 13 14 15.", "out": "11 12 13 14 15"}
+        {
+          "id": "a",
+          "text": "Program displays 15 14 13 12 11 and then raises an index out of range exception.",
+          "out": null
+        },
+        {
+          "id": "b",
+          "text": "Program displays 15 14 13 12 11.",
+          "out": "15 14 13 12 11"
+        },
+        {
+          "id": "c",
+          "text": "The program runs fine without error.",
+          "out": null
+        },
+        {
+          "id": "d",
+          "text": "Program displays 11 12 13 14 15.",
+          "out": "11 12 13 14 15"
+        }
       ],
-      "correct": ["a"],
+      "correct": [
+        "a"
+      ],
       "explanation": "There is no base case, so the recursion only stops when indexing fails. length goes 5, 4, ..., 1 -> prints 15 14 13 12 11. Then length 0 gives x[-1] = 15 and negative indices keep working down to x[-5] = 11, so the sequence is actually printed a second time. At length -5, x[-6] is out of range -> IndexError. Option (a) is the only one that mentions the exception, so it is the intended answer.",
       "distractor_notes": {
         "b": "Forgets that nothing stops the recursion: it ends with an exception.",
         "c": "Without a base case the recursion must end in an error.",
         "d": "Indices go from length-1 downwards, so the list is printed backwards."
       },
-      "slides": [178, 87],
-      "verify": {"mode": "output"},
+      "slides": [
+        178,
+        87
+      ],
+      "verify": {
+        "mode": "output"
+      },
       "expected_output": "15 14 13 12 11 15 14 13 12 11\n!IndexError",
       "quirk": true,
       "quirk_note": "Sloppy option wording: because negative indices are valid, the program really prints '15 14 13 12 11 15 14 13 12 11' before the IndexError. (a) is still the only acceptable answer.",
       "reviewed": 2,
-      "past_exam": {"page": 29, "screenshot": "Screenshot 2021-12-15 at 14.58.28.png (duplicate: 14.58.33)", "ticked": ["a"], "ticked_correct": true}
+      "past_exam": {
+        "page": 29,
+        "screenshot": "Screenshot 2021-12-15 at 14.58.28.png (duplicate: 14.58.33)",
+        "ticked": [
+          "a"
+        ],
+        "ticked_correct": true
+      }
     },
     {
-      "id": "PE-30", "chapter": "S4", "topic": "recursion", "tags": ["base-case", "RecursionError", "stack"],
-      "type": "single", "difficulty": 2, "source": "past_exam",
+      "id": "PE-30",
+      "chapter": "S4",
+      "topic": "recursion",
+      "tags": [
+        "base-case",
+        "RecursionError",
+        "stack"
+      ],
+      "type": "single",
+      "difficulty": 2,
+      "source": "past_exam",
       "stem": "Analyze the code",
       "code": "print(\"Recursive Function\")\ndef factorial(n):\n   return(n*factorial(n-1))\nfactorial(4)",
       "options": [
-        {"id": "a", "text": "Function runs infinitely and causes a StackOverflowError.", "out": null},
-        {"id": "b", "text": "Recursive Function 24.", "out": "Recursive Function\n24"},
-        {"id": "c", "text": "Syntax Error.", "out": "!SyntaxError"},
-        {"id": "d", "text": "Recursive Function.", "out": "Recursive Function"}
+        {
+          "id": "a",
+          "text": "Function runs infinitely and causes a StackOverflowError.",
+          "out": null
+        },
+        {
+          "id": "b",
+          "text": "Recursive Function 24.",
+          "out": "Recursive Function\n24"
+        },
+        {
+          "id": "c",
+          "text": "Syntax Error.",
+          "out": "!SyntaxError"
+        },
+        {
+          "id": "d",
+          "text": "Recursive Function.",
+          "out": "Recursive Function"
+        }
       ],
-      "correct": ["a"],
+      "correct": [
+        "a"
+      ],
       "explanation": "factorial has no base case (`if n == 0: return 1`), so it calls itself forever: 4, 3, 2, 1, 0, -1, ... Each call adds a frame to the call stack until Python's recursion limit (~1000) is hit and a RecursionError ('maximum recursion depth exceeded') is raised - Python's protection against a stack overflow. 'Recursive Function' is printed first, but the program then crashes. Note that even with a base case, the result of factorial(4) is never printed.",
       "distractor_notes": {
         "b": "No base case -> no 24; and the return value is never printed anyway.",
         "c": "The code is syntactically valid.",
         "d": "It does print that line first, but then the program crashes with an exception; 'runs infinitely and overflows the stack' is the intended description."
       },
-      "slides": [178, 84],
-      "verify": {"mode": "output"},
+      "slides": [
+        178,
+        84
+      ],
+      "verify": {
+        "mode": "output"
+      },
       "expected_output": "Recursive Function\n!RecursionError",
       "quirk": true,
       "quirk_note": "'StackOverflowError' is the Java name; Python raises RecursionError. The exam's intended answer is still (a).",
       "reviewed": 2,
-      "past_exam": {"page": 30, "screenshot": "Screenshot 2021-12-15 at 14.58.35.png", "ticked": ["d"], "ticked_correct": false}
+      "past_exam": {
+        "page": 30,
+        "screenshot": "Screenshot 2021-12-15 at 14.58.35.png",
+        "ticked": [
+          "d"
+        ],
+        "ticked_correct": false
+      }
     },
     {
-      "id": "PE-31", "chapter": "S3", "topic": "exceptions", "tags": ["try-except-else-finally"],
-      "type": "single", "difficulty": 2, "source": "past_exam",
+      "id": "PE-31",
+      "chapter": "S3",
+      "topic": "exceptions",
+      "tags": [
+        "try-except-else-finally"
+      ],
+      "type": "single",
+      "difficulty": 2,
+      "source": "past_exam",
       "stem": "What is the output of the code?",
       "code": "try:\n   list = 5*[0]+5*[10]\n   x = list[9]\n   print(\"Done!\")\nexcept IndexError:\n   print(\"Index out of Bond! \")\nelse:\n   print(\"Nothing is wrong!\")\nfinally:\n   print(\"Finally block!\")",
       "options": [
-        {"id": "a", "text": "'Nothing is wrong!' followed by 'Finally block!'", "out": "Nothing is wrong!\nFinally block!"},
-        {"id": "b", "text": "'Done!' follow by 'Nothing is wrong!' followed by 'Finally block'.", "out": "Done!\nNothing is wrong!\nFinally block!"},
-        {"id": "c", "text": "'Done!' follow by 'Nothing is wrong!'", "out": "Done!\nNothing is wrong!"},
-        {"id": "d", "text": "'Finally Block!'", "out": "Finally block!"}
+        {
+          "id": "a",
+          "text": "'Nothing is wrong!' followed by 'Finally block!'",
+          "out": "Nothing is wrong!\nFinally block!"
+        },
+        {
+          "id": "b",
+          "text": "'Done!' follow by 'Nothing is wrong!' followed by 'Finally block'.",
+          "out": "Done!\nNothing is wrong!\nFinally block!"
+        },
+        {
+          "id": "c",
+          "text": "'Done!' follow by 'Nothing is wrong!'",
+          "out": "Done!\nNothing is wrong!"
+        },
+        {
+          "id": "d",
+          "text": "'Finally Block!'",
+          "out": "Finally block!"
+        }
       ],
-      "correct": ["b"],
+      "correct": [
+        "b"
+      ],
       "explanation": "`5*[0]+5*[10]` has 10 elements (indices 0-9), so `list[9]` is valid (10) and 'Done!' is printed. No exception -> the else clause runs ('Nothing is wrong!'), and finally always runs ('Finally block!').",
       "distractor_notes": {
         "a": "Forgets that the try body itself prints 'Done!' before the else clause.",
         "c": "finally *always* runs, exception or not.",
         "d": "Index 9 exists in a 10-element list; the try block completes normally."
       },
-      "slides": [140],
-      "verify": {"mode": "output"},
+      "slides": [
+        140
+      ],
+      "verify": {
+        "mode": "output"
+      },
       "reviewed": 2,
-      "past_exam": {"page": 31, "screenshot": "Screenshot 2021-12-15 at 14.58.37.png", "ticked": ["a"], "ticked_correct": false}
+      "past_exam": {
+        "page": 31,
+        "screenshot": "Screenshot 2021-12-15 at 14.58.37.png",
+        "ticked": [
+          "a"
+        ],
+        "ticked_correct": false
+      }
     },
     {
-      "id": "PE-32", "chapter": "S1", "topic": "strings", "tags": ["quotes", "string-literals"],
-      "type": "single", "difficulty": 1, "source": "past_exam",
+      "id": "PE-32",
+      "chapter": "S1",
+      "topic": "strings",
+      "tags": [
+        "quotes",
+        "string-literals"
+      ],
+      "type": "single",
+      "difficulty": 1,
+      "source": "past_exam",
       "stem": "In Python, `'hello'` is the same as `\"hello\"`",
       "code": null,
       "options": [
-        {"id": "a", "text": "True", "probe": "print('hello' == \"hello\" and type('hello') is type(\"hello\"))"},
-        {"id": "b", "text": "False", "probe": "print('hello' != \"hello\")"}
+        {
+          "id": "a",
+          "text": "True",
+          "probe": "print('hello' == \"hello\" and type('hello') is type(\"hello\"))"
+        },
+        {
+          "id": "b",
+          "text": "False",
+          "probe": "print('hello' != \"hello\")"
+        }
       ],
-      "correct": ["a"],
+      "correct": [
+        "a"
+      ],
       "explanation": "Single and double quotes create exactly the same kind of str object. Having both simply lets you put one kind of quote inside the other without escaping: \"It's\" or 'He said \"hi\"'.",
       "distractor_notes": {
         "b": "Unlike C or Java, Python has no separate char type: 'x' and \"x\" are both str."
       },
-      "slides": [22, 30],
-      "verify": {"mode": "truth", "setup": ""},
+      "slides": [
+        22,
+        30
+      ],
+      "verify": {
+        "mode": "truth",
+        "setup": ""
+      },
       "reviewed": 2,
-      "past_exam": {"page": 32, "screenshot": "Screenshot 2021-12-15 at 14.58.39.png", "ticked": ["a"], "ticked_correct": true}
+      "past_exam": {
+        "page": 32,
+        "screenshot": "Screenshot 2021-12-15 at 14.58.39.png",
+        "ticked": [
+          "a"
+        ],
+        "ticked_correct": true
+      }
     },
     {
-      "id": "PE-33", "chapter": "S1", "topic": "loops", "tags": ["for-vs-while", "definition"],
-      "type": "single", "difficulty": 1, "source": "past_exam",
+      "id": "PE-33",
+      "chapter": "S1",
+      "topic": "loops",
+      "tags": [
+        "for-vs-while",
+        "definition"
+      ],
+      "type": "single",
+      "difficulty": 1,
+      "source": "past_exam",
       "stem": "What is the difference between `for` and `while` loops?",
       "code": null,
       "options": [
-        {"id": "a", "text": "`for` is used only on lists, whereas `while` can be used in every case."},
-        {"id": "b", "text": "`while` cannot loop over lists, whereas `for` can do it."},
-        {"id": "c", "text": "`for` is used for a defined number of iterations, whereas `while` is used for an undefined one."},
-        {"id": "d", "text": "`for` cannot be used in a function, whereas `while` can be."}
+        {
+          "id": "a",
+          "text": "`for` is used only on lists, whereas `while` can be used in every case."
+        },
+        {
+          "id": "b",
+          "text": "`while` cannot loop over lists, whereas `for` can do it."
+        },
+        {
+          "id": "c",
+          "text": "`for` is used for a defined number of iterations, whereas `while` is used for an undefined one."
+        },
+        {
+          "id": "d",
+          "text": "`for` cannot be used in a function, whereas `while` can be."
+        }
       ],
-      "correct": ["c"],
+      "correct": [
+        "c"
+      ],
       "explanation": "A `for` loop iterates over an iterable (range, list, string, dict...), so the number of iterations is known in advance (definite). A `while` loop repeats as long as a condition holds, an indefinite number of times. Both can be used anywhere, including in functions.",
       "distractor_notes": {
         "a": "for works on any iterable: strings, ranges, dicts, files, generators...",
         "b": "A while loop can walk a list with an index (`while i < len(l)`).",
         "d": "Both loops can be used inside functions."
       },
-      "slides": [37, 39],
-      "verify": {"mode": "manual", "reference": "Slide 37: 'While loops are looping an indefinite number of times... For loops will loop a definite number of times'"},
+      "slides": [
+        37,
+        39
+      ],
+      "verify": {
+        "mode": "manual",
+        "reference": "Slide 37: 'While loops are looping an indefinite number of times... For loops will loop a definite number of times'"
+      },
       "reviewed": 2,
-      "past_exam": {"page": 33, "screenshot": "Screenshot 2021-12-15 at 14.58.42.png", "ticked": ["c"], "ticked_correct": true}
+      "past_exam": {
+        "page": 33,
+        "screenshot": "Screenshot 2021-12-15 at 14.58.42.png",
+        "ticked": [
+          "c"
+        ],
+        "ticked_correct": true
+      }
     },
     {
-      "id": "PE-34", "chapter": "S2", "topic": "dicts", "tags": ["iteration", "keys"],
-      "type": "single", "difficulty": 1, "source": "past_exam",
+      "id": "PE-34",
+      "chapter": "S2",
+      "topic": "dicts",
+      "tags": [
+        "iteration",
+        "keys"
+      ],
+      "type": "single",
+      "difficulty": 1,
+      "source": "past_exam",
       "stem": "What can be the code to loop over the keys of a dictionary and print them?",
       "code": "My_dictionary = {0: 'a', 1: 'b', 2: 'c'}",
       "options": [
-        {"id": "a", "text": "Not possible."},
-        {"id": "b", "text": "for i in My_dictionary:\n    print(i)", "mono": true},
-        {"id": "c", "text": "for i in My_dictionary:\n    print(My_dictionary)", "mono": true},
-        {"id": "d", "text": "for i in My_dictionary:\n    print(keys)", "mono": true}
+        {
+          "id": "a",
+          "text": "Not possible."
+        },
+        {
+          "id": "b",
+          "text": "for i in My_dictionary:\n    print(i)",
+          "mono": true
+        },
+        {
+          "id": "c",
+          "text": "for i in My_dictionary:\n    print(My_dictionary)",
+          "mono": true
+        },
+        {
+          "id": "d",
+          "text": "for i in My_dictionary:\n    print(keys)",
+          "mono": true
+        }
       ],
-      "correct": ["b"],
+      "correct": [
+        "b"
+      ],
       "explanation": "Iterating directly over a dict yields its keys (in insertion order), so `for i in d: print(i)` prints 0, 1, 2. Equivalent: `for i in d.keys():`.",
       "distractor_notes": {
         "a": "Iterating over a dict is the most common way to get its keys.",
         "c": "Prints the whole dictionary three times.",
         "d": "`keys` is not a variable here -> NameError (the method is `My_dictionary.keys()`)."
       },
-      "slides": [97],
-      "verify": {"mode": "truth", "probe_template": "import io, contextlib\nbuf = io.StringIO()\ntry:\n    with contextlib.redirect_stdout(buf):\n        exec(__OPTION__)\n    ok = buf.getvalue() == '0\\n1\\n2\\n'\nexcept Exception:\n    ok = False\nprint(ok)"},
+      "slides": [
+        97
+      ],
+      "verify": {
+        "mode": "truth",
+        "probe_template": "import io, contextlib\nbuf = io.StringIO()\ntry:\n    with contextlib.redirect_stdout(buf):\n        exec(__OPTION__)\n    ok = buf.getvalue() == '0\\n1\\n2\\n'\nexcept Exception:\n    ok = False\nprint(ok)"
+      },
       "quirk": true,
       "quirk_note": "In the exam the dict was named `My_dictionary` but the loops used `My_Dictionary` (capital D): taken literally every option raises NameError. The typo is fixed here; the intended answer is unaffected.",
       "reviewed": 2,
-      "past_exam": {"page": 34, "screenshot": "Screenshot 2021-12-15 at 14.58.44.png", "ticked": ["c"], "ticked_correct": false}
+      "past_exam": {
+        "page": 34,
+        "screenshot": "Screenshot 2021-12-15 at 14.58.44.png",
+        "ticked": [
+          "c"
+        ],
+        "ticked_correct": false
+      }
     },
     {
-      "id": "PE-35", "chapter": "S1", "topic": "python-intro", "tags": ["all-of-the-above", "paradigms"],
-      "type": "single", "difficulty": 1, "source": "past_exam",
+      "id": "PE-35",
+      "chapter": "S1",
+      "topic": "python-intro",
+      "tags": [
+        "all-of-the-above",
+        "paradigms"
+      ],
+      "type": "single",
+      "difficulty": 1,
+      "source": "past_exam",
       "stem": "Which of the following is correct about Python?",
       "code": null,
       "options": [
-        {"id": "a", "text": "It provides very high-level dynamic data types and supports dynamic type checking."},
-        {"id": "b", "text": "All of the above."},
-        {"id": "c", "text": "It supports functional and structured programming methods as well as OOP."},
-        {"id": "d", "text": "It can be used as a scripting language or can be compiled to byte-code for building large applications."}
+        {
+          "id": "a",
+          "text": "It provides very high-level dynamic data types and supports dynamic type checking."
+        },
+        {
+          "id": "b",
+          "text": "All of the above."
+        },
+        {
+          "id": "c",
+          "text": "It supports functional and structured programming methods as well as OOP."
+        },
+        {
+          "id": "d",
+          "text": "It can be used as a scripting language or can be compiled to byte-code for building large applications."
+        }
       ],
-      "correct": ["b"],
+      "correct": [
+        "b"
+      ],
       "explanation": "All three statements are true: Python is dynamically typed with high-level built-in types (list, dict, set...), it is multi-paradigm (imperative/procedural, object-oriented, functional), and it is used both for scripting and for large applications - CPython compiles source code to byte-code (.pyc) that its virtual machine interprets.",
       "distractor_notes": {
         "a": "True, but not the only true statement.",
         "c": "True, but not the only true statement.",
         "d": "True, but not the only true statement."
       },
-      "slides": [10, 62],
-      "verify": {"mode": "manual", "reference": "Slide 10 'Python a high level multi paradigm language'; slide 62 'Typing is implicit... duck typing'"},
+      "slides": [
+        10,
+        62
+      ],
+      "verify": {
+        "mode": "manual",
+        "reference": "Slide 10 'Python a high level multi paradigm language'; slide 62 'Typing is implicit... duck typing'"
+      },
       "reviewed": 2,
-      "past_exam": {"page": 35, "screenshot": "Screenshot 2021-12-15 at 14.58.46.png", "ticked": ["b"], "ticked_correct": true}
+      "past_exam": {
+        "page": 35,
+        "screenshot": "Screenshot 2021-12-15 at 14.58.46.png",
+        "ticked": [
+          "b"
+        ],
+        "ticked_correct": true
+      }
     },
     {
-      "id": "PE-36", "chapter": "S2", "topic": "function-arguments", "tags": ["keyword-arguments", "tuple-return", "unpacking"],
-      "type": "single", "difficulty": 1, "source": "past_exam",
+      "id": "PE-36",
+      "chapter": "S2",
+      "topic": "function-arguments",
+      "tags": [
+        "keyword-arguments",
+        "tuple-return",
+        "unpacking"
+      ],
+      "type": "single",
+      "difficulty": 1,
+      "source": "past_exam",
       "stem": "What is the output of the following code?",
       "code": "def f(x = 100, y = 100):\n   return(x+y, x-y)\nx, y = f(y = 200, x = 100)\nprint(x, y)",
       "options": [
-        {"id": "a", "text": "200 100"},
-        {"id": "b", "text": "200 0"},
-        {"id": "c", "text": "300 -100"},
-        {"id": "d", "text": "0 300"}
+        {
+          "id": "a",
+          "text": "200 100"
+        },
+        {
+          "id": "b",
+          "text": "200 0"
+        },
+        {
+          "id": "c",
+          "text": "300 -100"
+        },
+        {
+          "id": "d",
+          "text": "0 300"
+        }
       ],
-      "correct": ["c"],
+      "correct": [
+        "c"
+      ],
       "explanation": "Keyword arguments bind by name, whatever their order: x=100, y=200. The function returns the tuple (100+200, 100-200) = (300, -100), which is unpacked into x and y.",
       "distractor_notes": {
         "a": "Uses the defaults (100+100, ...) and ignores the arguments.",
         "b": "Uses the defaults: 100+100 and 100-100.",
         "d": "Binds the keywords by position (x=200, y=100) and mixes up the tuple order."
       },
-      "slides": [82, 94],
-      "verify": {"mode": "output"},
+      "slides": [
+        82,
+        94
+      ],
+      "verify": {
+        "mode": "output"
+      },
       "reviewed": 2,
-      "past_exam": {"page": 36, "screenshot": "Screenshot 2021-12-15 at 14.58.48.png", "ticked": ["c"], "ticked_correct": true}
+      "past_exam": {
+        "page": 36,
+        "screenshot": "Screenshot 2021-12-15 at 14.58.48.png",
+        "ticked": [
+          "c"
+        ],
+        "ticked_correct": true
+      }
     },
     {
-      "id": "PE-37", "chapter": "S2", "topic": "lists", "tags": ["remove", "pop", "list-methods"],
-      "type": "single", "difficulty": 1, "source": "past_exam",
+      "id": "PE-37",
+      "chapter": "S2",
+      "topic": "lists",
+      "tags": [
+        "remove",
+        "pop",
+        "list-methods"
+      ],
+      "type": "single",
+      "difficulty": 1,
+      "source": "past_exam",
       "stem": "Which one of the following functions removes an object from a list?",
       "code": null,
       "options": [
-        {"id": "a", "text": "list.index(obj)", "mono": true},
-        {"id": "b", "text": "list.insert(index, obj)", "mono": true},
-        {"id": "c", "text": "list.remove(obj)", "mono": true},
-        {"id": "d", "text": "list.pop(obj=list[-1])", "mono": true}
+        {
+          "id": "a",
+          "text": "list.index(obj)",
+          "mono": true
+        },
+        {
+          "id": "b",
+          "text": "list.insert(index, obj)",
+          "mono": true
+        },
+        {
+          "id": "c",
+          "text": "list.remove(obj)",
+          "mono": true
+        },
+        {
+          "id": "d",
+          "text": "list.pop(obj=list[-1])",
+          "mono": true
+        }
       ],
-      "correct": ["c"],
+      "correct": [
+        "c"
+      ],
       "explanation": "`lst.remove(obj)` removes the first element equal to obj (ValueError if absent). `lst.pop(i)` also removes an element, but by *index* (default: the last one) and returns it - and it takes no keyword argument named obj, so `pop(obj=...)` as written is a TypeError.",
       "distractor_notes": {
         "a": "index() only returns the position of obj; the list is unchanged.",
         "b": "insert() adds an element.",
         "d": "pop removes by index, not by object, and the call as written is invalid (pop() takes no keyword arguments)."
       },
-      "slides": [88],
-      "verify": {"mode": "truth", "setup": "lst = ['x', 'y', 'z']\nobj = 'y'\nindex = 0", "probe_template": "try:\n    exec(__OPTION__.replace('list', 'lst'))\nexcept Exception:\n    pass\nprint(lst == ['x', 'z'])"},
+      "slides": [
+        88
+      ],
+      "verify": {
+        "mode": "truth",
+        "setup": "lst = ['x', 'y', 'z']\nobj = 'y'\nindex = 0",
+        "probe_template": "try:\n    exec(__OPTION__.replace('list', 'lst'))\nexcept Exception:\n    pass\nprint(lst == ['x', 'z'])"
+      },
       "reviewed": 2,
-      "past_exam": {"page": 37, "screenshot": "Screenshot 2021-12-15 at 14.58.50.png", "ticked": ["c"], "ticked_correct": true}
+      "past_exam": {
+        "page": 37,
+        "screenshot": "Screenshot 2021-12-15 at 14.58.50.png",
+        "ticked": [
+          "c"
+        ],
+        "ticked_correct": true
+      }
     },
     {
-      "id": "PE-38", "chapter": "S1", "topic": "operators", "tags": ["str+int", "TypeError", "str()"],
-      "type": "single", "difficulty": 2, "source": "past_exam",
+      "id": "PE-38",
+      "chapter": "S1",
+      "topic": "operators",
+      "tags": [
+        "str+int",
+        "TypeError",
+        "str()"
+      ],
+      "type": "single",
+      "difficulty": 2,
+      "source": "past_exam",
       "stem": "How will you concatenate \"Hello\" and integer 6?",
       "code": null,
       "options": [
-        {"id": "a", "text": "4. \"Hello + 6\"", "mono": true},
-        {"id": "b", "text": "3. \"Hello\" + str(6)", "mono": true},
-        {"id": "c", "text": "5. Both 2 and 3"},
-        {"id": "d", "text": "1. \"Hello\" + 6", "mono": true},
-        {"id": "e", "text": "2. \"Hello\" + \"6\"", "mono": true}
+        {
+          "id": "a",
+          "text": "4. \"Hello + 6\"",
+          "mono": true
+        },
+        {
+          "id": "b",
+          "text": "3. \"Hello\" + str(6)",
+          "mono": true
+        },
+        {
+          "id": "c",
+          "text": "5. Both 2 and 3"
+        },
+        {
+          "id": "d",
+          "text": "1. \"Hello\" + 6",
+          "mono": true
+        },
+        {
+          "id": "e",
+          "text": "2. \"Hello\" + \"6\"",
+          "mono": true
+        }
       ],
-      "correct": ["b"],
+      "correct": [
+        "b"
+      ],
       "explanation": "`+` between a str and an int raises TypeError (Python never converts implicitly), so the integer must be converted first: `\"Hello\" + str(6)` -> 'Hello6' (or `f\"Hello{6}\"`). Option 2 also produces 'Hello6', but it concatenates the *string* \"6\" - the integer 6 is never used - so it does not answer the question.",
       "distractor_notes": {
         "a": "A single string literal 'Hello + 6': no concatenation at all.",
@@ -886,56 +2341,146 @@
         "d": "TypeError: can only concatenate str (not \"int\") to str.",
         "e": "Works, but the operand is the string \"6\", not the integer 6."
       },
-      "slides": [27, 30],
-      "verify": {"mode": "manual", "reference": "Slide 27 'Can you add 3 to \"4\"?'; slide 30 concatenation; checked: 'Hello' + 6 raises TypeError, 'Hello' + str(6) == 'Hello6'"},
+      "slides": [
+        27,
+        30
+      ],
+      "verify": {
+        "mode": "manual",
+        "reference": "Slide 27 'Can you add 3 to \"4\"?'; slide 30 concatenation; checked: 'Hello' + 6 raises TypeError, 'Hello' + str(6) == 'Hello6'"
+      },
       "reviewed": 2,
-      "past_exam": {"page": 38, "screenshot": "Screenshot 2021-12-15 at 14.58.52.png", "ticked": ["c"], "ticked_correct": false}
+      "past_exam": {
+        "page": 38,
+        "screenshot": "Screenshot 2021-12-15 at 14.58.52.png",
+        "ticked": [
+          "c"
+        ],
+        "ticked_correct": false
+      },
+      "quirk": true,
+      "quirk_note": "Debatable item: \"Hello\" + \"6\" also produces 'Hello6', so some students defend \"Both 2 and 3\". The key follows the strict reading of \"integer 6\": only option 3 uses the integer."
     },
     {
-      "id": "PE-39a", "chapter": "S5", "topic": "inheritance", "tags": ["method-inheritance"],
-      "type": "single", "difficulty": 1, "source": "past_exam",
+      "id": "PE-39a",
+      "chapter": "S5",
+      "topic": "inheritance",
+      "tags": [
+        "method-inheritance"
+      ],
+      "type": "single",
+      "difficulty": 1,
+      "source": "past_exam",
       "stem": "Classes. Let be the definition of these two classes (see code). What's the output of the following code snippet: `bobo.walk()`",
       "code": "class Dog:\n    def walk(self):\n        print(\"*walking*\")\n    def speak(self):\n        print(\"Woof!\")\n\nclass JackRussellTerrier(Dog):\n    def speak(self):\n        print(\"Arff!\")\n\nbobo = JackRussellTerrier()\nbobo.walk()",
       "options": [
-        {"id": "a", "text": "Arff!", "mono": true},
-        {"id": "b", "text": "*walking*", "mono": true},
-        {"id": "c", "text": "AttributeError: 'JackRussellTerrier' object has no attribute 'walk'", "mono": true, "out": "!AttributeError"},
-        {"id": "d", "text": "Woof!", "mono": true}
+        {
+          "id": "a",
+          "text": "Arff!",
+          "mono": true
+        },
+        {
+          "id": "b",
+          "text": "*walking*",
+          "mono": true
+        },
+        {
+          "id": "c",
+          "text": "AttributeError: 'JackRussellTerrier' object has no attribute 'walk'",
+          "mono": true,
+          "out": "!AttributeError"
+        },
+        {
+          "id": "d",
+          "text": "Woof!",
+          "mono": true
+        }
       ],
-      "correct": ["b"],
+      "correct": [
+        "b"
+      ],
       "explanation": "JackRussellTerrier does not define `walk`, so attribute lookup continues in its parent class Dog, whose `walk` prints *walking*. Members that are not redefined in the child are borrowed from the parent.",
       "distractor_notes": {
         "a": "That is speak(), not walk().",
         "c": "Inherited methods are found through the parent class.",
         "d": "That is Dog.speak()."
       },
-      "slides": [194],
-      "verify": {"mode": "output"},
+      "slides": [
+        194
+      ],
+      "verify": {
+        "mode": "output"
+      },
       "reviewed": 2,
-      "past_exam": {"page": 39, "screenshot": "Screenshot 2021-12-15 at 14.58.57.png", "ticked": ["b"], "ticked_correct": true}
+      "past_exam": {
+        "page": 39,
+        "screenshot": "Screenshot 2021-12-15 at 14.58.57.png",
+        "ticked": [
+          "b"
+        ],
+        "ticked_correct": true
+      }
     },
     {
-      "id": "PE-39b", "chapter": "S5", "topic": "inheritance", "tags": ["method-overriding", "polymorphism"],
-      "type": "single", "difficulty": 1, "source": "past_exam",
+      "id": "PE-39b",
+      "chapter": "S5",
+      "topic": "inheritance",
+      "tags": [
+        "method-overriding",
+        "polymorphism"
+      ],
+      "type": "single",
+      "difficulty": 1,
+      "source": "past_exam",
       "stem": "Same two classes. What's the output of the following code snippet: `bobo.speak()`",
       "code": "class Dog:\n    def walk(self):\n        print(\"*walking*\")\n    def speak(self):\n        print(\"Woof!\")\n\nclass JackRussellTerrier(Dog):\n    def speak(self):\n        print(\"Arff!\")\n\nbobo = JackRussellTerrier()\nbobo.speak()",
       "options": [
-        {"id": "a", "text": "Arff!", "mono": true},
-        {"id": "b", "text": "Arff!\nWoof!", "mono": true},
-        {"id": "c", "text": "*walking*\nWoof!\nArff!", "mono": true},
-        {"id": "d", "text": "Woof!\nArff!", "mono": true}
+        {
+          "id": "a",
+          "text": "Arff!",
+          "mono": true
+        },
+        {
+          "id": "b",
+          "text": "Arff!\nWoof!",
+          "mono": true
+        },
+        {
+          "id": "c",
+          "text": "*walking*\nWoof!\nArff!",
+          "mono": true
+        },
+        {
+          "id": "d",
+          "text": "Woof!\nArff!",
+          "mono": true
+        }
       ],
-      "correct": ["a"],
+      "correct": [
+        "a"
+      ],
       "explanation": "JackRussellTerrier overrides `speak`, so the child's version is found first and only it runs. The parent's `speak` is not called unless the child explicitly calls `super().speak()`.",
       "distractor_notes": {
         "b": "Overriding replaces the parent method; it does not chain to it automatically.",
         "c": "Calling speak() does not call walk().",
         "d": "Same as (b): Dog.speak() is never called."
       },
-      "slides": [194, 195],
-      "verify": {"mode": "output"},
+      "slides": [
+        194,
+        195
+      ],
+      "verify": {
+        "mode": "output"
+      },
       "reviewed": 2,
-      "past_exam": {"page": 39, "screenshot": "Screenshot 2021-12-15 at 14.59.00.png", "ticked": ["a"], "ticked_correct": true}
+      "past_exam": {
+        "page": 39,
+        "screenshot": "Screenshot 2021-12-15 at 14.59.00.png",
+        "ticked": [
+          "a"
+        ],
+        "ticked_correct": true
+      }
     }
   ]
 }

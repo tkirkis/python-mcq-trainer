@@ -12,7 +12,7 @@
   "type": "multi",
   "difficulty": 3,
   "source": "generated",
-  "stem": "A server answers with the UTF-8 encoded body `café`, received with `resp = requests.get(url)`. Which statements are true? Select all that apply.",
+  "stem": "A server answers with the body `café`, encoded in UTF-8 and sent with the header `Content-Type: text/plain; charset=utf-8`. It is received with `resp = requests.get(url)`. Which statements are true? Select all that apply.",
   "code": null,
   "options": [
    {
@@ -41,7 +41,7 @@
    "b",
    "c"
   ],
-  "explanation": "`resp.content` is the raw body as bytes; `resp.text` is that body decoded into a str. 'é' takes 2 bytes in UTF-8, so the content has 5 bytes but the text only 4 characters. Use `.text` for HTML/text and `.content` for binary data such as images.",
+  "explanation": "`resp.content` is the raw body as bytes; `resp.text` is that body decoded into a str. 'é' takes 2 bytes in UTF-8, so the content has 5 bytes but the text only 4 characters. Use `.text` for HTML/text and `.content` for binary data such as images. (requests decodes .text with the charset declared in Content-Type; without it, a text/* body would be decoded as ISO-8859-1.)",
   "distractor_notes": {
    "d": "'é' is one character but two bytes in UTF-8: 4 != 5."
   },
@@ -50,10 +50,10 @@
   ],
   "verify": {
    "mode": "truth",
-   "setup": "import requests\nresp = requests.models.Response()\nresp.status_code = 200\nresp._content = 'café'.encode('utf-8')\nresp.encoding = 'utf-8'",
-   "note": "The Response is built offline (no network) with the body and encoding a real server would send."
+   "setup": "import requests\nfrom requests.utils import get_encoding_from_headers\nresp = requests.models.Response()\nresp.status_code = 200\nresp.headers['Content-Type'] = 'text/plain; charset=utf-8'\nresp._content = 'café'.encode('utf-8')\nresp.encoding = get_encoding_from_headers(resp.headers)",
+   "note": "The Response is built offline (no network) with the body and Content-Type header of the stem; the encoding is derived from the header exactly as requests.get does."
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0042",
@@ -108,7 +108,7 @@
    "code": "import requests\nresp = requests.models.Response()\nresp.status_code = 200\nresp._content = b'{\"a\": 14, \"b\": \"no\", \"c\": true}'\ndata = resp.json()\nprint(type(data).__name__, data['c'])",
    "note": "The Response is built offline (no network) with the given JSON body."
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0043",
@@ -157,7 +157,7 @@
    "mode": "manual",
    "reference": "Slide 301 '2. In command-line': wget/curl do not perform any rendering, convenient tools to test a server"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0044",
@@ -210,7 +210,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0045",
@@ -263,7 +263,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0046",
@@ -319,7 +319,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0047",
@@ -375,7 +375,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0048",
@@ -430,7 +430,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0049",
@@ -483,7 +483,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0050",
@@ -537,7 +537,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0051",
@@ -591,7 +591,7 @@
    "setup": "import flask\napp = flask.Flask(__name__)\n\ndef index():\n    return 'Hello'\n",
    "probe_template": "__OPTION_RAW__\nprint(app.test_client().get('/').get_data(as_text=True) == 'Hello')"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0052",
@@ -642,7 +642,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0053",
@@ -690,14 +690,13 @@
    "c": "The app runs on your machine, not on a remote domain (and app.run serves plain http)."
   },
   "slides": [
-   156,
    305
   ],
   "verify": {
    "mode": "manual",
    "reference": "Slide 305: app.run(port=5000), the server runs on our computer, 127.0.0.1 or localhost"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0054",
@@ -752,7 +751,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0055",
@@ -805,7 +804,7 @@
    "mode": "manual",
    "reference": "Slide 304 'Web frameworks': Django, Pyramids, CherryPy, Bottle, Flask, Tornado, Web2Py"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0056",
@@ -853,13 +852,12 @@
    "d": "Int keys and tuples are accepted (converted); only unsupported types such as sets raise TypeError."
   },
   "slides": [
-   136,
    298
   ],
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0057",
@@ -907,14 +905,12 @@
    "c": "Tuples are lost too: JSON arrays are loaded as lists."
   },
   "slides": [
-   135,
-   136,
    298
   ],
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0058",
@@ -961,13 +957,12 @@
    "d": "true and null are JSON literals, not quoted strings."
   },
   "slides": [
-   136,
    298
   ],
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0059",
@@ -1011,14 +1006,13 @@
    "d": "The order of the keys is irrelevant to the definition."
   },
   "slides": [
-   135,
    298
   ],
   "verify": {
    "mode": "manual",
-   "reference": "Slide 298 'Serialization': how to turn some data into a string; slide 135"
+   "reference": "Slide 298 'Serialization': how to turn some data into a string (JSON, pickle)"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0060",
@@ -1065,14 +1059,12 @@
    "b": "Tuples are encoded as JSON arrays and decoded as lists: the result is [1, 2]."
   },
   "slides": [
-   135,
-   136,
    298
   ],
   "verify": {
    "mode": "truth",
    "setup": ""
   },
-  "reviewed": 1
+  "reviewed": 2
  }
 ]

@@ -46,7 +46,7 @@
       "mode": "manual",
       "reference": "Slide 187 (The 4 pillars of OOP)"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0082",
@@ -95,7 +95,7 @@
       "mode": "manual",
       "reference": "Slide 187 (The 4 pillars of OOP)"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0083",
@@ -145,7 +145,7 @@
       "mode": "manual",
       "reference": "Slides 187 (4 pillars) and 194 (overriding methods is polymorphism)"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0084",
@@ -211,7 +211,7 @@
       "mode": "truth",
       "probe_template": "print((__OPTION_RAW__) is True)"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0085",
@@ -265,7 +265,7 @@
       "mode": "truth",
       "probe_template": "try:\n    __OPTION_RAW__\n    print(True)\nexcept AttributeError:\n    print(False)"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0086",
@@ -318,7 +318,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0087",
@@ -379,7 +379,7 @@
       "mode": "truth",
       "probe_template": "try:\n    print(__OPTION_RAW__ == 10)\nexcept TypeError:\n    print(False)"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0088",
@@ -433,7 +433,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0089",
@@ -488,7 +488,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0090",
@@ -543,7 +543,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0091",
@@ -598,7 +598,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0092",
@@ -652,7 +652,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0093",
@@ -712,7 +712,7 @@
       "mode": "truth",
       "probe_template": "try:\n    __OPTION_RAW__\n    print(True)\nexcept TypeError:\n    print(False)"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0094",
@@ -766,7 +766,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1,
+    "reviewed": 2,
     "expected_output": "(['one', 'two'],)\n{}"
   },
   {
@@ -816,7 +816,7 @@
       "mode": "manual",
       "reference": "Slide 201 (MVC)"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0096",
@@ -866,7 +866,7 @@
       "mode": "manual",
       "reference": "Slides 199-200 (3 tiers)"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0097",
@@ -920,7 +920,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0098",
@@ -975,7 +975,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0099",
@@ -1024,7 +1024,7 @@
       "mode": "manual",
       "reference": "Slide 204 (Tk widgets)"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0100",
@@ -1092,6 +1092,6 @@
       "mode": "truth",
       "probe_template": "cmd = __OPTION_RAW__\nbefore = list(calls)\ntry:\n    cmd()\n    print(before == [] and len(calls) == 1)\nexcept TypeError:\n    print(False)"
     },
-    "reviewed": 1
+    "reviewed": 2
   }
 ]

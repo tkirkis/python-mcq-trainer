@@ -52,7 +52,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0042",
@@ -114,7 +114,7 @@
       "mode": "truth",
       "setup": "log = []\n\nclass X:\n    def __str__(self):\n        log.append('__str__')\n        return 'x'\n    def __getitem__(self, i):\n        log.append('__getitem__')\n        return i\n    def __call__(self, a):\n        log.append('__call__')\n        return a\n    def __length__(self):\n        log.append('__length__')\n        return 0\n    def __plus__(self, other):\n        log.append('__plus__')\n        return 0\n\nx = X()\ny = X()"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0043",
@@ -168,7 +168,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0044",
@@ -228,7 +228,7 @@
     "verify": {
       "mode": "truth"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0045",
@@ -282,7 +282,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0046",
@@ -337,7 +337,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0047",
@@ -393,7 +393,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0048",
@@ -453,7 +453,7 @@
     "verify": {
       "mode": "truth"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0049",
@@ -507,7 +507,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0050",
@@ -561,7 +561,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0051",
@@ -615,7 +615,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0052",
@@ -669,7 +669,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0053",
@@ -724,7 +724,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0054",
@@ -791,7 +791,7 @@
       "mode": "truth",
       "probe_template": "print((__OPTION_RAW__) is True)"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0055",
@@ -860,7 +860,7 @@
       "mode": "truth",
       "probe_template": "print((__OPTION_RAW__) is True)"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0056",
@@ -912,7 +912,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0057",
@@ -967,7 +967,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0058",
@@ -1022,7 +1022,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0059",
@@ -1079,7 +1079,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0060",
@@ -1133,6 +1133,6 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   }
 ]

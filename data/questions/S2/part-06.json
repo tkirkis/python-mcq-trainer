@@ -49,7 +49,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0152",
@@ -102,7 +102,7 @@
       "mode": "truth",
       "setup": ""
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0153",
@@ -154,7 +154,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0154",
@@ -206,7 +206,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0155",
@@ -258,7 +258,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0156",
@@ -311,7 +311,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0157",
@@ -364,7 +364,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0158",
@@ -415,7 +415,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0159",
@@ -467,7 +467,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0160",
@@ -526,7 +526,7 @@
       "setup": "",
       "probe_template": "print(hasattr(set(), __OPTION__))"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0161",
@@ -592,7 +592,7 @@
       "mode": "truth",
       "probe_template": "print((__OPTION_RAW__) is True)"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0162",
@@ -646,7 +646,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0163",
@@ -699,7 +699,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0164",
@@ -751,7 +751,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0165",
@@ -802,7 +802,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0166",
@@ -863,7 +863,7 @@
       "setup": "",
       "probe_template": "try:\n    compile(__OPTION__, 'q', 'exec')\n    print(True)\nexcept SyntaxError:\n    print(False)"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0167",
@@ -915,7 +915,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0168",
@@ -968,7 +968,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0169",
@@ -1020,7 +1020,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0170",
@@ -1072,7 +1072,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0171",
@@ -1124,7 +1124,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0172",
@@ -1176,7 +1176,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0173",
@@ -1229,7 +1229,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0174",
@@ -1282,7 +1282,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0175",
@@ -1335,7 +1335,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0176",
@@ -1388,7 +1388,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0177",
@@ -1448,7 +1448,7 @@
       "setup": "",
       "probe_template": "print((__OPTION_RAW__) == [0, 2, 4])"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0178",
@@ -1507,6 +1507,6 @@
       "mode": "truth",
       "setup": ""
     },
-    "reviewed": 1
+    "reviewed": 2
   }
 ]

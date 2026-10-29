@@ -54,7 +54,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0022",
@@ -109,7 +109,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0023",
@@ -165,7 +165,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0024",
@@ -219,7 +219,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0025",
@@ -275,7 +275,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0026",
@@ -330,7 +330,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0027",
@@ -386,7 +386,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0028",
@@ -447,7 +447,7 @@
       "mode": "truth",
       "probe_template": "try:\n    __OPTION_RAW__\n    print(False)\nexcept TypeError:\n    print(True)"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0029",
@@ -500,7 +500,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0030",
@@ -554,7 +554,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0031",
@@ -610,7 +610,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0032",
@@ -664,7 +664,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0033",
@@ -718,7 +718,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0034",
@@ -761,7 +761,7 @@
     ],
     "explanation": "`len(p)` calls `p.__len__()` → 3. When a class has no `__bool__`, truth testing uses `__len__`: a length of 0 means False.",
     "distractor_notes": {
-      "b": "Objects are always truthy only when they define neither `__bool__` nor `__len__`.",
+      "b": "Objects are truthy by default only when their class defines neither `__bool__` nor `__len__`; here `__len__` returns 0, so the object is falsy.",
       "d": "`bool()` always returns True or False.",
       "a": "`len()` works because `__len__` is defined."
     },
@@ -772,7 +772,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0035",
@@ -827,7 +827,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0036",
@@ -882,7 +882,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0037",
@@ -944,7 +944,7 @@
       "mode": "truth",
       "probe_template": "try:\n    __OPTION_RAW__\n    print(True)\nexcept Exception:\n    print(False)"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0038",
@@ -998,7 +998,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0039",
@@ -1052,7 +1052,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0040",
@@ -1109,6 +1109,6 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   }
 ]

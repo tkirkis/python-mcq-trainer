@@ -49,7 +49,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0062",
@@ -103,7 +103,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0063",
@@ -155,7 +155,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0064",
@@ -207,7 +207,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0065",
@@ -259,7 +259,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0066",
@@ -311,7 +311,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0067",
@@ -363,7 +363,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0068",
@@ -415,7 +415,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0069",
@@ -467,7 +467,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0070",
@@ -527,7 +527,7 @@
       "setup": "",
       "probe_template": "x = __OPTION_RAW__\nprint(type(x) is tuple)"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0071",
@@ -587,7 +587,7 @@
       "mode": "truth",
       "setup": ""
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0072",
@@ -639,7 +639,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0073",
@@ -650,7 +650,7 @@
       "star"
     ],
     "type": "single",
-    "difficulty": 3,
+    "difficulty": 2,
     "source": "generated",
     "stem": "What is the output of the following code?",
     "code": "first, *rest = (1, 2, 3, 4)\nprint(first, rest)",
@@ -691,7 +691,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0074",
@@ -744,7 +744,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0075",
@@ -796,7 +796,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0076",
@@ -848,7 +848,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0077",
@@ -901,7 +901,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0078",
@@ -953,7 +953,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0079",
@@ -1006,7 +1006,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0080",
@@ -1058,7 +1058,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0081",
@@ -1111,7 +1111,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0082",
@@ -1172,7 +1172,7 @@
       "setup": "",
       "probe_template": "try:\n    __OPTION_RAW__\n    print(False)\nexcept ValueError:\n    print(True)"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0083",
@@ -1234,7 +1234,7 @@
       "setup": "",
       "probe_template": "print((__OPTION_RAW__) is True)"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0084",
@@ -1299,6 +1299,6 @@
       "mode": "truth",
       "setup": ""
     },
-    "reviewed": 1
+    "reviewed": 2
   }
 ]

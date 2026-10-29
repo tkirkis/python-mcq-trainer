@@ -50,7 +50,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0002",
@@ -102,7 +102,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0003",
@@ -154,7 +154,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0004",
@@ -205,7 +205,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0005",
@@ -256,7 +256,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0006",
@@ -308,7 +308,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0007",
@@ -361,7 +361,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0008",
@@ -414,7 +414,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0009",
@@ -424,7 +424,7 @@
       "insert"
     ],
     "type": "single",
-    "difficulty": 3,
+    "difficulty": 2,
     "source": "generated",
     "stem": "What is the output of the following code?",
     "code": "x = [1, 2, 3]\nx.insert(1, 9)\nx.insert(10, 7)\nprint(x)",
@@ -465,7 +465,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0010",
@@ -518,7 +518,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0011",
@@ -570,7 +570,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0012",
@@ -622,7 +622,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0013",
@@ -676,7 +676,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0014",
@@ -730,7 +730,7 @@
       "mode": "output"
     },
     "expected_output": "[1, 2, 4, 3]",
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0015",
@@ -791,7 +791,7 @@
       "setup": "lst = [3, 1, 2]",
       "probe_template": "before = list(lst)\nr = __OPTION_RAW__\nprint(r is None and lst != before)"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0016",
@@ -846,7 +846,7 @@
       "setup": "list = [1]\niterable = [2, 3]",
       "probe_template": "try:\n    exec(__OPTION__)\nexcept Exception:\n    pass\nprint(list == [1, 2, 3])"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0017",
@@ -908,7 +908,7 @@
       "setup": "x = [1, 2, 3]",
       "probe_template": "print((__OPTION_RAW__) is True)"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0018",
@@ -976,7 +976,7 @@
       "setup": "lst = [4, 5, 6]",
       "probe_template": "try:\n    __OPTION_RAW__\n    print(False)\nexcept Exception:\n    print(True)"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0019",
@@ -1029,7 +1029,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0020",
@@ -1082,7 +1082,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0021",
@@ -1135,7 +1135,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0022",
@@ -1187,7 +1187,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S2-0023",
@@ -1240,6 +1240,6 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   }
 ]

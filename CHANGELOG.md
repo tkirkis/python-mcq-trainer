@@ -18,7 +18,11 @@
   execution and self-reviewing. A central pass re-verified everything, cross-checked S6–S8 on
   NumPy 2.1 / pandas 2.2, spread the correct answers evenly over a/b/c/d
   (`scripts/rebalance_options.py`), and an independent adversarial review read every question
-  again (ambiguity, wrong keys, duplicates, version dependence).
+  again (ambiguity, wrong keys, duplicates, version dependence): 840 questions re-solved blind, no
+  wrong answer key found, 44 questions tightened (ambiguous stems, notes, off-chapter slide refs,
+  4 near-duplicates rewritten), lessons corrected (pandas 3 copy-on-write, `__int__`, JSON keys).
+- Final state: 840 questions, 783 (93 %) verified by execution, 57 conceptual reviewed twice,
+  `verify_questions.py --strict --no-cache`: 0 failures, 0 warnings, 0 near-duplicates.
 
 ### Phase 3 — app
 - Vite + React + TypeScript PWA, offline-first (Workbox precache), IndexedDB append-only event log.

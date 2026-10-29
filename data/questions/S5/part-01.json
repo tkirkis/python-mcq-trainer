@@ -52,7 +52,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0002",
@@ -108,7 +108,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0003",
@@ -165,7 +165,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0004",
@@ -222,7 +222,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0005",
@@ -279,7 +279,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0006",
@@ -334,7 +334,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0007",
@@ -389,7 +389,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0008",
@@ -445,7 +445,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0009",
@@ -502,7 +502,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0010",
@@ -563,7 +563,7 @@
     "verify": {
       "mode": "truth"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0011",
@@ -623,7 +623,7 @@
     "verify": {
       "mode": "truth"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0012",
@@ -677,7 +677,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0013",
@@ -731,7 +731,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0014",
@@ -785,7 +785,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0015",
@@ -842,7 +842,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0016",
@@ -898,7 +898,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0017",
@@ -955,7 +955,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0018",
@@ -1015,7 +1015,7 @@
       "mode": "truth",
       "probe_template": "try:\n    print(__OPTION_RAW__ == 15)\nexcept Exception:\n    print(False)"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0019",
@@ -1068,7 +1068,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S5-0020",
@@ -1124,6 +1124,6 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   }
 ]

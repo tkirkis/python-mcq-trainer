@@ -5,80 +5,28 @@
   "topic": "generators",
   "tags": [
    "generator-expression",
-   "type"
+   "next",
+   "lazy"
   ],
   "type": "single",
   "difficulty": 1,
   "source": "generated",
   "stem": "What is the output of the following code?",
-  "code": "g = (i * i for i in range(4))\nprint(type(g).__name__)",
+  "code": "g = (c.upper() for c in 'abc')\nprint(next(g), next(g))",
   "options": [
    {
     "id": "a",
-    "text": "list",
+    "text": "A A",
     "mono": true
    },
    {
     "id": "b",
-    "text": "tuple",
+    "text": "a b",
     "mono": true
    },
    {
     "id": "c",
-    "text": "generator",
-    "mono": true
-   },
-   {
-    "id": "d",
-    "text": "range",
-    "mono": true
-   }
-  ],
-  "correct": [
-   "c"
-  ],
-  "explanation": "Parentheses around a comprehension do not build a tuple: they create a **generator expression**, whose type is `generator`. Use `[...]` for a list or `tuple(...)` for a tuple.",
-  "distractor_notes": {
-   "a": "A list comprehension needs square brackets.",
-   "b": "There is no 'tuple comprehension': `( ... for ... )` is a generator expression.",
-   "d": "range(4) is only the source being iterated."
-  },
-  "slides": [
-   250
-  ],
-  "verify": {
-   "mode": "output"
-  },
-  "reviewed": 1
- },
- {
-  "id": "S7-0022",
-  "chapter": "S7",
-  "topic": "generators",
-  "tags": [
-   "generator-expression",
-   "exhaustion",
-   "sum"
-  ],
-  "type": "single",
-  "difficulty": 2,
-  "source": "generated",
-  "stem": "What is the output of the following code?",
-  "code": "g = (x for x in [1, 2, 3])\nprint(sum(g), sum(g))",
-  "options": [
-   {
-    "id": "a",
-    "text": "6 6",
-    "mono": true
-   },
-   {
-    "id": "b",
-    "text": "6 0",
-    "mono": true
-   },
-   {
-    "id": "c",
-    "text": "6 None",
+    "text": "A B",
     "mono": true
    },
    {
@@ -89,13 +37,68 @@
    }
   ],
   "correct": [
+   "c"
+  ],
+  "explanation": "A generator expression is an iterator: each `next(g)` resumes it just long enough to produce one more value. It keeps its position between calls, so the first call gives 'A' and the second 'B'.",
+  "distractor_notes": {
+   "a": "next() does not restart the generator: it continues from where it stopped.",
+   "b": "Each value produced is `c.upper()`, not `c`.",
+   "d": "A generator expression is an iterator, so next() can be called on it directly (unlike a list)."
+  },
+  "slides": [
+   250,
+   251
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 2
+ },
+ {
+  "id": "S7-0022",
+  "chapter": "S7",
+  "topic": "generators",
+  "tags": [
+   "generator-expression",
+   "lazy",
+   "list-comprehension"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "nums = [1, 2, 3]\ng = (x * 10 for x in nums)\nnums.append(4)\nprint(list(g))",
+  "options": [
+   {
+    "id": "a",
+    "text": "[10, 20, 30]",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "[10, 20, 30, 40]",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "[]",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "RuntimeError",
+    "mono": true,
+    "out": "!RuntimeError"
+   }
+  ],
+  "correct": [
    "b"
   ],
-  "explanation": "A generator can be traversed only once. The first `sum` consumes all the values (6); the second `sum` receives an already exhausted generator and returns the sum of nothing, 0.",
+  "explanation": "A generator expression computes nothing when it is created: its values are produced only when `list(g)` consumes it. By then the list it iterates over (the same object `nums`) already contains 4, so four values are produced. A list comprehension `[x * 10 for x in nums]` would have been computed immediately and given [10, 20, 30].",
   "distractor_notes": {
-   "a": "Treats the generator like a list that can be re-read.",
-   "c": "sum of an empty iterable is 0, not None.",
-   "d": "sum accepts any iterable, including an exhausted generator."
+   "a": "That is what a list comprehension would give: it is evaluated at once, before the append.",
+   "c": "The generator has not been consumed before list(g), so it is not exhausted.",
+   "d": "The list is modified before the iteration starts, not during it; no error is raised."
   },
   "slides": [
    250
@@ -103,7 +106,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0023",
@@ -155,7 +158,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0024",
@@ -208,7 +211,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0025",
@@ -261,7 +264,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0026",
@@ -315,7 +318,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0027",
@@ -368,7 +371,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0028",
@@ -376,37 +379,38 @@
   "topic": "generators",
   "tags": [
    "generator-expression",
-   "list-comprehension"
+   "list-comprehension",
+   "map"
   ],
   "type": "multi",
   "difficulty": 2,
   "source": "generated",
-  "stem": "Which of the following expressions are equal to the list `[0, 2, 4]`? Select all that apply.",
+  "stem": "Which of the following expressions are equal to the list `[0, 1, 4]`? Select all that apply.",
   "code": null,
   "options": [
    {
     "id": "a",
-    "text": "[x for x in range(5) if x % 2 == 0]",
+    "text": "[x * x for x in range(3)]",
     "mono": true
    },
    {
     "id": "b",
-    "text": "list(x for x in range(5) if x % 2 == 0)",
+    "text": "list(x * x for x in range(3))",
     "mono": true
    },
    {
     "id": "c",
-    "text": "(x for x in range(5) if x % 2 == 0)",
+    "text": "(x * x for x in range(3))",
     "mono": true
    },
    {
     "id": "d",
-    "text": "list(range(0, 5, 2))",
+    "text": "list(map(lambda x: x * x, range(3)))",
     "mono": true
    },
    {
     "id": "e",
-    "text": "[(x for x in range(5) if x % 2 == 0)]",
+    "text": "[(x * x for x in range(3))]",
     "mono": true
    }
   ],
@@ -415,20 +419,21 @@
    "b",
    "d"
   ],
-  "explanation": "(a) is a list comprehension; (b) passes a generator expression to `list()`, which consumes it; (d) builds the list from a range with step 2. (c) is a generator object, not a list, and (e) is a list containing **one** generator object.",
+  "explanation": "A list comprehension builds the list directly; `list()` consumes a generator expression or a map object and collects their values into a list. A bare generator expression is a generator object, not a list, and putting one inside square brackets gives a list containing **one** generator object.",
   "distractor_notes": {
    "c": "A generator expression is not a list; it never compares equal to one.",
    "e": "Brackets around a generator expression make a one-element list holding the generator."
   },
   "slides": [
-   250
+   250,
+   253
   ],
   "verify": {
    "mode": "truth",
    "setup": "",
-   "probe_template": "print(__OPTION_RAW__ == [0, 2, 4])"
+   "probe_template": "print((__OPTION_RAW__) == [0, 1, 4])"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0029",
@@ -476,7 +481,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0030",
@@ -531,7 +536,7 @@
    "code": "import re\nevens = (i for i in range(11) if i % 2 == 0)\nprint(re.sub(r'0x[0-9a-fA-F]+', '0x...', str(evens)))",
    "note": "The real output contains a memory address; verify.code masks it as 0x..."
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0031",
@@ -584,7 +589,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0032",
@@ -637,7 +642,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0033",
@@ -691,7 +696,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0034",
@@ -752,7 +757,7 @@
    "setup": "g = (x for x in range(3))",
    "probe_template": "try:\n    __OPTION_RAW__\n    print(False)\nexcept Exception:\n    print(True)"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0035",
@@ -806,7 +811,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0036",
@@ -861,7 +866,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0037",
@@ -915,7 +920,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0038",
@@ -969,7 +974,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0039",
@@ -1037,7 +1042,7 @@
    "setup": "",
    "probe_template": "obj = __OPTION_RAW__\ntry:\n    next(obj)\n    print(True)\nexcept TypeError:\n    print(False)"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0040",
@@ -1091,6 +1096,6 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  }
 ]

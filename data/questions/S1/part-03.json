@@ -49,7 +49,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0048",
@@ -104,7 +104,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0049",
@@ -160,7 +160,7 @@
    "mode": "truth",
    "setup": ""
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0050",
@@ -212,7 +212,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0051",
@@ -264,7 +264,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0052",
@@ -307,7 +307,7 @@
    "mode": "output"
   },
   "expected_output": "small",
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0053",
@@ -362,7 +362,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0054",
@@ -417,7 +417,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0055",
@@ -472,7 +472,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0056",
@@ -539,7 +539,7 @@
    "setup": "",
    "probe_template": "print(bool(__OPTION_RAW__) is False)"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0057",
@@ -592,7 +592,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0058",
@@ -660,7 +660,7 @@
    "setup": "",
    "probe_template": "print((__OPTION_RAW__) is True)"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0059",
@@ -712,7 +712,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0060",
@@ -765,7 +765,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0061",
@@ -821,7 +821,7 @@
    "mode": "truth",
    "setup": ""
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0062",
@@ -876,7 +876,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0063",
@@ -927,7 +927,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0064",
@@ -980,7 +980,7 @@
    "setup": "",
    "probe_template": "try:\n    compile(__OPTION__, 'q', 'exec')\n    print(True)\nexcept SyntaxError:\n    print(False)"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0065",
@@ -1033,7 +1033,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0066",
@@ -1086,7 +1086,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0067",
@@ -1148,7 +1148,7 @@
    "setup": "",
    "probe_template": "try:\n    compile(__OPTION__, 'q', 'exec')\n    print(True)\nexcept SyntaxError:\n    print(False)"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0068",
@@ -1199,7 +1199,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0069",
@@ -1265,7 +1265,7 @@
    "setup": "",
    "probe_template": "try:\n    compile('x = ' + __OPTION__, 'q', 'exec')\n    print(True)\nexcept SyntaxError:\n    print(False)"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0070",
@@ -1318,6 +1318,6 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  }
 ]

@@ -51,7 +51,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0002",
@@ -106,7 +106,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0003",
@@ -160,7 +160,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0004",
@@ -212,7 +212,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0005",
@@ -265,7 +265,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0006",
@@ -317,7 +317,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0007",
@@ -370,7 +370,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0008",
@@ -422,7 +422,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0009",
@@ -475,7 +475,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0010",
@@ -529,7 +529,7 @@
       "mode": "output"
     },
     "expected_output": "2\n!UnboundLocalError",
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0011",
@@ -583,7 +583,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0012",
@@ -646,7 +646,7 @@
       "setup": "n = 0",
       "probe_template": "__OPTION_RAW__\nf()\nprint(True)"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0013",
@@ -702,7 +702,7 @@
       "mode": "output"
     },
     "expected_output": "6",
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0014",
@@ -757,7 +757,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0015",
@@ -821,7 +821,7 @@
       "setup": "x = 5",
       "probe_template": "import io, contextlib\nbuf = io.StringIO()\nwith contextlib.redirect_stdout(buf):\n    exec(__OPTION__)\nprint(buf.getvalue() == '10\\n')"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0016",
@@ -877,7 +877,7 @@
       "mode": "truth",
       "setup": ""
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0017",
@@ -930,7 +930,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0018",
@@ -985,7 +985,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0019",
@@ -1040,7 +1040,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0020",
@@ -1091,6 +1091,6 @@
       "mode": "manual",
       "reference": "Slide 153 (CPU = calculator, RAM = short-term memory, hard disk = long-term storage) and slide 155 (a program is copied from disk to RAM when executed)"
     },
-    "reviewed": 1
+    "reviewed": 2
   }
 ]

@@ -68,7 +68,7 @@
       },
       "probe_template": "import io, contextlib\nbuf = io.StringIO()\nwith contextlib.redirect_stdout(buf):\n    exec(__OPTION__)\nprint(buf.getvalue() == '3.14\\n')"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0062",
@@ -128,7 +128,7 @@
         "shapes/circle.py": "def area(r):\n    return 3 * r * r\n"
       }
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0063",
@@ -182,7 +182,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0064",
@@ -241,7 +241,7 @@
         "config.py": "level = 1\n\ndef bump():\n    global level\n    level += 1\n"
       }
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0065",
@@ -300,7 +300,7 @@
         "util.py": "def public():\n    return \"pub\"\n\ndef _helper():\n    return \"help\"\n"
       }
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0066",
@@ -354,7 +354,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0067",
@@ -407,7 +407,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0068",
@@ -460,7 +460,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0069",
@@ -514,7 +514,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0070",
@@ -572,7 +572,7 @@
         "class1/sub/c.py": "x = 3\n"
       }
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0071",
@@ -630,7 +630,7 @@
       "mode": "truth",
       "probe_template": "import posixpath\nprint(not posixpath.isabs(__OPTION__))"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0072",
@@ -684,7 +684,7 @@
     "verify": {
       "mode": "truth"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0073",
@@ -737,7 +737,7 @@
       "mode": "manual",
       "reference": "Slides p. 130 (shell commands: pwd = print working directory)"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0074",
@@ -786,7 +786,7 @@
       "mode": "manual",
       "reference": "Slides p. 131 (environment variables; PATH = where the OS looks for programs)"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0075",
@@ -847,7 +847,7 @@
       "setup": "import os",
       "probe_template": "__OPTION_RAW__\nprint(True)"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0076",
@@ -900,7 +900,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0077",
@@ -953,7 +953,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0078",
@@ -1007,7 +1007,7 @@
       "mode": "truth",
       "setup": "import time\nfrom datetime import datetime"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0079",
@@ -1060,7 +1060,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0080",
@@ -1114,6 +1114,6 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   }
 ]

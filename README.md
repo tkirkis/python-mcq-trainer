@@ -19,7 +19,19 @@ MCQ exam of the MSc DSBA Python course (F. Popineau, slides of 31/08/2025).
 
 ## The question bank
 
-__BANK_STATS__
+| Chapter | Slides | Questions | of which past exam | Select-all | Easy / Med / Hard | Verified by execution |
+|---|---|---|---|---|---|---|
+| S1 Basics | 1–67 | 166 | 16 | 25 | 55 / 74 / 37 | 157 (95%) |
+| S2 Functions & data structures | 68–125 | 150 | 10 | 23 | 52 / 65 / 33 | 147 (98%) |
+| S3 Files, OS, modules, exceptions | 126–149 | 83 | 3 | 14 | 25 / 38 / 20 | 81 (98%) |
+| S4 Under the hood: scopes, aliasing, mutability | 150–181 | 93 | 3 | 15 | 21 / 43 / 29 | 92 (99%) |
+| S5 OOP & GUI | 182–213 | 106 | 6 | 17 | 31 / 49 / 26 | 100 (94%) |
+| S6 NumPy, Pandas, visualization | 214–246 | 100 | 0 | 16 | 30 / 45 / 25 | 99 (99%) |
+| S7 Pythonic code, testing, efficiency | 247–278 | 82 | 2 | 14 | 23 / 38 / 21 | 74 (90%) |
+| S8 Web applications | 279–319 | 60 | 0 | 10 | 22 / 27 / 11 | 33 (55%) |
+| **Total** | 1–319 | **840** | 40 | 134 (16%) | 259 / 379 / 202 | **783 (93%)** |
+
+S6–S8 (not tested last year): 242 questions (29%). The other 57 are conceptual (HTTP, PEP 8, MVC, …) and were reviewed independently twice. Every question was also re-read by a second, independent reviewer (no wrong answer key found; 44 questions tightened).
 
 Every answer key is checked by `scripts/verify_questions.py`, which **executes** the snippet of
 each question in a sandboxed `python -I` subprocess (NumPy/Pandas/Matplotlib/Flask included) and

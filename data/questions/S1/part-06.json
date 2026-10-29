@@ -48,7 +48,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0116",
@@ -99,7 +99,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0117",
@@ -150,7 +150,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0118",
@@ -203,7 +203,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0119",
@@ -258,7 +258,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0120",
@@ -310,7 +310,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0121",
@@ -363,7 +363,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0122",
@@ -416,9 +416,11 @@
   ],
   "verify": {
    "mode": "output",
-   "timeout": 2
+   "timeout": 2,
+   "setup": "import sys\nsys.stdout.reconfigure(line_buffering=True)",
+   "prefix": "0\n1\n"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0123",
@@ -472,7 +474,7 @@
    "mode": "truth",
    "setup": ""
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0124",
@@ -534,7 +536,7 @@
    "setup": "",
    "probe_template": "import io, contextlib\n_buf = io.StringIO()\nwith contextlib.redirect_stdout(_buf):\n    exec(__OPTION__, {})\nprint('ELSE' in _buf.getvalue())"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0125",
@@ -587,7 +589,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0126",
@@ -640,7 +642,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0127",
@@ -694,7 +696,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0128",
@@ -748,7 +750,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0129",
@@ -800,7 +802,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0130",
@@ -854,7 +856,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0131",
@@ -906,7 +908,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0132",
@@ -960,7 +962,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0133",
@@ -1028,7 +1030,7 @@
    "setup": "",
    "probe_template": "_v = __OPTION_RAW__\nprint(type(_v) is int)"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0134",
@@ -1070,7 +1072,7 @@
   ],
   "explanation": "The argument expression radius + 1 is evaluated first (3) and bound to the parameter radius inside the function: 3 * 3 * 3 = 27.",
   "distractor_notes": {
-   "a": "Computes 3 * 3 * 4: the same parameter value is used twice.",
+   "a": "No factor is 4: inside the function radius is 3 everywhere and pi is 3, so the result is 3 * 3 * 3.",
    "c": "Adds 1 to the result instead of to the argument.",
    "d": "Uses radius = 2: the argument is radius + 1 = 3."
   },
@@ -1080,7 +1082,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0135",
@@ -1132,7 +1134,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0136",
@@ -1185,7 +1187,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0137",
@@ -1240,7 +1242,7 @@
    "mode": "truth",
    "setup": ""
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0138",
@@ -1294,6 +1296,6 @@
    "mode": "truth",
    "setup": ""
   },
-  "reviewed": 1
+  "reviewed": 2
  }
 ]

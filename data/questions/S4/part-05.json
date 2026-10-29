@@ -51,7 +51,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0082",
@@ -104,7 +104,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0083",
@@ -158,7 +158,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0084",
@@ -211,7 +211,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0085",
@@ -265,7 +265,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0086",
@@ -326,7 +326,7 @@
       "mode": "truth",
       "probe_template": "print((__OPTION_RAW__) == [1, 4, 9])"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0087",
@@ -380,7 +380,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0088",
@@ -421,11 +421,11 @@
     "correct": [
       "c"
     ],
-    "explanation": "Each call of counter creates a new local n and a new closure step bound to it. a and b therefore have independent counters: a has been called three times (3), b once (1).",
+    "explanation": "Each call of `counter` creates a new local `n` and a new closure `step` bound to it. `a` and `b` therefore have independent counters: `a` has been called three times (3), `b` once (1).",
     "distractor_notes": {
       "a": "nonlocal n makes the increments persist between calls of the same closure.",
-      "b": "Each counter() call has its own n; a and b do not share state.",
-      "d": "b has only been called once."
+      "b": "Each counter() call has its own n; `a` and `b` do not share state.",
+      "d": "`b` has only been called once."
     },
     "slides": [
       177,
@@ -434,7 +434,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0089",
@@ -489,7 +489,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0090",
@@ -548,6 +548,6 @@
     "verify": {
       "mode": "truth"
     },
-    "reviewed": 1
+    "reviewed": 2
   }
 ]

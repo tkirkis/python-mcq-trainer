@@ -50,7 +50,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0002",
@@ -103,7 +103,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0003",
@@ -156,7 +156,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0004",
@@ -209,7 +209,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0005",
@@ -262,7 +262,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0006",
@@ -314,7 +314,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0007",
@@ -369,7 +369,7 @@
    "mode": "truth",
    "setup": ""
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0008",
@@ -422,7 +422,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0009",
@@ -475,7 +475,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0010",
@@ -527,7 +527,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0011",
@@ -581,7 +581,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0012",
@@ -632,7 +632,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0013",
@@ -684,7 +684,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0014",
@@ -744,7 +744,7 @@
    "setup": "",
    "probe_template": "try:\n    compile(__OPTION__, 'q', 'eval')\n    print(True)\nexcept SyntaxError:\n    print(False)"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0015",
@@ -797,7 +797,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0016",
@@ -850,7 +850,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0017",
@@ -904,7 +904,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0018",
@@ -956,7 +956,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0019",
@@ -1008,7 +1008,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0020",
@@ -1069,7 +1069,7 @@
    "setup": "",
    "probe_template": "print((__OPTION_RAW__) is True)"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0021",
@@ -1131,7 +1131,7 @@
    "setup": "f = \"report.TXT\"",
    "probe_template": "print((__OPTION_RAW__) is True)"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0022",
@@ -1194,6 +1194,6 @@
    "setup": "",
    "probe_template": "print((__OPTION_RAW__) == 'abc')"
   },
-  "reviewed": 1
+  "reviewed": 2
  }
 ]

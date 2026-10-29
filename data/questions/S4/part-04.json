@@ -50,7 +50,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0062",
@@ -104,7 +104,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0063",
@@ -158,7 +158,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0064",
@@ -211,7 +211,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0065",
@@ -273,7 +273,7 @@
       "setup": "",
       "probe_template": "__OPTION_RAW__\ng[0][0] = 1\nprint(g[1][0] == 0 and g[2][0] == 0)"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0066",
@@ -328,7 +328,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0067",
@@ -382,7 +382,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0068",
@@ -436,7 +436,7 @@
       "mode": "truth",
       "probe_template": "__OPTION_RAW__\nprint(b is a)"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0069",
@@ -488,7 +488,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0070",
@@ -502,7 +502,7 @@
     "type": "multi",
     "difficulty": 2,
     "source": "generated",
-    "stem": "Starting from the code below, after which of the following lines does `c['a'] = 2` leave `d['a']` equal to `1` (each line tried on its own)? Select all that apply.",
+    "stem": "Starting from the code below, after which of the following lines does `c['a'] = 2` run without error and leave `d['a']` equal to `1` (each line tried on its own)? Select all that apply.",
     "code": "import copy\nd = {'a': 1}",
     "options": [
       {
@@ -536,10 +536,10 @@
       "c",
       "d"
     ],
-    "explanation": "dict(d), d.copy() and copy.copy(d) all create a new dictionary (a shallow copy), so assigning a key in the copy does not affect d. `c = d` only creates an alias. d.items() returns a view, which does not support item assignment (TypeError).",
+    "explanation": "dict(d), d.copy() and copy.copy(d) all create a new dictionary (a shallow copy), so assigning a key in the copy does not affect `d`. `c = d` only creates an alias. d.items() returns a view, which does not support item assignment (TypeError).",
     "distractor_notes": {
-      "a": "Alias: c and d are the same dict, so d['a'] becomes 2.",
-      "e": "A dict_items view is not a dict: `c['a'] = 2` raises TypeError."
+      "a": "Alias: `c` and `d` name the same dict, so d['a'] becomes 2.",
+      "e": "A dict_items view is not a dict: `c['a'] = 2` raises TypeError (even though `d['a']` stays 1)."
     },
     "slides": [
       173,
@@ -549,7 +549,7 @@
       "mode": "truth",
       "probe_template": "__OPTION_RAW__\nc['a'] = 2\nprint(d['a'] == 1)"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0071",
@@ -604,7 +604,7 @@
     "verify": {
       "mode": "truth"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0072",
@@ -657,7 +657,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0073",
@@ -710,7 +710,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0074",
@@ -764,7 +764,7 @@
       "mode": "output"
     },
     "expected_output": "done\n!RecursionError",
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0075",
@@ -817,7 +817,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0076",
@@ -871,7 +871,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0077",
@@ -926,7 +926,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0078",
@@ -980,7 +980,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0079",
@@ -1033,7 +1033,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0080",
@@ -1094,6 +1094,6 @@
       "mode": "truth",
       "setup": ""
     },
-    "reviewed": 1
+    "reviewed": 2
   }
 ]

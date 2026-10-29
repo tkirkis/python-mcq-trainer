@@ -1,1081 +1,1081 @@
 [
- {
-  "id": "S6-0061",
-  "chapter": "S6",
-  "topic": "numpy-operations",
-  "tags": [
-   "dtype",
-   "in-place",
-   "TypeError"
-  ],
-  "type": "single",
-  "difficulty": 3,
-  "source": "generated",
-  "stem": "What will be the output of the code?",
-  "code": "import numpy as np\na = np.array([1, 2, 3])\na += 1.5\nprint(a)",
-  "options": [
-   {
-    "id": "a",
-    "text": "TypeError",
-    "out": "!TypeError"
-   },
-   {
-    "id": "b",
-    "text": "[2 3 4]",
-    "mono": true
-   },
-   {
-    "id": "c",
-    "text": "[3 4 5]",
-    "mono": true
-   },
-   {
-    "id": "d",
-    "text": "[2.5 3.5 4.5]",
-    "mono": true
-   }
-  ],
-  "correct": [
-   "a"
-  ],
-  "explanation": "`a += 1.5` works in place: the float result must be written back into the existing integer array, and NumPy refuses that implicit float-to-int cast for operators (UFuncTypeError, a subclass of TypeError). `a = a + 1.5` would work and create a new float array [2.5 3.5 4.5]. (Item assignment such as `a[0] = 1.5` does truncate silently.)",
-  "distractor_notes": {
-   "d": "That is `a = a + 1.5`, which builds a new float array; `+=` must write into the int array.",
-   "b": "NumPy does not truncate in an augmented assignment; it raises.",
-   "c": "1.5 is not rounded to 2 before the addition."
+  {
+    "id": "S6-0061",
+    "chapter": "S6",
+    "topic": "numpy-operations",
+    "tags": [
+      "dtype",
+      "in-place",
+      "TypeError"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "import numpy as np\na = np.array([1, 2, 3])\na += 1.5\nprint(a)",
+    "options": [
+      {
+        "id": "a",
+        "text": "TypeError",
+        "out": "!TypeError"
+      },
+      {
+        "id": "b",
+        "text": "[2 3 4]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[3 4 5]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[2.5 3.5 4.5]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "`a += 1.5` works in place: the float result must be written back into the existing integer array, and NumPy refuses that implicit float-to-int cast for operators (UFuncTypeError, a subclass of TypeError). `a = a + 1.5` would work and create a new float array [2.5 3.5 4.5]. (Item assignment such as `a[0] = 1.5` does truncate silently.)",
+    "distractor_notes": {
+      "d": "That is `a = a + 1.5`, which builds a new float array; `+=` must write into the int array.",
+      "b": "NumPy does not truncate in an augmented assignment; it raises.",
+      "c": "1.5 is not rounded to 2 before the addition."
+    },
+    "slides": [
+      217,
+      225
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 2
   },
-  "slides": [
-   217,
-   225
-  ],
-  "verify": {
-   "mode": "output"
+  {
+    "id": "S6-0062",
+    "chapter": "S6",
+    "topic": "numpy-operations",
+    "tags": [
+      "dot",
+      "matrix-product",
+      "vectorization",
+      "ValueError"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "import numpy as np\nm = np.ones((1, 5))\nx = np.ones((100, 5))\nprint(np.dot(x, m.T).shape)\nprint(np.dot(x, m).shape)",
+    "options": [
+      {
+        "id": "a",
+        "text": "(100, 1)\n(100, 5)",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "(100,)\n(100, 5)",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "(100, 5)\nValueError",
+        "mono": true,
+        "out": "(100, 5)\n!ValueError"
+      },
+      {
+        "id": "d",
+        "text": "(100, 1)\nValueError",
+        "mono": true,
+        "out": "(100, 1)\n!ValueError"
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "A matrix product (n, k) . (k, p) gives (n, p). `m.T` has shape (5, 1), so `np.dot(x, m.T)` is (100, 5) . (5, 1) = (100, 1). `np.dot(x, m)` is (100, 5) . (1, 5): the inner dimensions 5 and 1 differ, so ValueError (shapes not aligned). `np.dot` does not broadcast like `*`.",
+    "distractor_notes": {
+      "a": "`np.dot` is a matrix product, not an element-wise one: the inner dimensions must match.",
+      "b": "`m.T` is 2D (5, 1), so the product keeps two axes.",
+      "c": "(100, 5) is the shape of the element-wise `x * m` (broadcasting), not of the dot product."
+    },
+    "slides": [
+      224
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 2
   },
-  "reviewed": 1
- },
- {
-  "id": "S6-0062",
-  "chapter": "S6",
-  "topic": "numpy-operations",
-  "tags": [
-   "dot",
-   "matrix-product",
-   "vectorization",
-   "ValueError"
-  ],
-  "type": "single",
-  "difficulty": 3,
-  "source": "generated",
-  "stem": "What is the output of the following code?",
-  "code": "import numpy as np\nm = np.ones((1, 5))\nx = np.ones((100, 5))\nprint(np.dot(x, m.T).shape)\nprint(np.dot(x, m).shape)",
-  "options": [
-   {
-    "id": "a",
-    "text": "(100, 1)\n(100, 5)",
-    "mono": true
-   },
-   {
-    "id": "b",
-    "text": "(100,)\n(100, 5)",
-    "mono": true
-   },
-   {
-    "id": "c",
-    "text": "(100, 5)\nValueError",
-    "mono": true,
-    "out": "(100, 5)\n!ValueError"
-   },
-   {
-    "id": "d",
-    "text": "(100, 1)\nValueError",
-    "mono": true,
-    "out": "(100, 1)\n!ValueError"
-   }
-  ],
-  "correct": [
-   "d"
-  ],
-  "explanation": "A matrix product (n, k) . (k, p) gives (n, p). `m.T` has shape (5, 1), so `np.dot(x, m.T)` is (100, 5) . (5, 1) = (100, 1). `np.dot(x, m)` is (100, 5) . (1, 5): the inner dimensions 5 and 1 differ, so ValueError (shapes not aligned). `np.dot` does not broadcast like `*`.",
-  "distractor_notes": {
-   "a": "`np.dot` is a matrix product, not an element-wise one: the inner dimensions must match.",
-   "b": "`m.T` is 2D (5, 1), so the product keeps two axes.",
-   "c": "(100, 5) is the shape of the element-wise `x * m` (broadcasting), not of the dot product."
+  {
+    "id": "S6-0063",
+    "chapter": "S6",
+    "topic": "numpy-operations",
+    "tags": [
+      "structured-array",
+      "mask"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Find the output of the code?",
+    "code": "import numpy as np\ndata = np.array([('ann', 25), ('bob', 31), ('cyd', 19)],\n                dtype=[('name', 'U10'), ('age', int)])\nprint(data[data['age'] > 20]['name'])",
+    "options": [
+      {
+        "id": "a",
+        "text": "[25 31]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[('ann', 25) ('bob', 31)]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "['ann' 'bob']",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "['bob']",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "A structured array has named fields. `data['age']` is the integer field, so `data['age'] > 20` is a boolean mask over the records; it keeps ann and bob, and `['name']` then extracts their names.",
+    "distractor_notes": {
+      "d": "25 > 20 as well, so ann is kept.",
+      "a": "That is the 'age' field of the selected records, not the 'name' field.",
+      "b": "That is `data[data['age'] > 20]` before selecting the 'name' field."
+    },
+    "slides": [
+      228
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 2
   },
-  "slides": [
-   267
-  ],
-  "verify": {
-   "mode": "output"
+  {
+    "id": "S6-0064",
+    "chapter": "S6",
+    "topic": "numpy-operations",
+    "tags": [
+      "element-wise",
+      "dot",
+      "which-is-false"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Given `a = np.array([1, 2, 3])`, which of the following statements is **false**?",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "`a * a` gives a 3x3 matrix",
+        "probe": "print(not ((a * a).shape == (3, 3)))"
+      },
+      {
+        "id": "b",
+        "text": "`a + [10, 20, 30]` gives `[11 22 33]`",
+        "probe": "print(not ((a + [10, 20, 30]).tolist() == [11, 22, 33]))"
+      },
+      {
+        "id": "c",
+        "text": "`np.dot(a, a)` gives 14",
+        "probe": "print(not bool(np.dot(a, a) == 14))"
+      },
+      {
+        "id": "d",
+        "text": "`a / 2` gives the float array `[0.5 1.  1.5]`",
+        "probe": "print(not ((a / 2).tolist() == [0.5, 1.0, 1.5]))"
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "Arithmetic operators are element-wise: `a * a` is [1 4 9], shape (3,), not a matrix. The other statements are true: `/` always produces floats, a list operand is converted to an array, and `np.dot` of two 1D arrays is the scalar product 1 + 4 + 9 = 14.",
+    "distractor_notes": {
+      "d": "True: true division of integers returns floats.",
+      "b": "True: the list is converted to an array and added element-wise.",
+      "c": "True: the dot product of two 1D arrays is the sum of the products."
+    },
+    "slides": [
+      217,
+      224
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": "import numpy as np\na = np.array([1, 2, 3])"
+    },
+    "reviewed": 2
   },
-  "reviewed": 1
- },
- {
-  "id": "S6-0063",
-  "chapter": "S6",
-  "topic": "numpy-operations",
-  "tags": [
-   "structured-array",
-   "mask"
-  ],
-  "type": "single",
-  "difficulty": 2,
-  "source": "generated",
-  "stem": "Find the output of the code?",
-  "code": "import numpy as np\ndata = np.array([('ann', 25), ('bob', 31), ('cyd', 19)],\n                dtype=[('name', 'U10'), ('age', int)])\nprint(data[data['age'] > 20]['name'])",
-  "options": [
-   {
-    "id": "a",
-    "text": "[25 31]",
-    "mono": true
-   },
-   {
-    "id": "b",
-    "text": "[('ann', 25) ('bob', 31)]",
-    "mono": true
-   },
-   {
-    "id": "c",
-    "text": "['ann' 'bob']",
-    "mono": true
-   },
-   {
-    "id": "d",
-    "text": "['bob']",
-    "mono": true
-   }
-  ],
-  "correct": [
-   "c"
-  ],
-  "explanation": "A structured array has named fields. `data['age']` is the integer field, so `data['age'] > 20` is a boolean mask over the records; it keeps ann and bob, and `['name']` then extracts their names.",
-  "distractor_notes": {
-   "d": "25 > 20 as well, so ann is kept.",
-   "a": "That is the 'age' field of the selected records, not the 'name' field.",
-   "b": "That is `data[data['age'] > 20]` before selecting the 'name' field."
+  {
+    "id": "S6-0065",
+    "chapter": "S6",
+    "topic": "pandas-basics",
+    "tags": [
+      "DataFrame",
+      "shape",
+      "dict-of-lists"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "import pandas as pd\ndf = pd.DataFrame({'apples': [3, 2, 0, 1],\n                   'oranges': [0, 3, 7, 2]})\nprint(df.shape)",
+    "options": [
+      {
+        "id": "a",
+        "text": "(4, 2)",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "(4,)",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "(2, 4)",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "8",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "Each key of the dict becomes a column and its list holds that column's values: 4 rows x 2 columns. `shape` is (rows, columns).",
+    "distractor_notes": {
+      "c": "The keys are columns, not rows.",
+      "d": "8 is `df.size`, the number of cells.",
+      "b": "A DataFrame is 2D; (4,) would be the shape of a single column (a Series)."
+    },
+    "slides": [
+      230,
+      231,
+      232
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 2
   },
-  "slides": [
-   228
-  ],
-  "verify": {
-   "mode": "output"
+  {
+    "id": "S6-0066",
+    "chapter": "S6",
+    "topic": "pandas-basics",
+    "tags": [
+      "index",
+      "RangeIndex",
+      "true-false"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "True or False: when no index is given, the rows of a DataFrame are labelled starting from 1.",
+    "code": "import pandas as pd\ndf = pd.DataFrame({'x': [10, 20, 30]})",
+    "options": [
+      {
+        "id": "a",
+        "text": "True",
+        "probe": "print(list(df.index)[0] == 1)"
+      },
+      {
+        "id": "b",
+        "text": "False",
+        "probe": "print(list(df.index) == [0, 1, 2])"
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "Without an explicit `index=...`, pandas labels the rows 0, 1, 2, ... (a RangeIndex), like Python positions.",
+    "distractor_notes": {
+      "a": "The default labels start at 0, not 1: here they are 0, 1, 2."
+    },
+    "slides": [
+      230,
+      231
+    ],
+    "verify": {
+      "mode": "truth"
+    },
+    "reviewed": 2
   },
-  "reviewed": 1
- },
- {
-  "id": "S6-0064",
-  "chapter": "S6",
-  "topic": "numpy-operations",
-  "tags": [
-   "element-wise",
-   "dot",
-   "which-is-false"
-  ],
-  "type": "single",
-  "difficulty": 2,
-  "source": "generated",
-  "stem": "Given `a = np.array([1, 2, 3])`, which of the following statements is **false**?",
-  "code": null,
-  "options": [
-   {
-    "id": "a",
-    "text": "`a * a` gives a 3x3 matrix",
-    "probe": "print(not ((a * a).shape == (3, 3)))"
-   },
-   {
-    "id": "b",
-    "text": "`a + [10, 20, 30]` gives `[11 22 33]`",
-    "probe": "print(not ((a + [10, 20, 30]).tolist() == [11, 22, 33]))"
-   },
-   {
-    "id": "c",
-    "text": "`np.dot(a, a)` gives 14",
-    "probe": "print(not bool(np.dot(a, a) == 14))"
-   },
-   {
-    "id": "d",
-    "text": "`a / 2` gives the float array `[0.5 1.  1.5]`",
-    "probe": "print(not ((a / 2).tolist() == [0.5, 1.0, 1.5]))"
-   }
-  ],
-  "correct": [
-   "a"
-  ],
-  "explanation": "Arithmetic operators are element-wise: `a * a` is [1 4 9], shape (3,), not a matrix. The other statements are true: `/` always produces floats, a list operand is converted to an array, and `np.dot` of two 1D arrays is the scalar product 1 + 4 + 9 = 14.",
-  "distractor_notes": {
-   "d": "True: true division of integers returns floats.",
-   "b": "True: the list is converted to an array and added element-wise.",
-   "c": "True: the dot product of two 1D arrays is the sum of the products."
+  {
+    "id": "S6-0067",
+    "chapter": "S6",
+    "topic": "pandas-basics",
+    "tags": [
+      "index",
+      "len",
+      "size"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "import pandas as pd\ndata = {'apples': [3, 2, 0, 1], 'oranges': [0, 3, 7, 2]}\ndf = pd.DataFrame(data, index=['June', 'Robert', 'Lily', 'David'])\nprint(len(df), df.size)",
+    "options": [
+      {
+        "id": "a",
+        "text": "4 12",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "2 8",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "4 8",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "8 8",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "`len(df)` is the number of rows (4). `df.size` counts all the cells: 4 rows x 2 columns = 8. The index labels are not a column, so they are not counted.",
+    "distractor_notes": {
+      "b": "`len` of a DataFrame counts rows, not columns.",
+      "a": "The index is not a data column, so it is not part of `size`.",
+      "d": "`len` gives the number of rows only."
+    },
+    "slides": [
+      231
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 2
   },
-  "slides": [
-   217,
-   267
-  ],
-  "verify": {
-   "mode": "truth",
-   "setup": "import numpy as np\na = np.array([1, 2, 3])"
+  {
+    "id": "S6-0068",
+    "chapter": "S6",
+    "topic": "pandas-basics",
+    "tags": [
+      "head",
+      "tail"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "Find the output of the code?",
+    "code": "import pandas as pd\ndf = pd.DataFrame({'x': range(20)})\nprint(len(df.head()), len(df.tail(3)))",
+    "options": [
+      {
+        "id": "a",
+        "text": "5 3",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "20 3",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "3 3",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "10 3",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "`head()` returns the first 5 rows by default; `tail(n)` returns the last n rows.",
+    "distractor_notes": {
+      "d": "The default of `head()` is 5 rows, not 10.",
+      "c": "`head()` has its own default (5); the 3 only applies to `tail`.",
+      "b": "`head()` returns a preview of the first rows, not the whole DataFrame."
+    },
+    "slides": [
+      232
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 2
   },
-  "reviewed": 1
- },
- {
-  "id": "S6-0065",
-  "chapter": "S6",
-  "topic": "pandas-basics",
-  "tags": [
-   "DataFrame",
-   "shape",
-   "dict-of-lists"
-  ],
-  "type": "single",
-  "difficulty": 1,
-  "source": "generated",
-  "stem": "What is the output of the following code?",
-  "code": "import pandas as pd\ndf = pd.DataFrame({'apples': [3, 2, 0, 1],\n                   'oranges': [0, 3, 7, 2]})\nprint(df.shape)",
-  "options": [
-   {
-    "id": "a",
-    "text": "(4, 2)",
-    "mono": true
-   },
-   {
-    "id": "b",
-    "text": "(4,)",
-    "mono": true
-   },
-   {
-    "id": "c",
-    "text": "(2, 4)",
-    "mono": true
-   },
-   {
-    "id": "d",
-    "text": "8",
-    "mono": true
-   }
-  ],
-  "correct": [
-   "a"
-  ],
-  "explanation": "Each key of the dict becomes a column and its list holds that column's values: 4 rows x 2 columns. `shape` is (rows, columns).",
-  "distractor_notes": {
-   "c": "The keys are columns, not rows.",
-   "d": "8 is `df.size`, the number of cells.",
-   "b": "A DataFrame is 2D; (4,) would be the shape of a single column (a Series)."
+  {
+    "id": "S6-0069",
+    "chapter": "S6",
+    "topic": "pandas-basics",
+    "tags": [
+      "DataFrame",
+      "ValueError"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following snippet?",
+    "code": "import pandas as pd\ndf = pd.DataFrame({'a': [1, 2, 3], 'b': [4, 5]})\nprint(df.shape)",
+    "options": [
+      {
+        "id": "a",
+        "text": "KeyError",
+        "out": "!KeyError"
+      },
+      {
+        "id": "b",
+        "text": "(3, 2)",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "(2, 2)",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "ValueError",
+        "out": "!ValueError"
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "All the lists of the dict must have the same length; otherwise pandas raises ValueError (All arrays must be of the same length). It does not pad the short list with NaN.",
+    "distractor_notes": {
+      "b": "Plain lists are not padded with NaN.",
+      "c": "pandas does not truncate the longer list.",
+      "a": "KeyError is raised when looking up a missing label, not when building a DataFrame."
+    },
+    "slides": [
+      230
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 2
   },
-  "slides": [
-   230,
-   231,
-   232
-  ],
-  "verify": {
-   "mode": "output"
+  {
+    "id": "S6-0070",
+    "chapter": "S6",
+    "topic": "pandas-basics",
+    "tags": [
+      "read_csv",
+      "index_col",
+      "columns"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "# purchases.csv contains:\n# ,apples,oranges\n# June,3,0\n# Robert,2,3\n# Lily,0,7\n# David,1,2\nimport pandas as pd\ndf = pd.read_csv('purchases.csv')\nprint(list(df.columns))",
+    "options": [
+      {
+        "id": "a",
+        "text": "['apples', 'oranges']",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "['', 'apples', 'oranges']",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "['June', 'Robert', 'Lily', 'David']",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "['Unnamed: 0', 'apples', 'oranges']",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "Without `index_col`, `read_csv` treats the first column (the names, whose header is empty) as an ordinary data column and calls it 'Unnamed: 0'; the rows get a default 0..3 index. `index_col=0` would turn it into the index.",
+    "distractor_notes": {
+      "a": "That is the result with `index_col=0`.",
+      "b": "pandas replaces an empty header by 'Unnamed: <position>'.",
+      "c": "Those are the values of the first column, not column names."
+    },
+    "slides": [
+      231
+    ],
+    "verify": {
+      "mode": "output",
+      "files": {
+        "purchases.csv": ",apples,oranges\nJune,3,0\nRobert,2,3\nLily,0,7\nDavid,1,2\n"
+      }
+    },
+    "reviewed": 2
   },
-  "reviewed": 1
- },
- {
-  "id": "S6-0066",
-  "chapter": "S6",
-  "topic": "pandas-basics",
-  "tags": [
-   "index",
-   "RangeIndex",
-   "true-false"
-  ],
-  "type": "single",
-  "difficulty": 1,
-  "source": "generated",
-  "stem": "True or False: when no index is given, the rows of a DataFrame are labelled starting from 1.",
-  "code": "import pandas as pd\ndf = pd.DataFrame({'x': [10, 20, 30]})",
-  "options": [
-   {
-    "id": "a",
-    "text": "True",
-    "probe": "print(list(df.index)[0] == 1)"
-   },
-   {
-    "id": "b",
-    "text": "False",
-    "probe": "print(list(df.index) == [0, 1, 2])"
-   }
-  ],
-  "correct": [
-   "b"
-  ],
-  "explanation": "Without an explicit `index=...`, pandas labels the rows 0, 1, 2, ... (a RangeIndex), like Python positions.",
-  "distractor_notes": {
-   "a": "The default labels start at 0, not 1: here they are 0, 1, 2."
+  {
+    "id": "S6-0071",
+    "chapter": "S6",
+    "topic": "pandas-basics",
+    "tags": [
+      "read_csv",
+      "index_col",
+      "loc"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "# scores.csv contains:\n# name,math,physics\n# Ana,12,15\n# Ben,9,11\n# Cleo,17,14\nimport pandas as pd\ndf = pd.read_csv('scores.csv', index_col=0)\nprint(df.shape, df.loc['Ben', 'physics'])",
+    "options": [
+      {
+        "id": "a",
+        "text": "(4, 2) 11",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "(3, 2) 11",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "(3, 3) 11",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "(3, 2) 9",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "`index_col=0` turns the first column (name) into the row index: it is no longer a data column, so the shape is 3 rows x 2 columns, and rows can be selected by name with `loc[row_label, column_label]`.",
+    "distractor_notes": {
+      "c": "The index column is not counted as a data column.",
+      "a": "The header line gives the column names; it is not a row.",
+      "d": "9 is Ben's math grade; `loc['Ben', 'physics']` reads the physics column."
+    },
+    "slides": [
+      231,
+      232
+    ],
+    "verify": {
+      "mode": "output",
+      "files": {
+        "scores.csv": "name,math,physics\nAna,12,15\nBen,9,11\nCleo,17,14\n"
+      }
+    },
+    "reviewed": 2
   },
-  "slides": [
-   230,
-   231
-  ],
-  "verify": {
-   "mode": "truth"
+  {
+    "id": "S6-0072",
+    "chapter": "S6",
+    "topic": "pandas-basics",
+    "tags": [
+      "Series",
+      "index",
+      "label"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "import pandas as pd\ns = pd.Series([10, 20, 30], index=['a', 'b', 'c'])\nprint(s['b'])",
+    "options": [
+      {
+        "id": "a",
+        "text": "20",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "KeyError",
+        "out": "!KeyError"
+      },
+      {
+        "id": "c",
+        "text": "10",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "1",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "A Series is a 1D array with labels: `s['b']` looks up the value whose label is 'b', i.e. 20.",
+    "distractor_notes": {
+      "d": "1 is the position of 'b'; the lookup returns the value, not the position.",
+      "b": "'b' is an existing label.",
+      "c": "10 is the value labelled 'a'."
+    },
+    "slides": [
+      230
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 2
   },
-  "reviewed": 1
- },
- {
-  "id": "S6-0067",
-  "chapter": "S6",
-  "topic": "pandas-basics",
-  "tags": [
-   "index",
-   "len",
-   "size"
-  ],
-  "type": "single",
-  "difficulty": 1,
-  "source": "generated",
-  "stem": "What is the output of the following code?",
-  "code": "import pandas as pd\ndata = {'apples': [3, 2, 0, 1], 'oranges': [0, 3, 7, 2]}\ndf = pd.DataFrame(data, index=['June', 'Robert', 'Lily', 'David'])\nprint(len(df), df.size)",
-  "options": [
-   {
-    "id": "a",
-    "text": "4 12",
-    "mono": true
-   },
-   {
-    "id": "b",
-    "text": "2 8",
-    "mono": true
-   },
-   {
-    "id": "c",
-    "text": "4 8",
-    "mono": true
-   },
-   {
-    "id": "d",
-    "text": "8 8",
-    "mono": true
-   }
-  ],
-  "correct": [
-   "c"
-  ],
-  "explanation": "`len(df)` is the number of rows (4). `df.size` counts all the cells: 4 rows x 2 columns = 8. The index labels are not a column, so they are not counted.",
-  "distractor_notes": {
-   "b": "`len` of a DataFrame counts rows, not columns.",
-   "a": "The index is not a data column, so it is not part of `size`.",
-   "d": "`len` gives the number of rows only."
+  {
+    "id": "S6-0073",
+    "chapter": "S6",
+    "topic": "pandas-basics",
+    "tags": [
+      "DataFrame",
+      "creation",
+      "shape"
+    ],
+    "type": "multi",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Which of the following create a DataFrame with 3 rows and 2 columns? Select all that apply.",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "pd.DataFrame({'a': [1, 2, 3], 'b': [4, 5, 6]})",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "pd.DataFrame([[1, 4], [2, 5], [3, 6]], columns=['a', 'b'])",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "pd.DataFrame({'a': [1, 2], 'b': [3, 4], 'c': [5, 6]})",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "pd.DataFrame(np.zeros((3, 2)))",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "pd.DataFrame([[1, 2, 3], [4, 5, 6]])",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "b",
+      "d"
+    ],
+    "explanation": "A dict maps column names to column values (2 keys of 3 values -> 3 x 2). A list of lists is read row by row (3 inner lists of 2 -> 3 x 2). A 2D NumPy array keeps its shape.",
+    "distractor_notes": {
+      "c": "Three keys give three columns of 2 values: shape (2, 3).",
+      "e": "Each inner list is a row: 2 rows of 3 values, shape (2, 3)."
+    },
+    "slides": [
+      230
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": "import numpy as np\nimport pandas as pd",
+      "probe_template": "print(__OPTION_RAW__.shape == (3, 2))"
+    },
+    "reviewed": 2
   },
-  "slides": [
-   231
-  ],
-  "verify": {
-   "mode": "output"
+  {
+    "id": "S6-0074",
+    "chapter": "S6",
+    "topic": "pandas-basics",
+    "tags": [
+      "index",
+      "columns",
+      "shape",
+      "which-is-false"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Given the DataFrame below, which statement is **false**?",
+    "code": "import pandas as pd\ndf = pd.DataFrame({'apples': [3, 2, 0, 1], 'oranges': [0, 3, 7, 2]},\n                  index=['June', 'Robert', 'Lily', 'David'])",
+    "options": [
+      {
+        "id": "a",
+        "text": "`df.columns.tolist()` is `['apples', 'oranges']`",
+        "probe": "print(not (df.columns.tolist() == ['apples', 'oranges']))"
+      },
+      {
+        "id": "b",
+        "text": "`df['apples'].sum()` is 6",
+        "probe": "print(not bool(df['apples'].sum() == 6))"
+      },
+      {
+        "id": "c",
+        "text": "`df.index[0]` is `'June'`",
+        "probe": "print(not (df.index[0] == 'June'))"
+      },
+      {
+        "id": "d",
+        "text": "`df.shape` is `(4, 3)` because the index counts as a column",
+        "probe": "print(not (df.shape == (4, 3)))"
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "The index holds the row labels; it is not a column. The DataFrame has 4 rows and 2 columns, so `df.shape` is (4, 2). The other statements are true: the columns are apples and oranges, the first label is 'June', and 3 + 2 + 0 + 1 = 6.",
+    "distractor_notes": {
+      "a": "True: the dict keys become the column names.",
+      "c": "True: the first row label is 'June'.",
+      "b": "True: 3 + 2 + 0 + 1 = 6."
+    },
+    "slides": [
+      231
+    ],
+    "verify": {
+      "mode": "truth"
+    },
+    "reviewed": 2
   },
-  "reviewed": 1
- },
- {
-  "id": "S6-0068",
-  "chapter": "S6",
-  "topic": "pandas-basics",
-  "tags": [
-   "head",
-   "tail"
-  ],
-  "type": "single",
-  "difficulty": 1,
-  "source": "generated",
-  "stem": "Find the output of the code?",
-  "code": "import pandas as pd\ndf = pd.DataFrame({'x': range(20)})\nprint(len(df.head()), len(df.tail(3)))",
-  "options": [
-   {
-    "id": "a",
-    "text": "5 3",
-    "mono": true
-   },
-   {
-    "id": "b",
-    "text": "20 3",
-    "mono": true
-   },
-   {
-    "id": "c",
-    "text": "3 3",
-    "mono": true
-   },
-   {
-    "id": "d",
-    "text": "10 3",
-    "mono": true
-   }
-  ],
-  "correct": [
-   "a"
-  ],
-  "explanation": "`head()` returns the first 5 rows by default; `tail(n)` returns the last n rows.",
-  "distractor_notes": {
-   "d": "The default of `head()` is 5 rows, not 10.",
-   "c": "`head()` has its own default (5); the 3 only applies to `tail`.",
-   "b": "`head()` returns a preview of the first rows, not the whole DataFrame."
+  {
+    "id": "S6-0075",
+    "chapter": "S6",
+    "topic": "pandas-selection",
+    "tags": [
+      "Series-vs-DataFrame",
+      "brackets"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "import pandas as pd\ndf = pd.DataFrame({'genre': ['Action', 'Drama'],\n                   'rating': [8.1, 7.4]})\nprint(type(df['genre']).__name__, type(df[['genre']]).__name__)",
+    "options": [
+      {
+        "id": "a",
+        "text": "DataFrame DataFrame",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "Series DataFrame",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "Series Series",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "DataFrame Series",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "Single brackets with one column name return that column as a Series (1D). Double brackets pass a list of column names and always return a DataFrame, even when the list has one name.",
+    "distractor_notes": {
+      "a": "One name in single brackets gives a Series.",
+      "c": "A list of names (double brackets) gives a DataFrame.",
+      "d": "The two cases are swapped."
+    },
+    "slides": [
+      235
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 2
   },
-  "slides": [
-   232
-  ],
-  "verify": {
-   "mode": "output"
+  {
+    "id": "S6-0076",
+    "chapter": "S6",
+    "topic": "pandas-selection",
+    "tags": [
+      "Series-vs-DataFrame",
+      "shape"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "import pandas as pd\ndf = pd.DataFrame({'apples': [3, 2, 0, 1],\n                   'oranges': [0, 3, 7, 2]})\nprint(df['apples'].shape, df[['apples']].shape)",
+    "options": [
+      {
+        "id": "a",
+        "text": "(4,) (1, 4)",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "(4,) (4, 1)",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "(4, 1) (4, 1)",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "(4, 1) (4,)",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "`df['apples']` is a Series: 1D, shape (4,). `df[['apples']]` is a DataFrame with 4 rows and a single column: shape (4, 1).",
+    "distractor_notes": {
+      "c": "A Series has no column axis: its shape has one element.",
+      "a": "The one-column DataFrame keeps its 4 rows on the first axis.",
+      "d": "The two cases are swapped."
+    },
+    "slides": [
+      235
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 2
   },
-  "reviewed": 1
- },
- {
-  "id": "S6-0069",
-  "chapter": "S6",
-  "topic": "pandas-basics",
-  "tags": [
-   "DataFrame",
-   "ValueError"
-  ],
-  "type": "single",
-  "difficulty": 2,
-  "source": "generated",
-  "stem": "What is the output of the following snippet?",
-  "code": "import pandas as pd\ndf = pd.DataFrame({'a': [1, 2, 3], 'b': [4, 5]})\nprint(df.shape)",
-  "options": [
-   {
-    "id": "a",
-    "text": "KeyError",
-    "out": "!KeyError"
-   },
-   {
-    "id": "b",
-    "text": "(3, 2)",
-    "mono": true
-   },
-   {
-    "id": "c",
-    "text": "(2, 2)",
-    "mono": true
-   },
-   {
-    "id": "d",
-    "text": "ValueError",
-    "out": "!ValueError"
-   }
-  ],
-  "correct": [
-   "d"
-  ],
-  "explanation": "All the lists of the dict must have the same length; otherwise pandas raises ValueError (All arrays must be of the same length). It does not pad the short list with NaN.",
-  "distractor_notes": {
-   "b": "Plain lists are not padded with NaN.",
-   "c": "pandas does not truncate the longer list.",
-   "a": "KeyError is raised when looking up a missing label, not when building a DataFrame."
+  {
+    "id": "S6-0077",
+    "chapter": "S6",
+    "topic": "pandas-selection",
+    "tags": [
+      "loc",
+      "iloc",
+      "slicing",
+      "inclusive"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "import pandas as pd\ndf = pd.DataFrame({'apples': [3, 2, 0, 1]},\n                  index=['June', 'Robert', 'Lily', 'David'])\nprint(len(df.loc['Robert':'Lily']), len(df.iloc[1:2]))",
+    "options": [
+      {
+        "id": "a",
+        "text": "2 2",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "1 1",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "1 2",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "2 1",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "`loc` slices by label and **includes** the end label: Robert and Lily, 2 rows. `iloc` slices by position like Python and excludes the end: `1:2` is only position 1, 1 row.",
+    "distractor_notes": {
+      "b": "A `loc` label slice includes its end label.",
+      "a": "An `iloc` slice excludes its end position.",
+      "c": "Both rules are swapped."
+    },
+    "slides": [
+      235
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 2
   },
-  "slides": [
-   230
-  ],
-  "verify": {
-   "mode": "output"
+  {
+    "id": "S6-0078",
+    "chapter": "S6",
+    "topic": "pandas-selection",
+    "tags": [
+      "loc",
+      "iloc",
+      "RangeIndex",
+      "inclusive"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "Find the output of the code?",
+    "code": "import pandas as pd\ndf = pd.DataFrame({'v': [10, 20, 30, 40, 50]})\nprint(df.loc[1:3, 'v'].tolist())\nprint(df.iloc[1:3, 0].tolist())",
+    "options": [
+      {
+        "id": "a",
+        "text": "[10, 20, 30]\n[20, 30]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[20, 30]\n[20, 30]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[20, 30, 40]\n[20, 30]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[20, 30, 40]\n[20, 30, 40]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "Even when the labels are the integers 0..4, `loc` works with labels and includes the end label 3 (three rows), whereas `iloc` works with positions and excludes position 3 (two rows).",
+    "distractor_notes": {
+      "b": "`loc` includes the end label, even with an integer index.",
+      "d": "`iloc` excludes the end position, like Python slicing.",
+      "a": "Label 1 is the second row (value 20); labels start at 0."
+    },
+    "slides": [
+      235
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 2
   },
-  "reviewed": 1
- },
- {
-  "id": "S6-0070",
-  "chapter": "S6",
-  "topic": "pandas-basics",
-  "tags": [
-   "read_csv",
-   "index_col",
-   "columns"
-  ],
-  "type": "single",
-  "difficulty": 2,
-  "source": "generated",
-  "stem": "What is the output of the following code?",
-  "code": "# purchases.csv contains:\n# ,apples,oranges\n# June,3,0\n# Robert,2,3\n# Lily,0,7\n# David,1,2\nimport pandas as pd\ndf = pd.read_csv('purchases.csv')\nprint(list(df.columns))",
-  "options": [
-   {
-    "id": "a",
-    "text": "['apples', 'oranges']",
-    "mono": true
-   },
-   {
-    "id": "b",
-    "text": "['', 'apples', 'oranges']",
-    "mono": true
-   },
-   {
-    "id": "c",
-    "text": "['June', 'Robert', 'Lily', 'David']",
-    "mono": true
-   },
-   {
-    "id": "d",
-    "text": "['Unnamed: 0', 'apples', 'oranges']",
-    "mono": true
-   }
-  ],
-  "correct": [
-   "d"
-  ],
-  "explanation": "Without `index_col`, `read_csv` treats the first column (the names, whose header is empty) as an ordinary data column and calls it 'Unnamed: 0'; the rows get a default 0..3 index. `index_col=0` would turn it into the index.",
-  "distractor_notes": {
-   "a": "That is the result with `index_col=0`.",
-   "b": "pandas replaces an empty header by 'Unnamed: <position>'.",
-   "c": "Those are the values of the first column, not column names."
+  {
+    "id": "S6-0079",
+    "chapter": "S6",
+    "topic": "pandas-selection",
+    "tags": [
+      "loc",
+      "iloc",
+      "row-selection"
+    ],
+    "type": "multi",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "Given `df` below, which expressions return the row of `'Lily'` (as a Series)? Select all that apply.",
+    "code": "import pandas as pd\ndf = pd.DataFrame({'apples': [3, 2, 0, 1], 'oranges': [0, 3, 7, 2]},\n                  index=['June', 'Robert', 'Lily', 'David'])",
+    "options": [
+      {
+        "id": "a",
+        "text": "df.loc['Lily']",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "df.iloc[2]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "df['Lily']",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "df.iloc['Lily']",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "df.loc[2]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "b"
+    ],
+    "explanation": "`loc` selects by label and `iloc` by integer position (Lily is at position 2). `df['Lily']` looks for a column named 'Lily' (KeyError), `iloc` does not accept labels (TypeError), and `loc` does not accept positions when the labels are strings (KeyError).",
+    "distractor_notes": {
+      "c": "`df[...]` with one label selects a column; there is no column 'Lily': KeyError.",
+      "d": "`iloc` only accepts integer positions: TypeError.",
+      "e": "`loc` looks for the label 2, which does not exist: KeyError."
+    },
+    "slides": [
+      231,
+      235
+    ],
+    "verify": {
+      "mode": "truth",
+      "probe_template": "r = __OPTION_RAW__\nprint(isinstance(r, pd.Series) and r.tolist() == [0, 7])"
+    },
+    "reviewed": 2
   },
-  "slides": [
-   231
-  ],
-  "verify": {
-   "mode": "output",
-   "files": {
-    "purchases.csv": ",apples,oranges\nJune,3,0\nRobert,2,3\nLily,0,7\nDavid,1,2\n"
-   }
-  },
-  "reviewed": 1
- },
- {
-  "id": "S6-0071",
-  "chapter": "S6",
-  "topic": "pandas-basics",
-  "tags": [
-   "read_csv",
-   "index_col",
-   "loc"
-  ],
-  "type": "single",
-  "difficulty": 2,
-  "source": "generated",
-  "stem": "What will be the output of the code?",
-  "code": "# scores.csv contains:\n# name,math,physics\n# Ana,12,15\n# Ben,9,11\n# Cleo,17,14\nimport pandas as pd\ndf = pd.read_csv('scores.csv', index_col=0)\nprint(df.shape, df.loc['Ben', 'physics'])",
-  "options": [
-   {
-    "id": "a",
-    "text": "(4, 2) 11",
-    "mono": true
-   },
-   {
-    "id": "b",
-    "text": "(3, 2) 11",
-    "mono": true
-   },
-   {
-    "id": "c",
-    "text": "(3, 3) 11",
-    "mono": true
-   },
-   {
-    "id": "d",
-    "text": "(3, 2) 9",
-    "mono": true
-   }
-  ],
-  "correct": [
-   "b"
-  ],
-  "explanation": "`index_col=0` turns the first column (name) into the row index: it is no longer a data column, so the shape is 3 rows x 2 columns, and rows can be selected by name with `loc[row_label, column_label]`.",
-  "distractor_notes": {
-   "c": "The index column is not counted as a data column.",
-   "a": "The header line gives the column names; it is not a row.",
-   "d": "9 is Ben's math grade; `loc['Ben', 'physics']` reads the physics column."
-  },
-  "slides": [
-   231,
-   232
-  ],
-  "verify": {
-   "mode": "output",
-   "files": {
-    "scores.csv": "name,math,physics\nAna,12,15\nBen,9,11\nCleo,17,14\n"
-   }
-  },
-  "reviewed": 1
- },
- {
-  "id": "S6-0072",
-  "chapter": "S6",
-  "topic": "pandas-basics",
-  "tags": [
-   "Series",
-   "index",
-   "label"
-  ],
-  "type": "single",
-  "difficulty": 1,
-  "source": "generated",
-  "stem": "What is the output of the following code?",
-  "code": "import pandas as pd\ns = pd.Series([10, 20, 30], index=['a', 'b', 'c'])\nprint(s['b'])",
-  "options": [
-   {
-    "id": "a",
-    "text": "20",
-    "mono": true
-   },
-   {
-    "id": "b",
-    "text": "KeyError",
-    "out": "!KeyError"
-   },
-   {
-    "id": "c",
-    "text": "10",
-    "mono": true
-   },
-   {
-    "id": "d",
-    "text": "1",
-    "mono": true
-   }
-  ],
-  "correct": [
-   "a"
-  ],
-  "explanation": "A Series is a 1D array with labels: `s['b']` looks up the value whose label is 'b', i.e. 20.",
-  "distractor_notes": {
-   "d": "1 is the position of 'b'; the lookup returns the value, not the position.",
-   "b": "'b' is an existing label.",
-   "c": "10 is the value labelled 'a'."
-  },
-  "slides": [
-   230
-  ],
-  "verify": {
-   "mode": "output"
-  },
-  "reviewed": 1
- },
- {
-  "id": "S6-0073",
-  "chapter": "S6",
-  "topic": "pandas-basics",
-  "tags": [
-   "DataFrame",
-   "creation",
-   "shape"
-  ],
-  "type": "multi",
-  "difficulty": 2,
-  "source": "generated",
-  "stem": "Which of the following create a DataFrame with 3 rows and 2 columns? Select all that apply.",
-  "code": null,
-  "options": [
-   {
-    "id": "a",
-    "text": "pd.DataFrame({'a': [1, 2, 3], 'b': [4, 5, 6]})",
-    "mono": true
-   },
-   {
-    "id": "b",
-    "text": "pd.DataFrame([[1, 4], [2, 5], [3, 6]], columns=['a', 'b'])",
-    "mono": true
-   },
-   {
-    "id": "c",
-    "text": "pd.DataFrame({'a': [1, 2], 'b': [3, 4], 'c': [5, 6]})",
-    "mono": true
-   },
-   {
-    "id": "d",
-    "text": "pd.DataFrame(np.zeros((3, 2)))",
-    "mono": true
-   },
-   {
-    "id": "e",
-    "text": "pd.DataFrame([[1, 2, 3], [4, 5, 6]])",
-    "mono": true
-   }
-  ],
-  "correct": [
-   "a",
-   "b",
-   "d"
-  ],
-  "explanation": "A dict maps column names to column values (2 keys of 3 values -> 3 x 2). A list of lists is read row by row (3 inner lists of 2 -> 3 x 2). A 2D NumPy array keeps its shape.",
-  "distractor_notes": {
-   "c": "Three keys give three columns of 2 values: shape (2, 3).",
-   "e": "Each inner list is a row: 2 rows of 3 values, shape (2, 3)."
-  },
-  "slides": [
-   230
-  ],
-  "verify": {
-   "mode": "truth",
-   "setup": "import numpy as np\nimport pandas as pd",
-   "probe_template": "print(__OPTION_RAW__.shape == (3, 2))"
-  },
-  "reviewed": 1
- },
- {
-  "id": "S6-0074",
-  "chapter": "S6",
-  "topic": "pandas-basics",
-  "tags": [
-   "index",
-   "columns",
-   "shape",
-   "which-is-false"
-  ],
-  "type": "single",
-  "difficulty": 2,
-  "source": "generated",
-  "stem": "Given the DataFrame below, which statement is **false**?",
-  "code": "import pandas as pd\ndf = pd.DataFrame({'apples': [3, 2, 0, 1], 'oranges': [0, 3, 7, 2]},\n                  index=['June', 'Robert', 'Lily', 'David'])",
-  "options": [
-   {
-    "id": "a",
-    "text": "`df.columns.tolist()` is `['apples', 'oranges']`",
-    "probe": "print(not (df.columns.tolist() == ['apples', 'oranges']))"
-   },
-   {
-    "id": "b",
-    "text": "`df['apples'].sum()` is 6",
-    "probe": "print(not bool(df['apples'].sum() == 6))"
-   },
-   {
-    "id": "c",
-    "text": "`df.index[0]` is `'June'`",
-    "probe": "print(not (df.index[0] == 'June'))"
-   },
-   {
-    "id": "d",
-    "text": "`df.shape` is `(4, 3)` because the index counts as a column",
-    "probe": "print(not (df.shape == (4, 3)))"
-   }
-  ],
-  "correct": [
-   "d"
-  ],
-  "explanation": "The index holds the row labels; it is not a column. The DataFrame has 4 rows and 2 columns, so `df.shape` is (4, 2). The other statements are true: the columns are apples and oranges, the first label is 'June', and 3 + 2 + 0 + 1 = 6.",
-  "distractor_notes": {
-   "a": "True: the dict keys become the column names.",
-   "c": "True: the first row label is 'June'.",
-   "b": "True: 3 + 2 + 0 + 1 = 6."
-  },
-  "slides": [
-   231
-  ],
-  "verify": {
-   "mode": "truth"
-  },
-  "reviewed": 1
- },
- {
-  "id": "S6-0075",
-  "chapter": "S6",
-  "topic": "pandas-selection",
-  "tags": [
-   "Series-vs-DataFrame",
-   "brackets"
-  ],
-  "type": "single",
-  "difficulty": 1,
-  "source": "generated",
-  "stem": "What is the output of the following code?",
-  "code": "import pandas as pd\ndf = pd.DataFrame({'genre': ['Action', 'Drama'],\n                   'rating': [8.1, 7.4]})\nprint(type(df['genre']).__name__, type(df[['genre']]).__name__)",
-  "options": [
-   {
-    "id": "a",
-    "text": "DataFrame DataFrame",
-    "mono": true
-   },
-   {
-    "id": "b",
-    "text": "Series DataFrame",
-    "mono": true
-   },
-   {
-    "id": "c",
-    "text": "Series Series",
-    "mono": true
-   },
-   {
-    "id": "d",
-    "text": "DataFrame Series",
-    "mono": true
-   }
-  ],
-  "correct": [
-   "b"
-  ],
-  "explanation": "Single brackets with one column name return that column as a Series (1D). Double brackets pass a list of column names and always return a DataFrame, even when the list has one name.",
-  "distractor_notes": {
-   "a": "One name in single brackets gives a Series.",
-   "c": "A list of names (double brackets) gives a DataFrame.",
-   "d": "The two cases are swapped."
-  },
-  "slides": [
-   235
-  ],
-  "verify": {
-   "mode": "output"
-  },
-  "reviewed": 1
- },
- {
-  "id": "S6-0076",
-  "chapter": "S6",
-  "topic": "pandas-selection",
-  "tags": [
-   "Series-vs-DataFrame",
-   "shape"
-  ],
-  "type": "single",
-  "difficulty": 2,
-  "source": "generated",
-  "stem": "What will be the output of the code?",
-  "code": "import pandas as pd\ndf = pd.DataFrame({'apples': [3, 2, 0, 1],\n                   'oranges': [0, 3, 7, 2]})\nprint(df['apples'].shape, df[['apples']].shape)",
-  "options": [
-   {
-    "id": "a",
-    "text": "(4,) (1, 4)",
-    "mono": true
-   },
-   {
-    "id": "b",
-    "text": "(4,) (4, 1)",
-    "mono": true
-   },
-   {
-    "id": "c",
-    "text": "(4, 1) (4, 1)",
-    "mono": true
-   },
-   {
-    "id": "d",
-    "text": "(4, 1) (4,)",
-    "mono": true
-   }
-  ],
-  "correct": [
-   "b"
-  ],
-  "explanation": "`df['apples']` is a Series: 1D, shape (4,). `df[['apples']]` is a DataFrame with 4 rows and a single column: shape (4, 1).",
-  "distractor_notes": {
-   "c": "A Series has no column axis: its shape has one element.",
-   "a": "The one-column DataFrame keeps its 4 rows on the first axis.",
-   "d": "The two cases are swapped."
-  },
-  "slides": [
-   235
-  ],
-  "verify": {
-   "mode": "output"
-  },
-  "reviewed": 1
- },
- {
-  "id": "S6-0077",
-  "chapter": "S6",
-  "topic": "pandas-selection",
-  "tags": [
-   "loc",
-   "iloc",
-   "slicing",
-   "inclusive"
-  ],
-  "type": "single",
-  "difficulty": 2,
-  "source": "generated",
-  "stem": "What is the output of the following code?",
-  "code": "import pandas as pd\ndf = pd.DataFrame({'apples': [3, 2, 0, 1]},\n                  index=['June', 'Robert', 'Lily', 'David'])\nprint(len(df.loc['Robert':'Lily']), len(df.iloc[1:2]))",
-  "options": [
-   {
-    "id": "a",
-    "text": "2 2",
-    "mono": true
-   },
-   {
-    "id": "b",
-    "text": "1 1",
-    "mono": true
-   },
-   {
-    "id": "c",
-    "text": "1 2",
-    "mono": true
-   },
-   {
-    "id": "d",
-    "text": "2 1",
-    "mono": true
-   }
-  ],
-  "correct": [
-   "d"
-  ],
-  "explanation": "`loc` slices by label and **includes** the end label: Robert and Lily, 2 rows. `iloc` slices by position like Python and excludes the end: `1:2` is only position 1, 1 row.",
-  "distractor_notes": {
-   "b": "A `loc` label slice includes its end label.",
-   "a": "An `iloc` slice excludes its end position.",
-   "c": "Both rules are swapped."
-  },
-  "slides": [
-   235
-  ],
-  "verify": {
-   "mode": "output"
-  },
-  "reviewed": 1
- },
- {
-  "id": "S6-0078",
-  "chapter": "S6",
-  "topic": "pandas-selection",
-  "tags": [
-   "loc",
-   "iloc",
-   "RangeIndex",
-   "inclusive"
-  ],
-  "type": "single",
-  "difficulty": 3,
-  "source": "generated",
-  "stem": "Find the output of the code?",
-  "code": "import pandas as pd\ndf = pd.DataFrame({'v': [10, 20, 30, 40, 50]})\nprint(df.loc[1:3, 'v'].tolist())\nprint(df.iloc[1:3, 0].tolist())",
-  "options": [
-   {
-    "id": "a",
-    "text": "[10, 20, 30]\n[20, 30]",
-    "mono": true
-   },
-   {
-    "id": "b",
-    "text": "[20, 30]\n[20, 30]",
-    "mono": true
-   },
-   {
-    "id": "c",
-    "text": "[20, 30, 40]\n[20, 30]",
-    "mono": true
-   },
-   {
-    "id": "d",
-    "text": "[20, 30, 40]\n[20, 30, 40]",
-    "mono": true
-   }
-  ],
-  "correct": [
-   "c"
-  ],
-  "explanation": "Even when the labels are the integers 0..4, `loc` works with labels and includes the end label 3 (three rows), whereas `iloc` works with positions and excludes position 3 (two rows).",
-  "distractor_notes": {
-   "b": "`loc` includes the end label, even with an integer index.",
-   "d": "`iloc` excludes the end position, like Python slicing.",
-   "a": "Label 1 is the second row (value 20); labels start at 0."
-  },
-  "slides": [
-   235
-  ],
-  "verify": {
-   "mode": "output"
-  },
-  "reviewed": 1
- },
- {
-  "id": "S6-0079",
-  "chapter": "S6",
-  "topic": "pandas-selection",
-  "tags": [
-   "loc",
-   "iloc",
-   "row-selection"
-  ],
-  "type": "multi",
-  "difficulty": 3,
-  "source": "generated",
-  "stem": "Given `df` below, which expressions return the row of `'Lily'` (as a Series)? Select all that apply.",
-  "code": "import pandas as pd\ndf = pd.DataFrame({'apples': [3, 2, 0, 1], 'oranges': [0, 3, 7, 2]},\n                  index=['June', 'Robert', 'Lily', 'David'])",
-  "options": [
-   {
-    "id": "a",
-    "text": "df.loc['Lily']",
-    "mono": true
-   },
-   {
-    "id": "b",
-    "text": "df.iloc[2]",
-    "mono": true
-   },
-   {
-    "id": "c",
-    "text": "df['Lily']",
-    "mono": true
-   },
-   {
-    "id": "d",
-    "text": "df.iloc['Lily']",
-    "mono": true
-   },
-   {
-    "id": "e",
-    "text": "df.loc[2]",
-    "mono": true
-   }
-  ],
-  "correct": [
-   "a",
-   "b"
-  ],
-  "explanation": "`loc` selects by label and `iloc` by integer position (Lily is at position 2). `df['Lily']` looks for a column named 'Lily' (KeyError), `iloc` does not accept labels (TypeError), and `loc` does not accept positions when the labels are strings (KeyError).",
-  "distractor_notes": {
-   "c": "`df[...]` with one label selects a column; there is no column 'Lily': KeyError.",
-   "d": "`iloc` only accepts integer positions: TypeError.",
-   "e": "`loc` looks for the label 2, which does not exist: KeyError."
-  },
-  "slides": [
-   231,
-   235
-  ],
-  "verify": {
-   "mode": "truth",
-   "probe_template": "r = __OPTION_RAW__\nprint(isinstance(r, pd.Series) and r.tolist() == [0, 7])"
-  },
-  "reviewed": 1
- },
- {
-  "id": "S6-0080",
-  "chapter": "S6",
-  "topic": "pandas-selection",
-  "tags": [
-   "brackets",
-   "columns",
-   "KeyError"
-  ],
-  "type": "single",
-  "difficulty": 2,
-  "source": "generated",
-  "stem": "What is the output of the following code?",
-  "code": "import pandas as pd\ndf = pd.DataFrame({'apples': [3, 2], 'oranges': [0, 3]},\n                  index=['June', 'Robert'])\nprint(df['June'])",
-  "options": [
-   {
-    "id": "a",
-    "text": "The row of June: apples 3, oranges 0",
-    "out": null
-   },
-   {
-    "id": "b",
-    "text": "KeyError",
-    "out": "!KeyError"
-   },
-   {
-    "id": "c",
-    "text": "IndexError",
-    "out": "!IndexError"
-   },
-   {
-    "id": "d",
-    "text": "[3, 0]",
-    "mono": true
-   }
-  ],
-  "correct": [
-   "b"
-  ],
-  "explanation": "`df[label]` selects a **column**. There is no column named 'June' ('June' is a row label), so pandas raises KeyError. The row is obtained with `df.loc['June']`.",
-  "distractor_notes": {
-   "a": "That is `df.loc['June']`; plain brackets look up columns.",
-   "c": "A missing label raises KeyError, not IndexError.",
-   "d": "That is `df.loc['June'].tolist()`; plain brackets look up columns and fail here."
-  },
-  "slides": [
-   231,
-   235
-  ],
-  "verify": {
-   "mode": "output"
-  },
-  "reviewed": 1
- }
+  {
+    "id": "S6-0080",
+    "chapter": "S6",
+    "topic": "pandas-selection",
+    "tags": [
+      "brackets",
+      "columns",
+      "KeyError"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "import pandas as pd\ndf = pd.DataFrame({'apples': [3, 2], 'oranges': [0, 3]},\n                  index=['June', 'Robert'])\nprint(df['June'])",
+    "options": [
+      {
+        "id": "a",
+        "text": "The row of June: apples 3, oranges 0",
+        "out": null
+      },
+      {
+        "id": "b",
+        "text": "KeyError",
+        "out": "!KeyError"
+      },
+      {
+        "id": "c",
+        "text": "IndexError",
+        "out": "!IndexError"
+      },
+      {
+        "id": "d",
+        "text": "[3, 0]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "`df[label]` selects a **column**. There is no column named 'June' ('June' is a row label), so pandas raises KeyError. The row is obtained with `df.loc['June']`.",
+    "distractor_notes": {
+      "a": "That is `df.loc['June']`; plain brackets look up columns.",
+      "c": "A missing label raises KeyError, not IndexError.",
+      "d": "That is `df.loc['June'].tolist()`; plain brackets look up columns and fail here."
+    },
+    "slides": [
+      231,
+      235
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 2
+  }
 ]

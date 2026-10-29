@@ -51,7 +51,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0062",
@@ -107,7 +107,7 @@
    "setup": "",
    "probe_template": "__OPTION_RAW__\nprint(f.closed)"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0063",
@@ -170,7 +170,7 @@
    "probe_template": "__OPTION_RAW__\nprint(buf.getvalue() != '')",
    "note": "The probes log into a StringIO buffer instead of sys.stdout to detect whether anything was emitted."
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0064",
@@ -224,7 +224,7 @@
    "setup": "",
    "probe_template": "import logging\nnames = __OPTION__.split(' < ')\nvals = [getattr(logging, n) for n in names]\nprint(vals == sorted(vals) and len(set(vals)) == 5)"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0065",
@@ -279,7 +279,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0066",
@@ -333,7 +333,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0067",
@@ -386,7 +386,7 @@
    "mode": "manual",
    "reference": "Slide 259 'Logging, not printing': levels, console or file output, added context"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0068",
@@ -439,7 +439,7 @@
    "mode": "manual",
    "reference": "Slide 260 'Debugging': step through code, set breakpoints, inspect variables"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0069",
@@ -494,7 +494,7 @@
    "setup": "import numpy as np\nx = np.array([1.0, 2.0, 3.0])\nm = np.array([0.5, 0.5, 2.0])\ntotal = 0\nfor j in range(3):\n    total = total + x[j] * m[j]",
    "probe_template": "res = __OPTION_RAW__\nprint(bool(np.ndim(res) == 0 and res == total))"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0070",
@@ -547,7 +547,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0071",
@@ -601,7 +601,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0072",
@@ -656,7 +656,7 @@
    "mode": "manual",
    "reference": "Python docs (Set types; wiki TimeComplexity): `in` is O(1) average for set/dict, O(n) for list/tuple; slide 263 'Use built-in functions and libraries'"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0073",
@@ -715,7 +715,7 @@
    "mode": "manual",
    "reference": "Slides 263-269: vectorization ('Say goodbye to loops'), multiprocessing Pool, Numba jit, Cython"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0074",
@@ -770,7 +770,7 @@
    "setup": "values = [15, 4, 42, 8, 23, 16]\nbest = values[0]\nfor v in values:\n    if v > best:\n        best = v",
    "probe_template": "print(__OPTION_RAW__ == best)"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0075",
@@ -823,7 +823,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0076",
@@ -877,7 +877,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0077",
@@ -931,7 +931,7 @@
    "setup": "",
    "probe_template": "import io, contextlib\nbuf = io.StringIO()\nwith contextlib.redirect_stdout(buf):\n    import this\nprint(__OPTION__ not in buf.getvalue())"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0078",
@@ -984,7 +984,7 @@
    "mode": "manual",
    "reference": "PEP 8, 'Naming Conventions' (class names use the CapWords convention); slide 272 (PEP8 style guide)"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0079",
@@ -1037,7 +1037,7 @@
    "mode": "manual",
    "reference": "Slide 273 'Writing comments: pydocs' (sections Args, Returns, Raises, Attributes)"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0080",
@@ -1081,7 +1081,7 @@
   ],
   "explanation": "The course advises against a single big module: it is unreadable, forces several people to edit the same file and makes the code hard to reuse. Splitting into packages (each with `__init__.py`), plus a README.md and a requirements.txt, is the recommended layout.",
   "distractor_notes": {
-   "a": "True: __init__.py marks the directory as a package so that `from pkg.sub import module` works.",
+   "a": "True per the course: every package directory gets an `__init__.py` (it makes the directory a regular package, so imports such as `from vending_machine.core import machine` work as expected).",
    "b": "True: requirements.txt specifies the dependencies (pip install -r requirements.txt).",
    "c": "True: the README explains what the project is about."
   },
@@ -1093,6 +1093,6 @@
    "mode": "manual",
    "reference": "Slides 277-278 'Project file architecture' and 'Project architecture'"
   },
-  "reviewed": 1
+  "reviewed": 2
  }
 ]

@@ -50,7 +50,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0022",
@@ -103,7 +103,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0023",
@@ -165,7 +165,7 @@
       "setup": "",
       "probe_template": "def f(items):\n    __OPTION_RAW__\ndata = [1, 2]\nf(data)\nprint(data == [])"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0024",
@@ -218,7 +218,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0025",
@@ -270,7 +270,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0026",
@@ -322,7 +322,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0027",
@@ -374,7 +374,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0028",
@@ -435,7 +435,7 @@
       "mode": "truth",
       "probe_template": "print((__OPTION_RAW__) is True)"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0029",
@@ -488,7 +488,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0030",
@@ -541,7 +541,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0031",
@@ -594,7 +594,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0032",
@@ -648,7 +648,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0033",
@@ -689,11 +689,11 @@
     "correct": [
       "b"
     ],
-    "explanation": "b is an alias of a, so b.sort() sorts that single list in place: a becomes [1, 2, 3]. sorted() returns a new list (here in descending order) and leaves a unchanged.",
+    "explanation": "`b` is an alias of `a`, so `b.sort()` sorts that single list in place: `a` becomes [1, 2, 3]. `sorted()` returns a new list (here in descending order) and leaves `a` unchanged.",
     "distractor_notes": {
-      "a": "sort() through the alias b modifies the list that a refers to.",
-      "c": "sorted(..., reverse=True) returns a new descending list; it does not affect a.",
-      "d": "Option b is exactly the output."
+      "a": "`sort()` through the alias `b` modifies the list that `a` refers to.",
+      "c": "`sorted(..., reverse=True)` returns a new descending list; it does not affect `a`.",
+      "d": "`[1, 2, 3] [3, 2, 1]` is listed, and it is exactly the output."
     },
     "slides": [
       174,
@@ -702,7 +702,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0034",
@@ -744,7 +744,7 @@
       "mode": "truth",
       "setup": ""
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0035",
@@ -799,7 +799,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0036",
@@ -847,13 +847,14 @@
       "d": "r is defined: it holds the return value of f(), which is None."
     },
     "slides": [
+      173,
       33,
       63
     ],
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0037",
@@ -905,7 +906,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0038",
@@ -959,7 +960,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0039",
@@ -1007,7 +1008,7 @@
       "c",
       "e"
     ],
-    "explanation": "b is an alias of a (same object). c and d are other objects (a new list display, and a slice copy) whose contents equal a's, so they are `==` to a and b but not identical to them.",
+    "explanation": "`b` is an alias of `a` (same object). `c` and `d` are other objects (a new list display, and a slice copy) whose contents equal `a`'s, so they are `==` to `a` and `b` but not identical to them.",
     "distractor_notes": {
       "b": "Two separately created lists are distinct objects, even when equal.",
       "d": "Slicing creates a new list object."
@@ -1021,7 +1022,7 @@
       "mode": "truth",
       "probe_template": "print((__OPTION_RAW__) is True)"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S4-0040",
@@ -1069,6 +1070,7 @@
       "d": "None and False are different objects: `None is False` is False."
     },
     "slides": [
+      173,
       33,
       63
     ],
@@ -1077,6 +1079,6 @@
       "setup": "",
       "probe_template": "vals = [None, 0, '', [], 'None', False, 1]\nprint(all(((__OPTION_RAW__) is True) == (x is None) for x in vals))"
     },
-    "reviewed": 1
+    "reviewed": 2
   }
 ]

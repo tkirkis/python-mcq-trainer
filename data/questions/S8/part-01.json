@@ -46,7 +46,7 @@
    "mode": "manual",
    "reference": "Slide 284 'Servers': a program that never stops and can be accessed through the network"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0002",
@@ -95,7 +95,7 @@
    "mode": "manual",
    "reference": "Slide 287 'The internet: a big computer network' - your computer is connected to an ISP"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0003",
@@ -144,7 +144,7 @@
    "mode": "manual",
    "reference": "Slide 291 'DNS resolution'"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0004",
@@ -204,7 +204,7 @@
    "mode": "truth",
    "probe_template": "import ipaddress\ntry:\n    ipaddress.IPv4Address(__OPTION__)\n    print(True)\nexcept ValueError:\n    print(False)"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0005",
@@ -253,7 +253,7 @@
    "mode": "manual",
    "reference": "Slide 292 'What is a port?' - every server listens to a specific port; slide 316"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0006",
@@ -302,7 +302,7 @@
    "mode": "manual",
    "reference": "Slide 296 'HTTP Response: packets'"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0007",
@@ -358,7 +358,7 @@
    "mode": "manual",
    "reference": "Slides 289-297 'Life of an HTTP request' (DNS resolution, port, TCP connection, request, response, rendering)"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0008",
@@ -412,7 +412,7 @@
    "mode": "truth",
    "probe_template": "import ipaddress\nprint(ipaddress.ip_address(__OPTION__).is_loopback)"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0009",
@@ -460,7 +460,7 @@
    "mode": "manual",
    "reference": "Slide 293 'TCP Connection'"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0010",
@@ -512,7 +512,7 @@
    "mode": "manual",
    "reference": "Slide 284 (servers = programs and computers), slide 292 (several servers, ports, HTTPS 443), slide 316"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0011",
@@ -563,7 +563,7 @@
    "mode": "manual",
    "reference": "Slide 291 'DNS resolution'; slide 300 (the browser does DNS resolution); slide 316 (53 for DNS)"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0012",
@@ -615,7 +615,7 @@
    "mode": "manual",
    "reference": "Slide 300 (the browser adds the port based on the protocol); slide 316 (80 for HTTP, 443 for HTTPS)"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0013",
@@ -668,7 +668,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0014",
@@ -722,7 +722,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0015",
@@ -775,7 +775,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0016",
@@ -828,7 +828,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0017",
@@ -882,7 +882,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0018",
@@ -921,7 +921,7 @@
    "mode": "manual",
    "reference": "Slide 319 'Fragments': the fragment is not passed to the server"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0019",
@@ -973,7 +973,7 @@
    "mode": "manual",
    "reference": "Slide 312: URL = scheme://username:password@host:port/path?query#fragment"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0020",
@@ -1028,6 +1028,6 @@
    "mode": "manual",
    "reference": "Slide 316 '80 for HTTP server by default (443 HTTPS)'; slide 292 'HTTPS servers listen to 443'"
   },
-  "reviewed": 1
+  "reviewed": 2
  }
 ]

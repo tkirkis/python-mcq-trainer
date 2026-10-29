@@ -52,7 +52,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0042",
@@ -106,7 +106,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0043",
@@ -160,7 +160,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0044",
@@ -214,7 +214,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0045",
@@ -268,7 +268,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0046",
@@ -322,7 +322,7 @@
    "setup": "",
    "probe_template": "import unittest\nclass _T(unittest.TestCase):\n    def runTest(self):\n        pass\nt = _T()\nm = getattr(t, __OPTION__, None)\nok = m is not None\nif ok:\n    try:\n        m([1], [1])\n    except AssertionError:\n        ok = False\nif ok:\n    try:\n        m([1], [2])\n        ok = False\n    except AssertionError:\n        pass\nprint(ok)"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0047",
@@ -382,7 +382,7 @@
    "mode": "truth",
    "setup": ""
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0048",
@@ -435,7 +435,7 @@
    "mode": "manual",
    "reference": "Slide 257: the coverage package measures how much of the codebase is covered by at least one unit test"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0049",
@@ -489,7 +489,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0050",
@@ -550,7 +550,7 @@
    "setup": "import math\n\ndef distance(x, y):\n    return math.sqrt((x[0] - y[0])**2 + (x[1] - y[1])**2)\n\nimport unittest\nclass _T(unittest.TestCase):\n    def runTest(self):\n        pass\nself = _T()",
    "probe_template": "try:\n    __OPTION_RAW__\n    print(True)\nexcept AssertionError:\n    print(False)"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0051",
@@ -604,7 +604,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0052",
@@ -664,7 +664,7 @@
    "setup": "",
    "probe_template": "try:\n    __OPTION_RAW__\n    print(False)\nexcept AssertionError:\n    print(True)"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0053",
@@ -720,7 +720,7 @@
    "code": "src = \"def withdraw(balance, amount):\\n    assert amount <= balance, 'insufficient funds'\\n    return balance - amount\\n\\nprint(withdraw(10, 25))\"\nexec(compile(src, 'script.py', 'exec', optimize=1))",
    "note": "compile(..., optimize=1) reproduces python -O (assert statements are removed)."
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0054",
@@ -778,7 +778,7 @@
    "code": "import warnings\nwarnings.simplefilter('ignore')\nsrc = \"x = -1\\nassert (x > 0, 'x must be positive')\\nprint('ok')\"\nexec(compile(src, 'q', 'exec'))",
    "note": "Warnings are silenced because the SyntaxWarning would go to stderr."
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0055",
@@ -836,7 +836,7 @@
    "mode": "truth",
    "setup": ""
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0056",
@@ -890,7 +890,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0057",
@@ -945,7 +945,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0058",
@@ -1003,7 +1003,7 @@
     "data.txt": "line1\nline2\n"
    }
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0059",
@@ -1057,7 +1057,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0060",
@@ -1111,6 +1111,6 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  }
 ]

@@ -60,7 +60,7 @@
    "setup": "nums = [3, -1, 2]",
    "probe_template": "print(type(__OPTION_RAW__) is list)"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0002",
@@ -116,7 +116,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0003",
@@ -171,7 +171,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0004",
@@ -223,7 +223,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0005",
@@ -278,7 +278,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0006",
@@ -332,7 +332,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0007",
@@ -394,7 +394,7 @@
    "setup": "",
    "probe_template": "print((__OPTION_RAW__) is True)"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0008",
@@ -402,45 +402,46 @@
   "topic": "functional",
   "tags": [
    "zip",
-   "dict",
-   "shortest"
+   "slicing",
+   "shortest",
+   "pairs"
   ],
   "type": "single",
-  "difficulty": 1,
+  "difficulty": 2,
   "source": "generated",
   "stem": "What is the output of the following code?",
-  "code": "keys = ['x', 'y', 'z']\nvals = [1, 2]\nprint(dict(zip(keys, vals)))",
+  "code": "nums = [3, 8, 4, 10]\nprint([b - a for a, b in zip(nums, nums[1:])])",
   "options": [
    {
     "id": "a",
-    "text": "{1: 'x', 2: 'y'}",
+    "text": "[-5, 4, -6]",
     "mono": true
    },
    {
     "id": "b",
-    "text": "{'x': 1, 'y': 2, 'z': None}",
-    "mono": true
-   },
-   {
-    "id": "c",
     "text": "ValueError",
     "mono": true,
     "out": "!ValueError"
    },
    {
+    "id": "c",
+    "text": "[5]",
+    "mono": true
+   },
+   {
     "id": "d",
-    "text": "{'x': 1, 'y': 2}",
+    "text": "[5, -4, 6]",
     "mono": true
    }
   ],
   "correct": [
    "d"
   ],
-  "explanation": "`zip()` stops as soon as the shortest iterable is exhausted, so it yields only ('x', 1) and ('y', 2); `dict()` turns these pairs into key/value entries. 'z' is silently dropped.",
+  "explanation": "`nums[1:]` is the list shifted by one position, so `zip(nums, nums[1:])` pairs each item with the next one: (3, 8), (8, 4), (4, 10). zip stops when the shorter iterable (3 items) is exhausted, so there are 3 differences `b - a`: 5, -4, 6.",
   "distractor_notes": {
-   "a": "The first iterable gives the keys, the second the values.",
-   "b": "zip does not pad missing values with None (that is itertools.zip_longest).",
-   "c": "Plain zip never complains about different lengths; it truncates."
+   "a": "a is the current item and b the next one; the expression is b - a, not a - b.",
+   "b": "zip accepts iterables of different lengths: it simply stops at the shorter one.",
+   "c": "nums[1:] is the whole list from index 1 on, not only the element at index 1."
   },
   "slides": [
    253
@@ -448,7 +449,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0009",
@@ -501,7 +502,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0010",
@@ -555,7 +556,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0011",
@@ -608,7 +609,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0012",
@@ -656,13 +657,12 @@
    "d": "The default b=2 is used when b is not passed."
   },
   "slides": [
-   253,
-   205
+   253
   ],
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0013",
@@ -711,13 +711,12 @@
    "c": "The lambdas see the final value of i, not the first one."
   },
   "slides": [
-   205,
    253
   ],
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0014",
@@ -771,15 +770,14 @@
    "e": "`assert` is a statement; it cannot be the body of a lambda."
   },
   "slides": [
-   253,
-   205
+   253
   ],
   "verify": {
    "mode": "truth",
    "setup": "",
    "probe_template": "try:\n    compile(__OPTION__, 'q', 'exec')\n    print(True)\nexcept SyntaxError:\n    print(False)"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0015",
@@ -834,7 +832,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0016",
@@ -889,7 +887,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0017",
@@ -943,7 +941,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0018",
@@ -997,7 +995,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0019",
@@ -1052,7 +1050,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S7-0020",
@@ -1113,6 +1111,6 @@
    "setup": "import argparse\nparser = argparse.ArgumentParser()\nparser.add_argument('--num_iter', type=int, default=10)",
    "probe_template": "import io, contextlib\ntry:\n    with contextlib.redirect_stderr(io.StringIO()):\n        __OPTION_RAW__\n    print(True)\nexcept SystemExit:\n    print(False)"
   },
-  "reviewed": 1
+  "reviewed": 2
  }
 ]

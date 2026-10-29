@@ -1,1107 +1,1105 @@
 [
- {
-  "id": "S6-0041",
-  "chapter": "S6",
-  "topic": "numpy-broadcasting",
-  "tags": [
-   "broadcasting",
-   "3D"
-  ],
-  "type": "single",
-  "difficulty": 2,
-  "source": "generated",
-  "stem": "What will be the output of the code?",
-  "code": "import numpy as np\nA = np.ones((5, 1, 3))\nB = np.ones((1, 4, 3))\nprint((A + B).shape)",
-  "options": [
-   {
-    "id": "a",
-    "text": "(5, 4, 3)",
-    "mono": true
-   },
-   {
-    "id": "b",
-    "text": "(5, 1, 3)",
-    "mono": true
-   },
-   {
-    "id": "c",
-    "text": "(1, 4, 3)",
-    "mono": true
-   },
-   {
-    "id": "d",
-    "text": "ValueError",
-    "out": "!ValueError"
-   }
-  ],
-  "correct": [
-   "a"
-  ],
-  "explanation": "Compare axis by axis: 5 vs 1 -> 5, 1 vs 4 -> 4, 3 vs 3 -> 3. Each size-1 axis is stretched to the size of the other array, giving (5, 4, 3).",
-  "distractor_notes": {
-   "b": "A's size-1 axis 1 is stretched to 4.",
-   "c": "B's size-1 axis 0 is stretched to 5.",
-   "d": "On each axis the sizes are equal or one of them is 1: compatible."
+  {
+    "id": "S6-0041",
+    "chapter": "S6",
+    "topic": "numpy-broadcasting",
+    "tags": [
+      "broadcasting",
+      "3D"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "import numpy as np\nA = np.ones((5, 1, 3))\nB = np.ones((1, 4, 3))\nprint((A + B).shape)",
+    "options": [
+      {
+        "id": "a",
+        "text": "(5, 4, 3)",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "(5, 1, 3)",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "(1, 4, 3)",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "ValueError",
+        "out": "!ValueError"
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "Compare axis by axis: 5 vs 1 -> 5, 1 vs 4 -> 4, 3 vs 3 -> 3. Each size-1 axis is stretched to the size of the other array, giving (5, 4, 3).",
+    "distractor_notes": {
+      "b": "A's size-1 axis 1 is stretched to 4.",
+      "c": "B's size-1 axis 0 is stretched to 5.",
+      "d": "On each axis the sizes are equal or one of them is 1: compatible."
+    },
+    "slides": [
+      223
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 2
   },
-  "slides": [
-   223
-  ],
-  "verify": {
-   "mode": "output"
+  {
+    "id": "S6-0042",
+    "chapter": "S6",
+    "topic": "numpy-broadcasting",
+    "tags": [
+      "broadcasting",
+      "ValueError",
+      "trailing-dimension"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "import numpy as np\nm = np.ones((2, 3))\nv = np.array([1, 2])\nprint(m + v)",
+    "options": [
+      {
+        "id": "a",
+        "text": "[[2. 2. 2.]\n [3. 3. 3.]]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[[2. 3.]\n [2. 3.]]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[[2. 3. 1.]\n [2. 3. 1.]]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "ValueError",
+        "out": "!ValueError"
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "Broadcasting aligns shapes from the right: (2, 3) and (2,) compare 3 with 2, which is incompatible, so NumPy raises ValueError. To add one value per row, `v` must be a column: `v.reshape(2, 1)`.",
+    "distractor_notes": {
+      "a": "That is `m + v.reshape(2, 1)`; a 1D array is matched with the last axis (3 columns), not the rows.",
+      "c": "NumPy never pads with zeros.",
+      "b": "The result could not be smaller than `m`; and the shapes are incompatible anyway."
+    },
+    "slides": [
+      222,
+      223,
+      224
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 2
   },
-  "reviewed": 1
- },
- {
-  "id": "S6-0042",
-  "chapter": "S6",
-  "topic": "numpy-broadcasting",
-  "tags": [
-   "broadcasting",
-   "ValueError",
-   "trailing-dimension"
-  ],
-  "type": "single",
-  "difficulty": 3,
-  "source": "generated",
-  "stem": "What is the output of the following code?",
-  "code": "import numpy as np\nm = np.ones((2, 3))\nv = np.array([1, 2])\nprint(m + v)",
-  "options": [
-   {
-    "id": "a",
-    "text": "[[2. 2. 2.]\n [3. 3. 3.]]",
-    "mono": true
-   },
-   {
-    "id": "b",
-    "text": "[[2. 3.]\n [2. 3.]]",
-    "mono": true
-   },
-   {
-    "id": "c",
-    "text": "[[2. 3. 1.]\n [2. 3. 1.]]",
-    "mono": true
-   },
-   {
-    "id": "d",
-    "text": "ValueError",
-    "out": "!ValueError"
-   }
-  ],
-  "correct": [
-   "d"
-  ],
-  "explanation": "Broadcasting aligns shapes from the right: (2, 3) and (2,) compare 3 with 2, which is incompatible, so NumPy raises ValueError. To add one value per row, `v` must be a column: `v.reshape(2, 1)`.",
-  "distractor_notes": {
-   "a": "That is `m + v.reshape(2, 1)`; a 1D array is matched with the last axis (3 columns), not the rows.",
-   "c": "NumPy never pads with zeros.",
-   "b": "The result could not be smaller than `m`; and the shapes are incompatible anyway."
+  {
+    "id": "S6-0043",
+    "chapter": "S6",
+    "topic": "numpy-broadcasting",
+    "tags": [
+      "broadcasting",
+      "axis",
+      "hands-on"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "Find the output of the code?",
+    "code": "import numpy as np\nprices = np.array([2, 5, 1])\norders = np.array([[1, 0, 2],\n                   [3, 1, 0]])\nprint((orders * prices).sum(axis=1))",
+    "options": [
+      {
+        "id": "a",
+        "text": "15",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[ 4 11]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "ValueError",
+        "out": "!ValueError"
+      },
+      {
+        "id": "d",
+        "text": "[8 5 2]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "`prices` (3,) is broadcast over each order row: [[2 0 2] [6 5 0]]. Summing along axis 1 gives the total price of each order: 4 and 11.",
+    "distractor_notes": {
+      "d": "That is `axis=0`: the total value sold per product.",
+      "a": "That is the grand total, without axis.",
+      "c": "(2, 3) and (3,) are compatible."
+    },
+    "slides": [
+      222,
+      224
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 2
   },
-  "slides": [
-   222,
-   223,
-   224
-  ],
-  "verify": {
-   "mode": "output"
+  {
+    "id": "S6-0044",
+    "chapter": "S6",
+    "topic": "numpy-broadcasting",
+    "tags": [
+      "broadcasting",
+      "rules"
+    ],
+    "type": "multi",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Which pairs of array shapes can be broadcast together (for example added with `+`)? Select all that apply.",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "(3,) and (2, 3)"
+      },
+      {
+        "id": "b",
+        "text": "(2,) and (3,)"
+      },
+      {
+        "id": "c",
+        "text": "(4, 1) and (3,)"
+      },
+      {
+        "id": "d",
+        "text": "(2, 3) and (3, 2)"
+      },
+      {
+        "id": "e",
+        "text": "(5, 1, 4) and (3, 1)"
+      }
+    ],
+    "correct": [
+      "a",
+      "c",
+      "e"
+    ],
+    "explanation": "Align the shapes on the right and compare dimension by dimension: each pair must be equal or contain a 1 (a missing dimension counts as 1). (3,)+(2, 3) -> (2, 3); (4, 1)+(3,) -> (4, 3); (5, 1, 4)+(3, 1) -> (5, 3, 4).",
+    "distractor_notes": {
+      "b": "2 vs 3 and neither is 1: incompatible.",
+      "d": "Last axis 3 vs 2 and first axis 2 vs 3: incompatible (shapes are not transposed automatically)."
+    },
+    "slides": [
+      222,
+      223,
+      224
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": "import numpy as np",
+      "probe_template": "s1, s2 = __OPTION__.split(' and ')\nnp.zeros(eval(s1)) + np.zeros(eval(s2))\nprint(True)"
+    },
+    "reviewed": 2
   },
-  "reviewed": 1
- },
- {
-  "id": "S6-0043",
-  "chapter": "S6",
-  "topic": "numpy-broadcasting",
-  "tags": [
-   "broadcasting",
-   "axis",
-   "hands-on"
-  ],
-  "type": "single",
-  "difficulty": 3,
-  "source": "generated",
-  "stem": "Find the output of the code?",
-  "code": "import numpy as np\nprices = np.array([2, 5, 1])\norders = np.array([[1, 0, 2],\n                   [3, 1, 0]])\nprint((orders * prices).sum(axis=1))",
-  "options": [
-   {
-    "id": "a",
-    "text": "15",
-    "mono": true
-   },
-   {
-    "id": "b",
-    "text": "[ 4 11]",
-    "mono": true
-   },
-   {
-    "id": "c",
-    "text": "ValueError",
-    "out": "!ValueError"
-   },
-   {
-    "id": "d",
-    "text": "[8 5 2]",
-    "mono": true
-   }
-  ],
-  "correct": [
-   "b"
-  ],
-  "explanation": "`prices` (3,) is broadcast over each order row: [[2 0 2] [6 5 0]]. Summing along axis 1 gives the total price of each order: 4 and 11.",
-  "distractor_notes": {
-   "d": "That is `axis=0`: the total value sold per product.",
-   "a": "That is the grand total, without axis.",
-   "c": "(2, 3) and (3,) are compatible."
+  {
+    "id": "S6-0045",
+    "chapter": "S6",
+    "topic": "numpy-broadcasting",
+    "tags": [
+      "broadcasting",
+      "scalar",
+      "hands-on"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "import numpy as np\ngrades = np.array([72, 35, 64, 88, 51])\ncurved = grades + (80 - grades.mean())\nprint(np.minimum(curved, 100))",
+    "options": [
+      {
+        "id": "a",
+        "text": "[ 90.  53.  82. 100.  69.]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[ 90  53  82 100  69]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "ValueError",
+        "out": "!ValueError"
+      },
+      {
+        "id": "d",
+        "text": "[ 90.  53.  82. 106.  69.]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "`grades.mean()` is the scalar 62.0, so `80 - 62.0 = 18.0` is broadcast to every grade (and makes the result a float array). `np.minimum` then compares element-wise with the scalar 100, capping 106 at 100.",
+    "distractor_notes": {
+      "d": "`np.minimum(curved, 100)` caps every value above 100.",
+      "b": "The mean is a float, so adding it produces floats.",
+      "c": "A scalar broadcasts against an array of any shape."
+    },
+    "slides": [
+      222,
+      225
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 2
   },
-  "slides": [
-   222,
-   224
-  ],
-  "verify": {
-   "mode": "output"
+  {
+    "id": "S6-0046",
+    "chapter": "S6",
+    "topic": "numpy-broadcasting",
+    "tags": [
+      "broadcasting",
+      "reshape",
+      "outer"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "import numpy as np\nx = np.arange(3)\nprint(x.reshape(-1, 1) - x)",
+    "options": [
+      {
+        "id": "a",
+        "text": "ValueError",
+        "out": "!ValueError"
+      },
+      {
+        "id": "b",
+        "text": "[[ 0  1  2]\n [-1  0  1]\n [-2 -1  0]]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[0 0 0]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[[ 0 -1 -2]\n [ 1  0 -1]\n [ 2  1  0]]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "`x.reshape(-1, 1)` is a (3, 1) column and `x` a (3,) row: they broadcast to (3, 3) with element [i, j] = x[i] - x[j].",
+    "distractor_notes": {
+      "c": "The shapes differ, so the result is a 3x3 grid, not an element-wise difference.",
+      "a": "(3, 1) and (3,) are compatible.",
+      "b": "That is `x - x.reshape(-1, 1)`: the row index comes from the column vector, so the signs are reversed."
+    },
+    "slides": [
+      222,
+      223,
+      224
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 2
   },
-  "reviewed": 1
- },
- {
-  "id": "S6-0044",
-  "chapter": "S6",
-  "topic": "numpy-broadcasting",
-  "tags": [
-   "broadcasting",
-   "rules"
-  ],
-  "type": "multi",
-  "difficulty": 2,
-  "source": "generated",
-  "stem": "Which pairs of array shapes can be broadcast together (for example added with `+`)? Select all that apply.",
-  "code": null,
-  "options": [
-   {
-    "id": "a",
-    "text": "(3,) and (2, 3)"
-   },
-   {
-    "id": "b",
-    "text": "(2,) and (3,)"
-   },
-   {
-    "id": "c",
-    "text": "(4, 1) and (3,)"
-   },
-   {
-    "id": "d",
-    "text": "(2, 3) and (3, 2)"
-   },
-   {
-    "id": "e",
-    "text": "(5, 1, 4) and (3, 1)"
-   }
-  ],
-  "correct": [
-   "a",
-   "c",
-   "e"
-  ],
-  "explanation": "Align the shapes on the right and compare dimension by dimension: each pair must be equal or contain a 1 (a missing dimension counts as 1). (3,)+(2, 3) -> (2, 3); (4, 1)+(3,) -> (4, 3); (5, 1, 4)+(3, 1) -> (5, 3, 4).",
-  "distractor_notes": {
-   "b": "2 vs 3 and neither is 1: incompatible.",
-   "d": "Last axis 3 vs 2 and first axis 2 vs 3: incompatible (shapes are not transposed automatically)."
+  {
+    "id": "S6-0047",
+    "chapter": "S6",
+    "topic": "numpy-masking",
+    "tags": [
+      "mask",
+      "filtering"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "import numpy as np\na = np.array([4, 7, 1, 9, 3])\nprint(a[a > 3])",
+    "options": [
+      {
+        "id": "a",
+        "text": "[ True  True False  True False]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[0 1 3]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[4 7 9]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[7 9]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "`a > 3` builds a boolean mask of the same shape; indexing with it keeps only the elements where the mask is True, in their original order: 4, 7, 9.",
+    "distractor_notes": {
+      "a": "That is the mask `a > 3` itself, not the filtered array.",
+      "d": "4 > 3 is True, so 4 is kept.",
+      "b": "Those are the positions of the selected values (what `np.nonzero` gives), not the values."
+    },
+    "slides": [
+      226
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 2
   },
-  "slides": [
-   222,
-   223,
-   224
-  ],
-  "verify": {
-   "mode": "truth",
-   "setup": "import numpy as np",
-   "probe_template": "s1, s2 = __OPTION__.split(' and ')\nnp.zeros(eval(s1)) + np.zeros(eval(s2))\nprint(True)"
+  {
+    "id": "S6-0048",
+    "chapter": "S6",
+    "topic": "numpy-masking",
+    "tags": [
+      "mask",
+      "element-wise",
+      "comparison"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "Find the output of the code?",
+    "code": "import numpy as np\na = np.array([2, 8, 5])\nprint(a % 2 == 0)",
+    "options": [
+      {
+        "id": "a",
+        "text": "[ True  True False]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[2 8]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "True",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[1 1 0]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "Arithmetic and comparisons on arrays are element-wise: the result is a boolean array of the same shape. 2 and 8 are even, 5 is not.",
+    "distractor_notes": {
+      "b": "That would be the filtered array `a[a % 2 == 0]`.",
+      "c": "The comparison is not reduced to one bool; it is applied to each element.",
+      "d": "A boolean array prints True/False, not 1/0."
+    },
+    "slides": [
+      226
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 2
   },
-  "reviewed": 1
- },
- {
-  "id": "S6-0045",
-  "chapter": "S6",
-  "topic": "numpy-broadcasting",
-  "tags": [
-   "broadcasting",
-   "scalar",
-   "hands-on"
-  ],
-  "type": "single",
-  "difficulty": 2,
-  "source": "generated",
-  "stem": "What is the output of the following code?",
-  "code": "import numpy as np\ngrades = np.array([72, 35, 64, 88, 51])\ncurved = grades + (80 - grades.mean())\nprint(np.minimum(curved, 100))",
-  "options": [
-   {
-    "id": "a",
-    "text": "[ 90.  53.  82. 100.  69.]",
-    "mono": true
-   },
-   {
-    "id": "b",
-    "text": "[ 90  53  82 100  69]",
-    "mono": true
-   },
-   {
-    "id": "c",
-    "text": "ValueError",
-    "out": "!ValueError"
-   },
-   {
-    "id": "d",
-    "text": "[ 90.  53.  82. 106.  69.]",
-    "mono": true
-   }
-  ],
-  "correct": [
-   "a"
-  ],
-  "explanation": "`grades.mean()` is the scalar 62.0, so `80 - 62.0 = 18.0` is broadcast to every grade (and makes the result a float array). `np.minimum` then compares element-wise with the scalar 100, capping 106 at 100.",
-  "distractor_notes": {
-   "d": "`np.minimum(curved, 100)` caps every value above 100.",
-   "b": "The mean is a float, so adding it produces floats.",
-   "c": "A scalar broadcasts against an array of any shape."
+  {
+    "id": "S6-0049",
+    "chapter": "S6",
+    "topic": "numpy-masking",
+    "tags": [
+      "mask",
+      "count",
+      "boolean-sum"
+    ],
+    "type": "multi",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Given `a = np.array([6, 2, 8, 5, 1])`, which expressions return the **number** of elements greater than 3 (that is, 3)? Select all that apply.",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "(a > 3).sum()",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "np.sum(a > 3)",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "len(a[a > 3])",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "a[a > 3].sum()",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "(a > 3).size",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "b",
+      "c"
+    ],
+    "explanation": "True counts as 1 and False as 0, so summing a boolean mask counts the True values. The length of the filtered array gives the same count.",
+    "distractor_notes": {
+      "d": "That adds the selected values (6 + 8 + 5 = 19) instead of counting them.",
+      "e": "`size` is the number of elements of the mask (5), True or False."
+    },
+    "slides": [
+      226
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": "import numpy as np\na = np.array([6, 2, 8, 5, 1])",
+      "probe_template": "print(bool(__OPTION_RAW__ == 3))"
+    },
+    "reviewed": 2
   },
-  "slides": [
-   222,
-   225
-  ],
-  "verify": {
-   "mode": "output"
+  {
+    "id": "S6-0050",
+    "chapter": "S6",
+    "topic": "numpy-masking",
+    "tags": [
+      "mask",
+      "and-vs-&",
+      "ValueError"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "import numpy as np\na = np.array([1, 5, 8, 3])\nprint(a[(a > 2) and (a < 6)])",
+    "options": [
+      {
+        "id": "a",
+        "text": "[False  True False  True]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[5 8 3]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "ValueError",
+        "out": "!ValueError"
+      },
+      {
+        "id": "d",
+        "text": "[5 3]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "`and` needs a single truth value for its left operand, but `a > 2` is an array of several booleans: NumPy refuses to guess and raises ValueError (the truth value of an array with more than one element is ambiguous). Use `&`: `a[(a > 2) & (a < 6)]` gives [5 3].",
+    "distractor_notes": {
+      "d": "That is the result with `&` instead of `and`.",
+      "b": "That would be `a[a > 2]` alone.",
+      "a": "That is the combined mask; and `and` raises before any indexing happens."
+    },
+    "slides": [
+      226
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 2
   },
-  "reviewed": 1
- },
- {
-  "id": "S6-0046",
-  "chapter": "S6",
-  "topic": "numpy-broadcasting",
-  "tags": [
-   "broadcasting",
-   "reshape",
-   "outer"
-  ],
-  "type": "single",
-  "difficulty": 3,
-  "source": "generated",
-  "stem": "What will be the output of the code?",
-  "code": "import numpy as np\nx = np.arange(3)\nprint(x.reshape(-1, 1) - x)",
-  "options": [
-   {
-    "id": "a",
-    "text": "ValueError",
-    "out": "!ValueError"
-   },
-   {
-    "id": "b",
-    "text": "[[ 0  1  2]\n [-1  0  1]\n [-2 -1  0]]",
-    "mono": true
-   },
-   {
-    "id": "c",
-    "text": "[0 0 0]",
-    "mono": true
-   },
-   {
-    "id": "d",
-    "text": "[[ 0 -1 -2]\n [ 1  0 -1]\n [ 2  1  0]]",
-    "mono": true
-   }
-  ],
-  "correct": [
-   "d"
-  ],
-  "explanation": "`x.reshape(-1, 1)` is a (3, 1) column and `x` a (3,) row: they broadcast to (3, 3) with element [i, j] = x[i] - x[j].",
-  "distractor_notes": {
-   "c": "The shapes differ, so the result is a 3x3 grid, not an element-wise difference.",
-   "a": "(3, 1) and (3,) are compatible.",
-   "b": "That is `x - x.reshape(-1, 1)`: the row index comes from the column vector, so the signs are reversed."
+  {
+    "id": "S6-0051",
+    "chapter": "S6",
+    "topic": "numpy-masking",
+    "tags": [
+      "mask",
+      "precedence",
+      "parentheses",
+      "ValueError"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "import numpy as np\na = np.array([1, 5, 8, 3])\nprint(a[a > 2 & a < 6])",
+    "options": [
+      {
+        "id": "a",
+        "text": "TypeError",
+        "out": "!TypeError"
+      },
+      {
+        "id": "b",
+        "text": "ValueError",
+        "out": "!ValueError"
+      },
+      {
+        "id": "c",
+        "text": "[3 5]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[5 3]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "`&` binds tighter than the comparison operators, so the expression is read as `a > (2 & a) < 6`, a chained comparison that needs the truth value of a whole array: ValueError. Each comparison must be parenthesised: `(a > 2) & (a < 6)`.",
+    "distractor_notes": {
+      "d": "That is the result once each comparison is wrapped in parentheses.",
+      "c": "Filtering keeps the original order; and here the expression fails anyway.",
+      "a": "`2 & a` is a valid bitwise AND on integers; the error comes from the chained comparison and is a ValueError."
+    },
+    "slides": [
+      226
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 2
   },
-  "slides": [
-   222,
-   223,
-   224
-  ],
-  "verify": {
-   "mode": "output"
+  {
+    "id": "S6-0052",
+    "chapter": "S6",
+    "topic": "numpy-masking",
+    "tags": [
+      "mask",
+      "assignment",
+      "in-place"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "import numpy as np\na = np.array([[1, -2],\n              [-3, 4]])\na[a < 0] = 0\nprint(a)",
+    "options": [
+      {
+        "id": "a",
+        "text": "[[ 1 -2]\n [-3  4]]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[[1 0]\n [0 4]]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[[ 0 -2]\n [-3  0]]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[1 4]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "Assigning through a boolean mask modifies the original array in place: every negative element becomes 0 and the shape (2, 2) is kept.",
+    "distractor_notes": {
+      "d": "That is the filtered copy `a[a >= 0]`; an assignment does not change the shape of `a`.",
+      "a": "Mask assignment writes into `a` itself.",
+      "c": "That replaces the elements where the mask is False (the mask is inverted)."
+    },
+    "slides": [
+      226
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 2
   },
-  "reviewed": 1
- },
- {
-  "id": "S6-0047",
-  "chapter": "S6",
-  "topic": "numpy-masking",
-  "tags": [
-   "mask",
-   "filtering"
-  ],
-  "type": "single",
-  "difficulty": 1,
-  "source": "generated",
-  "stem": "What is the output of the following code?",
-  "code": "import numpy as np\na = np.array([4, 7, 1, 9, 3])\nprint(a[a > 3])",
-  "options": [
-   {
-    "id": "a",
-    "text": "[ True  True False  True False]",
-    "mono": true
-   },
-   {
-    "id": "b",
-    "text": "[0 1 3]",
-    "mono": true
-   },
-   {
-    "id": "c",
-    "text": "[4 7 9]",
-    "mono": true
-   },
-   {
-    "id": "d",
-    "text": "[7 9]",
-    "mono": true
-   }
-  ],
-  "correct": [
-   "c"
-  ],
-  "explanation": "`a > 3` builds a boolean mask of the same shape; indexing with it keeps only the elements where the mask is True, in their original order: 4, 7, 9.",
-  "distractor_notes": {
-   "a": "That is the mask `a > 3` itself, not the filtered array.",
-   "d": "4 > 3 is True, so 4 is kept.",
-   "b": "Those are the positions of the selected values (what `np.nonzero` gives), not the values."
+  {
+    "id": "S6-0053",
+    "chapter": "S6",
+    "topic": "numpy-masking",
+    "tags": [
+      "mask",
+      "shape",
+      "invert"
+    ],
+    "type": "multi",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Given `m = np.arange(6).reshape(2, 3)`, which statements are true? Select all that apply.",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "`m > 2` has shape `(2, 3)`",
+        "probe": "print((m > 2).shape == (2, 3))"
+      },
+      {
+        "id": "b",
+        "text": "`m[m > 2]` has shape `(2, 3)`",
+        "probe": "print(m[m > 2].shape == (2, 3))"
+      },
+      {
+        "id": "c",
+        "text": "`m[m > 2]` is the 1D array `[3 4 5]`",
+        "probe": "print(m[m > 2].tolist() == [3, 4, 5])"
+      },
+      {
+        "id": "d",
+        "text": "`m[~(m > 2)]` is `[0 1 2]`",
+        "probe": "print(m[~(m > 2)].tolist() == [0, 1, 2])"
+      },
+      {
+        "id": "e",
+        "text": "`(m > 2).sum()` is 12",
+        "probe": "print(bool((m > 2).sum() == 12))"
+      }
+    ],
+    "correct": [
+      "a",
+      "c",
+      "d"
+    ],
+    "explanation": "A comparison keeps the shape of the array, but filtering with a mask always returns a flat 1D array of the selected values (in row order), since they do not form a rectangle in general. `~` inverts a boolean mask.",
+    "distractor_notes": {
+      "b": "Boolean indexing flattens the selection: the result is 1D, shape (3,).",
+      "e": "Summing the mask counts the True values (3); 12 is the sum of the selected values 3 + 4 + 5."
+    },
+    "slides": [
+      226
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": "import numpy as np\nm = np.arange(6).reshape(2, 3)"
+    },
+    "reviewed": 2
   },
-  "slides": [
-   226
-  ],
-  "verify": {
-   "mode": "output"
+  {
+    "id": "S6-0054",
+    "chapter": "S6",
+    "topic": "numpy-masking",
+    "tags": [
+      "mask",
+      "and-vs-&",
+      "or",
+      "invert"
+    ],
+    "type": "multi",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Given `a = np.array([1, 5, 8, 3])`, which expressions evaluate to `[5 8]` without raising an error? Select all that apply.",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "a[(a > 4) & (a < 9)]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "a[(a > 4) and (a < 9)]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "a[a > 4]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "a[~(a <= 4)]",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "a[(a > 4) | (a < 9)]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "c",
+      "d"
+    ],
+    "explanation": "`&` combines two masks element-wise (AND), `~` negates a mask, and a single condition is enough here. Python's `and` cannot combine arrays, and `|` is an OR: every element is below 9, so it keeps everything.",
+    "distractor_notes": {
+      "b": "`and` asks for the truth value of a whole array: ValueError.",
+      "e": "`|` is OR: every element satisfies `a < 9`, so the result is [1 5 8 3]."
+    },
+    "slides": [
+      226
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": "import numpy as np\na = np.array([1, 5, 8, 3])",
+      "probe_template": "print(__OPTION_RAW__.tolist() == [5, 8])"
+    },
+    "reviewed": 2
   },
-  "reviewed": 1
- },
- {
-  "id": "S6-0048",
-  "chapter": "S6",
-  "topic": "numpy-masking",
-  "tags": [
-   "mask",
-   "element-wise",
-   "comparison"
-  ],
-  "type": "single",
-  "difficulty": 1,
-  "source": "generated",
-  "stem": "Find the output of the code?",
-  "code": "import numpy as np\na = np.array([2, 8, 5])\nprint(a % 2 == 0)",
-  "options": [
-   {
-    "id": "a",
-    "text": "[ True  True False]",
-    "mono": true
-   },
-   {
-    "id": "b",
-    "text": "[2 8]",
-    "mono": true
-   },
-   {
-    "id": "c",
-    "text": "True",
-    "mono": true
-   },
-   {
-    "id": "d",
-    "text": "[1 1 0]",
-    "mono": true
-   }
-  ],
-  "correct": [
-   "a"
-  ],
-  "explanation": "Arithmetic and comparisons on arrays are element-wise: the result is a boolean array of the same shape. 2 and 8 are even, 5 is not.",
-  "distractor_notes": {
-   "b": "That would be the filtered array `a[a % 2 == 0]`.",
-   "c": "The comparison is not reduced to one bool; it is applied to each element.",
-   "d": "A boolean array prints True/False, not 1/0."
+  {
+    "id": "S6-0055",
+    "chapter": "S6",
+    "topic": "numpy-operations",
+    "tags": [
+      "element-wise",
+      "list-vs-array"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "import numpy as np\nlst = [1, 2, 3]\narr = np.array([1, 2, 3])\nprint(lst * 2)\nprint(arr * 2)",
+    "options": [
+      {
+        "id": "a",
+        "text": "[2, 4, 6]\n[1 2 3 1 2 3]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[1, 2, 3, 1, 2, 3]\n[2 4 6]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[1, 2, 3, 1, 2, 3]\n[1 2 3 1 2 3]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[2, 4, 6]\n[2 4 6]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "For a list, `* 2` repeats the list (concatenates two copies). For a NumPy array, arithmetic operators are element-wise: each element is multiplied by 2.",
+    "distractor_notes": {
+      "d": "Lists do not do element-wise arithmetic: `*` repeats them.",
+      "c": "Arrays do not repeat: `*` multiplies each element.",
+      "a": "The two behaviours are swapped."
+    },
+    "slides": [
+      217
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 2
   },
-  "slides": [
-   226
-  ],
-  "verify": {
-   "mode": "output"
+  {
+    "id": "S6-0056",
+    "chapter": "S6",
+    "topic": "numpy-operations",
+    "tags": [
+      "element-wise",
+      "list-vs-array",
+      "concatenation"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "import numpy as np\nprint([1, 2] + [3, 4])\nprint(np.array([1, 2]) + np.array([3, 4]))",
+    "options": [
+      {
+        "id": "a",
+        "text": "[1, 2, 3, 4]\n[4 6]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[1, 2, 3, 4]\n[1 2 3 4]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[4, 6]\n[4 6]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[4, 6]\n[1 2 3 4]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "`+` concatenates lists but adds arrays element-wise: 1 + 3 = 4 and 2 + 4 = 6.",
+    "distractor_notes": {
+      "c": "List `+` is concatenation, not addition.",
+      "b": "Array `+` is element-wise addition, not concatenation (use `np.concatenate` for that).",
+      "d": "The two behaviours are swapped."
+    },
+    "slides": [
+      217
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 2
   },
-  "reviewed": 1
- },
- {
-  "id": "S6-0049",
-  "chapter": "S6",
-  "topic": "numpy-masking",
-  "tags": [
-   "mask",
-   "count",
-   "boolean-sum"
-  ],
-  "type": "multi",
-  "difficulty": 2,
-  "source": "generated",
-  "stem": "Given `a = np.array([6, 2, 8, 5, 1])`, which expressions return the **number** of elements greater than 3 (that is, 3)? Select all that apply.",
-  "code": null,
-  "options": [
-   {
-    "id": "a",
-    "text": "(a > 3).sum()",
-    "mono": true
-   },
-   {
-    "id": "b",
-    "text": "np.sum(a > 3)",
-    "mono": true
-   },
-   {
-    "id": "c",
-    "text": "len(a[a > 3])",
-    "mono": true
-   },
-   {
-    "id": "d",
-    "text": "a[a > 3].sum()",
-    "mono": true
-   },
-   {
-    "id": "e",
-    "text": "(a > 3).size",
-    "mono": true
-   }
-  ],
-  "correct": [
-   "a",
-   "b",
-   "c"
-  ],
-  "explanation": "True counts as 1 and False as 0, so summing a boolean mask counts the True values. The length of the filtered array gives the same count.",
-  "distractor_notes": {
-   "d": "That adds the selected values (6 + 8 + 5 = 19) instead of counting them.",
-   "e": "`size` is the number of elements of the mask (5), True or False."
+  {
+    "id": "S6-0057",
+    "chapter": "S6",
+    "topic": "numpy-operations",
+    "tags": [
+      "transpose",
+      "reshape",
+      "swapaxes"
+    ],
+    "type": "multi",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "Given `a = np.array([[1, 2, 3], [4, 5, 6]])`, which expressions return `[[1 4] [2 5] [3 6]]`? Select all that apply.",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "a.T",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "a.reshape(3, 2)",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "np.transpose(a)",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "np.swapaxes(a, 0, 1)",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "a[::-1]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "c",
+      "d"
+    ],
+    "explanation": "Transposing swaps rows and columns (element [i, j] becomes [j, i]): `a.T`, `np.transpose(a)` and `np.swapaxes(a, 0, 1)` all do it. `reshape` only regroups the elements in their original reading order.",
+    "distractor_notes": {
+      "b": "`reshape(3, 2)` gives the right shape but keeps the reading order: [[1 2] [3 4] [5 6]].",
+      "e": "That reverses the order of the rows: [[4 5 6] [1 2 3]]."
+    },
+    "slides": [
+      218,
+      227
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": "import numpy as np\na = np.array([[1, 2, 3], [4, 5, 6]])",
+      "probe_template": "print(__OPTION_RAW__.tolist() == [[1, 4], [2, 5], [3, 6]])"
+    },
+    "reviewed": 2
   },
-  "slides": [
-   226
-  ],
-  "verify": {
-   "mode": "truth",
-   "setup": "import numpy as np\na = np.array([6, 2, 8, 5, 1])",
-   "probe_template": "print(bool(__OPTION_RAW__ == 3))"
+  {
+    "id": "S6-0058",
+    "chapter": "S6",
+    "topic": "numpy-operations",
+    "tags": [
+      "vstack",
+      "hstack",
+      "shape"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "Find the output of the code?",
+    "code": "import numpy as np\na = np.ones((2, 3))\nb = np.zeros((2, 3))\nprint(np.vstack((a, b)).shape, np.hstack((a, b)).shape)",
+    "options": [
+      {
+        "id": "a",
+        "text": "(4, 6) (4, 6)",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "(2, 6) (4, 3)",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "(4, 3) (2, 6)",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "(2, 2, 3) (2, 6)",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "`vstack` stacks vertically, adding rows: 2 + 2 rows -> (4, 3). `hstack` stacks horizontally, adding columns: 3 + 3 -> (2, 6).",
+    "distractor_notes": {
+      "b": "The two functions are swapped.",
+      "d": "`vstack` joins along the existing first axis; it does not create a new axis (that is `np.stack`).",
+      "a": "Each function grows only one axis."
+    },
+    "slides": [
+      227
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 2
   },
-  "reviewed": 1
- },
- {
-  "id": "S6-0050",
-  "chapter": "S6",
-  "topic": "numpy-masking",
-  "tags": [
-   "mask",
-   "and-vs-&",
-   "ValueError"
-  ],
-  "type": "single",
-  "difficulty": 2,
-  "source": "generated",
-  "stem": "What is the output of the following code?",
-  "code": "import numpy as np\na = np.array([1, 5, 8, 3])\nprint(a[(a > 2) and (a < 6)])",
-  "options": [
-   {
-    "id": "a",
-    "text": "[False  True False  True]",
-    "mono": true
-   },
-   {
-    "id": "b",
-    "text": "[5 8 3]",
-    "mono": true
-   },
-   {
-    "id": "c",
-    "text": "ValueError",
-    "out": "!ValueError"
-   },
-   {
-    "id": "d",
-    "text": "[5 3]",
-    "mono": true
-   }
-  ],
-  "correct": [
-   "c"
-  ],
-  "explanation": "`and` needs a single truth value for its left operand, but `a > 2` is an array of several booleans: NumPy refuses to guess and raises ValueError (the truth value of an array with more than one element is ambiguous). Use `&`: `a[(a > 2) & (a < 6)]` gives [5 3].",
-  "distractor_notes": {
-   "d": "That is the result with `&` instead of `and`.",
-   "b": "That would be `a[a > 2]` alone.",
-   "a": "That is the combined mask; and `and` raises before any indexing happens."
+  {
+    "id": "S6-0059",
+    "chapter": "S6",
+    "topic": "numpy-operations",
+    "tags": [
+      "concatenate",
+      "axis",
+      "ValueError"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What is the output of the following snippet?",
+    "code": "import numpy as np\na = np.array([[1, 2], [3, 4]])\nb = np.array([[5, 6]])\nprint(np.concatenate((a, b)).shape)\nprint(np.concatenate((a, b), axis=None).shape)\nprint(np.concatenate((a, b), axis=1).shape)",
+    "options": [
+      {
+        "id": "a",
+        "text": "(3, 2)\n(3, 2)\n(2, 3)",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "(3, 2)\n(6,)\n(2, 3)",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "(3, 2)\n(6,)\nValueError",
+        "mono": true,
+        "out": "(3, 2)\n(6,)\n!ValueError"
+      },
+      {
+        "id": "d",
+        "text": "(2, 3)\n(6,)\nValueError",
+        "mono": true,
+        "out": "(2, 3)\n(6,)\n!ValueError"
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "`np.concatenate` joins along `axis=0` by default: (2, 2) and (1, 2) give (3, 2). `axis=None` flattens everything into one 1D array of 6 values. `axis=1` would put them side by side, but they have 2 and 1 rows: all dimensions except the joining axis must match, so ValueError.",
+    "distractor_notes": {
+      "b": "Joining along axis 1 requires the same number of rows.",
+      "d": "The default axis is 0 (rows are added), not 1.",
+      "a": "`axis=None` flattens the arrays before joining."
+    },
+    "slides": [
+      227
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 2
   },
-  "slides": [
-   226
-  ],
-  "verify": {
-   "mode": "output"
-  },
-  "reviewed": 1
- },
- {
-  "id": "S6-0051",
-  "chapter": "S6",
-  "topic": "numpy-masking",
-  "tags": [
-   "mask",
-   "precedence",
-   "parentheses",
-   "ValueError"
-  ],
-  "type": "single",
-  "difficulty": 3,
-  "source": "generated",
-  "stem": "What will be the output of the code?",
-  "code": "import numpy as np\na = np.array([1, 5, 8, 3])\nprint(a[a > 2 & a < 6])",
-  "options": [
-   {
-    "id": "a",
-    "text": "TypeError",
-    "out": "!TypeError"
-   },
-   {
-    "id": "b",
-    "text": "ValueError",
-    "out": "!ValueError"
-   },
-   {
-    "id": "c",
-    "text": "[3 5]",
-    "mono": true
-   },
-   {
-    "id": "d",
-    "text": "[5 3]",
-    "mono": true
-   }
-  ],
-  "correct": [
-   "b"
-  ],
-  "explanation": "`&` binds tighter than the comparison operators, so the expression is read as `a > (2 & a) < 6`, a chained comparison that needs the truth value of a whole array: ValueError. Each comparison must be parenthesised: `(a > 2) & (a < 6)`.",
-  "distractor_notes": {
-   "d": "That is the result once each comparison is wrapped in parentheses.",
-   "c": "Filtering keeps the original order; and here the expression fails anyway.",
-   "a": "`2 & a` is a valid bitwise AND on integers; the error comes from the chained comparison and is a ValueError."
-  },
-  "slides": [
-   226
-  ],
-  "verify": {
-   "mode": "output"
-  },
-  "reviewed": 1
- },
- {
-  "id": "S6-0052",
-  "chapter": "S6",
-  "topic": "numpy-masking",
-  "tags": [
-   "mask",
-   "assignment",
-   "in-place"
-  ],
-  "type": "single",
-  "difficulty": 2,
-  "source": "generated",
-  "stem": "What is the output of the following code?",
-  "code": "import numpy as np\na = np.array([[1, -2],\n              [-3, 4]])\na[a < 0] = 0\nprint(a)",
-  "options": [
-   {
-    "id": "a",
-    "text": "[[ 1 -2]\n [-3  4]]",
-    "mono": true
-   },
-   {
-    "id": "b",
-    "text": "[[1 0]\n [0 4]]",
-    "mono": true
-   },
-   {
-    "id": "c",
-    "text": "[[ 0 -2]\n [-3  0]]",
-    "mono": true
-   },
-   {
-    "id": "d",
-    "text": "[1 4]",
-    "mono": true
-   }
-  ],
-  "correct": [
-   "b"
-  ],
-  "explanation": "Assigning through a boolean mask modifies the original array in place: every negative element becomes 0 and the shape (2, 2) is kept.",
-  "distractor_notes": {
-   "d": "That is the filtered copy `a[a >= 0]`; an assignment does not change the shape of `a`.",
-   "a": "Mask assignment writes into `a` itself.",
-   "c": "That replaces the elements where the mask is False (the mask is inverted)."
-  },
-  "slides": [
-   226
-  ],
-  "verify": {
-   "mode": "output"
-  },
-  "reviewed": 1
- },
- {
-  "id": "S6-0053",
-  "chapter": "S6",
-  "topic": "numpy-masking",
-  "tags": [
-   "mask",
-   "shape",
-   "invert"
-  ],
-  "type": "multi",
-  "difficulty": 2,
-  "source": "generated",
-  "stem": "Given `m = np.arange(6).reshape(2, 3)`, which statements are true? Select all that apply.",
-  "code": null,
-  "options": [
-   {
-    "id": "a",
-    "text": "`m > 2` has shape `(2, 3)`",
-    "probe": "print((m > 2).shape == (2, 3))"
-   },
-   {
-    "id": "b",
-    "text": "`m[m > 2]` has shape `(2, 3)`",
-    "probe": "print(m[m > 2].shape == (2, 3))"
-   },
-   {
-    "id": "c",
-    "text": "`m[m > 2]` is the 1D array `[3 4 5]`",
-    "probe": "print(m[m > 2].tolist() == [3, 4, 5])"
-   },
-   {
-    "id": "d",
-    "text": "`m[~(m > 2)]` is `[0 1 2]`",
-    "probe": "print(m[~(m > 2)].tolist() == [0, 1, 2])"
-   },
-   {
-    "id": "e",
-    "text": "`(m > 2).sum()` is 12",
-    "probe": "print(bool((m > 2).sum() == 12))"
-   }
-  ],
-  "correct": [
-   "a",
-   "c",
-   "d"
-  ],
-  "explanation": "A comparison keeps the shape of the array, but filtering with a mask always returns a flat 1D array of the selected values (in row order), since they do not form a rectangle in general. `~` inverts a boolean mask.",
-  "distractor_notes": {
-   "b": "Boolean indexing flattens the selection: the result is 1D, shape (3,).",
-   "e": "Summing the mask counts the True values (3); 12 is the sum of the selected values 3 + 4 + 5."
-  },
-  "slides": [
-   226
-  ],
-  "verify": {
-   "mode": "truth",
-   "setup": "import numpy as np\nm = np.arange(6).reshape(2, 3)"
-  },
-  "reviewed": 1
- },
- {
-  "id": "S6-0054",
-  "chapter": "S6",
-  "topic": "numpy-masking",
-  "tags": [
-   "mask",
-   "and-vs-&",
-   "or",
-   "invert"
-  ],
-  "type": "multi",
-  "difficulty": 2,
-  "source": "generated",
-  "stem": "Given `a = np.array([1, 5, 8, 3])`, which expressions evaluate to `[5 8]` without raising an error? Select all that apply.",
-  "code": null,
-  "options": [
-   {
-    "id": "a",
-    "text": "a[(a > 4) & (a < 9)]",
-    "mono": true
-   },
-   {
-    "id": "b",
-    "text": "a[(a > 4) and (a < 9)]",
-    "mono": true
-   },
-   {
-    "id": "c",
-    "text": "a[a > 4]",
-    "mono": true
-   },
-   {
-    "id": "d",
-    "text": "a[~(a <= 4)]",
-    "mono": true
-   },
-   {
-    "id": "e",
-    "text": "a[(a > 4) | (a < 9)]",
-    "mono": true
-   }
-  ],
-  "correct": [
-   "a",
-   "c",
-   "d"
-  ],
-  "explanation": "`&` combines two masks element-wise (AND), `~` negates a mask, and a single condition is enough here. Python's `and` cannot combine arrays, and `|` is an OR: every element is below 9, so it keeps everything.",
-  "distractor_notes": {
-   "b": "`and` asks for the truth value of a whole array: ValueError.",
-   "e": "`|` is OR: every element satisfies `a < 9`, so the result is [1 5 8 3]."
-  },
-  "slides": [
-   226
-  ],
-  "verify": {
-   "mode": "truth",
-   "setup": "import numpy as np\na = np.array([1, 5, 8, 3])",
-   "probe_template": "print(__OPTION_RAW__.tolist() == [5, 8])"
-  },
-  "reviewed": 1
- },
- {
-  "id": "S6-0055",
-  "chapter": "S6",
-  "topic": "numpy-operations",
-  "tags": [
-   "element-wise",
-   "list-vs-array"
-  ],
-  "type": "single",
-  "difficulty": 1,
-  "source": "generated",
-  "stem": "What is the output of the following code?",
-  "code": "import numpy as np\nlst = [1, 2, 3]\narr = np.array([1, 2, 3])\nprint(lst * 2)\nprint(arr * 2)",
-  "options": [
-   {
-    "id": "a",
-    "text": "[2, 4, 6]\n[1 2 3 1 2 3]",
-    "mono": true
-   },
-   {
-    "id": "b",
-    "text": "[1, 2, 3, 1, 2, 3]\n[2 4 6]",
-    "mono": true
-   },
-   {
-    "id": "c",
-    "text": "[1, 2, 3, 1, 2, 3]\n[1 2 3 1 2 3]",
-    "mono": true
-   },
-   {
-    "id": "d",
-    "text": "[2, 4, 6]\n[2 4 6]",
-    "mono": true
-   }
-  ],
-  "correct": [
-   "b"
-  ],
-  "explanation": "For a list, `* 2` repeats the list (concatenates two copies). For a NumPy array, arithmetic operators are element-wise: each element is multiplied by 2.",
-  "distractor_notes": {
-   "d": "Lists do not do element-wise arithmetic: `*` repeats them.",
-   "c": "Arrays do not repeat: `*` multiplies each element.",
-   "a": "The two behaviours are swapped."
-  },
-  "slides": [
-   217,
-   264
-  ],
-  "verify": {
-   "mode": "output"
-  },
-  "reviewed": 1
- },
- {
-  "id": "S6-0056",
-  "chapter": "S6",
-  "topic": "numpy-operations",
-  "tags": [
-   "element-wise",
-   "list-vs-array",
-   "concatenation"
-  ],
-  "type": "single",
-  "difficulty": 1,
-  "source": "generated",
-  "stem": "What will be the output of the code?",
-  "code": "import numpy as np\nprint([1, 2] + [3, 4])\nprint(np.array([1, 2]) + np.array([3, 4]))",
-  "options": [
-   {
-    "id": "a",
-    "text": "[1, 2, 3, 4]\n[4 6]",
-    "mono": true
-   },
-   {
-    "id": "b",
-    "text": "[1, 2, 3, 4]\n[1 2 3 4]",
-    "mono": true
-   },
-   {
-    "id": "c",
-    "text": "[4, 6]\n[4 6]",
-    "mono": true
-   },
-   {
-    "id": "d",
-    "text": "[4, 6]\n[1 2 3 4]",
-    "mono": true
-   }
-  ],
-  "correct": [
-   "a"
-  ],
-  "explanation": "`+` concatenates lists but adds arrays element-wise: 1 + 3 = 4 and 2 + 4 = 6.",
-  "distractor_notes": {
-   "c": "List `+` is concatenation, not addition.",
-   "b": "Array `+` is element-wise addition, not concatenation (use `np.concatenate` for that).",
-   "d": "The two behaviours are swapped."
-  },
-  "slides": [
-   217,
-   264
-  ],
-  "verify": {
-   "mode": "output"
-  },
-  "reviewed": 1
- },
- {
-  "id": "S6-0057",
-  "chapter": "S6",
-  "topic": "numpy-operations",
-  "tags": [
-   "transpose",
-   "reshape",
-   "swapaxes"
-  ],
-  "type": "multi",
-  "difficulty": 3,
-  "source": "generated",
-  "stem": "Given `a = np.array([[1, 2, 3], [4, 5, 6]])`, which expressions return `[[1 4] [2 5] [3 6]]`? Select all that apply.",
-  "code": null,
-  "options": [
-   {
-    "id": "a",
-    "text": "a.T",
-    "mono": true
-   },
-   {
-    "id": "b",
-    "text": "a.reshape(3, 2)",
-    "mono": true
-   },
-   {
-    "id": "c",
-    "text": "np.transpose(a)",
-    "mono": true
-   },
-   {
-    "id": "d",
-    "text": "np.swapaxes(a, 0, 1)",
-    "mono": true
-   },
-   {
-    "id": "e",
-    "text": "a[::-1]",
-    "mono": true
-   }
-  ],
-  "correct": [
-   "a",
-   "c",
-   "d"
-  ],
-  "explanation": "Transposing swaps rows and columns (element [i, j] becomes [j, i]): `a.T`, `np.transpose(a)` and `np.swapaxes(a, 0, 1)` all do it. `reshape` only regroups the elements in their original reading order.",
-  "distractor_notes": {
-   "b": "`reshape(3, 2)` gives the right shape but keeps the reading order: [[1 2] [3 4] [5 6]].",
-   "e": "That reverses the order of the rows: [[4 5 6] [1 2 3]]."
-  },
-  "slides": [
-   218,
-   227
-  ],
-  "verify": {
-   "mode": "truth",
-   "setup": "import numpy as np\na = np.array([[1, 2, 3], [4, 5, 6]])",
-   "probe_template": "print(__OPTION_RAW__.tolist() == [[1, 4], [2, 5], [3, 6]])"
-  },
-  "reviewed": 1
- },
- {
-  "id": "S6-0058",
-  "chapter": "S6",
-  "topic": "numpy-operations",
-  "tags": [
-   "vstack",
-   "hstack",
-   "shape"
-  ],
-  "type": "single",
-  "difficulty": 1,
-  "source": "generated",
-  "stem": "Find the output of the code?",
-  "code": "import numpy as np\na = np.ones((2, 3))\nb = np.zeros((2, 3))\nprint(np.vstack((a, b)).shape, np.hstack((a, b)).shape)",
-  "options": [
-   {
-    "id": "a",
-    "text": "(4, 6) (4, 6)",
-    "mono": true
-   },
-   {
-    "id": "b",
-    "text": "(2, 6) (4, 3)",
-    "mono": true
-   },
-   {
-    "id": "c",
-    "text": "(4, 3) (2, 6)",
-    "mono": true
-   },
-   {
-    "id": "d",
-    "text": "(2, 2, 3) (2, 6)",
-    "mono": true
-   }
-  ],
-  "correct": [
-   "c"
-  ],
-  "explanation": "`vstack` stacks vertically, adding rows: 2 + 2 rows -> (4, 3). `hstack` stacks horizontally, adding columns: 3 + 3 -> (2, 6).",
-  "distractor_notes": {
-   "b": "The two functions are swapped.",
-   "d": "`vstack` joins along the existing first axis; it does not create a new axis (that is `np.stack`).",
-   "a": "Each function grows only one axis."
-  },
-  "slides": [
-   227
-  ],
-  "verify": {
-   "mode": "output"
-  },
-  "reviewed": 1
- },
- {
-  "id": "S6-0059",
-  "chapter": "S6",
-  "topic": "numpy-operations",
-  "tags": [
-   "concatenate",
-   "axis",
-   "ValueError"
-  ],
-  "type": "single",
-  "difficulty": 3,
-  "source": "generated",
-  "stem": "What is the output of the following snippet?",
-  "code": "import numpy as np\na = np.array([[1, 2], [3, 4]])\nb = np.array([[5, 6]])\nprint(np.concatenate((a, b)).shape)\nprint(np.concatenate((a, b), axis=None).shape)\nprint(np.concatenate((a, b), axis=1).shape)",
-  "options": [
-   {
-    "id": "a",
-    "text": "(3, 2)\n(3, 2)\n(2, 3)",
-    "mono": true
-   },
-   {
-    "id": "b",
-    "text": "(3, 2)\n(6,)\n(2, 3)",
-    "mono": true
-   },
-   {
-    "id": "c",
-    "text": "(3, 2)\n(6,)\nValueError",
-    "mono": true,
-    "out": "(3, 2)\n(6,)\n!ValueError"
-   },
-   {
-    "id": "d",
-    "text": "(2, 3)\n(6,)\nValueError",
-    "mono": true,
-    "out": "(2, 3)\n(6,)\n!ValueError"
-   }
-  ],
-  "correct": [
-   "c"
-  ],
-  "explanation": "`np.concatenate` joins along `axis=0` by default: (2, 2) and (1, 2) give (3, 2). `axis=None` flattens everything into one 1D array of 6 values. `axis=1` would put them side by side, but they have 2 and 1 rows: all dimensions except the joining axis must match, so ValueError.",
-  "distractor_notes": {
-   "b": "Joining along axis 1 requires the same number of rows.",
-   "d": "The default axis is 0 (rows are added), not 1.",
-   "a": "`axis=None` flattens the arrays before joining."
-  },
-  "slides": [
-   227
-  ],
-  "verify": {
-   "mode": "output"
-  },
-  "reviewed": 1
- },
- {
-  "id": "S6-0060",
-  "chapter": "S6",
-  "topic": "numpy-operations",
-  "tags": [
-   "sort",
-   "in-place",
-   "copy"
-  ],
-  "type": "single",
-  "difficulty": 3,
-  "source": "generated",
-  "stem": "What is the output of the following code?",
-  "code": "import numpy as np\na = np.array([3, 1, 2])\nb = np.sort(a)\nc = a.sort()\nprint(a, b, c)",
-  "options": [
-   {
-    "id": "a",
-    "text": "[3 1 2] [1 2 3] None",
-    "mono": true
-   },
-   {
-    "id": "b",
-    "text": "[1 2 3] [1 2 3] None",
-    "mono": true
-   },
-   {
-    "id": "c",
-    "text": "[3 1 2] [1 2 3] [1 2 3]",
-    "mono": true
-   },
-   {
-    "id": "d",
-    "text": "[1 2 3] [1 2 3] [1 2 3]",
-    "mono": true
-   }
-  ],
-  "correct": [
-   "b"
-  ],
-  "explanation": "`np.sort(a)` returns a sorted copy. The method `a.sort()` then sorts `a` itself in place and returns None, like `list.sort()`. So when printing, `a` is sorted, `b` is the sorted copy and `c` is None.",
-  "distractor_notes": {
-   "a": "`a.sort()` on line 4 sorts `a` in place before the print.",
-   "d": "The method `.sort()` returns None.",
-   "c": "Both mistakes: the in-place sort changes `a`, and returns None."
-  },
-  "slides": [
-   227
-  ],
-  "verify": {
-   "mode": "output"
-  },
-  "reviewed": 1
- }
+  {
+    "id": "S6-0060",
+    "chapter": "S6",
+    "topic": "numpy-operations",
+    "tags": [
+      "sort",
+      "in-place",
+      "copy"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "import numpy as np\na = np.array([3, 1, 2])\nb = np.sort(a)\nc = a.sort()\nprint(a, b, c)",
+    "options": [
+      {
+        "id": "a",
+        "text": "[3 1 2] [1 2 3] None",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[1 2 3] [1 2 3] None",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[3 1 2] [1 2 3] [1 2 3]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[1 2 3] [1 2 3] [1 2 3]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "`np.sort(a)` returns a sorted copy. The method `a.sort()` then sorts `a` itself in place and returns None, like `list.sort()`. So when printing, `a` is sorted, `b` is the sorted copy and `c` is None.",
+    "distractor_notes": {
+      "a": "`a.sort()` on line 4 sorts `a` in place before the print.",
+      "d": "The method `.sort()` returns None.",
+      "c": "Both mistakes: the in-place sort changes `a`, and returns None."
+    },
+    "slides": [
+      227
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 2
+  }
 ]

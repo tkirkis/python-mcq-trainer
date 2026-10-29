@@ -37,7 +37,7 @@
     "correct": [
       "d"
     ],
-    "explanation": "Concatenating a str and an int raises `TypeError` (incompatible types). `except Exception` catches it and the code prints the class name `TypeError`, which is not among the first three options.",
+    "explanation": "Concatenating a str and an int raises `TypeError` (incompatible types). `except Exception` catches it and the code prints the class name `TypeError`, which is not among the listed values.",
     "distractor_notes": {
       "a": "The values are fine; the problem is mixing two types, hence `TypeError`.",
       "b": "The code is syntactically valid: the error happens at run time.",
@@ -50,7 +50,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1,
+    "reviewed": 2,
     "expected_output": "TypeError"
   },
   {
@@ -105,7 +105,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0023",
@@ -158,7 +158,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0024",
@@ -212,7 +212,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0025",
@@ -271,7 +271,7 @@
       "mode": "truth",
       "probe_template": "import builtins\nobj = getattr(builtins, __OPTION__, None)\nprint(isinstance(obj, type) and issubclass(obj, BaseException))"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0026",
@@ -325,7 +325,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0027",
@@ -380,7 +380,7 @@
         "notes.txt": "first\nsecond\nthird\n"
       }
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0028",
@@ -445,7 +445,7 @@
       },
       "probe_template": "with open('poem.txt') as f:\n    s = __OPTION_RAW__\nprint(s == 'roses\\nare red\\n')"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0029",
@@ -501,7 +501,7 @@
         "names.txt": "Ann\nBob\n"
       }
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0030",
@@ -556,7 +556,7 @@
         "data.txt": "abc\n"
       }
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0031",
@@ -612,7 +612,7 @@
         "log.txt": "old line\n"
       }
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0032",
@@ -668,7 +668,7 @@
         "log.txt": "A\n"
       }
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0033",
@@ -720,7 +720,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0034",
@@ -776,7 +776,7 @@
         "report.txt": "draft\n"
       }
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0035",
@@ -832,7 +832,7 @@
         "data.txt": "x\n"
       }
     },
-    "reviewed": 1,
+    "reviewed": 2,
     "expected_output": "!UnsupportedOperation"
   },
   {
@@ -889,7 +889,7 @@
         "data.txt": "x\n"
       }
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0037",
@@ -902,7 +902,7 @@
     "type": "single",
     "difficulty": 1,
     "source": "generated",
-    "stem": "The file `data.txt` contains `hi` followed by a newline. What is the output?",
+    "stem": "The file `data.txt` contains `hi` followed by a newline character (`\\n`). What is the output?",
     "code": "with open(\"data.txt\", \"rb\") as f:\n    content = f.read()\nprint(content)",
     "options": [
       {
@@ -944,7 +944,7 @@
         "data.txt": "hi\n"
       }
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0038",
@@ -1000,7 +1000,7 @@
     "verify": {
       "mode": "output"
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0039",
@@ -1057,7 +1057,7 @@
         "book.txt": "It is a truth\nuniversally acknowledged\n\nthat a single man\n"
       }
     },
-    "reviewed": 1
+    "reviewed": 2
   },
   {
     "id": "S3-0040",
@@ -1114,6 +1114,6 @@
         "words.txt": "the cat and the hat\nthe end\n"
       }
     },
-    "reviewed": 1
+    "reviewed": 2
   }
 ]

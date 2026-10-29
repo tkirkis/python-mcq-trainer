@@ -56,7 +56,7 @@
    "mode": "manual",
    "reference": "Slide 316 'Port': 80 HTTP (443 HTTPS), 22 SSH, 25 SMTP (465 SMTPS), 53 DNS, 3306 MySQL, 27017 MongoDB, 6379 redis"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0022",
@@ -111,7 +111,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0023",
@@ -164,7 +164,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0024",
@@ -228,7 +228,7 @@
   "verify": {
    "mode": "truth"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0025",
@@ -282,7 +282,7 @@
    "mode": "manual",
    "reference": "Slide 300: when you type a URL the browser performs GET requests, POST if it comes from a form"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0026",
@@ -335,7 +335,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0027",
@@ -384,7 +384,7 @@
    "mode": "manual",
    "reference": "Slide 295 (status in the HTTP response); standard HTTP status classes (RFC 9110 section 15)"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0028",
@@ -443,7 +443,7 @@
    "mode": "truth",
    "probe_template": "from http import HTTPStatus\ncode, phrase = __OPTION__.split(' ', 1)\nprint(HTTPStatus(int(code)).phrase == phrase)"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0029",
@@ -503,7 +503,7 @@
    "probe_template": "print(400 <= int(__OPTION__) < 500)",
    "note": "4xx = client error class (RFC 9110 section 15.5)"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0030",
@@ -553,7 +553,7 @@
    "mode": "manual",
    "reference": "Slide 295 'HTTP Response': headers, status, full HTML of the page"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0031",
@@ -613,7 +613,7 @@
    "mode": "manual",
    "reference": "Slide 294 (request headers Host, User-Agent, Accept-Language) vs slide 295 (response headers Set-Cookie, Server)"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0032",
@@ -662,7 +662,7 @@
    "mode": "manual",
    "reference": "Slide 295: response headers 'Content-Type: text/html; charset=utf-8', 'Content-Encoding: gzip'"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0033",
@@ -711,7 +711,7 @@
    "mode": "manual",
    "reference": "Slide 297 'HTML rendering': AJAX calls are asynchronous http requests sent from javascript"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0034",
@@ -761,7 +761,7 @@
    "mode": "manual",
    "reference": "Slide 297 'The browser now turns this html string into a nice webpage'; slide 301 (no rendering in wget/curl)"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0035",
@@ -811,7 +811,7 @@
    "mode": "manual",
    "reference": "Slide 294 'HTTP Request': contains the type of request GET, POST, PUT...; slide 300"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0036",
@@ -853,7 +853,7 @@
   "correct": [
    "a"
   ],
-  "explanation": "The handler raises ZeroDivisionError. Flask catches exceptions raised in handlers and answers with **500 Internal Server Error** - a server-side error; the client receives a normal (error) response and does not crash.",
+  "explanation": "The handler raises ZeroDivisionError. Flask catches exceptions raised in handlers and answers with **500 Internal Server Error** - a server-side error. Flask logs the traceback (on stderr), but the program itself does not crash: the client receives a normal (error) response and the print shows 500.",
   "distractor_notes": {
    "b": "The route exists: 404 would mean that no route matches the path.",
    "c": "The handler never returns a value, so there is no successful response.",
@@ -867,7 +867,7 @@
    "mode": "output",
    "setup": "import logging\nlogging.disable(logging.CRITICAL)"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0037",
@@ -919,7 +919,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0038",
@@ -969,7 +969,7 @@
    "mode": "manual",
    "reference": "Slide 297: other HTTP requests are sent during rendering (images, AJAX); slide 296 (packets)"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0039",
@@ -1023,7 +1023,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S8-0040",
@@ -1078,6 +1078,6 @@
    "probe_template": "print((__OPTION_RAW__) == 200)",
    "note": "The Response is built offline (no network), as requests.get would return it for a 200 answer."
   },
-  "reviewed": 1
+  "reviewed": 2
  }
 ]

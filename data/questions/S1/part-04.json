@@ -51,7 +51,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0072",
@@ -105,7 +105,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0073",
@@ -156,7 +156,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0074",
@@ -207,7 +207,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0075",
@@ -260,7 +260,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0076",
@@ -315,7 +315,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0077",
@@ -368,7 +368,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0078",
@@ -421,7 +421,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0079",
@@ -473,7 +473,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0080",
@@ -527,7 +527,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0081",
@@ -588,7 +588,7 @@
    "setup": "",
    "probe_template": "def _run(age):\n    ns = {'age': age}\n    exec(__OPTION__, ns)\n    return ns.get('status')\ntry:\n    print(_run(20) == 'adult' and _run(10) == 'minor')\nexcept SyntaxError:\n    print(False)"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0082",
@@ -642,7 +642,7 @@
    "setup": "",
    "probe_template": "try:\n    compile('if x:\\n    pass\\n' + __OPTION__ + ' y:\\n    pass\\n', 'q', 'exec')\n    print(True)\nexcept SyntaxError:\n    print(False)"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0083",
@@ -704,7 +704,7 @@
    "setup": "x = 4",
    "probe_template": "import io, contextlib\n_buf = io.StringIO()\ntry:\n    with contextlib.redirect_stdout(_buf):\n        exec(__OPTION__, globals())\n    _ok = _buf.getvalue() == 'yes\\n'\nexcept Exception:\n    _ok = False\nprint(_ok)"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0084",
@@ -758,7 +758,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0085",
@@ -812,7 +812,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0086",
@@ -869,7 +869,7 @@
    "mode": "truth",
    "setup": ""
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0087",
@@ -920,7 +920,7 @@
    "mode": "manual",
    "reference": "Slide 10 (interpreted, garbage collected, multi paradigm); slides 26 and 62 (typing is dynamic/implicit, no need to declare variables)"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0088",
@@ -970,7 +970,7 @@
    "mode": "manual",
    "reference": "Slide 18 (pip = Pip Installs Packages, pypi.org); slide 21 (pip is a console command, not a python command)"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0089",
@@ -1023,7 +1023,7 @@
   "verify": {
    "mode": "output"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0090",
@@ -1073,7 +1073,7 @@
    "mode": "manual",
    "reference": "Slide 19 (notebooks: cells of 2 kinds, code and text, displayed in the web browser, the jupyter application is a web server)"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0091",
@@ -1121,7 +1121,7 @@
    "mode": "manual",
    "reference": "Slide 9 (history: creation by Guido van Rossum, 1991 first public release, 2000 Python 2.0, 2008 Python 3.0)"
   },
-  "reviewed": 1
+  "reviewed": 2
  },
  {
   "id": "S1-0092",
@@ -1177,6 +1177,6 @@
    "mode": "truth",
    "setup": "x = 1\nx = 'one'\nA = isinstance(x, str)\nB = 2 ** 100 == 1267650600228229401496703205376\ntry:\n    compile('if True:\\nprint(1)\\n', 'q', 'exec')\n    C = False\nexcept IndentationError:\n    C = True\nALL = A and B and C"
   },
-  "reviewed": 1
+  "reviewed": 2
  }
 ]
