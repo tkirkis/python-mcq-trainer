@@ -1,0 +1,1245 @@
+[
+  {
+    "id": "S2-0001",
+    "chapter": "S2",
+    "topic": "lists",
+    "tags": [
+      "append",
+      "len",
+      "nested-list"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "bands = ['Queen', 'Abba']\nbands.append(['Blur', 'Oasis', 'Muse'])\nprint(len(bands))",
+    "options": [
+      {
+        "id": "a",
+        "text": "5",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "TypeError",
+        "out": "!TypeError"
+      },
+      {
+        "id": "c",
+        "text": "2",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "3",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "`append` adds its argument as **one** element, even when that argument is a list. `bands` becomes `['Queen', 'Abba', ['Blur', 'Oasis', 'Muse']]`, which has 3 elements.",
+    "distractor_notes": {
+      "a": "That would be the result of `extend`, which adds the elements one by one.",
+      "b": "append accepts any object, including a list.",
+      "c": "append does modify the list in place: one element is added."
+    },
+    "slides": [
+      88
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0002",
+    "chapter": "S2",
+    "topic": "lists",
+    "tags": [
+      "append",
+      "extend"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "a = [1, 2]\nb = [1, 2]\na.append([3, 4])\nb.extend([3, 4])\nprint(a, b)",
+    "options": [
+      {
+        "id": "a",
+        "text": "[1, 2, 3, 4] [1, 2, 3, 4]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[1, 2, [3, 4]] [1, 2, [3, 4]]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[1, 2, [3, 4]] [1, 2, 3, 4]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[1, 2, 3, 4] [1, 2, [3, 4]]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "`append(x)` adds x as a single element (here a nested list), while `extend(iterable)` adds each element of the iterable at the end of the list.",
+    "distractor_notes": {
+      "a": "Treats append like extend.",
+      "b": "Treats extend like append.",
+      "d": "Swaps the two behaviours."
+    },
+    "slides": [
+      88
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0003",
+    "chapter": "S2",
+    "topic": "lists",
+    "tags": [
+      "extend",
+      "string"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "letters = ['x']\nletters.extend('yz')\nprint(letters)",
+    "options": [
+      {
+        "id": "a",
+        "text": "['x', 'y', 'z']",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "['x', 'yz']",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "['xyz']",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "TypeError",
+        "out": "!TypeError"
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "`extend` iterates over its argument; iterating over the string `'yz'` gives `'y'` then `'z'`, so both characters are added as separate elements.",
+    "distractor_notes": {
+      "b": "That is what `append('yz')` would give.",
+      "c": "Lists are not concatenated like strings; the elements stay separate.",
+      "d": "Any iterable, including a string, is accepted by extend."
+    },
+    "slides": [
+      88
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0004",
+    "chapter": "S2",
+    "topic": "lists",
+    "tags": [
+      "pop"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "nums = [10, 20, 30, 40]\nx = nums.pop()\ny = nums.pop(0)\nprint(x, y, nums)",
+    "options": [
+      {
+        "id": "a",
+        "text": "10 40 [20, 30]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "40 10 [20, 30]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "None None [20, 30]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "40 10 [10, 20, 30, 40]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "`pop()` without argument removes **and returns** the last element (40); `pop(0)` removes and returns the element at index 0 (10). The list is left with `[20, 30]`.",
+    "distractor_notes": {
+      "a": "pop() defaults to the last index (-1), not the first.",
+      "c": "pop returns the removed element; it does not return None (unlike append or sort).",
+      "d": "pop removes the element from the list, it does not just read it."
+    },
+    "slides": [
+      88
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0005",
+    "chapter": "S2",
+    "topic": "lists",
+    "tags": [
+      "remove"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Find the output of the code?",
+    "code": "vals = [3, 1, 3, 2, 3]\nvals.remove(3)\nprint(vals)",
+    "options": [
+      {
+        "id": "a",
+        "text": "[1, 2]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[3, 1, 3, 3]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[3, 1, 3, 2]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[1, 3, 2, 3]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "`remove(x)` deletes only the **first** element equal to x. Its argument is a value, not an index.",
+    "distractor_notes": {
+      "a": "remove does not delete every occurrence; you would need a loop or a comprehension.",
+      "b": "That would be `del vals[3]` or `vals.pop(3)`: remove takes a value, not an index.",
+      "c": "remove searches from the left, not from the end."
+    },
+    "slides": [
+      88
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0006",
+    "chapter": "S2",
+    "topic": "lists",
+    "tags": [
+      "remove",
+      "ValueError"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What happens when the following code is run?",
+    "code": "fruits = ['apple', 'pear']\nfruits.remove('kiwi')\nprint(fruits)",
+    "options": [
+      {
+        "id": "a",
+        "text": "ValueError",
+        "out": "!ValueError"
+      },
+      {
+        "id": "b",
+        "text": "KeyError",
+        "out": "!KeyError"
+      },
+      {
+        "id": "c",
+        "text": "['apple', 'pear']",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "IndexError",
+        "out": "!IndexError"
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "`list.remove(x)` raises **ValueError** when x is not in the list. (For sets, `remove` raises KeyError; for lists it is ValueError.)",
+    "distractor_notes": {
+      "b": "KeyError is raised by dicts and by set.remove, not by list.remove.",
+      "c": "list.remove does not silently ignore a missing value.",
+      "d": "IndexError is for a bad position (e.g. `pop(10)`), not for a missing value."
+    },
+    "slides": [
+      88
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0007",
+    "chapter": "S2",
+    "topic": "lists",
+    "tags": [
+      "sort",
+      "None"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "nums = [3, 1, 2]\nresult = nums.sort()\nprint(result, nums)",
+    "options": [
+      {
+        "id": "a",
+        "text": "[1, 2, 3] [1, 2, 3]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[1, 2, 3] [3, 1, 2]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "None [1, 2, 3]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "None [3, 1, 2]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "`list.sort()` sorts the list **in place** and returns None. Use `sorted(nums)` to get a new sorted list.",
+    "distractor_notes": {
+      "a": "sort does not return the list.",
+      "b": "That is the behaviour of sorted(nums): new list, original unchanged.",
+      "d": "The list itself is sorted in place."
+    },
+    "slides": [
+      87,
+      88
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0008",
+    "chapter": "S2",
+    "topic": "lists",
+    "tags": [
+      "sorted",
+      "reverse"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "a = [5, 2, 9]\nb = sorted(a)\na.reverse()\nprint(a, b)",
+    "options": [
+      {
+        "id": "a",
+        "text": "[9, 5, 2] [2, 5, 9]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[9, 2, 5] [2, 5, 9]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[5, 2, 9] [2, 5, 9]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[9, 2, 5] [9, 2, 5]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "`sorted(a)` returns a **new** sorted list and leaves a unchanged. `a.reverse()` reverses a in place (it does not sort): `[5, 2, 9]` becomes `[9, 2, 5]`.",
+    "distractor_notes": {
+      "a": "reverse() only flips the current order; it does not sort in descending order.",
+      "c": "reverse() modifies the list in place.",
+      "d": "b is a separate list created by sorted(); later changes to a do not affect it."
+    },
+    "slides": [
+      87,
+      88
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0009",
+    "chapter": "S2",
+    "topic": "lists",
+    "tags": [
+      "insert"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "x = [1, 2, 3]\nx.insert(1, 9)\nx.insert(10, 7)\nprint(x)",
+    "options": [
+      {
+        "id": "a",
+        "text": "[1, 9, 2, 3, 7]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[1, 2, 9, 3, 7]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "IndexError",
+        "out": "!IndexError"
+      },
+      {
+        "id": "d",
+        "text": "[1, 9, 3, 7]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "`insert(i, v)` puts v **before** the element at index i, so 9 lands at index 1. An index beyond the end does not raise: the value is simply added at the end.",
+    "distractor_notes": {
+      "b": "insert places the value at index i (before the current element i), not after it.",
+      "c": "insert never raises IndexError: a too large index means 'add at the end'.",
+      "d": "insert shifts the following elements to the right; it never overwrites one."
+    },
+    "slides": [
+      88
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0010",
+    "chapter": "S2",
+    "topic": "lists",
+    "tags": [
+      "index",
+      "count"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "letters = ['a', 'b', 'c', 'b']\nprint(letters.index('b'), letters.count('b'))",
+    "options": [
+      {
+        "id": "a",
+        "text": "1 1",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "3 2",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "2 2",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "1 2",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "`index(x)` returns the position of the **first** occurrence (indices start at 0) and `count(x)` counts all occurrences.",
+    "distractor_notes": {
+      "a": "count counts every occurrence.",
+      "b": "index returns the first occurrence, not the last.",
+      "c": "Indices start at 0, not 1."
+    },
+    "slides": [
+      87,
+      88
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0011",
+    "chapter": "S2",
+    "topic": "lists",
+    "tags": [
+      "repetition",
+      "operator"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "print([0, 1] * 3)",
+    "options": [
+      {
+        "id": "a",
+        "text": "[0, 3]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[0, 1, 0, 1, 0, 1]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[[0, 1], [0, 1], [0, 1]]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "TypeError",
+        "out": "!TypeError"
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "`list * n` repeats the elements of the list n times in a new flat list. It is repetition, not element-wise multiplication.",
+    "distractor_notes": {
+      "a": "Lists are not vectors: * does not multiply each element.",
+      "c": "Repetition concatenates copies of the elements; it does not nest the list.",
+      "d": "list * int is allowed (repetition); list * list or list * float would fail."
+    },
+    "slides": [
+      87
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0012",
+    "chapter": "S2",
+    "topic": "lists",
+    "tags": [
+      "concatenation",
+      "TypeError"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "nums = [1, 2, 3]\nnums = nums + 4\nprint(nums)",
+    "options": [
+      {
+        "id": "a",
+        "text": "[1, 2, 3, 4]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[5, 6, 7]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "TypeError",
+        "out": "!TypeError"
+      },
+      {
+        "id": "d",
+        "text": "[1, 2, 3, [4]]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "`+` between lists concatenates two **lists**; a list and an int cannot be added, so Python raises TypeError. Write `nums + [4]` or `nums.append(4)`.",
+    "distractor_notes": {
+      "a": "That needs `nums + [4]` (or append).",
+      "b": "+ is not element-wise for lists.",
+      "d": "+ does not wrap the int into a list."
+    },
+    "slides": [
+      88
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0013",
+    "chapter": "S2",
+    "topic": "lists",
+    "tags": [
+      "in",
+      "nested-list",
+      "len"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "data = [1, [2, 3], 4]\nprint(2 in data, [2, 3] in data, len(data))",
+    "options": [
+      {
+        "id": "a",
+        "text": "True True 3",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "True False 4",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "False True 3",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "False False 4",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "`in` only checks the top-level elements: 2 is inside the nested list but is not itself an element of data, whereas `[2, 3]` is. The nested list counts as one element, so `len(data)` is 3.",
+    "distractor_notes": {
+      "a": "in does not search inside nested lists.",
+      "b": "The nested list is a single element: len is 3 and [2, 3] is found.",
+      "d": "len counts top-level elements only (3), and [2, 3] is one of them."
+    },
+    "slides": [
+      87,
+      88
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0014",
+    "chapter": "S2",
+    "topic": "lists",
+    "tags": [
+      "insert",
+      "negative-index",
+      "none-of-the-above"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "nums = [1, 2, 3]\nnums.insert(-1, 4)\nprint(nums)",
+    "options": [
+      {
+        "id": "a",
+        "text": "[1, 2, 3, 4]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[4, 1, 2, 3]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "IndexError",
+        "out": "!IndexError"
+      },
+      {
+        "id": "d",
+        "text": "None of the above",
+        "out": null
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "`insert(i, x)` inserts x **before** the element currently at index i. Index -1 is the last element (3), so 4 goes just before it and the output is `[1, 2, 4, 3]` - which is not listed.",
+    "distractor_notes": {
+      "a": "Adding at the end needs `append(4)` (or `insert(len(nums), 4)`); -1 means 'before the last element'.",
+      "b": "That is `insert(0, 4)`.",
+      "c": "Negative indices are allowed in insert."
+    },
+    "slides": [
+      88
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "expected_output": "[1, 2, 4, 3]",
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0015",
+    "chapter": "S2",
+    "topic": "lists",
+    "tags": [
+      "methods",
+      "None",
+      "in-place"
+    ],
+    "type": "multi",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Which of the following calls modify `lst` in place **and** return `None`? Select all that apply.",
+    "code": "lst = [3, 1, 2]",
+    "options": [
+      {
+        "id": "a",
+        "text": "lst.append(4)",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "lst.sort()",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "lst.pop()",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "lst.index(1)",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "lst.reverse()",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "b",
+      "e"
+    ],
+    "explanation": "append, sort and reverse are mutating methods that return None. `pop()` also changes the list but returns the removed element (2); `index(1)` returns a position (1) and does not change the list.",
+    "distractor_notes": {
+      "c": "pop changes the list but returns the removed element, not None.",
+      "d": "index only reads the list and returns a position."
+    },
+    "slides": [
+      88
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": "lst = [3, 1, 2]",
+      "probe_template": "before = list(lst)\nr = __OPTION_RAW__\nprint(r is None and lst != before)"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0016",
+    "chapter": "S2",
+    "topic": "lists",
+    "tags": [
+      "extend",
+      "methods",
+      "conceptual"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "Which one of the following methods adds every element of an iterable at the end of a list?",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "list.append(iterable)",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "list.extend(iterable)",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "list.insert(iterable)",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "list.add(iterable)",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "`extend(iterable)` appends each element of the iterable. `append` would add the iterable as one (nested) element, `insert` needs an index and a value, and lists have no `add` method (that is a set method).",
+    "distractor_notes": {
+      "a": "append adds the whole iterable as one element: [1, [2, 3]].",
+      "c": "insert takes two arguments (index, value) and inserts a single element.",
+      "d": "add is a set method; on a list it raises AttributeError."
+    },
+    "slides": [
+      88
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": "list = [1]\niterable = [2, 3]",
+      "probe_template": "try:\n    exec(__OPTION__)\nexcept Exception:\n    pass\nprint(list == [1, 2, 3])"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0017",
+    "chapter": "S2",
+    "topic": "lists",
+    "tags": [
+      "operators",
+      "in",
+      "len"
+    ],
+    "type": "multi",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Which of the following expressions evaluate to `True`? Select all that apply.",
+    "code": "x = [1, 2, 3]",
+    "options": [
+      {
+        "id": "a",
+        "text": "x + [4] == [1, 2, 3, 4]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "x * 2 == [2, 4, 6]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "len([x, x]) == 6",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[1, 2] in x",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "x[len(x) - 1] == 3",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "e"
+    ],
+    "explanation": "`+` concatenates lists and `x[len(x) - 1]` is the last element. `x * 2` repeats the list (`[1, 2, 3, 1, 2, 3]`), `[x, x]` is a list of 2 elements, and `in` looks for one element equal to `[1, 2]`, not for a sub-sequence.",
+    "distractor_notes": {
+      "b": "* repeats a list, it does not multiply the elements.",
+      "c": "[x, x] contains two elements (two references to x).",
+      "d": "in tests membership of a single element; [1, 2] is not an element of x."
+    },
+    "slides": [
+      87,
+      88
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": "x = [1, 2, 3]",
+      "probe_template": "print((__OPTION_RAW__) is True)"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0018",
+    "chapter": "S2",
+    "topic": "lists",
+    "tags": [
+      "exceptions",
+      "IndexError",
+      "ValueError"
+    ],
+    "type": "multi",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "Which of the following statements raise an exception? Select all that apply.",
+    "code": "lst = [4, 5, 6]",
+    "options": [
+      {
+        "id": "a",
+        "text": "lst.remove(7)",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "lst.pop(3)",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "lst.insert(5, 0)",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "lst[1:10]",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "lst.index(4)",
+        "mono": true
+      },
+      {
+        "id": "f",
+        "text": "lst[-4]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "b",
+      "f"
+    ],
+    "explanation": "`remove(7)` raises ValueError (7 is absent); `pop(3)` and `lst[-4]` raise IndexError (valid indices are -3 to 2). `insert` with a large index adds at the end, a slice never raises for out-of-range bounds, and `index(4)` returns 0.",
+    "distractor_notes": {
+      "c": "insert with an index past the end simply adds the value at the end.",
+      "d": "Slices clip out-of-range bounds: lst[1:10] is [5, 6].",
+      "e": "4 is present at index 0, so index returns 0."
+    },
+    "slides": [
+      88,
+      90
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": "lst = [4, 5, 6]",
+      "probe_template": "try:\n    __OPTION_RAW__\n    print(False)\nexcept Exception:\n    print(True)"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0019",
+    "chapter": "S2",
+    "topic": "lists",
+    "tags": [
+      "nested-loops",
+      "append",
+      "hands-on"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "suits = ['S', 'H']\nranks = ['A', 'K', 'Q']\ndeck = []\nfor s in suits:\n    for r in ranks:\n        deck.append(r + s)\nprint(len(deck), deck[3])",
+    "options": [
+      {
+        "id": "a",
+        "text": "6 AH",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "6 KH",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "6 QS",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "5 AH",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "The outer loop runs over suits and the inner loop over ranks, so deck is `['AS', 'KS', 'QS', 'AH', 'KH', 'QH']` (2 x 3 = 6 cards). Index 3 is the fourth card, `'AH'`.",
+    "distractor_notes": {
+      "b": "That would be the order if ranks were the outer loop (AS, AH, KS, KH...).",
+      "c": "deck[3] is the 4th element (indices start at 0), not the 3rd.",
+      "d": "2 suits x 3 ranks = 6 cards."
+    },
+    "slides": [
+      89
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0020",
+    "chapter": "S2",
+    "topic": "lists",
+    "tags": [
+      "pop",
+      "append",
+      "insert"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "Analyze the code. What does it print?",
+    "code": "q = [5, 6, 7, 8]\nq.append(q.pop(0))\nq.insert(0, q.pop())\nprint(q)",
+    "options": [
+      {
+        "id": "a",
+        "text": "[5, 6, 7, 8]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[6, 7, 8, 5]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[5, 5, 6, 7, 8, 5]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "TypeError",
+        "out": "!TypeError"
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "`q.pop(0)` removes and returns 5, which is appended: `[6, 7, 8, 5]`. Then `q.pop()` removes and returns the last element (5 again) and `insert(0, ...)` puts it back in front: `[5, 6, 7, 8]`.",
+    "distractor_notes": {
+      "b": "Forgets that the third line moves the last element back to the front.",
+      "c": "pop removes the element; it does not leave a copy behind.",
+      "d": "pop returns the removed element, so append and insert receive an int, not None."
+    },
+    "slides": [
+      88
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0021",
+    "chapter": "S2",
+    "topic": "program-flow",
+    "tags": [
+      "call-stack",
+      "mutual-recursion"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "def f(x):\n    print(x, end=' ')\n    if x == 1:\n        return 1\n    elif x % 2 == 0:\n        return g(x)\n    else:\n        return h(x)\n\ndef g(x):\n    return f(x // 2)\n\ndef h(x):\n    return f(3 * x + 1)\n\nf(3)",
+    "options": [
+      {
+        "id": "a",
+        "text": "3 10 5 16 8 4 2",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "3 10 5 16 8 4 2 1",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "3",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "NameError",
+        "out": "!NameError"
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "f, g and h call each other: odd numbers go through h (3x + 1), even numbers through g (x // 2), and the chain stops when f receives 1. g and h are defined before `f(3)` runs, so the names exist when f needs them. Every value, including the final 1, is printed by f.",
+    "distractor_notes": {
+      "a": "f(1) is called too, and it prints 1 before returning.",
+      "c": "The return statements call g or h, so execution continues through several calls.",
+      "d": "Names inside a function body are looked up when the function runs; g and h exist when f(3) is executed."
+    },
+    "slides": [
+      83,
+      84
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0022",
+    "chapter": "S2",
+    "topic": "program-flow",
+    "tags": [
+      "execution-flow"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "def first():\n    print('A')\n    second()\n    print('B')\n\ndef second():\n    print('C')\n\nprint('D')\nfirst()",
+    "options": [
+      {
+        "id": "a",
+        "text": "A\nC\nB\nD",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "D\nA\nC\nB",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "D\nA\nB\nC",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "A\nB\nC\nD",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "`def` only defines the functions; nothing is printed until they are called. The program prints D, then calls first(), which prints A, calls second() (C) and **returns** to finish with B.",
+    "distractor_notes": {
+      "a": "Function bodies do not run when they are defined; D is printed first.",
+      "c": "second() is called between the two prints of first(), so C comes before B.",
+      "d": "The execution order follows the calls, not the order of the text."
+    },
+    "slides": [
+      83,
+      84
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0023",
+    "chapter": "S2",
+    "topic": "program-flow",
+    "tags": [
+      "call-stack",
+      "LIFO",
+      "recursion"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "def down(n):\n    if n == 0:\n        return\n    print(n, end=' ')\n    down(n - 1)\n    print(n, end=' ')\n\ndown(3)",
+    "options": [
+      {
+        "id": "a",
+        "text": "1 2 3 3 2 1",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "3 2 1 3 2 1",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "3 2 1",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "3 2 1 1 2 3",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "Each call prints n, then waits for the recursive call to finish before printing n again. Calls are stacked (Last In, First Out): the last call started (n=1) is the first to resume, so the second prints come out in reverse order: 1 2 3.",
+    "distractor_notes": {
+      "a": "The first print happens before the recursive call, so 3 is printed first.",
+      "b": "Pending calls resume in reverse order (last in, first out).",
+      "c": "After the recursive call returns, each call continues and executes its second print."
+    },
+    "slides": [
+      84
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  }
+]

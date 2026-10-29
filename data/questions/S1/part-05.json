@@ -1,0 +1,1204 @@
+[
+ {
+  "id": "S1-0093",
+  "chapter": "S1",
+  "topic": "loops",
+  "tags": [
+   "range",
+   "for"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "for i in range(2, 6):\n    print(i, end=\" \")",
+  "options": [
+   {
+    "id": "a",
+    "text": "2 3 4 5",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "2 3 4 5 6",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "2 4",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "3 4 5",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "`range(start, stop)` starts at `start` (included) and stops **before** `stop`: 2, 3, 4, 5. `end=' '` replaces the newline by a space.",
+  "distractor_notes": {
+   "b": "The stop value 6 is excluded.",
+   "c": "The default step is 1, not 2.",
+   "d": "The start value 2 is included."
+  },
+  "slides": [
+   36,
+   37,
+   39
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0094",
+  "chapter": "S1",
+  "topic": "loops",
+  "tags": [
+   "range",
+   "negative-step"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "print(list(range(10, 0, -3)))",
+  "options": [
+   {
+    "id": "a",
+    "text": "[10, 7, 4, 1]",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "[10, 7, 4]",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "[7, 4, 1]",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "[]",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "With a negative step, range counts down from start and stops before reaching stop: 10, 7, 4, 1 (the next value, -2, would be past 0).",
+  "distractor_notes": {
+   "b": "1 is still greater than the stop value 0, so it is included.",
+   "c": "The start value 10 is included.",
+   "d": "A negative step makes a decreasing range non-empty when start > stop."
+  },
+  "slides": [
+   36,
+   37,
+   39
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0095",
+  "chapter": "S1",
+  "topic": "loops",
+  "tags": [
+   "range",
+   "empty-range"
+  ],
+  "type": "multi",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "Which of the following ranges are **empty** (a `for` loop over them runs zero times)? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "range(1, 5, -1)",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "range(0, 1)",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "range(0)",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "range(5, 1)",
+    "mono": true
+   },
+   {
+    "id": "e",
+    "text": "range(5, 1, -1)",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a",
+   "c",
+   "d"
+  ],
+  "explanation": "With the default step 1, a range is empty when start >= stop. With a negative step it is empty when start <= stop. range(5, 1, -1) is 5, 4, 3, 2 and range(0, 1) is just 0.",
+  "distractor_notes": {
+   "b": "Contains one value, 0 (the stop 1 is excluded).",
+   "e": "A negative step counts down: 5, 4, 3, 2."
+  },
+  "slides": [
+   36,
+   37,
+   39
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "",
+   "probe_template": "print(len(__OPTION_RAW__) == 0)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0096",
+  "chapter": "S1",
+  "topic": "loops",
+  "tags": [
+   "while",
+   "off-by-one"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "i = 0\ntotal = 0\nwhile i < 5:\n    i += 1\n    total += i\nprint(total)",
+  "options": [
+   {
+    "id": "a",
+    "text": "21",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "10",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "15",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "5",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "i is incremented **before** being added, so the values added are 1, 2, 3, 4, 5 (when i reaches 5 the condition fails): 15.",
+  "distractor_notes": {
+   "a": "The loop stops when i == 5; 6 is never added.",
+   "b": "That is 0+1+2+3+4: it would be the result if total += i came before i += 1.",
+   "d": "total accumulates all the values, it is not just the last one."
+  },
+  "slides": [
+   36,
+   37,
+   39
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0097",
+  "chapter": "S1",
+  "topic": "loops",
+  "tags": [
+   "for",
+   "strings"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "for ch in \"abc\":\n    print(ch * 2, end=\"\")",
+  "options": [
+   {
+    "id": "a",
+    "text": "abc2",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "abcabc",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "aabbcc",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "aa bb cc",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "A for loop over a string visits its characters one by one. Each character is repeated twice and printed with an empty end, so everything is on one line with no separator.",
+  "distractor_notes": {
+   "a": "str * int repeats the string.",
+   "b": "That would be 'abc' * 2; here each character is doubled separately.",
+   "d": "end='' adds nothing between the prints."
+  },
+  "slides": [
+   37
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0098",
+  "chapter": "S1",
+  "topic": "loops",
+  "tags": [
+   "for",
+   "loop-variable"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "for i in range(3):\n    x = i * 2\nprint(i, x)",
+  "options": [
+   {
+    "id": "a",
+    "text": "2 4",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "NameError",
+    "out": "!NameError"
+   },
+   {
+    "id": "c",
+    "text": "3 6",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "3 4",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "A loop does not create a new scope: i and x still exist after the loop and keep the values of the last iteration (i = 2, x = 4).",
+  "distractor_notes": {
+   "b": "Variables assigned in a loop remain defined after it.",
+   "c": "range(3) stops at 2; i never takes the value 3.",
+   "d": "i ends at 2, not 3."
+  },
+  "slides": [
+   37
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0099",
+  "chapter": "S1",
+  "topic": "loops",
+  "tags": [
+   "while",
+   "hands-on",
+   "collatz"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "n = 6\nsteps = 0\nwhile n != 1:\n    if n % 2 == 0:\n        n = n // 2\n    else:\n        n = 3 * n + 1\n    steps += 1\nprint(steps)",
+  "options": [
+   {
+    "id": "a",
+    "text": "7",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "8",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "9",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "The loop never ends",
+    "out": "!Timeout"
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "Collatz sequence from 6: 6 -> 3 -> 10 -> 5 -> 16 -> 8 -> 4 -> 2 -> 1. That is 8 transitions, and the loop stops as soon as n == 1.",
+  "distractor_notes": {
+   "a": "Misses one step of the sequence.",
+   "c": "Counts the values (9) instead of the steps between them.",
+   "d": "The sequence reaches 1 and the condition n != 1 becomes False."
+  },
+  "slides": [
+   36,
+   55
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0100",
+  "chapter": "S1",
+  "topic": "loops",
+  "tags": [
+   "while",
+   "gcd",
+   "hands-on"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "a, b = 48, 18\nwhile b:\n    a, b = b, a % b\nprint(a)",
+  "options": [
+   {
+    "id": "a",
+    "text": "3",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "6",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "0",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "18",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "Euclid's algorithm: (48, 18) -> (18, 12) -> (12, 6) -> (6, 0). `while b:` stops when b is 0 (falsy), and a holds the GCD, 6.",
+  "distractor_notes": {
+   "a": "3 divides both, but it is not the greatest common divisor.",
+   "c": "0 is the final value of b, not of a.",
+   "d": "18 is only the starting value of b."
+  },
+  "slides": [
+   36,
+   53
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0101",
+  "chapter": "S1",
+  "topic": "loops",
+  "tags": [
+   "while",
+   "infinite-loop"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "n = 1\nwhile n != 10:\n    n += 2\nprint(n)",
+  "options": [
+   {
+    "id": "a",
+    "text": "10",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "9",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "The loop never stops (nothing is printed)",
+    "out": "!Timeout"
+   },
+   {
+    "id": "d",
+    "text": "11",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "n takes the odd values 1, 3, 5, 7, 9, 11, 13... and is never exactly 10, so `n != 10` stays True forever: infinite loop. Using `while n < 10:` would be safe.",
+  "distractor_notes": {
+   "a": "n is always odd; it jumps from 9 to 11.",
+   "b": "9 != 10 is True, so the loop continues.",
+   "d": "The loop does not stop at 11, because 11 != 10 is still True."
+  },
+  "slides": [
+   36,
+   39
+  ],
+  "verify": {
+   "mode": "output",
+   "timeout": 2
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0102",
+  "chapter": "S1",
+  "topic": "loops",
+  "tags": [
+   "nested-loops",
+   "range"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "count = 0\nfor i in range(3):\n    for j in range(i):\n        count += 1\nprint(count)",
+  "options": [
+   {
+    "id": "a",
+    "text": "6",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "9",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "0",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "3",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "The inner loop runs i times: 0 times for i = 0, once for i = 1, twice for i = 2. Total 0 + 1 + 2 = 3.",
+  "distractor_notes": {
+   "a": "That is 1 + 2 + 3: range(i) stops before i.",
+   "b": "Would be range(3) for the inner loop too (3 x 3).",
+   "c": "Only the first inner loop (range(0)) is empty."
+  },
+  "slides": [
+   37
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0103",
+  "chapter": "S1",
+  "topic": "loops",
+  "tags": [
+   "while",
+   "for",
+   "equivalence"
+  ],
+  "type": "multi",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Which of the following `while` loops print the same thing as `for i in range(1, 4): print(i)`? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "i = 1\nwhile i < 4:\n    print(i)\n    i += 1",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "i = 1\nwhile i <= 4:\n    print(i)\n    i += 1",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "i = 0\nwhile i < 3:\n    i += 1\n    print(i)",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "i = 1\nwhile i < 4:\n    i += 1\n    print(i)",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a",
+   "c"
+  ],
+  "explanation": "The for loop prints 1, 2, 3. A while loop needs an explicit counter: initialise it, test it, and update it. Where the increment is placed (before or after the print) shifts the printed values.",
+  "distractor_notes": {
+   "b": "`<= 4` also prints 4.",
+   "d": "The increment comes before the print: prints 2, 3, 4."
+  },
+  "slides": [
+   39
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "",
+   "probe_template": "import io, contextlib\n_buf = io.StringIO()\ntry:\n    with contextlib.redirect_stdout(_buf):\n        exec(__OPTION__, {})\n    _ok = _buf.getvalue() == '1\\n2\\n3\\n'\nexcept Exception:\n    _ok = False\nprint(_ok)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0104",
+  "chapter": "S1",
+  "topic": "loops",
+  "tags": [
+   "for",
+   "loop-variable",
+   "none-of-the-above"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "for i in range(3):\n    print(i, end=\" \")\n    i = 10",
+  "options": [
+   {
+    "id": "a",
+    "text": "0 10",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "The loop never ends",
+    "out": "!Timeout"
+   },
+   {
+    "id": "c",
+    "text": "0",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "None of the above",
+    "out": null
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "The program prints `0 1 2`. Assigning to the loop variable inside the body has no effect on the iteration: at each new iteration the for loop takes the next value from range(3) and rebinds i.",
+  "distractor_notes": {
+   "a": "i = 10 happens after the print, and the next iteration rebinds i anyway.",
+   "b": "A for loop over range(3) always performs exactly 3 iterations.",
+   "c": "Changing i does not stop the loop; the range drives it."
+  },
+  "slides": [
+   37
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "expected_output": "0 1 2",
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0105",
+  "chapter": "S1",
+  "topic": "loops",
+  "tags": [
+   "range",
+   "definition"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "Which statement about `range(start, stop)` is correct?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "`range(4, 1)` raises a ValueError because start is greater than stop.",
+    "probe": "try:\n    range(4, 1)\n    print(False)\nexcept ValueError:\n    print(True)"
+   },
+   {
+    "id": "b",
+    "text": "Both bounds are included: `range(1, 4)` gives 1, 2, 3, 4.",
+    "probe": "print(list(range(1, 4)) == [1, 2, 3, 4])"
+   },
+   {
+    "id": "c",
+    "text": "`start` is included and `stop` is excluded: `range(1, 4)` gives 1, 2, 3.",
+    "probe": "print(list(range(1, 4)) == [1, 2, 3])"
+   },
+   {
+    "id": "d",
+    "text": "When `start > stop`, the range automatically counts down: `range(4, 1)` gives 4, 3, 2.",
+    "probe": "print(list(range(4, 1)) == [4, 3, 2])"
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "range(start, stop) goes from start (included) up to stop (excluded) with step 1. If start >= stop the range is simply empty - no error. To count down you must give a negative step: range(4, 1, -1).",
+  "distractor_notes": {
+   "a": "An empty range is not an error.",
+   "b": "stop is excluded.",
+   "d": "The default step is +1, so range(4, 1) is empty; use range(4, 1, -1)."
+  },
+  "slides": [
+   37
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": ""
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0106",
+  "chapter": "S1",
+  "topic": "loops",
+  "tags": [
+   "nested-loops",
+   "hands-on"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "for i in range(1, 4):\n    line = \"\"\n    for j in range(1, 4):\n        line += str(i * j) + \" \"\n    print(line.strip())",
+  "options": [
+   {
+    "id": "a",
+    "text": "1 2 3\n2 4 6\n3 6 9",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "1 2 3\n2 4 6",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "1 2 3 4\n2 4 6 8\n3 6 9 12\n4 8 12 16",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "0 0 0\n0 1 2\n0 2 4",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "Both loops run over 1, 2, 3 (4 excluded). For each i a line with i*1, i*2, i*3 is built and printed: a 3x3 multiplication table.",
+  "distractor_notes": {
+   "b": "The outer loop has 3 iterations (1, 2, 3).",
+   "c": "range(1, 4) stops at 3.",
+   "d": "The ranges start at 1, not 0."
+  },
+  "slides": [
+   37,
+   47
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0107",
+  "chapter": "S1",
+  "topic": "loops",
+  "tags": [
+   "for",
+   "accumulator",
+   "strings"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "s = \"abc\"\nr = \"\"\nfor ch in s:\n    r = ch + r\nprint(r)",
+  "options": [
+   {
+    "id": "a",
+    "text": "cba",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "c",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "abc",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "a",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "Each character is put in **front** of what has been built so far: 'a', then 'ba', then 'cba'. This reverses the string.",
+  "distractor_notes": {
+   "b": "r is not overwritten by the last character: it is ch + r.",
+   "c": "Would be r = r + ch (appending at the end).",
+   "d": "r accumulates all the characters."
+  },
+  "slides": [
+   37
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0108",
+  "chapter": "S1",
+  "topic": "loops",
+  "tags": [
+   "for",
+   "hands-on",
+   "compound-interest"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "amount = 100\nfor year in range(3):\n    amount = amount * 1.1\nprint(round(amount))",
+  "options": [
+   {
+    "id": "a",
+    "text": "133",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "146",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "121",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "130",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "Compound interest: the amount is multiplied by 1.1 three times (range(3) = 0, 1, 2): 100 * 1.1 ** 3 = 133.1, rounded to 133.",
+  "distractor_notes": {
+   "b": "4 years: range(3) does not include 3.",
+   "c": "Only 2 years: range(3) gives 3 iterations.",
+   "d": "Simple interest (100 + 3 * 10): each year multiplies the new amount, not the initial one."
+  },
+  "slides": [
+   37,
+   48
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0109",
+  "chapter": "S1",
+  "topic": "imports-main",
+  "tags": [
+   "import",
+   "NameError",
+   "prefix"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "import math\nprint(sqrt(16))",
+  "options": [
+   {
+    "id": "a",
+    "text": "NameError",
+    "out": "!NameError"
+   },
+   {
+    "id": "b",
+    "text": "4",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "4.0",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "ImportError",
+    "out": "!ImportError"
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "`import math` only binds the name `math`. Its functions must be accessed with the module prefix: `math.sqrt(16)`. The bare name sqrt is not defined: NameError.",
+  "distractor_notes": {
+   "b": "sqrt returns a float anyway, and the call fails.",
+   "c": "That is what `math.sqrt(16)` (or `from math import sqrt`) would print.",
+   "d": "The import itself succeeds; it is the name sqrt that is missing."
+  },
+  "slides": [
+   41,
+   66,
+   67
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0110",
+  "chapter": "S1",
+  "topic": "imports-main",
+  "tags": [
+   "from-import",
+   "NameError",
+   "evaluation-order"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "from math import sqrt\nprint(sqrt(16), math.pi > 3)",
+  "options": [
+   {
+    "id": "a",
+    "text": "NameError",
+    "out": "!NameError"
+   },
+   {
+    "id": "b",
+    "text": "4.0 True",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "4.0, then NameError",
+    "out": "4.0\n!NameError"
+   },
+   {
+    "id": "d",
+    "text": "4 True",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "`from math import sqrt` binds only the name sqrt, not the name math. All arguments are evaluated **before** print is called, so `math.pi` raises NameError and nothing at all is printed.",
+  "distractor_notes": {
+   "b": "The name `math` is not defined by `from math import sqrt`.",
+   "c": "print never starts: its arguments are evaluated first and the second one fails.",
+   "d": "The call fails, and sqrt returns a float anyway."
+  },
+  "slides": [
+   41,
+   66,
+   67
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0111",
+  "chapter": "S1",
+  "topic": "imports-main",
+  "tags": [
+   "import-as",
+   "alias"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "import math as m\nprint(m.floor(3.7), m.ceil(3.2))",
+  "options": [
+   {
+    "id": "a",
+    "text": "3.0 4.0",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "NameError",
+    "out": "!NameError"
+   },
+   {
+    "id": "c",
+    "text": "3 4",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "4 3",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "`import math as m` binds the module to the alias m, so its members are reached as m.floor, m.ceil. floor rounds down (3), ceil rounds up (4); both return ints.",
+  "distractor_notes": {
+   "a": "math.floor and math.ceil return ints in Python 3.",
+   "b": "The alias m is defined by `as m`.",
+   "d": "floor rounds down and ceil rounds up, not the reverse."
+  },
+  "slides": [
+   41,
+   66,
+   67
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0112",
+  "chapter": "S1",
+  "topic": "imports-main",
+  "tags": [
+   "__name__",
+   "main-guard"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "The following file is run directly with `python script.py`. What does it print?",
+  "code": "def main():\n    print(\"main runs\")\n\nprint(__name__)\nif __name__ == \"__main__\":\n    main()",
+  "options": [
+   {
+    "id": "a",
+    "text": "__main__",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "main runs",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "script\nmain runs",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "__main__\nmain runs",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "When a file is executed as the main program, Python sets its `__name__` to the string '__main__'. So both the first print and the guarded call to main() run.",
+  "distractor_notes": {
+   "a": "The condition is True, so main() is called.",
+   "b": "print(__name__) is at top level and runs first.",
+   "c": "The module's file name is only used as __name__ when the file is imported."
+  },
+  "slides": [
+   67,
+   21
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0113",
+  "chapter": "S1",
+  "topic": "imports-main",
+  "tags": [
+   "__name__",
+   "main-guard",
+   "import-side-effects"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "Two files are in the same folder. What is printed when you run `python main.py`?",
+  "code": "# file mymod.py\nprint('loading', __name__)\nif __name__ == '__main__':\n    print('main block')\n\n# file main.py\nimport mymod\nprint('done')",
+  "options": [
+   {
+    "id": "a",
+    "text": "loading mymod\nmain block\ndone",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "loading mymod\ndone",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "loading __main__\nmain block\ndone",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "done",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "Importing a module executes its top-level code once, so 'loading' is printed - with `__name__` equal to the module name 'mymod'. The guarded block does not run on import, because __name__ is not '__main__'. That is exactly why the guard is used.",
+  "distractor_notes": {
+   "a": "The `if __name__ == '__main__'` block is skipped when the file is imported.",
+   "c": "Only the file run directly gets __name__ == '__main__'; an imported module gets its own name.",
+   "d": "import runs the module's top-level statements."
+  },
+  "slides": [
+   66,
+   67
+  ],
+  "verify": {
+   "mode": "output",
+   "code": "import sys\nsys.path.insert(0, '.')\nimport mymod\nprint('done')",
+   "files": {
+    "mymod.py": "print('loading', __name__)\nif __name__ == '__main__':\n    print('main block')\n"
+   }
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0114",
+  "chapter": "S1",
+  "topic": "imports-main",
+  "tags": [
+   "import",
+   "from-import",
+   "alias"
+  ],
+  "type": "multi",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Which of the following snippets print `3.14`? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "import math\nprint(round(math.pi, 2))",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "import math as m\nprint(round(math.pi, 2))",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "from math import *\nprint(round(pi, 2))",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "from math import pi\nprint(round(pi, 2))",
+    "mono": true
+   },
+   {
+    "id": "e",
+    "text": "import math.pi\nprint(round(pi, 2))",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a",
+   "c",
+   "d"
+  ],
+  "explanation": "`import math` needs the prefix `math.`; `from math import pi` (or `*`) binds pi directly. With an alias, only the alias is defined. `import` only accepts modules, not their attributes.",
+  "distractor_notes": {
+   "b": "With `import math as m`, only the name m is bound: math.pi raises NameError.",
+   "e": "math.pi is not a module: ModuleNotFoundError (use `from math import pi`)."
+  },
+  "slides": [
+   41,
+   66,
+   67
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "",
+   "probe_template": "import io, contextlib\n_buf = io.StringIO()\ntry:\n    with contextlib.redirect_stdout(_buf):\n        exec(__OPTION__, {})\n    _ok = _buf.getvalue() == '3.14\\n'\nexcept Exception:\n    _ok = False\nprint(_ok)"
+  },
+  "reviewed": 1
+ }
+]

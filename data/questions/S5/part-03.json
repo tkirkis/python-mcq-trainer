@@ -1,0 +1,1138 @@
+[
+  {
+    "id": "S5-0041",
+    "chapter": "S5",
+    "topic": "special-methods",
+    "tags": [
+      "__iter__",
+      "generator",
+      "iterable"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "class Countdown:\n    def __init__(self, start):\n        self.start = start\n    def __iter__(self):\n        n = self.start\n        while n > 0:\n            yield n\n            n -= 1\n\nc = Countdown(3)\nprint(list(c), list(c))",
+    "options": [
+      {
+        "id": "a",
+        "text": "TypeError",
+        "mono": true,
+        "out": "!TypeError"
+      },
+      {
+        "id": "b",
+        "text": "[3, 2, 1] []",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[1, 2, 3] [1, 2, 3]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[3, 2, 1] [3, 2, 1]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "`list(c)` calls `iter(c)`, i.e. `c.__iter__()`. Here `__iter__` contains `yield`, so every call creates a new, fresh generator: the object can be iterated as many times as you want. Only a single generator or iterator object gets exhausted.",
+    "distractor_notes": {
+      "b": "Exhaustion concerns one generator; `__iter__` builds a new one on each `list(c)`.",
+      "c": "The loop counts down from start.",
+      "a": "Defining `__iter__` makes the object iterable."
+    },
+    "slides": [
+      192,
+      193
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0042",
+    "chapter": "S5",
+    "topic": "special-methods",
+    "tags": [
+      "dunder-names",
+      "__str__",
+      "__getitem__",
+      "__call__"
+    ],
+    "type": "multi",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "`x` and `y` are instances of a class that defines five methods: `__str__`, `__getitem__`, `__call__`, `__length__` and `__plus__` (each one records its name when it is called). Which statements are true? (Select all that apply.)",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "`print(x)` calls `x.__str__()`",
+        "probe": "print(x)\nprint(log == ['__str__'])"
+      },
+      {
+        "id": "b",
+        "text": "`x[0]` calls `x.__getitem__(0)`",
+        "probe": "x[0]\nprint(log == ['__getitem__'])"
+      },
+      {
+        "id": "c",
+        "text": "`x(1)` calls `x.__call__(1)`",
+        "probe": "x(1)\nprint(log == ['__call__'])"
+      },
+      {
+        "id": "d",
+        "text": "`len(x)` calls `x.__length__()`",
+        "probe": "try:\n    len(x)\nexcept TypeError:\n    pass\nprint(log == ['__length__'])"
+      },
+      {
+        "id": "e",
+        "text": "`x + y` calls `x.__plus__(y)`",
+        "probe": "try:\n    x + y\nexcept TypeError:\n    pass\nprint(log == ['__plus__'])"
+      }
+    ],
+    "correct": [
+      "a",
+      "b",
+      "c"
+    ],
+    "explanation": "Python maps syntax to fixed special-method names: `print`/`str()` → `__str__`, `[]` → `__getitem__`, `()` → `__call__`, `len()` → `__len__`, `+` → `__add__`. Names such as `__length__` or `__plus__` are not special: defining them changes nothing, and `len(x)` / `x + y` raise TypeError.",
+    "distractor_notes": {
+      "d": "The hook used by `len()` is `__len__`; `__length__` is just an ordinary method name.",
+      "e": "`+` calls `__add__`; `__plus__` means nothing to Python."
+    },
+    "slides": [
+      192,
+      193
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": "log = []\n\nclass X:\n    def __str__(self):\n        log.append('__str__')\n        return 'x'\n    def __getitem__(self, i):\n        log.append('__getitem__')\n        return i\n    def __call__(self, a):\n        log.append('__call__')\n        return a\n    def __length__(self):\n        log.append('__length__')\n        return 0\n    def __plus__(self, other):\n        log.append('__plus__')\n        return 0\n\nx = X()\ny = X()"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0043",
+    "chapter": "S5",
+    "topic": "special-methods",
+    "tags": [
+      "__repr__",
+      "__str__-fallback",
+      "containers"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "class Card:\n    def __init__(self, rank):\n        self.rank = rank\n    def __repr__(self):\n        return 'Card:' + self.rank\n\nprint(Card('K'), [Card('Q')])",
+    "options": [
+      {
+        "id": "a",
+        "text": "Card:K [Card:Q]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "A text like `<__main__.Card object at 0x...>` followed by `[Card:Q]`",
+        "out": null
+      },
+      {
+        "id": "c",
+        "text": "K ['Q']",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "Card:K ['Card:Q']",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "print uses `str()`. When a class defines no `__str__`, the version inherited from `object` falls back to `__repr__`. So the object prints as Card:K, and the list shows its element with `__repr__` as well: [Card:Q].",
+    "distractor_notes": {
+      "b": "The default `<... object at 0x...>` text only appears when neither `__str__` nor `__repr__` is defined.",
+      "c": "print does not display attributes automatically; it shows what `__repr__` returns.",
+      "d": "The list shows the text returned by `__repr__` as is; quotes appear only for elements that are themselves strings."
+    },
+    "slides": [
+      192,
+      193
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0044",
+    "chapter": "S5",
+    "topic": "special-methods",
+    "tags": [
+      "object-defaults",
+      "__eq__",
+      "__str__"
+    ],
+    "type": "multi",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Given the code, which statements are true? (Select all that apply.)",
+    "code": "class Plain:\n    pass\n\np = Plain()",
+    "options": [
+      {
+        "id": "a",
+        "text": "`str(p)` starts with `'<__main__.Plain object at'`",
+        "probe": "print(str(p).startswith('<__main__.Plain object at'))"
+      },
+      {
+        "id": "b",
+        "text": "`p == Plain()` is False",
+        "probe": "print((p == Plain()) is False)"
+      },
+      {
+        "id": "c",
+        "text": "`p == p` is True",
+        "probe": "print((p == p) is True)"
+      },
+      {
+        "id": "d",
+        "text": "`len(p)` returns 0",
+        "probe": "try:\n    print(len(p) == 0)\nexcept TypeError:\n    print(False)"
+      },
+      {
+        "id": "e",
+        "text": "`str(p)` raises AttributeError because Plain defines no `__str__`",
+        "probe": "try:\n    str(p)\n    print(False)\nexcept AttributeError:\n    print(True)"
+      }
+    ],
+    "correct": [
+      "a",
+      "b",
+      "c"
+    ],
+    "explanation": "Every class inherits default special methods from `object`: `__str__`/`__repr__` produce '<__main__.Plain object at 0x...>', and `__eq__` compares identity, so `p == p` is True but `p == Plain()` (another object) is False. `object` provides no `__len__`, so `len(p)` raises TypeError.",
+    "distractor_notes": {
+      "d": "`object` defines no `__len__` → TypeError (object of type 'Plain' has no len()).",
+      "e": "`__str__` is inherited from `object`, so `str()` always works."
+    },
+    "slides": [
+      192,
+      193
+    ],
+    "verify": {
+      "mode": "truth"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0045",
+    "chapter": "S5",
+    "topic": "inheritance",
+    "tags": [
+      "method-inheritance",
+      "overriding"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "class Vehicle:\n    def wheels(self):\n        return 4\n\nclass Bike(Vehicle):\n    def wheels(self):\n        return 2\n\nclass Car(Vehicle):\n    pass\n\nprint(Car().wheels(), Bike().wheels())",
+    "options": [
+      {
+        "id": "a",
+        "text": "AttributeError",
+        "mono": true,
+        "out": "!AttributeError"
+      },
+      {
+        "id": "b",
+        "text": "4 4",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "2 2",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "4 2",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "Car does not define `wheels`, so the lookup continues in its parent Vehicle → 4. Bike overrides `wheels`, so its own version is found first → 2.",
+    "distractor_notes": {
+      "b": "Bike's method overrides (replaces) the parent's for Bike objects.",
+      "c": "Car inherits from Vehicle, not from Bike.",
+      "a": "Methods that a child does not define are found in the parent class."
+    },
+    "slides": [
+      194,
+      195
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0046",
+    "chapter": "S5",
+    "topic": "inheritance",
+    "tags": [
+      "super",
+      "__init__"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "class Employee:\n    def __init__(self, name):\n        self.name = name\n\nclass Manager(Employee):\n    def __init__(self, name, team):\n        super().__init__(name)\n        self.team = team\n\nm = Manager('Eva', ['Leo', 'Mia'])\nprint(m.name, len(m.team))",
+    "options": [
+      {
+        "id": "a",
+        "text": "TypeError",
+        "mono": true,
+        "out": "!TypeError"
+      },
+      {
+        "id": "b",
+        "text": "AttributeError",
+        "mono": true,
+        "out": "!AttributeError"
+      },
+      {
+        "id": "c",
+        "text": "Eva 2",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "None 2",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "`super().__init__(name)` runs `Employee.__init__` on the same object, which sets `self.name`. Manager's `__init__` then adds `team`, a list of 2 names.",
+    "distractor_notes": {
+      "b": "`name` is created by the parent initializer that `super().__init__` calls.",
+      "d": "`name` is set to 'Eva' by Employee.__init__.",
+      "a": "`super().__init__(name)` passes exactly what Employee expects; self is supplied automatically."
+    },
+    "slides": [
+      194,
+      195
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0047",
+    "chapter": "S5",
+    "topic": "inheritance",
+    "tags": [
+      "inherited-__init__",
+      "TypeError"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What happens in the below code?",
+    "code": "class Shape:\n    def __init__(self, name):\n        self.name = name\n\nclass Square(Shape):\n    def area(self):\n        return 4\n\ns = Square()\nprint(s.area())",
+    "options": [
+      {
+        "id": "a",
+        "text": "4",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "TypeError",
+        "mono": true,
+        "out": "!TypeError"
+      },
+      {
+        "id": "c",
+        "text": "AttributeError",
+        "mono": true,
+        "out": "!AttributeError"
+      },
+      {
+        "id": "d",
+        "text": "NameError",
+        "mono": true,
+        "out": "!NameError"
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "Square defines no `__init__`, so it inherits `Shape.__init__`, which requires a `name` argument. `Square()` therefore raises TypeError (missing 1 required positional argument: 'name') and the object is never created.",
+    "distractor_notes": {
+      "a": "The object is never created, so area() is never called.",
+      "c": "No attribute lookup fails: the call `Square()` fails first.",
+      "d": "All names are defined."
+    },
+    "slides": [
+      194,
+      195
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0048",
+    "chapter": "S5",
+    "topic": "inheritance",
+    "tags": [
+      "super",
+      "forgot-super",
+      "AttributeError"
+    ],
+    "type": "multi",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Given the code, which statements are true? (Select all that apply.)",
+    "code": "class Vehicle:\n    def __init__(self, wheels):\n        self.wheels = wheels\n    def describe(self):\n        return f'{self.wheels} wheels'\n\nclass Truck(Vehicle):\n    def __init__(self, load):\n        self.load = load\n\nt = Truck(10)",
+    "options": [
+      {
+        "id": "a",
+        "text": "`t.load` is 10",
+        "probe": "print(t.load == 10)"
+      },
+      {
+        "id": "b",
+        "text": "`t.wheels` is 10",
+        "probe": "try:\n    print(t.wheels == 10)\nexcept AttributeError:\n    print(False)"
+      },
+      {
+        "id": "c",
+        "text": "`t.describe()` raises AttributeError",
+        "probe": "try:\n    t.describe()\n    print(False)\nexcept AttributeError:\n    print(True)"
+      },
+      {
+        "id": "d",
+        "text": "`isinstance(t, Vehicle)` is True",
+        "probe": "print(isinstance(t, Vehicle) is True)"
+      },
+      {
+        "id": "e",
+        "text": "Truck inherits the method `describe` from Vehicle",
+        "probe": "print('describe' not in Truck.__dict__ and Truck.describe is Vehicle.describe)"
+      }
+    ],
+    "correct": [
+      "a",
+      "c",
+      "d",
+      "e"
+    ],
+    "explanation": "Truck overrides `__init__` and never calls `super().__init__()`, so `Vehicle.__init__` does not run and t has no `wheels` attribute. Methods are still inherited: `describe` exists on Truck, but it fails when it reads `self.wheels` (AttributeError). t is still an instance of Vehicle.",
+    "distractor_notes": {
+      "b": "10 went to `load`; `wheels` was never created because `Vehicle.__init__` was not called (AttributeError)."
+    },
+    "slides": [
+      194,
+      195
+    ],
+    "verify": {
+      "mode": "truth"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0049",
+    "chapter": "S5",
+    "topic": "inheritance",
+    "tags": [
+      "super",
+      "method-chaining",
+      "order"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "class Base:\n    def setup(self):\n        print('base')\n\nclass Child(Base):\n    def setup(self):\n        print('child start')\n        super().setup()\n        print('child end')\n\nChild().setup()",
+    "options": [
+      {
+        "id": "a",
+        "text": "child start\nchild end\nbase",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "base\nchild start\nchild end",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "child start\nchild end",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "child start\nbase\nchild end",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "`super().setup()` calls the parent's version exactly where it is written; when it returns, the child's method continues. So: child start, base, child end.",
+    "distractor_notes": {
+      "b": "The parent method is not called first automatically, only where `super()` appears.",
+      "c": "`super().setup()` does run Base.setup.",
+      "a": "The parent call happens between the two prints, not after the method."
+    },
+    "slides": [
+      194,
+      195
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0050",
+    "chapter": "S5",
+    "topic": "inheritance",
+    "tags": [
+      "super",
+      "multi-level",
+      "order"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "class A:\n    def __init__(self):\n        print('A', end=' ')\n\nclass B(A):\n    def __init__(self):\n        print('B', end=' ')\n        super().__init__()\n\nclass C(B):\n    def __init__(self):\n        super().__init__()\n        print('C', end=' ')\n\nC()",
+    "options": [
+      {
+        "id": "a",
+        "text": "A B C",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "C B A",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "B A C",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "C",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "`C()` runs `C.__init__`, whose first line calls `B.__init__`: B prints 'B' and then calls `A.__init__`, which prints 'A'. Control comes back to `C.__init__`, which prints 'C'. Output: B A C.",
+    "distractor_notes": {
+      "a": "Parent initializers do not run first automatically: the order follows where each `super()` call is placed.",
+      "b": "C prints only after its `super().__init__()` call has returned.",
+      "d": "The `super().__init__()` calls do run the parent initializers."
+    },
+    "slides": [
+      194,
+      195
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0051",
+    "chapter": "S5",
+    "topic": "inheritance",
+    "tags": [
+      "class-hierarchy",
+      "method-resolution"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "class A:\n    def who(self):\n        return 'A'\n\nclass B(A):\n    pass\n\nclass C(B):\n    pass\n\nclass D(C):\n    def who(self):\n        return 'D'\n\nprint(C().who(), D().who())",
+    "options": [
+      {
+        "id": "a",
+        "text": "C D",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "A D",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "D D",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "AttributeError",
+        "mono": true,
+        "out": "!AttributeError"
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "Neither C nor B defines `who`, so the lookup climbs C → B → A and finds `A.who`. D overrides `who`, so D objects use their own version.",
+    "distractor_notes": {
+      "c": "D's override only applies to D objects (and D's subclasses), not to its parents.",
+      "d": "The lookup goes through all the ancestors, not only the direct parent.",
+      "a": "C does not define `who`; methods are not renamed after the class."
+    },
+    "slides": [
+      194,
+      195
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0052",
+    "chapter": "S5",
+    "topic": "inheritance",
+    "tags": [
+      "multiple-inheritance",
+      "MRO"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "class A:\n    def hello(self):\n        return 'A'\n\nclass B(A):\n    def hello(self):\n        return 'B'\n\nclass C(A):\n    def hello(self):\n        return 'C'\n\nclass D(C, B):\n    pass\n\nprint(D().hello())",
+    "options": [
+      {
+        "id": "a",
+        "text": "C",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "B",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "A",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "TypeError",
+        "mono": true,
+        "out": "!TypeError"
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "With multiple inheritance Python searches the bases in the order they are listed (the MRO of D is D, C, B, A, object). C comes first and defines `hello`, so 'C' is returned.",
+    "distractor_notes": {
+      "b": "B is listed second in `class D(C, B)`.",
+      "d": "Multiple inheritance is allowed; two parents defining the same method is not an error.",
+      "c": "A is searched last, after both C and B."
+    },
+    "slides": [
+      194,
+      195
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0053",
+    "chapter": "S5",
+    "topic": "inheritance",
+    "tags": [
+      "multiple-inheritance",
+      "diamond",
+      "super",
+      "MRO"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "class A:\n    def go(self):\n        print('A')\n\nclass B(A):\n    def go(self):\n        print('B')\n        super().go()\n\nclass C(A):\n    def go(self):\n        print('C')\n        super().go()\n\nclass D(B, C):\n    def go(self):\n        print('D')\n        super().go()\n\nD().go()",
+    "options": [
+      {
+        "id": "a",
+        "text": "D\nB\nA",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "D\nB\nA\nC\nA",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "D\nC\nB\nA",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "D\nB\nC\nA",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "`super()` follows the MRO of the object's class, not simply the parent of the current class. For a D object the MRO is D, B, C, A, object, so `super()` inside B goes to C (not A), and A runs once, at the end.",
+    "distractor_notes": {
+      "a": "Inside B, `super()` moves to the next class of D's MRO, which is C.",
+      "b": "In a diamond each class appears once in the MRO, so A.go runs only once.",
+      "c": "B is listed before C in `class D(B, C)`."
+    },
+    "slides": [
+      194,
+      195
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0054",
+    "chapter": "S5",
+    "topic": "inheritance",
+    "tags": [
+      "isinstance",
+      "issubclass",
+      "object"
+    ],
+    "type": "multi",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Given the code, which expressions evaluate to True? (Select all that apply.)",
+    "code": "class Instrument:\n    pass\n\nclass Guitar(Instrument):\n    pass\n\nclass Bass(Guitar):\n    pass\n\nclass Drum(Instrument):\n    pass\n\ng = Guitar()\nb = Bass()",
+    "options": [
+      {
+        "id": "a",
+        "text": "isinstance(b, Instrument)",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "isinstance(g, Bass)",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "issubclass(Drum, Guitar)",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "issubclass(Bass, Instrument)",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "issubclass(Instrument, object)",
+        "mono": true
+      },
+      {
+        "id": "f",
+        "text": "isinstance(Guitar, Instrument)",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "d",
+      "e"
+    ],
+    "explanation": "`isinstance` and `issubclass` follow the parent chain upward: a Bass is a Guitar and an Instrument, and every class is a subclass of `object`. They never go downward (a Guitar is not a Bass) or sideways (Drum and Guitar are siblings). `isinstance(Guitar, Instrument)` asks whether the class object Guitar is an Instrument instance: it is not, it is a subclass.",
+    "distractor_notes": {
+      "b": "Inheritance goes upward only: a Guitar is not necessarily a Bass.",
+      "c": "Drum and Guitar are siblings, both children of Instrument.",
+      "f": "Guitar is a class, not an instance; `issubclass(Guitar, Instrument)` would be True."
+    },
+    "slides": [
+      194,
+      195
+    ],
+    "verify": {
+      "mode": "truth",
+      "probe_template": "print((__OPTION_RAW__) is True)"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0055",
+    "chapter": "S5",
+    "topic": "inheritance",
+    "tags": [
+      "isinstance",
+      "issubclass",
+      "bool",
+      "built-in-types"
+    ],
+    "type": "multi",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Which expressions evaluate to True? (Select all that apply.)",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "isinstance(True, int)",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "issubclass(bool, int)",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "isinstance(5, float)",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "issubclass(int, object)",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "isinstance(3.0, int)",
+        "mono": true
+      },
+      {
+        "id": "f",
+        "text": "issubclass(int, bool)",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "b",
+      "d"
+    ],
+    "explanation": "`bool` is a subclass of `int` (True behaves like 1), so True is an int instance; every class, int included, derives from `object`. int and float are separate classes: 5 is not a float and 3.0 is not an int. The relation goes from child to parent, so int is not a subclass of bool.",
+    "distractor_notes": {
+      "c": "int and float are distinct classes; 5 is an int.",
+      "e": "3.0 is a float even though its value is a whole number.",
+      "f": "bool derives from int, not the reverse."
+    },
+    "slides": [
+      194,
+      195,
+      196
+    ],
+    "verify": {
+      "mode": "truth",
+      "probe_template": "print((__OPTION_RAW__) is True)"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0056",
+    "chapter": "S5",
+    "topic": "inheritance",
+    "tags": [
+      "type-vs-isinstance"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "class Animal:\n    pass\n\nclass Cat(Animal):\n    pass\n\nc = Cat()\nprint(type(c) == Animal, isinstance(c, Animal))",
+    "options": [
+      {
+        "id": "a",
+        "text": "False True",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "True True",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "False False",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "True False",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "`type(c)` is exactly Cat, which is a different class from Animal, so the comparison is False. `isinstance` also accepts parent classes, so it gives True. Use isinstance when subclasses should count.",
+    "distractor_notes": {
+      "c": "isinstance takes inheritance into account.",
+      "d": "Reversed.",
+      "b": "type() returns the exact class of the object, not its parents."
+    },
+    "slides": [
+      194,
+      195
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0057",
+    "chapter": "S5",
+    "topic": "inheritance",
+    "tags": [
+      "overriding",
+      "polymorphism",
+      "self"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "class Report:\n    def title(self):\n        return 'Report'\n    def render(self):\n        return '== ' + self.title() + ' =='\n\nclass Sales(Report):\n    def title(self):\n        return 'Sales'\n\nprint(Sales().render())",
+    "options": [
+      {
+        "id": "a",
+        "text": "== Report ==",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "AttributeError",
+        "mono": true,
+        "out": "!AttributeError"
+      },
+      {
+        "id": "c",
+        "text": "Sales",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "== Sales ==",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "`render` is inherited from Report, but inside it `self` is the Sales object, so `self.title()` starts the lookup from Sales and finds the overriding version. The parent's code ends up calling the child's method: this is polymorphism.",
+    "distractor_notes": {
+      "a": "`self.title()` is not tied to Report's version; the lookup starts from the object's real class.",
+      "c": "render adds the '== ' decorations around the title.",
+      "b": "render is inherited from Report."
+    },
+    "slides": [
+      194,
+      195
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0058",
+    "chapter": "S5",
+    "topic": "inheritance",
+    "tags": [
+      "super",
+      "overriding",
+      "init-order"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "class Base:\n    def __init__(self):\n        self.setup()\n    def setup(self):\n        self.mode = 'base'\n\nclass Child(Base):\n    def __init__(self):\n        self.level = 2\n        super().__init__()\n    def setup(self):\n        self.mode = 'child' + str(self.level)\n\nprint(Child().mode)",
+    "options": [
+      {
+        "id": "a",
+        "text": "base",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "AttributeError",
+        "mono": true,
+        "out": "!AttributeError"
+      },
+      {
+        "id": "c",
+        "text": "child2",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "child",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "Child.__init__ sets `level`, then `super().__init__()` runs Base.__init__, which calls `self.setup()`. self is a Child, so Child.setup runs; `level` already exists, so mode becomes 'child2'.",
+    "distractor_notes": {
+      "a": "Base.setup is overridden: `self.setup()` picks Child's version.",
+      "d": "`str(self.level)` is appended to 'child'.",
+      "b": "`level` is set before `super().__init__()`; swapping those two lines would give AttributeError."
+    },
+    "slides": [
+      194,
+      195
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0059",
+    "chapter": "S5",
+    "topic": "inheritance",
+    "tags": [
+      "polymorphism",
+      "Shape2D",
+      "inherited-method"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "class Shape:\n    def area(self):\n        return 0\n\nclass Rect(Shape):\n    def __init__(self, w, h):\n        self.w, self.h = w, h\n    def area(self):\n        return self.w * self.h\n\nclass Circle(Shape):\n    def __init__(self, r):\n        self.r = r\n\nshapes = [Rect(2, 3), Circle(1), Shape()]\nprint([s.area() for s in shapes])",
+    "options": [
+      {
+        "id": "a",
+        "text": "[6, 3.14, 0]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[6, 0, 0]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "AttributeError",
+        "mono": true,
+        "out": "!AttributeError"
+      },
+      {
+        "id": "d",
+        "text": "TypeError",
+        "mono": true,
+        "out": "!TypeError"
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "Each object answers `area()` with the first version found from its own class: Rect overrides it (2 * 3 = 6); Circle does not, so it inherits `Shape.area` and returns 0 despite its radius; Shape() returns 0.",
+    "distractor_notes": {
+      "c": "`area` is defined in Shape and inherited by every subclass.",
+      "d": "`Shape()` is a valid call: without `__init__`, object's default takes no arguments.",
+      "a": "Circle never defines an area formula; it uses Shape's."
+    },
+    "slides": [
+      194,
+      195,
+      211
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0060",
+    "chapter": "S5",
+    "topic": "inheritance",
+    "tags": [
+      "super",
+      "multi-level",
+      "extending"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "class Pizza:\n    def toppings(self):\n        return ['cheese']\n\nclass Margherita(Pizza):\n    def toppings(self):\n        return super().toppings() + ['basil']\n\nclass Special(Margherita):\n    def toppings(self):\n        return ['ham'] + super().toppings()\n\nprint(Special().toppings())",
+    "options": [
+      {
+        "id": "a",
+        "text": "['ham', 'cheese', 'basil']",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "['ham', 'basil']",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "['cheese', 'basil', 'ham']",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "['ham', 'cheese']",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "Special puts 'ham' first and calls `super().toppings()`, i.e. Margherita's version, which itself calls Pizza's (['cheese']) and appends 'basil'. Result: ['ham'] + ['cheese', 'basil'].",
+    "distractor_notes": {
+      "b": "Margherita's `super()` call brings in Pizza's 'cheese'.",
+      "c": "'ham' is placed before the parent's list, not after.",
+      "d": "Margherita adds 'basil' to Pizza's list."
+    },
+    "slides": [
+      194,
+      195
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  }
+]

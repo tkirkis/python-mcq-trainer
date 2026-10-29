@@ -1,0 +1,1096 @@
+[
+ {
+  "id": "S7-0021",
+  "chapter": "S7",
+  "topic": "generators",
+  "tags": [
+   "generator-expression",
+   "type"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "g = (i * i for i in range(4))\nprint(type(g).__name__)",
+  "options": [
+   {
+    "id": "a",
+    "text": "list",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "tuple",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "generator",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "range",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "Parentheses around a comprehension do not build a tuple: they create a **generator expression**, whose type is `generator`. Use `[...]` for a list or `tuple(...)` for a tuple.",
+  "distractor_notes": {
+   "a": "A list comprehension needs square brackets.",
+   "b": "There is no 'tuple comprehension': `( ... for ... )` is a generator expression.",
+   "d": "range(4) is only the source being iterated."
+  },
+  "slides": [
+   250
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0022",
+  "chapter": "S7",
+  "topic": "generators",
+  "tags": [
+   "generator-expression",
+   "exhaustion",
+   "sum"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "g = (x for x in [1, 2, 3])\nprint(sum(g), sum(g))",
+  "options": [
+   {
+    "id": "a",
+    "text": "6 6",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "6 0",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "6 None",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "TypeError",
+    "mono": true,
+    "out": "!TypeError"
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "A generator can be traversed only once. The first `sum` consumes all the values (6); the second `sum` receives an already exhausted generator and returns the sum of nothing, 0.",
+  "distractor_notes": {
+   "a": "Treats the generator like a list that can be re-read.",
+   "c": "sum of an empty iterable is 0, not None.",
+   "d": "sum accepts any iterable, including an exhausted generator."
+  },
+  "slides": [
+   250
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0023",
+  "chapter": "S7",
+  "topic": "generators",
+  "tags": [
+   "yield",
+   "generator-function"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "def countdown(n):\n    while n > 0:\n        yield n\n        n -= 1\n\nprint(list(countdown(3)))",
+  "options": [
+   {
+    "id": "a",
+    "text": "[3, 2, 1]",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "[3, 2, 1, 0]",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "[2, 1, 0]",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "3",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "Each `yield` hands one value to the consumer and pauses the function. Values 3, 2, 1 are yielded; when n reaches 0 the loop ends, the generator finishes and `list()` stops.",
+  "distractor_notes": {
+   "b": "The loop condition `n > 0` is checked before 0 could be yielded.",
+   "c": "n is yielded *before* being decremented.",
+   "d": "yield does not end the function like return: the generator produces every value."
+  },
+  "slides": [
+   251
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0024",
+  "chapter": "S7",
+  "topic": "generators",
+  "tags": [
+   "yield",
+   "return",
+   "generator-function"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "def first_even(nums):\n    for n in nums:\n        if n % 2 == 0:\n            return n\n\ndef evens(nums):\n    for n in nums:\n        if n % 2 == 0:\n            yield n\n\nprint(first_even([1, 2, 3, 4]), list(evens([1, 2, 3, 4])))",
+  "options": [
+   {
+    "id": "a",
+    "text": "[2, 4] [2, 4]",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "2 [2, 4]",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "2 [2]",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "2 2",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "`return` ends the function at the first even number, so `first_even` returns 2. `yield` only pauses the generator: after producing 2 it resumes and also produces 4, so the list is [2, 4]. Do not mistake yield with return!",
+  "distractor_notes": {
+   "a": "return stops the whole function at the first match.",
+   "c": "yield does not stop the generator: it resumes after each value.",
+   "d": "list() collects every value yielded by the generator."
+  },
+  "slides": [
+   251
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0025",
+  "chapter": "S7",
+  "topic": "generators",
+  "tags": [
+   "yield",
+   "return",
+   "StopIteration"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "def gen():\n    yield 1\n    return 2\n    yield 3\n\nprint(list(gen()))",
+  "options": [
+   {
+    "id": "a",
+    "text": "[1, 3]",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "[1, 2]",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "[1, 2, 3]",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "[1]",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "Inside a generator, `return` terminates the iteration (it raises StopIteration internally). The returned value 2 is not produced as an item, and `yield 3` is never reached, so the list is [1].",
+  "distractor_notes": {
+   "a": "The generator stops at return; yield 3 is unreachable.",
+   "b": "The value of `return` in a generator is not yielded to the consumer.",
+   "c": "Code after return is never executed."
+  },
+  "slides": [
+   251
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0026",
+  "chapter": "S7",
+  "topic": "generators",
+  "tags": [
+   "lazy",
+   "yield",
+   "side-effects"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "def numbers(n):\n    for i in range(n):\n        print('making', i)\n        yield i\n\ng = numbers(2)\nprint('start')\nfor x in g:\n    print('got', x)",
+  "options": [
+   {
+    "id": "a",
+    "text": "start\nmaking 0\ngot 0\nmaking 1\ngot 1",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "making 0\nmaking 1\nstart\ngot 0\ngot 1",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "start\nmaking 0\nmaking 1\ngot 0\ngot 1",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "making 0\nstart\ngot 0\nmaking 1\ngot 1",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "Generators are lazy: `numbers(2)` runs no code at all. Each iteration of the for loop resumes the body just long enough to produce one value, so 'making' and 'got' lines alternate after 'start'.",
+  "distractor_notes": {
+   "b": "Calling a generator function does not run its body; values are not precomputed.",
+   "c": "Values are produced one at a time, on demand, not all before the loop body runs.",
+   "d": "Even the first value is only produced when the for loop asks for it, i.e. after 'start'."
+  },
+  "slides": [
+   250,
+   251
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0027",
+  "chapter": "S7",
+  "topic": "generators",
+  "tags": [
+   "generator-expression",
+   "exhaustion",
+   "membership"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "g = (n for n in range(10))\nprint(5 in g)\nprint(list(g))",
+  "options": [
+   {
+    "id": "a",
+    "text": "True\n[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "True\n[]",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "True\n[6, 7, 8, 9]",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "True\n[5, 6, 7, 8, 9]",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "`5 in g` iterates the generator until it finds 5, consuming 0 to 5 along the way. The generator keeps its position, so `list(g)` only collects the remaining values 6 to 9.",
+  "distractor_notes": {
+   "a": "A membership test on a generator consumes the items it inspects; they cannot be read again.",
+   "b": "`in` stops as soon as it finds 5, so the rest of the generator is left untouched.",
+   "d": "5 itself was consumed by the membership test."
+  },
+  "slides": [
+   250
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0028",
+  "chapter": "S7",
+  "topic": "generators",
+  "tags": [
+   "generator-expression",
+   "list-comprehension"
+  ],
+  "type": "multi",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Which of the following expressions are equal to the list `[0, 2, 4]`? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "[x for x in range(5) if x % 2 == 0]",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "list(x for x in range(5) if x % 2 == 0)",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "(x for x in range(5) if x % 2 == 0)",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "list(range(0, 5, 2))",
+    "mono": true
+   },
+   {
+    "id": "e",
+    "text": "[(x for x in range(5) if x % 2 == 0)]",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a",
+   "b",
+   "d"
+  ],
+  "explanation": "(a) is a list comprehension; (b) passes a generator expression to `list()`, which consumes it; (d) builds the list from a range with step 2. (c) is a generator object, not a list, and (e) is a list containing **one** generator object.",
+  "distractor_notes": {
+   "c": "A generator expression is not a list; it never compares equal to one.",
+   "e": "Brackets around a generator expression make a one-element list holding the generator."
+  },
+  "slides": [
+   250
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "",
+   "probe_template": "print(__OPTION_RAW__ == [0, 2, 4])"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0029",
+  "chapter": "S7",
+  "topic": "generators",
+  "tags": [
+   "memory",
+   "generator-expression",
+   "getsizeof"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "import sys\nbig_list = [x for x in range(100000)]\nbig_gen = (x for x in range(100000))\nprint(sys.getsizeof(big_gen) < sys.getsizeof(big_list))",
+  "options": [
+   {
+    "id": "a",
+    "text": "True",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "False",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "TypeError",
+    "mono": true,
+    "out": "!TypeError"
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "The list comprehension stores all 100000 references in memory (hundreds of kilobytes). The generator stores only its current state and produces values on demand, so its size is a few hundred bytes whatever the length of the range: generators are much less memory consuming.",
+  "distractor_notes": {
+   "b": "A generator does not hold its values: they are computed when requested.",
+   "c": "sys.getsizeof accepts any object, including generators."
+  },
+  "slides": [
+   250
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0030",
+  "chapter": "S7",
+  "topic": "generators",
+  "tags": [
+   "generator-expression",
+   "print",
+   "repr"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What does the following code display? (`0x...` stands for a memory address.)",
+  "code": "evens = (i for i in range(11) if i % 2 == 0)\nprint(evens)",
+  "options": [
+   {
+    "id": "a",
+    "text": "[0, 2, 4, 6, 8, 10]",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "(0, 2, 4, 6, 8, 10)",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "0 2 4 6 8 10",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "<generator object <genexpr> at 0x...>",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "Printing a generator does not show its values (they have not been computed yet): it shows the object's representation, `<generator object <genexpr> at 0x...>`. Iterate over it (or call `list()`) to see the values.",
+  "distractor_notes": {
+   "a": "That is what a list comprehension `[...]` would print.",
+   "b": "Parentheses make a generator expression, not a tuple.",
+   "c": "That is what a for loop with `print(i, end=' ')` over the generator would display."
+  },
+  "slides": [
+   250
+  ],
+  "verify": {
+   "mode": "output",
+   "code": "import re\nevens = (i for i in range(11) if i % 2 == 0)\nprint(re.sub(r'0x[0-9a-fA-F]+', '0x...', str(evens)))",
+   "note": "The real output contains a memory address; verify.code masks it as 0x..."
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0031",
+  "chapter": "S7",
+  "topic": "generators",
+  "tags": [
+   "yield",
+   "next",
+   "lazy"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "def gen():\n    print('A')\n    yield 1\n    print('B')\n    yield 2\n\ng = gen()\nprint('C')\nprint(next(g))",
+  "options": [
+   {
+    "id": "a",
+    "text": "A\nC\n1",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "C\nA\n1",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "C\n1",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "C\nA\n1\nB",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "`gen()` only creates the generator; no line of the body runs. `next(g)` then executes the body until the first `yield`: it prints A and returns 1. The generator is now paused before `print('B')`, which never runs.",
+  "distractor_notes": {
+   "a": "Calling a generator function does not execute its body.",
+   "c": "next(g) does run the body up to the first yield, so A is printed.",
+   "d": "Execution pauses at `yield 1`; 'B' would need a second next()."
+  },
+  "slides": [
+   251
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0032",
+  "chapter": "S7",
+  "topic": "generators",
+  "tags": [
+   "yield",
+   "return",
+   "generator-function"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "def f(x):\n    if x > 0:\n        return x\n    yield x\n\nprint(type(f(5)).__name__)",
+  "options": [
+   {
+    "id": "a",
+    "text": "int",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "function",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "NoneType",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "generator",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "A `yield` anywhere in the body turns `f` into a generator function, even if that yield is never reached. Calling `f(5)` runs nothing and returns a generator object; iterating it would hit `return` immediately and produce no value.",
+  "distractor_notes": {
+   "a": "The return value 5 is never returned to the caller: f(5) returns a generator.",
+   "b": "`f` is a function, but `f(5)` is the result of calling it.",
+   "c": "The call returns a generator object, not None."
+  },
+  "slides": [
+   251
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0033",
+  "chapter": "S7",
+  "topic": "generators",
+  "tags": [
+   "yield",
+   "infinite-generator",
+   "next"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "def fib():\n    a, b = 0, 1\n    while True:\n        yield a\n        a, b = b, a + b\n\ng = fib()\nprint([next(g) for _ in range(6)])",
+  "options": [
+   {
+    "id": "a",
+    "text": "The program never ends (infinite loop)",
+    "out": "!Timeout",
+    "mono": false
+   },
+   {
+    "id": "b",
+    "text": "[1, 1, 2, 3, 5, 8]",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "[0, 1, 1, 2, 3, 5]",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "[0, 1, 2, 3, 4, 5]",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "An infinite `while True` loop is fine in a generator: values are produced only on request. Six calls to `next(g)` give the first six Fibonacci numbers, starting with a = 0.",
+  "distractor_notes": {
+   "a": "The loop only advances when next() is called, so the program stops after 6 values.",
+   "b": "The first value yielded is a = 0, before the update.",
+   "d": "Those are the loop indices, not the yielded values."
+  },
+  "slides": [
+   251
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0034",
+  "chapter": "S7",
+  "topic": "generators",
+  "tags": [
+   "generator-expression",
+   "TypeError",
+   "AttributeError"
+  ],
+  "type": "multi",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Given `g = (x for x in range(3))`, which of the following statements raise an exception? Select all that apply.",
+  "code": "g = (x for x in range(3))",
+  "options": [
+   {
+    "id": "a",
+    "text": "g[0]",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "len(g)",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "list(g)",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "next(g)",
+    "mono": true
+   },
+   {
+    "id": "e",
+    "text": "g.append(3)",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a",
+   "b",
+   "e"
+  ],
+  "explanation": "A generator is not a sequence: it supports neither indexing (`TypeError`) nor `len()` (`TypeError`), and it has no list methods such as `append` (`AttributeError`). It can only be iterated, e.g. with `list(g)` or `next(g)`.",
+  "distractor_notes": {
+   "c": "list() simply consumes the generator: [0, 1, 2].",
+   "d": "next() returns the first value, 0."
+  },
+  "slides": [
+   250
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "g = (x for x in range(3))",
+   "probe_template": "try:\n    __OPTION_RAW__\n    print(False)\nexcept Exception:\n    print(True)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0035",
+  "chapter": "S7",
+  "topic": "iterators",
+  "tags": [
+   "iter",
+   "next",
+   "default"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "it = iter('ab')\nprint(next(it), next(it), next(it, 'end'))",
+  "options": [
+   {
+    "id": "a",
+    "text": "a b end",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "a b None",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "StopIteration",
+    "mono": true,
+    "out": "!StopIteration"
+   },
+   {
+    "id": "d",
+    "text": "a b b",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "`iter('ab')` gives an iterator over the characters. After 'a' and 'b' it is exhausted; `next(it, default)` returns the default instead of raising StopIteration.",
+  "distractor_notes": {
+   "b": "The default value passed to next() is returned, not None.",
+   "c": "With a second argument, next() does not raise StopIteration.",
+   "d": "An iterator never repeats its last value."
+  },
+  "slides": [
+   252
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0036",
+  "chapter": "S7",
+  "topic": "iterators",
+  "tags": [
+   "iter",
+   "next",
+   "StopIteration"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "it = iter([1])\nprint(next(it))\nprint(next(it))",
+  "options": [
+   {
+    "id": "a",
+    "text": "1\nNone",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "1, then StopIteration",
+    "out": "1\n!StopIteration",
+    "mono": false
+   },
+   {
+    "id": "c",
+    "text": "1, then IndexError",
+    "out": "1\n!IndexError",
+    "mono": false
+   },
+   {
+    "id": "d",
+    "text": "1\n1",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "The first `next()` returns 1. The iterator is then exhausted, and `next()` without a default raises `StopIteration` (a for loop catches it silently to know when to stop).",
+  "distractor_notes": {
+   "a": "next() does not return None at the end: it raises StopIteration.",
+   "c": "Iterators signal their end with StopIteration, not IndexError.",
+   "d": "An exhausted iterator never restarts."
+  },
+  "slides": [
+   252
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0037",
+  "chapter": "S7",
+  "topic": "iterators",
+  "tags": [
+   "__iter__",
+   "__next__",
+   "iterator-protocol"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "class Squares:\n    def __init__(self, limit):\n        self.limit = limit\n    def __iter__(self):\n        self.n = 1\n        return self\n    def __next__(self):\n        if self.n > self.limit:\n            raise StopIteration\n        result = self.n ** 2\n        self.n += 1\n        return result\n\nprint(list(Squares(3)))",
+  "options": [
+   {
+    "id": "a",
+    "text": "StopIteration",
+    "mono": true,
+    "out": "!StopIteration"
+   },
+   {
+    "id": "b",
+    "text": "[0, 1, 4, 9]",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "[1, 4, 9, 16]",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "[1, 4, 9]",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "`list()` calls `__iter__` (which sets n = 1) then `__next__` repeatedly: 1, 4, 9. When n becomes 4 > 3, `StopIteration` is raised, which `list()` treats as the normal end of the iteration.",
+  "distractor_notes": {
+   "a": "StopIteration is the normal end signal: list() catches it.",
+   "b": "Counting starts at n = 1, set in __iter__.",
+   "c": "The test `self.n > self.limit` stops before 4 is squared."
+  },
+  "slides": [
+   252
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0038",
+  "chapter": "S7",
+  "topic": "iterators",
+  "tags": [
+   "iterator-protocol",
+   "state",
+   "exhaustion"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "class Count:\n    def __init__(self, n):\n        self.i, self.n = 0, n\n    def __iter__(self):\n        return self\n    def __next__(self):\n        if self.i >= self.n:\n            raise StopIteration\n        self.i += 1\n        return self.i\n\nc = Count(3)\nprint(list(c), list(c))",
+  "options": [
+   {
+    "id": "a",
+    "text": "[1, 2, 3] []",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "[1, 2, 3] [1, 2, 3]",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "[0, 1, 2] []",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "StopIteration",
+    "mono": true,
+    "out": "!StopIteration"
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "The state (`self.i`) lives in the object and `__iter__` does not reset it. The first `list(c)` advances i to 3; the second call gets the same, already exhausted iterator and immediately receives StopIteration -> [].",
+  "distractor_notes": {
+   "b": "Would require __iter__ to reset the counter (as `self.i = 0`).",
+   "c": "i is incremented before being returned, so the values are 1, 2, 3.",
+   "d": "list() treats StopIteration as the end of the data, not as an error."
+  },
+  "slides": [
+   252
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0039",
+  "chapter": "S7",
+  "topic": "iterators",
+  "tags": [
+   "iterable-vs-iterator",
+   "next",
+   "TypeError"
+  ],
+  "type": "multi",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Which of the following objects can be passed **directly** to `next()` without raising `TypeError`? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "[1, 2, 3]",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "iter([1, 2, 3])",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "(x for x in [1, 2])",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "range(3)",
+    "mono": true
+   },
+   {
+    "id": "e",
+    "text": "'abc'",
+    "mono": true
+   },
+   {
+    "id": "f",
+    "text": "map(str, [1, 2])",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b",
+   "c",
+   "f"
+  ],
+  "explanation": "`next()` needs an **iterator** (an object with `__next__`). Lists, ranges and strings are iterables: `iter()` can build an iterator from them, but they are not iterators themselves. `iter(...)`, generators and map objects are iterators.",
+  "distractor_notes": {
+   "a": "A list is iterable, not an iterator: use next(iter(lst)).",
+   "d": "range is a re-iterable sequence, not an iterator.",
+   "e": "Strings are iterables, not iterators."
+  },
+  "slides": [
+   251,
+   252
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "",
+   "probe_template": "obj = __OPTION_RAW__\ntry:\n    next(obj)\n    print(True)\nexcept TypeError:\n    print(False)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0040",
+  "chapter": "S7",
+  "topic": "iterators",
+  "tags": [
+   "iterable-vs-iterator",
+   "range",
+   "exhaustion"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "r = range(3)\nprint(list(r), list(r))\nit = iter(r)\nprint(list(it), list(it))",
+  "options": [
+   {
+    "id": "a",
+    "text": "[0, 1, 2] [0, 1, 2]\n[0, 1, 2] [0, 1, 2]",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "[0, 1, 2] []\n[0, 1, 2] []",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "[0, 1, 2] [0, 1, 2]\n[0, 1, 2] []",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "[0, 1, 2] []\n[0, 1, 2] [0, 1, 2]",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "A `range` is an iterable: every `list(r)` asks it for a fresh iterator, so it can be traversed many times. `iter(r)` returns one iterator object, which is used up by the first `list(it)`.",
+  "distractor_notes": {
+   "a": "An iterator is single-pass: the second list(it) is empty.",
+   "b": "range objects are not exhausted: each traversal starts a new iterator.",
+   "d": "Inverts the roles of the iterable (range) and the iterator."
+  },
+  "slides": [
+   251,
+   252
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ }
+]

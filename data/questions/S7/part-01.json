@@ -1,0 +1,1118 @@
+[
+ {
+  "id": "S7-0001",
+  "chapter": "S7",
+  "topic": "functional",
+  "tags": [
+   "sorted",
+   "sort",
+   "map",
+   "filter",
+   "return-type"
+  ],
+  "type": "multi",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Given `nums = [3, -1, 2]`, which of the following expressions evaluate to a `list` object? Select all that apply.",
+  "code": "nums = [3, -1, 2]",
+  "options": [
+   {
+    "id": "a",
+    "text": "sorted(nums)",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "map(abs, nums)",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "nums.sort()",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "[abs(n) for n in nums]",
+    "mono": true
+   },
+   {
+    "id": "e",
+    "text": "filter(None, nums)",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a",
+   "d"
+  ],
+  "explanation": "`sorted()` always builds and returns a new list, and a list comprehension builds a list. In Python 3 `map()` and `filter()` return lazy iterator objects (wrap them in `list()` to get a list), and `list.sort()` sorts in place and returns `None`.",
+  "distractor_notes": {
+   "b": "`map` returns a lazy map object in Python 3, not a list.",
+   "c": "`list.sort()` sorts the list in place and returns None.",
+   "e": "`filter` returns a lazy filter object, not a list."
+  },
+  "slides": [
+   253
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "nums = [3, -1, 2]",
+   "probe_template": "print(type(__OPTION_RAW__) is list)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0002",
+  "chapter": "S7",
+  "topic": "functional",
+  "tags": [
+   "map",
+   "lambda",
+   "exhaustion",
+   "lazy"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "squares = map(lambda x: x * x, [1, 2, 3])\nprint(list(squares))\nprint(list(squares))",
+  "options": [
+   {
+    "id": "a",
+    "text": "[1, 4, 9]\n[]",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "[1, 4, 9]\n[1, 4, 9]",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "[1, 4, 9]\nNone",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "[1, 4, 9], then TypeError",
+    "out": "[1, 4, 9]\n!TypeError",
+    "mono": false
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "A map object is a lazy, single-pass iterator. The first `list()` consumes all its values; the second call finds it exhausted and builds an empty list.",
+  "distractor_notes": {
+   "b": "A map object is not a list: it can be traversed only once.",
+   "c": "`list()` of an exhausted iterator is an empty list, not None.",
+   "d": "Iterating an exhausted iterator is not an error: it simply yields nothing."
+  },
+  "slides": [
+   253,
+   250
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0003",
+  "chapter": "S7",
+  "topic": "functional",
+  "tags": [
+   "map",
+   "len",
+   "TypeError",
+   "lazy"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What will be the output of the code?",
+  "code": "doubled = map(lambda x: 2 * x, [1, 2, 3])\nprint(len(doubled))",
+  "options": [
+   {
+    "id": "a",
+    "text": "3",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "6",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "TypeError",
+    "mono": true,
+    "out": "!TypeError"
+   },
+   {
+    "id": "d",
+    "text": "[2, 4, 6]",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "In Python 3 `map()` returns a lazy map object that has no length: `len()` raises `TypeError: object of type 'map' has no len()`. `len(list(doubled))` would give 3.",
+  "distractor_notes": {
+   "a": "That would be `len(list(doubled))`; a map object itself has no len().",
+   "b": "Confuses the length with the last mapped value.",
+   "d": "`len` never returns a list; and the map is not materialised."
+  },
+  "slides": [
+   253
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0004",
+  "chapter": "S7",
+  "topic": "functional",
+  "tags": [
+   "filter",
+   "lambda"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "nums = [5, 12, 7, 20, 3]\nbig = list(filter(lambda n: n > 6, nums))\nprint(big)",
+  "options": [
+   {
+    "id": "a",
+    "text": "[False, True, True, True, False]",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "[5, 3]",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "[12, 7, 20]",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "[7, 12, 20]",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "`filter(f, it)` keeps the items for which `f(item)` is truthy, in their original order: 12, 7 and 20.",
+  "distractor_notes": {
+   "a": "That is what `map` with the same lambda would produce; filter keeps items, not booleans.",
+   "b": "Those are the items that are *rejected* (n <= 6).",
+   "d": "filter does not sort: the original order is kept."
+  },
+  "slides": [
+   253
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0005",
+  "chapter": "S7",
+  "topic": "functional",
+  "tags": [
+   "sorted",
+   "key",
+   "reverse",
+   "lambda",
+   "tuples"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "scores = [('ana', 12), ('bo', 9), ('cy', 15)]\nranked = sorted(scores, key=lambda s: s[1], reverse=True)\nprint([name for name, _ in ranked])",
+  "options": [
+   {
+    "id": "a",
+    "text": "['cy', 'ana', 'bo']",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "['bo', 'ana', 'cy']",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "['cy', 'bo', 'ana']",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "['ana', 'bo', 'cy']",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "The key extracts the score (`s[1]`), and `reverse=True` sorts from the highest to the lowest score: 15, 12, 9 -> cy, ana, bo.",
+  "distractor_notes": {
+   "b": "Ascending order: forgets `reverse=True`.",
+   "c": "Sorts by name in reverse alphabetical order instead of by score.",
+   "d": "Original (alphabetical) order: the key and reverse arguments are ignored."
+  },
+  "slides": [
+   253
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0006",
+  "chapter": "S7",
+  "topic": "functional",
+  "tags": [
+   "sorted",
+   "key",
+   "stability",
+   "len"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "words = ['bb', 'a', 'cc', 'd', 'aa']\nprint(sorted(words, key=len))",
+  "options": [
+   {
+    "id": "a",
+    "text": "['a', 'd', 'aa', 'bb', 'cc']",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "['a', 'aa', 'bb', 'cc', 'd']",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "['d', 'a', 'bb', 'cc', 'aa']",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "['a', 'd', 'bb', 'cc', 'aa']",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "Only the length is compared. Python's sort is **stable**: items with equal keys keep their original relative order. Length 1: 'a' then 'd'; length 2: 'bb', 'cc', 'aa' in the order they appear in the list.",
+  "distractor_notes": {
+   "a": "Ties are not broken alphabetically: only the key (length) is compared and the original order is kept.",
+   "b": "That is plain alphabetical order (no key).",
+   "c": "'a' comes before 'd' in the input list, and the sort is stable."
+  },
+  "slides": [
+   253
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0007",
+  "chapter": "S7",
+  "topic": "functional",
+  "tags": [
+   "any",
+   "all",
+   "empty-iterable",
+   "truthiness"
+  ],
+  "type": "multi",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Which of the following expressions evaluate to `True`? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "all([])",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "any([])",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "all([0, 1, 2])",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "any(['', 0, 'a'])",
+    "mono": true
+   },
+   {
+    "id": "e",
+    "text": "all(x > 0 for x in [1, 2, 3])",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a",
+   "d",
+   "e"
+  ],
+  "explanation": "`all()` is True when no item is falsy - vacuously True for an empty iterable; `any()` is True when at least one item is truthy - False for an empty iterable. `0` is falsy so `all([0, 1, 2])` is False; `'a'` is truthy so `any([...,'a'])` is True; all three numbers are positive in (e).",
+  "distractor_notes": {
+   "b": "`any([])` is False: there is no truthy item at all.",
+   "c": "0 is falsy, so not *all* items are truthy."
+  },
+  "slides": [
+   253
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "",
+   "probe_template": "print((__OPTION_RAW__) is True)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0008",
+  "chapter": "S7",
+  "topic": "functional",
+  "tags": [
+   "zip",
+   "dict",
+   "shortest"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "keys = ['x', 'y', 'z']\nvals = [1, 2]\nprint(dict(zip(keys, vals)))",
+  "options": [
+   {
+    "id": "a",
+    "text": "{1: 'x', 2: 'y'}",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "{'x': 1, 'y': 2, 'z': None}",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "ValueError",
+    "mono": true,
+    "out": "!ValueError"
+   },
+   {
+    "id": "d",
+    "text": "{'x': 1, 'y': 2}",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "`zip()` stops as soon as the shortest iterable is exhausted, so it yields only ('x', 1) and ('y', 2); `dict()` turns these pairs into key/value entries. 'z' is silently dropped.",
+  "distractor_notes": {
+   "a": "The first iterable gives the keys, the second the values.",
+   "b": "zip does not pad missing values with None (that is itertools.zip_longest).",
+   "c": "Plain zip never complains about different lengths; it truncates."
+  },
+  "slides": [
+   253
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0009",
+  "chapter": "S7",
+  "topic": "functional",
+  "tags": [
+   "reduce",
+   "functools",
+   "lambda"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "from functools import reduce\nprint(reduce(lambda acc, x: acc * 10 + x, [1, 2, 3]))",
+  "options": [
+   {
+    "id": "a",
+    "text": "6",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "321",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "123",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "60",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "`reduce` folds the list from the left: acc starts as 1, then 1*10+2 = 12, then 12*10+3 = 123.",
+  "distractor_notes": {
+   "a": "That is `sum([1, 2, 3])`; the lambda multiplies the accumulator by 10 each step.",
+   "b": "reduce processes items from left to right, not right to left.",
+   "d": "Not a product of the items: acc*10 + x builds the digits one by one."
+  },
+  "slides": [
+   253
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0010",
+  "chapter": "S7",
+  "topic": "functional",
+  "tags": [
+   "reduce",
+   "initializer",
+   "TypeError"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "from functools import reduce\nwords = ['a', 'bb', 'ccc']\nprint(reduce(lambda acc, w: acc + len(w), words))",
+  "options": [
+   {
+    "id": "a",
+    "text": "6",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "TypeError",
+    "mono": true,
+    "out": "!TypeError"
+   },
+   {
+    "id": "c",
+    "text": "5",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "abbccc",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "Without an initial value, `reduce` uses the first item `'a'` as the starting accumulator. The first call computes `'a' + len('bb')`, i.e. str + int -> TypeError. `reduce(f, words, 0)` would give 6.",
+  "distractor_notes": {
+   "a": "That needs an initializer: `reduce(lambda acc, w: acc + len(w), words, 0)`.",
+   "c": "Would assume the first word is skipped; in fact it becomes the (string) accumulator and the addition fails.",
+   "d": "The lambda adds `len(w)` (an int), not the word itself."
+  },
+  "slides": [
+   253
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0011",
+  "chapter": "S7",
+  "topic": "functional",
+  "tags": [
+   "max",
+   "key",
+   "ties"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "words = ['kiwi', 'banana', 'fig', 'cherry']\nprint(max(words, key=len))",
+  "options": [
+   {
+    "id": "a",
+    "text": "banana",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "cherry",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "kiwi",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "6",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "With `key=len`, max compares lengths: 'banana' and 'cherry' both have 6 letters. When several items are maximal, `max` returns the first one encountered, i.e. 'banana'. It returns the item itself, not the key value.",
+  "distractor_notes": {
+   "b": "Ties go to the *first* maximal item, not the last.",
+   "c": "'kiwi' is the alphabetical maximum (no key); the key compares lengths.",
+   "d": "max returns the element, not the result of key(element)."
+  },
+  "slides": [
+   253
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0012",
+  "chapter": "S7",
+  "topic": "functional",
+  "tags": [
+   "lambda",
+   "default-arguments"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "mul = lambda a, b=2: a * b\nprint(mul(3), mul(3, 3))",
+  "options": [
+   {
+    "id": "a",
+    "text": "5 6",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "6 9",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "TypeError",
+    "mono": true,
+    "out": "!TypeError"
+   },
+   {
+    "id": "d",
+    "text": "9 9",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "A lambda accepts parameters with default values like a normal function. `mul(3)` uses b=2 -> 6, `mul(3, 3)` -> 9.",
+  "distractor_notes": {
+   "a": "Adds instead of multiplying.",
+   "c": "Default parameter values are allowed in a lambda.",
+   "d": "The default b=2 is used when b is not passed."
+  },
+  "slides": [
+   253,
+   205
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0013",
+  "chapter": "S7",
+  "topic": "functional",
+  "tags": [
+   "lambda",
+   "closure",
+   "late-binding"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "funcs = [lambda: i for i in range(3)]\nprint([f() for f in funcs])",
+  "options": [
+   {
+    "id": "a",
+    "text": "[0, 1, 2]",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "NameError",
+    "mono": true,
+    "out": "!NameError"
+   },
+   {
+    "id": "c",
+    "text": "[0, 0, 0]",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "[2, 2, 2]",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "Each lambda captures the *variable* `i`, not its value at creation time (late binding). The lambdas are only called after the loop has finished, when `i` is 2, so all three return 2. `lambda i=i: i` would freeze each value.",
+  "distractor_notes": {
+   "a": "Would need the value to be captured at creation, e.g. `lambda i=i: i`.",
+   "b": "The closures keep the comprehension's `i` alive, so it is still defined when they are called.",
+   "c": "The lambdas see the final value of i, not the first one."
+  },
+  "slides": [
+   205,
+   253
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0014",
+  "chapter": "S7",
+  "topic": "functional",
+  "tags": [
+   "lambda",
+   "expression-vs-statement",
+   "SyntaxError"
+  ],
+  "type": "multi",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Which of the following lines are syntactically valid Python? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "f = lambda: 42",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "f = lambda x: y = x + 1",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "f = lambda x: x if x > 0 else -x",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "f = lambda x, y: (x, y)",
+    "mono": true
+   },
+   {
+    "id": "e",
+    "text": "f = lambda x: assert x > 0",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a",
+   "c",
+   "d"
+  ],
+  "explanation": "The body of a lambda must be a single **expression**. A lambda may have no parameters (a), use a conditional expression (c) or return a tuple (d). Assignments (`y = ...`) and statements such as `assert` are not expressions, so (b) and (e) are SyntaxErrors.",
+  "distractor_notes": {
+   "b": "`y = x + 1` is an assignment statement, not an expression.",
+   "e": "`assert` is a statement; it cannot be the body of a lambda."
+  },
+  "slides": [
+   253,
+   205
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "",
+   "probe_template": "try:\n    compile(__OPTION__, 'q', 'exec')\n    print(True)\nexcept SyntaxError:\n    print(False)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0015",
+  "chapter": "S7",
+  "topic": "functional",
+  "tags": [
+   "map",
+   "multiple-iterables",
+   "lambda"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "a = [1, 2, 3]\nb = [10, 20, 30, 40]\nprint(list(map(lambda x, y: x + y, a, b)))",
+  "options": [
+   {
+    "id": "a",
+    "text": "TypeError",
+    "mono": true,
+    "out": "!TypeError"
+   },
+   {
+    "id": "b",
+    "text": "[11, 22, 33, 40]",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "[11, 22, 33]",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "[1, 2, 3, 10, 20, 30, 40]",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "With several iterables, `map` calls the function with one item from each (`f(a[0], b[0])`, ...) and stops when the shortest iterable is exhausted, so 40 is never used.",
+  "distractor_notes": {
+   "a": "map accepts several iterables when the function takes that many arguments.",
+   "b": "map stops at the shortest iterable; it does not pass 40 on its own.",
+   "d": "That is list concatenation `a + b`, not element-wise addition."
+  },
+  "slides": [
+   253,
+   254
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0016",
+  "chapter": "S7",
+  "topic": "functional",
+  "tags": [
+   "map",
+   "lazy",
+   "side-effects"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "def show(x):\n    print(x, end=' ')\n    return x\n\nm = map(show, [1, 2, 3])\nprint('done')",
+  "options": [
+   {
+    "id": "a",
+    "text": "1 2 3 done",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "1 2 3",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "done",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "Nothing is printed",
+    "out": "",
+    "mono": false
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "`map` is lazy: creating the map object does not call `show` at all. The function would only run when the map is consumed (e.g. `list(m)` or a for loop), which never happens here, so only 'done' is printed.",
+  "distractor_notes": {
+   "a": "Assumes map calls the function immediately, as a list comprehension would.",
+   "b": "show is never called, and 'done' is printed in any case.",
+   "d": "`print('done')` always runs."
+  },
+  "slides": [
+   253,
+   250
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0017",
+  "chapter": "S7",
+  "topic": "argparse",
+  "tags": [
+   "argparse",
+   "default"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code? (`parse_args([])` parses an empty command line, as if the script were run without arguments.)",
+  "code": "import argparse\nparser = argparse.ArgumentParser()\nparser.add_argument('--num_iter', type=int, default=10)\nargs = parser.parse_args([])\nprint(args.num_iter * 2)",
+  "options": [
+   {
+    "id": "a",
+    "text": "20",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "1010",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "TypeError",
+    "mono": true,
+    "out": "!TypeError"
+   },
+   {
+    "id": "d",
+    "text": "AttributeError",
+    "mono": true,
+    "out": "!AttributeError"
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "When `--num_iter` is not given, the attribute takes its `default` value, the int 10, so the result is 20.",
+  "distractor_notes": {
+   "b": "The default is the int 10, not the string '10'.",
+   "c": "The default is the int 10 and `int * 2` is valid; nothing is None or a str here.",
+   "d": "Every declared argument becomes an attribute of `args`, even when it is not passed."
+  },
+  "slides": [
+   261
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0018",
+  "chapter": "S7",
+  "topic": "argparse",
+  "tags": [
+   "argparse",
+   "type",
+   "str-repetition"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "import argparse\nparser = argparse.ArgumentParser()\nparser.add_argument('--num_iter', default=10)\nargs = parser.parse_args(['--num_iter', '34'])\nprint(args.num_iter * 2)",
+  "options": [
+   {
+    "id": "a",
+    "text": "68",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "TypeError",
+    "mono": true,
+    "out": "!TypeError"
+   },
+   {
+    "id": "c",
+    "text": "20",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "3434",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "Command-line values are strings. Without `type=int`, argparse keeps '34' as a str, and `'34' * 2` repeats the string: 3434. The default 10 is only used when the option is absent.",
+  "distractor_notes": {
+   "a": "Would need `type=int` in add_argument to convert the value.",
+   "b": "str * int is valid: it repeats the string.",
+   "c": "The option is given on the command line, so the default is not used."
+  },
+  "slides": [
+   261
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0019",
+  "chapter": "S7",
+  "topic": "argparse",
+  "tags": [
+   "argparse",
+   "dest",
+   "underscore",
+   "float"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "import argparse\nparser = argparse.ArgumentParser()\nparser.add_argument('--learning-rate', type=float, default=0.1)\nargs = parser.parse_args(['--learning-rate=0.5'])\nprint(args.learning_rate)",
+  "options": [
+   {
+    "id": "a",
+    "text": "0.1",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "0.5",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "AttributeError",
+    "mono": true,
+    "out": "!AttributeError"
+   },
+   {
+    "id": "d",
+    "text": "'0.5'",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "The `--name=value` syntax is accepted, and dashes inside an option name become underscores in the attribute name (`args.learning_rate`). `type=float` converts '0.5' to 0.5.",
+  "distractor_notes": {
+   "a": "The option is given, so the default is overridden.",
+   "c": "argparse converts '-' to '_' to build a valid attribute name.",
+   "d": "type=float converts the string, and print of a float shows no quotes anyway."
+  },
+  "slides": [
+   261
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0020",
+  "chapter": "S7",
+  "topic": "argparse",
+  "tags": [
+   "argparse",
+   "SystemExit",
+   "type"
+  ],
+  "type": "multi",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "Given the parser below, which calls return normally (i.e. argparse does **not** print an error and exit)? Select all that apply.",
+  "code": "import argparse\nparser = argparse.ArgumentParser()\nparser.add_argument('--num_iter', type=int, default=10)",
+  "options": [
+   {
+    "id": "a",
+    "text": "parser.parse_args(['--num_iter', '34'])",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "parser.parse_args(['--num_iter=34'])",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "parser.parse_args([])",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "parser.parse_args(['--num_iter', '3.5'])",
+    "mono": true
+   },
+   {
+    "id": "e",
+    "text": "parser.parse_args(['--iterations', '3'])",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a",
+   "b",
+   "c"
+  ],
+  "explanation": "Both `--num_iter 34` and `--num_iter=34` are accepted, and an empty list uses the default. '3.5' cannot be converted by `int()`, and `--iterations` is an unknown option: in both cases argparse prints a usage error and raises `SystemExit`.",
+  "distractor_notes": {
+   "d": "type=int calls int('3.5'), which fails, so argparse reports an error and exits (SystemExit).",
+   "e": "Unknown options are rejected: argparse prints an error and exits."
+  },
+  "slides": [
+   261
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "import argparse\nparser = argparse.ArgumentParser()\nparser.add_argument('--num_iter', type=int, default=10)",
+   "probe_template": "import io, contextlib\ntry:\n    with contextlib.redirect_stderr(io.StringIO()):\n        __OPTION_RAW__\n    print(True)\nexcept SystemExit:\n    print(False)"
+  },
+  "reviewed": 1
+ }
+]

@@ -1,0 +1,8 @@
+# Libraries needed to execute every question of the bank during verification
+jsonschema>=4.20
+numpy>=1.26
+pandas>=2.1
+matplotlib>=3.8
+seaborn>=0.13
+flask>=3.0
+requests>=2.31

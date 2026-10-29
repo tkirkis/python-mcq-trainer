@@ -1,0 +1,553 @@
+[
+  {
+    "id": "S4-0081",
+    "chapter": "S4",
+    "topic": "first-class-functions",
+    "tags": [
+      "closure",
+      "nonlocal",
+      "returning-functions"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "def make(a):\n    def add(b):\n        nonlocal a\n        a += 1\n        return a + b\n    return add\nf = make(10)\nprint(f(1), f(1))",
+    "options": [
+      {
+        "id": "a",
+        "text": "UnboundLocalError",
+        "out": "!UnboundLocalError"
+      },
+      {
+        "id": "b",
+        "text": "12 12",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "11 11",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "12 13",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "make returns the inner function add, which is a closure: it keeps access to make's variable a even after make has returned. Thanks to nonlocal, each call increments that captured a: first call a = 11 -> 12, second call a = 12 -> 13.",
+    "distractor_notes": {
+      "a": "`nonlocal a` makes the `a += 1` legal.",
+      "b": "The captured a is shared by successive calls of f; it is not reset.",
+      "c": "a is incremented before the addition: 11 + 1 = 12 on the first call."
+    },
+    "slides": [
+      177,
+      172
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0082",
+    "chapter": "S4",
+    "topic": "first-class-functions",
+    "tags": [
+      "closure",
+      "late-binding",
+      "lambda"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "funcs = [lambda: i for i in range(3)]\nprint([f() for f in funcs])",
+    "options": [
+      {
+        "id": "a",
+        "text": "[2, 2, 2]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[0, 1, 2]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[3, 3, 3]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "NameError",
+        "out": "!NameError"
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "Each lambda refers to the variable i, not to its value at creation time (late binding). The lambdas are called after the comprehension has finished, when i is 2, so they all return 2. Writing `lambda i=i: i` would capture the current value instead.",
+    "distractor_notes": {
+      "b": "That needs the value to be captured, e.g. with a default argument `lambda i=i: i`.",
+      "c": "range(3) ends with i = 2, never 3.",
+      "d": "The closures keep the comprehension's variable i alive, so it is found."
+    },
+    "slides": [
+      177
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0083",
+    "chapter": "S4",
+    "topic": "first-class-functions",
+    "tags": [
+      "lambda",
+      "default-argument",
+      "closure"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "adders = [lambda x, n=n: x + n for n in range(3)]\nprint(adders[1](10), adders[2](10))",
+    "options": [
+      {
+        "id": "a",
+        "text": "10 10",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "12 12",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "11 12",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "TypeError",
+        "out": "!TypeError"
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "Default values are evaluated when each lambda is created, so `n=n` stores the current n (0, 1, 2) in each function. adders[1](10) = 10 + 1 and adders[2](10) = 10 + 2.",
+    "distractor_notes": {
+      "a": "Each lambda adds its stored n to x.",
+      "b": "Late binding would apply without the `n=n` default; here each lambda stores its own value.",
+      "d": "Calling with one argument is fine: n has a default value."
+    },
+    "slides": [
+      177,
+      82
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0084",
+    "chapter": "S4",
+    "topic": "first-class-functions",
+    "tags": [
+      "higher-order-functions",
+      "functions-as-arguments"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "Find the output of the code?",
+    "code": "def twice(f, x):\n    return f(f(x))\ndef inc(n):\n    return n + 1\nprint(twice(inc, 5))",
+    "options": [
+      {
+        "id": "a",
+        "text": "6",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "TypeError",
+        "out": "!TypeError"
+      },
+      {
+        "id": "c",
+        "text": "10",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "7",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "Functions are values: inc is passed (not called) to twice, which calls it two times: inc(inc(5)) = inc(6) = 7.",
+    "distractor_notes": {
+      "a": "f is applied twice, not once.",
+      "b": "Passing a function as an argument is perfectly legal.",
+      "c": "twice applies f twice; it does not double the number."
+    },
+    "slides": [
+      81,
+      177
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0085",
+    "chapter": "S4",
+    "topic": "first-class-functions",
+    "tags": [
+      "functions-as-arguments",
+      "TypeError",
+      "call-vs-reference"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What happens in the below code?",
+    "code": "def run(f, x):\n    return f(x)\ndef double(n):\n    return 2 * n\nprint(run(double(3), 4))",
+    "options": [
+      {
+        "id": "a",
+        "text": "8",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "TypeError",
+        "out": "!TypeError"
+      },
+      {
+        "id": "c",
+        "text": "24",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "6",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "double(3) is a call: it is evaluated first and passes the int 6 to run. Inside run, f(x) tries to call 6(4): TypeError ('int' object is not callable). To pass the function itself, write run(double, 4).",
+    "distractor_notes": {
+      "a": "That is the result of run(double, 4), which passes the function without calling it.",
+      "c": "f(x) is a call, not a multiplication.",
+      "d": "run does not return f; it calls it."
+    },
+    "slides": [
+      81,
+      177
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0086",
+    "chapter": "S4",
+    "topic": "first-class-functions",
+    "tags": [
+      "functions-as-arguments",
+      "map",
+      "select-all"
+    ],
+    "type": "multi",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "With `square` defined as below, which expressions evaluate to `[1, 4, 9]`? Select all that apply.",
+    "code": "def square(x):\n    return x * x",
+    "options": [
+      {
+        "id": "a",
+        "text": "list(map(square, [1, 2, 3]))",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[square(x) for x in [1, 2, 3]]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "list(map(square(), [1, 2, 3]))",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[f(x) for f in [square] for x in [1, 2, 3]]",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "square([1, 2, 3])",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "b",
+      "d"
+    ],
+    "explanation": "square is a value that can be passed to map (a) or stored in a list and called later (d); (b) calls it explicitly for each item. `square()` without an argument is a call that fails before map even runs (TypeError), and square([1, 2, 3]) computes list * list (TypeError).",
+    "distractor_notes": {
+      "c": "square() calls the function with no argument: TypeError. Pass the function itself: map(square, ...).",
+      "e": "x * x with a list x is list * list: TypeError."
+    },
+    "slides": [
+      81,
+      177
+    ],
+    "verify": {
+      "mode": "truth",
+      "probe_template": "print((__OPTION_RAW__) == [1, 4, 9])"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0087",
+    "chapter": "S4",
+    "topic": "first-class-functions",
+    "tags": [
+      "functions-as-values",
+      "del",
+      "alias"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "def greet():\n    return 'hi'\nsay = greet\ndel greet\nprint(say())",
+    "options": [
+      {
+        "id": "a",
+        "text": "hi",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "NameError",
+        "out": "!NameError"
+      },
+      {
+        "id": "c",
+        "text": "None",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "greet",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "`say = greet` binds a second name to the same function object. `del greet` only deletes the name greet; the function object survives because say still refers to it.",
+    "distractor_notes": {
+      "b": "del removes a name, not the object: say still works (only calling greet() would raise NameError).",
+      "c": "The function returns 'hi'.",
+      "d": "say() calls the function; the name it was defined with does not matter."
+    },
+    "slides": [
+      177,
+      173
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0088",
+    "chapter": "S4",
+    "topic": "first-class-functions",
+    "tags": [
+      "closure",
+      "nonlocal",
+      "state"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "def counter():\n    n = 0\n    def step():\n        nonlocal n\n        n += 1\n        return n\n    return step\na = counter()\nb = counter()\na()\na()\nprint(a(), b())",
+    "options": [
+      {
+        "id": "a",
+        "text": "1 1",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "3 4",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "3 1",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "3 3",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "Each call of counter creates a new local n and a new closure step bound to it. a and b therefore have independent counters: a has been called three times (3), b once (1).",
+    "distractor_notes": {
+      "a": "nonlocal n makes the increments persist between calls of the same closure.",
+      "b": "Each counter() call has its own n; a and b do not share state.",
+      "d": "b has only been called once."
+    },
+    "slides": [
+      177,
+      172
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0089",
+    "chapter": "S4",
+    "topic": "first-class-functions",
+    "tags": [
+      "closure",
+      "mutability",
+      "enclosing"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "def make_tally():\n    box = [0]\n    def tick():\n        box[0] += 1\n        return box[0]\n    return tick\nt = make_tally()\nt()\nprint(t())",
+    "options": [
+      {
+        "id": "a",
+        "text": "1",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "UnboundLocalError",
+        "out": "!UnboundLocalError"
+      },
+      {
+        "id": "c",
+        "text": "2",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[2]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "tick never assigns to the name box itself; `box[0] += 1` only mutates the list that box refers to. So no nonlocal is needed: box is read from the enclosing scope, and the list keeps its state between calls (1, then 2).",
+    "distractor_notes": {
+      "a": "The list lives in the closure and keeps its content between calls.",
+      "b": "Only an assignment to the bare name box would make it local; item assignment box[0] = ... does not.",
+      "d": "tick returns box[0], an int, not the list."
+    },
+    "slides": [
+      177,
+      169,
+      174
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0090",
+    "chapter": "S4",
+    "topic": "first-class-functions",
+    "tags": [
+      "functions-as-values",
+      "select-all"
+    ],
+    "type": "multi",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "`f` is defined as below. Which of the following work without raising an error? Select all that apply.",
+    "code": "def f(x):\n    return x",
+    "options": [
+      {
+        "id": "a",
+        "text": "Storing it in a list and calling it from there: `fs = [f]`, then `fs[0](1)`",
+        "probe": "fs = [f]\nprint(fs[0](1) == 1)"
+      },
+      {
+        "id": "b",
+        "text": "Passing it to another function: `list(map(f, [1, 2]))`",
+        "probe": "print(list(map(f, [1, 2])) == [1, 2])"
+      },
+      {
+        "id": "c",
+        "text": "Returning it from another function: `def g(): return f`, then `g()(3)`",
+        "probe": "def g():\n    return f\nprint(g()(3) == 3)"
+      },
+      {
+        "id": "d",
+        "text": "Using it as a dictionary key: `d = {f: 'id'}`",
+        "probe": "d = {f: 'id'}\nprint(d[f] == 'id')"
+      },
+      {
+        "id": "e",
+        "text": "Adding two functions: `f + f`",
+        "probe": "h = f + f\nprint(True)"
+      }
+    ],
+    "correct": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "explanation": "Functions are first-class objects: they can be stored in containers (a), passed as arguments (b), returned from functions (c) and, being hashable objects, even used as dictionary keys (d). There is no + operator for functions: `f + f` raises TypeError.",
+    "distractor_notes": {
+      "e": "Function objects do not support +: TypeError (unsupported operand types)."
+    },
+    "slides": [
+      177,
+      81
+    ],
+    "verify": {
+      "mode": "truth"
+    },
+    "reviewed": 1
+  }
+]

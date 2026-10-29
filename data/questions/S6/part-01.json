@@ -1,0 +1,1072 @@
+[
+ {
+  "id": "S6-0001",
+  "chapter": "S6",
+  "topic": "numpy-arrays",
+  "tags": [
+   "dtype",
+   "upcasting",
+   "print"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What will be the output of the code?",
+  "code": "import numpy as np\na = np.array([1, 2.5, 3])\nprint(a)",
+  "options": [
+   {
+    "id": "a",
+    "text": "[1.  2.5 3. ]",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "TypeError",
+    "out": "!TypeError"
+   },
+   {
+    "id": "c",
+    "text": "[1, 2.5, 3]",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "[1 2.5 3]",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "A NumPy array holds a single dtype. Mixing ints and a float upcasts every element to float64, so 1 and 3 become `1.` and `3.`; print pads the values so the columns line up.",
+  "distractor_notes": {
+   "d": "An array cannot keep ints and floats side by side: all elements are converted to the common type, float.",
+   "c": "That is how a Python list prints; NumPy prints arrays without commas.",
+   "b": "Mixing numeric types is allowed: NumPy promotes them to a common type instead of raising."
+  },
+  "slides": [
+   217,
+   218
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0002",
+  "chapter": "S6",
+  "topic": "numpy-arrays",
+  "tags": [
+   "shape"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "import numpy as np\na = np.array([[1, 2, 3], [4, 5, 6]])\nprint(a.shape)",
+  "options": [
+   {
+    "id": "a",
+    "text": "(6,)",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "(3, 2)",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "(2, 3)",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "6",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "`shape` is a tuple with the size of each axis. Two inner lists of three numbers give 2 rows and 3 columns: `(2, 3)`.",
+  "distractor_notes": {
+   "b": "Rows and columns swapped: the outer list (2 elements) is the first axis.",
+   "a": "That is the shape of a flat 1D array of 6 elements (e.g. `a.flatten()`).",
+   "d": "6 is `a.size`, the total number of elements, not the shape."
+  },
+  "slides": [
+   217,
+   218
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0003",
+  "chapter": "S6",
+  "topic": "numpy-arrays",
+  "tags": [
+   "ndim",
+   "size",
+   "len"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Find the output of the code?",
+  "code": "import numpy as np\na = np.zeros((4, 5))\nprint(a.ndim, a.size, len(a))",
+  "options": [
+   {
+    "id": "a",
+    "text": "2 20 5",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "20 2 4",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "2 20 4",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "2 20 20",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "`ndim` is the number of axes (2), `size` the total number of elements (4 x 5 = 20) and `len()` returns the length of the first axis only, i.e. the number of rows (4).",
+  "distractor_notes": {
+   "d": "`len` of an array is not its total size: it is the length of axis 0.",
+   "a": "`len` gives the first dimension (rows), not the number of columns.",
+   "b": "`ndim` and `size` are swapped."
+  },
+  "slides": [
+   217,
+   218
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0004",
+  "chapter": "S6",
+  "topic": "numpy-arrays",
+  "tags": [
+   "arange",
+   "end-exclusive"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following snippet?",
+  "code": "import numpy as np\nprint(np.arange(2, 10, 2))",
+  "options": [
+   {
+    "id": "a",
+    "text": "[2 4 6 8 10]",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "[2 4 6 8]",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "[2, 4, 6, 8]",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "[0 2 4 6 8]",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "Like `range`, `np.arange(start, stop, step)` stops before `stop`: 2, 4, 6, 8. The result is an array, printed without commas.",
+  "distractor_notes": {
+   "a": "The stop value 10 is excluded (unlike `np.linspace`, which includes its endpoint).",
+   "d": "The sequence starts at `start` = 2, not at 0.",
+   "c": "That is a list; an array prints without commas."
+  },
+  "slides": [
+   217,
+   218
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0005",
+  "chapter": "S6",
+  "topic": "numpy-arrays",
+  "tags": [
+   "linspace",
+   "end-inclusive"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "import numpy as np\nprint(np.linspace(0, 1, 5))",
+  "options": [
+   {
+    "id": "a",
+    "text": "[0.   0.25 0.5  0.75 1.  ]",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "[0 1 2 3 4]",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "[0.   0.25 0.5  0.75]",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "[0.  0.2 0.4 0.6 0.8]",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "`np.linspace(start, stop, num)` returns `num` evenly spaced floats **including** `stop`: 5 points from 0 to 1 means 4 gaps of 0.25.",
+  "distractor_notes": {
+   "d": "That is `np.arange(0, 1, 0.2)`: it treats the call like arange and drops the endpoint.",
+   "c": "Only 4 values: linspace includes the endpoint and returns exactly `num` = 5 values.",
+   "b": "The third argument is the number of samples, and the values are floats between 0 and 1."
+  },
+  "slides": [
+   217,
+   218
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0006",
+  "chapter": "S6",
+  "topic": "numpy-arrays",
+  "tags": [
+   "reshape",
+   "-1"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What will be the output of the code?",
+  "code": "import numpy as np\na = np.arange(12).reshape(3, -1)\nprint(a.shape)",
+  "options": [
+   {
+    "id": "a",
+    "text": "(4, 3)",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "ValueError",
+    "out": "!ValueError"
+   },
+   {
+    "id": "c",
+    "text": "(3, 4)",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "(3, 1)",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "In `reshape`, `-1` means \"infer this dimension from the size\": 12 elements in 3 rows gives 4 columns.",
+  "distractor_notes": {
+   "d": "-1 is not a size of 1: NumPy computes it so that the total size stays 12.",
+   "a": "The explicit 3 is the first axis (rows), so the inferred 4 is the number of columns.",
+   "b": "One -1 is allowed, and 12 is divisible by 3."
+  },
+  "slides": [
+   217,
+   218
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0007",
+  "chapter": "S6",
+  "topic": "numpy-arrays",
+  "tags": [
+   "reshape",
+   "ValueError"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "import numpy as np\na = np.arange(10)\nb = a.reshape(3, -1)\nprint(b.shape)",
+  "options": [
+   {
+    "id": "a",
+    "text": "(3, 3)",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "ValueError",
+    "out": "!ValueError"
+   },
+   {
+    "id": "c",
+    "text": "(3, 4)",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "(3, 10)",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "`reshape` never drops nor pads elements: 10 elements cannot be split into 3 equal rows, so NumPy raises ValueError (cannot reshape array of size 10 into shape (3, newaxis)).",
+  "distractor_notes": {
+   "a": "That would silently drop the 10th element: reshape never does that.",
+   "c": "That would need 12 elements: reshape never pads.",
+   "d": "-1 is inferred from the total size; 3 x 10 is not 10."
+  },
+  "slides": [
+   217,
+   218
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0008",
+  "chapter": "S6",
+  "topic": "numpy-arrays",
+  "tags": [
+   "dtype",
+   "truncation",
+   "assignment"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Find the output of the code?",
+  "code": "import numpy as np\na = np.array([1, 2, 3])\na[0] = 9.7\nprint(a)",
+  "options": [
+   {
+    "id": "a",
+    "text": "[9.7 2.  3. ]",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "[9 2 3]",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "[10  2  3]",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "TypeError",
+    "out": "!TypeError"
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "The dtype of an array is fixed when it is created (integers here). Assigning a float into an integer array converts the value to the array's dtype, truncating toward zero: 9.7 becomes 9.",
+  "distractor_notes": {
+   "a": "An existing array is never upcast by an assignment; only creation picks the common type.",
+   "c": "The conversion truncates, it does not round.",
+   "d": "Item assignment silently casts the float to int; no error."
+  },
+  "slides": [
+   217,
+   218
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0009",
+  "chapter": "S6",
+  "topic": "numpy-arrays",
+  "tags": [
+   "zeros",
+   "dtype"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following snippet?",
+  "code": "import numpy as np\nprint(np.zeros((2, 3)))",
+  "options": [
+   {
+    "id": "a",
+    "text": "[[0. 0. 0.]\n [0. 0. 0.]]",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "[0. 0. 0. 0. 0. 0.]",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "[[0 0 0]\n [0 0 0]]",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "[[0. 0.]\n [0. 0.]\n [0. 0.]]",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "`np.zeros(shape)` builds an array of that shape (2 rows, 3 columns) filled with zeros. The default dtype is float64, so the zeros print as `0.`.",
+  "distractor_notes": {
+   "c": "The default dtype is float, not int (you would need `dtype=int`).",
+   "d": "Shape (2, 3) means 2 rows of 3 values, not 3 rows of 2.",
+   "b": "The tuple is the shape of a 2D array, not a count of elements."
+  },
+  "slides": [
+   217,
+   218
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0010",
+  "chapter": "S6",
+  "topic": "numpy-arrays",
+  "tags": [
+   "shape",
+   "1D-vs-2D",
+   "reshape"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "import numpy as np\na = np.array([1, 2, 3])\nb = np.array([[1, 2, 3]])\nc = a.reshape(-1, 1)\nprint(a.shape, b.shape, c.shape)",
+  "options": [
+   {
+    "id": "a",
+    "text": "(3,) (1, 3) (1, 3)",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "(1, 3) (1, 3) (3, 1)",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "(3,) (3,) (3, 1)",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "(3,) (1, 3) (3, 1)",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "A flat list gives a 1D array of shape `(3,)`. The extra pair of brackets in `b` adds an axis: one row of 3 values, `(1, 3)`. `reshape(-1, 1)` asks for one column and infers the 3 rows: `(3, 1)`.",
+  "distractor_notes": {
+   "c": "The double brackets create a 2D array with a single row.",
+   "b": "A 1D array has a one-element shape tuple, `(3,)`, not `(1, 3)`.",
+   "a": "`reshape(-1, 1)` fixes the number of columns to 1; the rows are inferred."
+  },
+  "slides": [
+   217,
+   218
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0011",
+  "chapter": "S6",
+  "topic": "numpy-arrays",
+  "tags": [
+   "dtype",
+   "string",
+   "upcasting"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What will be the output of the code?",
+  "code": "import numpy as np\na = np.array([1, '2', 3.0])\nprint(a)",
+  "options": [
+   {
+    "id": "a",
+    "text": "[1. 2. 3.]",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "TypeError",
+    "out": "!TypeError"
+   },
+   {
+    "id": "c",
+    "text": "['1' '2' '3.0']",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "[1 '2' 3.0]",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "All elements of an array share one dtype. When a string is mixed with numbers, the common type is a string type, so every element is converted to text: 1 becomes '1' and 3.0 becomes '3.0'.",
+  "distractor_notes": {
+   "d": "An array cannot keep elements of different types.",
+   "a": "NumPy does not parse '2' into a number; it converts the numbers to strings instead.",
+   "b": "No error: a common (string) type exists."
+  },
+  "slides": [
+   217
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0012",
+  "chapter": "S6",
+  "topic": "numpy-arrays",
+  "tags": [
+   "dtype",
+   "truncation"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "import numpy as np\na = np.array([1.9, -1.9, 2.5], dtype=int)\nprint(a)",
+  "options": [
+   {
+    "id": "a",
+    "text": "[ 1 -1  2]",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "[ 2 -2  2]",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "[ 1 -2  2]",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "ValueError",
+    "out": "!ValueError"
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "Converting floats to an integer dtype truncates toward zero, like Python's `int()`: 1.9 -> 1, -1.9 -> -1, 2.5 -> 2. There is no rounding and no flooring.",
+  "distractor_notes": {
+   "b": "The conversion does not round (1.9 would become 2 and -1.9 would become -2).",
+   "c": "That is flooring (`np.floor`); truncation goes toward zero, so -1.9 becomes -1.",
+   "d": "Float data with `dtype=int` is accepted: the values are cast."
+  },
+  "slides": [
+   217
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0013",
+  "chapter": "S6",
+  "topic": "numpy-arrays",
+  "tags": [
+   "shape",
+   "zeros",
+   "reshape",
+   "transpose"
+  ],
+  "type": "multi",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Which of the following expressions create an array of shape `(2, 3)`? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "np.zeros((2, 3))",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "np.zeros(2, 3)",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "np.arange(6).reshape(2, 3)",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "np.array([[1, 2], [3, 4], [5, 6]])",
+    "mono": true
+   },
+   {
+    "id": "e",
+    "text": "np.ones((3, 2)).T",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a",
+   "c",
+   "e"
+  ],
+  "explanation": "The shape must be passed as one tuple: `np.zeros((2, 3))`. `np.arange(6)` has 6 elements that reshape into 2 x 3, and transposing a (3, 2) array gives (2, 3).",
+  "distractor_notes": {
+   "b": "The second positional parameter of `np.zeros` is the dtype, so `3` is rejected with a TypeError.",
+   "d": "Three inner lists of two numbers: shape (3, 2)."
+  },
+  "slides": [
+   217,
+   218
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "import numpy as np",
+   "probe_template": "x = __OPTION_RAW__\nprint(x.shape == (2, 3))"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0014",
+  "chapter": "S6",
+  "topic": "numpy-arrays",
+  "tags": [
+   "arange",
+   "linspace"
+  ],
+  "type": "multi",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Which of the following statements are true? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "`np.arange(0, 1, 0.25)` has 4 elements",
+    "probe": "print(len(np.arange(0, 1, 0.25)) == 4)"
+   },
+   {
+    "id": "b",
+    "text": "The last element of `np.linspace(0, 1, 4)` is `1.0`",
+    "probe": "print(bool(np.linspace(0, 1, 4)[-1] == 1.0))"
+   },
+   {
+    "id": "c",
+    "text": "`5 in np.arange(5)` is `True`",
+    "probe": "print(bool(5 in np.arange(5)))"
+   },
+   {
+    "id": "d",
+    "text": "The values of `np.linspace(0, 10, 5)` are spaced by 2",
+    "probe": "v = np.linspace(0, 10, 5)\nprint(bool(v[1] - v[0] == 2))"
+   }
+  ],
+  "correct": [
+   "a",
+   "b"
+  ],
+  "explanation": "`arange` excludes its stop value (0, 0.25, 0.5, 0.75: 4 elements; `arange(5)` is 0..4), whereas `linspace` includes it: `linspace(0, 1, 4)` ends at 1.0, and `linspace(0, 10, 5)` has 4 gaps of 2.5.",
+  "distractor_notes": {
+   "c": "`np.arange(5)` is 0, 1, 2, 3, 4: the stop value is excluded.",
+   "d": "5 points means 4 intervals: 10 / 4 = 2.5."
+  },
+  "slides": [
+   217,
+   218
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "import numpy as np"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0015",
+  "chapter": "S6",
+  "topic": "numpy-axes",
+  "tags": [
+   "axis",
+   "max"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "import numpy as np\nt = np.array([[5, 3, 7],\n              [2, 8, 1]])\nprint(t.max(axis=0))",
+  "options": [
+   {
+    "id": "a",
+    "text": "8",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "[5 8 7]",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "[7 8]",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "[2 3 1]",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "`axis=0` runs down the rows: the rows are collapsed and you get one result per column: max(5, 2) = 5, max(3, 8) = 8, max(7, 1) = 7.",
+  "distractor_notes": {
+   "c": "That is `axis=1`: one maximum per row.",
+   "a": "That is `t.max()` with no axis: the maximum of the whole array.",
+   "d": "Those are the column minima."
+  },
+  "slides": [
+   219
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0016",
+  "chapter": "S6",
+  "topic": "numpy-axes",
+  "tags": [
+   "axis",
+   "sum"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What will be the output of the code?",
+  "code": "import numpy as np\na = np.array([[1, 2, 3],\n              [4, 5, 6]])\nprint(a.sum(axis=1))",
+  "options": [
+   {
+    "id": "a",
+    "text": "[[ 6]\n [15]]",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "[ 6 15]",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "[5 7 9]",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "21",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "`axis=1` collapses the columns: one sum per row, 1+2+3 = 6 and 4+5+6 = 15. The result is 1D with shape (2,).",
+  "distractor_notes": {
+   "c": "Those are the column sums (`axis=0`).",
+   "d": "That is the total, `a.sum()` without axis.",
+   "a": "The reduced axis disappears; it is only kept with size 1 if you pass `keepdims=True`."
+  },
+  "slides": [
+   219
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0017",
+  "chapter": "S6",
+  "topic": "numpy-axes",
+  "tags": [
+   "axis",
+   "mean"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "import numpy as np\na = np.array([[1, 2], [3, 4]])\nprint(a.mean())\nprint(a.mean(axis=0))",
+  "options": [
+   {
+    "id": "a",
+    "text": "2.5\n2.5",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "2.5\n[1.5 3.5]",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "[2. 3.]\n[2. 3.]",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "2.5\n[2. 3.]",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "Without `axis`, the mean is taken over all elements: 10 / 4 = 2.5. With `axis=0`, each column is averaged: (1+3)/2 = 2 and (2+4)/2 = 3, printed as floats.",
+  "distractor_notes": {
+   "b": "Those are the row means (`axis=1`).",
+   "c": "Without an axis argument the whole array is reduced to a single number.",
+   "a": "With `axis=0` the result has one value per column, not a single number."
+  },
+  "slides": [
+   219
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0018",
+  "chapter": "S6",
+  "topic": "numpy-axes",
+  "tags": [
+   "axis",
+   "boolean-sum",
+   "count"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Find the output of the code?",
+  "code": "import numpy as np\na = np.array([[1, 5, 3],\n              [4, 2, 6]])\nprint((a > 2).sum(axis=0))",
+  "options": [
+   {
+    "id": "a",
+    "text": "4",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "[4 5 9]",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "[2 2]",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "[1 1 2]",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "`a > 2` is a boolean array; summing booleans counts the True values (True = 1). With `axis=0` the count is done down each column: 1, 1 and 2.",
+  "distractor_notes": {
+   "c": "Those are the counts per row (`axis=1`).",
+   "a": "That is the total count, without axis.",
+   "b": "That sums the values greater than 2 in each column instead of counting them."
+  },
+  "slides": [
+   219,
+   226
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0019",
+  "chapter": "S6",
+  "topic": "numpy-axes",
+  "tags": [
+   "axis",
+   "shape",
+   "3D"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following snippet?",
+  "code": "import numpy as np\na = np.zeros((2, 3, 4))\nprint(a.sum(axis=1).shape)",
+  "options": [
+   {
+    "id": "a",
+    "text": "(2, 3)",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "(2, 1, 4)",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "(2, 4)",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "(3,)",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "Aggregating along an axis removes that axis from the shape: (2, 3, 4) without axis 1 gives (2, 4).",
+  "distractor_notes": {
+   "d": "The reduced axis is removed; the other axes are kept, not the other way round.",
+   "a": "That removes the last axis (`axis=2`).",
+   "b": "The reduced axis is dropped, not kept with length 1 (that needs `keepdims=True`)."
+  },
+  "slides": [
+   219
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0020",
+  "chapter": "S6",
+  "topic": "numpy-axes",
+  "tags": [
+   "axis",
+   "argmax"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "import numpy as np\na = np.array([[3, 9, 1],\n              [7, 2, 8]])\nprint(a.argmax(axis=1))",
+  "options": [
+   {
+    "id": "a",
+    "text": "[1 2]",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "[9 8]",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "[1 0 1]",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "1",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "`argmax` returns the **position** of the maximum. With `axis=1` it works row by row: the max of row 0 (9) is at index 1, the max of row 1 (8) is at index 2.",
+  "distractor_notes": {
+   "b": "Those are the maxima themselves (`a.max(axis=1)`), not their positions.",
+   "c": "That is `argmax(axis=0)`: one index per column.",
+   "d": "That is `a.argmax()` on the flattened array."
+  },
+  "slides": [
+   219
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ }
+]

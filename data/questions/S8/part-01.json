@@ -1,0 +1,1033 @@
+[
+ {
+  "id": "S8-0001",
+  "chapter": "S8",
+  "topic": "web-architecture",
+  "tags": [
+   "server",
+   "definition"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "In the context of web applications, what is a **server**?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "A program that runs once, prints its result and terminates"
+   },
+   {
+    "id": "b",
+    "text": "Any computer that has a web browser installed"
+   },
+   {
+    "id": "c",
+    "text": "The internet service provider that connects your computer to the internet"
+   },
+   {
+    "id": "d",
+    "text": "A program (and, by extension, the machine running it) that keeps running and can be reached through the network to answer requests"
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "A server is a long-running program that never stops and can be accessed through the network: it waits for requests (e.g. HTTP requests) and sends back responses. The word designates both the program and the computer running it.",
+  "distractor_notes": {
+   "a": "A server is precisely a program that does not stop after one run.",
+   "b": "Having a browser makes a computer a client, not a server.",
+   "c": "The ISP gives you access to the internet; it is not the program answering your request."
+  },
+  "slides": [
+   284
+  ],
+  "verify": {
+   "mode": "manual",
+   "reference": "Slide 284 'Servers': a program that never stops and can be accessed through the network"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0002",
+  "chapter": "S8",
+  "topic": "web-architecture",
+  "tags": [
+   "isp",
+   "internet"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "How is a home computer usually connected to the internet?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "Directly, like the servers of big websites"
+   },
+   {
+    "id": "b",
+    "text": "Through an Internet Service Provider (ISP), which is itself connected to the internet"
+   },
+   {
+    "id": "c",
+    "text": "Through the DNS server of each website it visits"
+   },
+   {
+    "id": "d",
+    "text": "Through the web browser, which acts as an ISP"
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "Only some machines (servers, ISPs) are directly connected to the internet; your computer is connected to an ISP, which is in turn connected to the internet and relays your traffic.",
+  "distractor_notes": {
+   "a": "The course stresses that your computer is NOT directly connected to the internet.",
+   "c": "DNS translates names into IP addresses; it does not provide connectivity.",
+   "d": "The browser is a client program; it does not provide network access."
+  },
+  "slides": [
+   287
+  ],
+  "verify": {
+   "mode": "manual",
+   "reference": "Slide 287 'The internet: a big computer network' - your computer is connected to an ISP"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0003",
+  "chapter": "S8",
+  "topic": "web-architecture",
+  "tags": [
+   "dns",
+   "definition"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is **DNS resolution**?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "Translating a domain name such as `github.com` into the IP address of the server"
+   },
+   {
+    "id": "b",
+    "text": "Splitting an HTTP response into packets"
+   },
+   {
+    "id": "c",
+    "text": "Choosing the port number of the server from the scheme of the URL"
+   },
+   {
+    "id": "d",
+    "text": "Turning the HTML of a page into a rendered web page"
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "DNS (Domain Name System) resolution maps a human-readable domain name to an IP address. The ISP keeps a table domain name -> IP address and, when it does not know a name, asks other nodes of the network recursively.",
+  "distractor_notes": {
+   "b": "Packets are how large responses travel on the network, unrelated to names.",
+   "c": "The default port comes from the scheme (80 for http, 443 for https), not from DNS.",
+   "d": "Rendering is done by the browser."
+  },
+  "slides": [
+   291
+  ],
+  "verify": {
+   "mode": "manual",
+   "reference": "Slide 291 'DNS resolution'"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0004",
+  "chapter": "S8",
+  "topic": "web-architecture",
+  "tags": [
+   "ip-address",
+   "ipv4"
+  ],
+  "type": "multi",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Which of the following are valid IPv4 addresses? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "52.212.163.193",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "127.0.0.1",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "256.1.1.1",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "89.259.29.11",
+    "mono": true
+   },
+   {
+    "id": "e",
+    "text": "140.82.118.4",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a",
+   "b",
+   "e"
+  ],
+  "explanation": "An IPv4 address is made of 4 numbers separated by dots, each between 0 and 255 (one byte). 89.259.29.11 and 256.1.1.1 contain a number above 255, so they are invalid. 127.0.0.1 is valid: it is the loopback address of your own machine.",
+  "distractor_notes": {
+   "c": "256 does not fit in one byte (the maximum is 255).",
+   "d": "259 > 255: each of the 4 numbers is a single byte (0-255). This address appears in a course diagram only as an illustration."
+  },
+  "slides": [
+   288,
+   315
+  ],
+  "verify": {
+   "mode": "truth",
+   "probe_template": "import ipaddress\ntry:\n    ipaddress.IPv4Address(__OPTION__)\n    print(True)\nexcept ValueError:\n    print(False)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0005",
+  "chapter": "S8",
+  "topic": "web-architecture",
+  "tags": [
+   "port"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "Why does a client need to specify a **port** when it connects to a server machine?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "Because the port identifies the ISP of the client"
+   },
+   {
+    "id": "b",
+    "text": "Because one machine can run several server programs, and each one listens on its own port"
+   },
+   {
+    "id": "c",
+    "text": "Because the port is the encrypted version of the IP address"
+   },
+   {
+    "id": "d",
+    "text": "Because the port tells the browser how to render the page"
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "A single computer (one IP address) may run an HTTP server, an API server, a mail server, a database... The port number selects which of these programs receives the request (e.g. 443 for an HTTPS server).",
+  "distractor_notes": {
+   "a": "The ISP is not identified by a port.",
+   "c": "The IP address identifies the machine and the port identifies the program on that machine; nothing is encrypted.",
+   "d": "Rendering depends on the HTML received, not on the port."
+  },
+  "slides": [
+   292,
+   316
+  ],
+  "verify": {
+   "mode": "manual",
+   "reference": "Slide 292 'What is a port?' - every server listens to a specific port; slide 316"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0006",
+  "chapter": "S8",
+  "topic": "web-architecture",
+  "tags": [
+   "packets",
+   "http-response"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Which of the following is correct about a large HTTP response (for instance a big image)?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "It is sent as one single block that must follow one fixed route"
+   },
+   {
+    "id": "b",
+    "text": "It is split into packets that may take different routes; the client reassembles them once all are received"
+   },
+   {
+    "id": "c",
+    "text": "It is split into packets, and the server reassembles them before sending"
+   },
+   {
+    "id": "d",
+    "text": "It cannot be sent over HTTP: large files require FTP"
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "Big responses are cut into packets sent separately, possibly along different routes of the network. The client (the receiver) rebuilds the full response once it has received all the packets.",
+  "distractor_notes": {
+   "a": "Packets are routed independently; there is no single block on one fixed route.",
+   "c": "Reassembly is done by the receiver (the client), not by the sender.",
+   "d": "HTTP transports large files and images every day; FTP is just another protocol."
+  },
+  "slides": [
+   296
+  ],
+  "verify": {
+   "mode": "manual",
+   "reference": "Slide 296 'HTTP Response: packets'"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0007",
+  "chapter": "S8",
+  "topic": "web-architecture",
+  "tags": [
+   "dns",
+   "tcp",
+   "request-lifecycle"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "You type `https://github.com/tensorflow` in your browser. In which order do the following steps happen?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "HTTP request -> DNS resolution -> TCP connection to port 443 -> rendering of the HTML -> HTTP response"
+   },
+   {
+    "id": "b",
+    "text": "TCP connection to port 443 -> DNS resolution -> HTTP request -> HTTP response -> rendering of the HTML"
+   },
+   {
+    "id": "c",
+    "text": "DNS resolution -> TCP connection to port 443 -> HTTP request -> HTTP response -> rendering of the HTML"
+   },
+   {
+    "id": "d",
+    "text": "DNS resolution -> HTTP request -> TCP connection to port 80 -> HTTP response -> rendering of the HTML"
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "The browser first needs the server's IP address (DNS resolution), then opens a TCP connection to that IP on port 443 (the default for https), sends the HTTP request over it, receives the HTTP response (in packets) and finally renders the HTML.",
+  "distractor_notes": {
+   "a": "The request can only be sent over an established connection, and rendering needs the response.",
+   "b": "You cannot connect before knowing the IP address: DNS resolution comes first.",
+   "d": "The connection must exist before the request is sent, and https uses port 443, not 80."
+  },
+  "slides": [
+   289,
+   291,
+   292,
+   293,
+   294,
+   295,
+   297
+  ],
+  "verify": {
+   "mode": "manual",
+   "reference": "Slides 289-297 'Life of an HTTP request' (DNS resolution, port, TCP connection, request, response, rendering)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0008",
+  "chapter": "S8",
+  "topic": "web-architecture",
+  "tags": [
+   "ip-address",
+   "localhost"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "Which IP address always refers to **your own computer** (the hostname `localhost`)?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "127.0.0.1",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "192.168.0.1",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "0.0.0.0",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "255.255.255.255",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "127.0.0.1 is the loopback address: a request sent to it never leaves your machine, and `localhost` is its hostname. This is where a Flask app started on your computer can be reached.",
+  "distractor_notes": {
+   "b": "A typical private address on a home network (often the router), not your own machine in general.",
+   "c": "0.0.0.0 means 'unspecified / all interfaces' (a server can listen on it); it is not the loopback address.",
+   "d": "This is the broadcast address."
+  },
+  "slides": [
+   288,
+   305
+  ],
+  "verify": {
+   "mode": "truth",
+   "probe_template": "import ipaddress\nprint(ipaddress.ip_address(__OPTION__).is_loopback)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0009",
+  "chapter": "S8",
+  "topic": "web-architecture",
+  "tags": [
+   "tcp"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Once the browser knows the IP address of `github.com`, what is established between the client and the server **before** the HTTP request is sent?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "A new DNS entry on the server"
+   },
+   {
+    "id": "b",
+    "text": "A TCP connection to the server's port (443 for https)"
+   },
+   {
+    "id": "c",
+    "text": "A copy of the HTML page stored at the ISP"
+   },
+   {
+    "id": "d",
+    "text": "Nothing: the HTTP request is the first thing exchanged"
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "The client opens a TCP connection to IP:port of the server (e.g. 140.82.118.4:443); the HTTP request and the HTTP response then travel over this connection.",
+  "distractor_notes": {
+   "a": "DNS resolution already happened on the client side; the server's DNS table is not modified.",
+   "c": "The ISP relays the traffic but does not pre-store the page.",
+   "d": "HTTP is sent over an already established TCP connection."
+  },
+  "slides": [
+   293
+  ],
+  "verify": {
+   "mode": "manual",
+   "reference": "Slide 293 'TCP Connection'"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0010",
+  "chapter": "S8",
+  "topic": "web-architecture",
+  "tags": [
+   "server",
+   "port",
+   "all-of-the-above"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Which of the following is correct about servers?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "The word 'server' can refer both to the program answering requests and to the computer running it."
+   },
+   {
+    "id": "b",
+    "text": "One computer can run several servers (HTTP, API, mail, database...), each listening on its own port."
+   },
+   {
+    "id": "c",
+    "text": "An HTTPS server listens on port 443 by default."
+   },
+   {
+    "id": "d",
+    "text": "All of the above."
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "All three statements are true: 'server' designates both the program and the machine; a machine can host several server programs, distinguished by their ports; and HTTPS servers listen on port 443 unless configured otherwise.",
+  "distractor_notes": {
+   "a": "True, but not the only true statement.",
+   "b": "True, but not the only true statement.",
+   "c": "True, but not the only true statement."
+  },
+  "slides": [
+   284,
+   292,
+   316
+  ],
+  "verify": {
+   "mode": "manual",
+   "reference": "Slide 284 (servers = programs and computers), slide 292 (several servers, ports, HTTPS 443), slide 316"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0011",
+  "chapter": "S8",
+  "topic": "web-architecture",
+  "tags": [
+   "dns",
+   "which-is-false"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Which statement about DNS is **false**?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "It maps domain names such as `github.com` to IP addresses."
+   },
+   {
+    "id": "b",
+    "text": "If a DNS server does not know a domain name, it can ask other servers recursively."
+   },
+   {
+    "id": "c",
+    "text": "DNS servers listen on port 53 by default."
+   },
+   {
+    "id": "d",
+    "text": "DNS resolution is performed by the web server after it has received the HTTP request."
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "DNS resolution happens on the client side (browser + the ISP's DNS servers) **before** connecting: the client needs the IP address to reach the web server at all. Statements a, b and c are true.",
+  "distractor_notes": {
+   "a": "True: this is the purpose of DNS.",
+   "b": "True: unknown names are resolved by recursively asking other nodes.",
+   "c": "True: 53 is the default DNS port."
+  },
+  "slides": [
+   291,
+   300,
+   316
+  ],
+  "verify": {
+   "mode": "manual",
+   "reference": "Slide 291 'DNS resolution'; slide 300 (the browser does DNS resolution); slide 316 (53 for DNS)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0012",
+  "chapter": "S8",
+  "topic": "web-architecture",
+  "tags": [
+   "port",
+   "default-port",
+   "none-of-the-above"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "The machine `140.82.118.4` runs an HTTPS server on port 443, a MySQL server on port 3306 and a Redis server on port 6379. A client opens `http://140.82.118.4/status`. Which program receives the request?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "The HTTPS server, because it is the only web server on the machine"
+   },
+   {
+    "id": "b",
+    "text": "The MySQL server"
+   },
+   {
+    "id": "c",
+    "text": "The Redis server"
+   },
+   {
+    "id": "d",
+    "text": "None of them: `http://` without an explicit port means port 80, where no server listens"
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "When the URL has no port, the client uses the default port of the scheme: 80 for http (443 only for https). Nothing listens on port 80 on this machine, so the connection is refused; the HTTPS server is never contacted.",
+  "distractor_notes": {
+   "a": "443 is the default for https, not for http: the scheme decides the default port.",
+   "b": "3306 would only be used if written explicitly in the URL.",
+   "c": "6379 would only be used if written explicitly in the URL."
+  },
+  "slides": [
+   292,
+   300,
+   316
+  ],
+  "verify": {
+   "mode": "manual",
+   "reference": "Slide 300 (the browser adds the port based on the protocol); slide 316 (80 for HTTP, 443 for HTTPS)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0013",
+  "chapter": "S8",
+  "topic": "urls",
+  "tags": [
+   "urlparse",
+   "host"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "from urllib.parse import urlparse\n\nu = urlparse('https://github.com/tensorflow/tensorflow')\nprint(u.netloc)",
+  "options": [
+   {
+    "id": "a",
+    "text": "github.com",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "https://github.com",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "tensorflow",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "/tensorflow/tensorflow",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "`netloc` (network location) is the host part, between `//` and the path. The scheme is in `u.scheme` ('https') and the path in `u.path` ('/tensorflow/tensorflow').",
+  "distractor_notes": {
+   "b": "The scheme is not part of netloc.",
+   "c": "tensorflow is part of the path (the requested resource).",
+   "d": "That is `u.path`."
+  },
+  "slides": [
+   290,
+   315
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0014",
+  "chapter": "S8",
+  "topic": "urls",
+  "tags": [
+   "urlparse",
+   "port",
+   "default-port"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What will be the output of the code?",
+  "code": "from urllib.parse import urlparse\n\nu = urlparse('https://www.google.com/search?q=ip+address')\nprint(u.port)",
+  "options": [
+   {
+    "id": "a",
+    "text": "443",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "None",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "80",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "0",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "`.port` only returns a port written explicitly in the URL. None is written here, so it is None - even though the browser will connect to port 443, the default for https.",
+  "distractor_notes": {
+   "a": "443 is the port the browser will use, but urlparse does not fill in default ports.",
+   "c": "80 is the default for http, and it is not filled in either.",
+   "d": "A missing port is None, not 0."
+  },
+  "slides": [
+   316,
+   318
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0015",
+  "chapter": "S8",
+  "topic": "urls",
+  "tags": [
+   "query",
+   "parse_qs",
+   "escaping"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "from urllib.parse import parse_qs\n\nprint(parse_qs('q=ip+address&lang=en'))",
+  "options": [
+   {
+    "id": "a",
+    "text": "{'q': ['ip+address'], 'lang': ['en']}",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "{'q': 'ip address', 'lang': 'en'}",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "{'q': ['ip address'], 'lang': ['en']}",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "{'q=ip+address': ['lang=en']}",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "Query parameters are separated by `&`, and each `name=value` pair is decoded (`+` becomes a space). parse_qs returns a dict whose values are **lists**, because the same name may appear several times in a query.",
+  "distractor_notes": {
+   "a": "Decoding turns `+` back into a space.",
+   "b": "parse_qs always gives lists of values.",
+   "d": "`&` separates parameters and `=` separates a name from its value."
+  },
+  "slides": [
+   318
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0016",
+  "chapter": "S8",
+  "topic": "urls",
+  "tags": [
+   "query",
+   "escaping",
+   "quote_plus"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "Spaces are not allowed in a URL query. What is the output of the following code?",
+  "code": "from urllib.parse import quote_plus\n\nprint(quote_plus('ip address'))",
+  "options": [
+   {
+    "id": "a",
+    "text": "ip+address",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "ip%20address",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "ip_address",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "ip address",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "`quote_plus` escapes a value for a query string: spaces become `+`, as in `https://www.google.com/search?q=ip+address`.",
+  "distractor_notes": {
+   "b": "That is what `quote` (without _plus) produces: %20 is the percent-encoding of a space.",
+   "c": "Underscores are never used to escape spaces.",
+   "d": "A space cannot appear in a URL; it must be escaped."
+  },
+  "slides": [
+   318
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0017",
+  "chapter": "S8",
+  "topic": "urls",
+  "tags": [
+   "urlparse",
+   "fragment",
+   "path"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Find the output of the code?",
+  "code": "from urllib.parse import urlparse\n\nu = urlparse('https://en.wikipedia.org/wiki/Abraham_Lincoln#The_Civil_War')\nprint(u.path, u.fragment)",
+  "options": [
+   {
+    "id": "a",
+    "text": "/wiki/Abraham_Lincoln The_Civil_War",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "/wiki/Abraham_Lincoln #The_Civil_War",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "wiki/Abraham_Lincoln The_Civil_War",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "/wiki/Abraham_Lincoln#The_Civil_War The_Civil_War",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "The fragment is everything after `#`, without the `#` itself, and it is not part of the path. The path keeps its leading `/`.",
+  "distractor_notes": {
+   "b": "The `#` separator is not included in `fragment`.",
+   "c": "The path starts with `/`.",
+   "d": "The path stops before `#`."
+  },
+  "slides": [
+   317,
+   319
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0018",
+  "chapter": "S8",
+  "topic": "urls",
+  "tags": [
+   "fragment",
+   "true-false"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "True or False: when the browser opens `https://en.wikipedia.org/wiki/Python#History`, the fragment `#History` is sent to the server in the HTTP request.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "True"
+   },
+   {
+    "id": "b",
+    "text": "False"
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "The fragment is never sent to the server: the request only asks for `/wiki/Python`. The browser uses the fragment itself, once the page is received, to move the focus to the part of the document named `History`.",
+  "distractor_notes": {
+   "a": "The request URL stops before `#`: the fragment is handled by the client only."
+  },
+  "slides": [
+   319
+  ],
+  "verify": {
+   "mode": "manual",
+   "reference": "Slide 319 'Fragments': the fragment is not passed to the server"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0019",
+  "chapter": "S8",
+  "topic": "urls",
+  "tags": [
+   "url-anatomy"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "Which of the following gives the parts of a URL in the correct order?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "host://scheme:port/path?fragment#query",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "scheme://host:port@username:password/path#fragment?query",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "scheme://username:password@host:port/path?query#fragment",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "scheme://host/path:port?query#fragment",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "General form: the scheme (protocol), optional user info followed by `@`, the host, an optional `:port`, the path, an optional `?query`, and an optional `#fragment` at the very end.",
+  "distractor_notes": {
+   "a": "The scheme comes first, and the query (?) precedes the fragment (#).",
+   "b": "User info comes before the host, and the fragment is always last.",
+   "d": "The port belongs to the host part, before the path."
+  },
+  "slides": [
+   312
+  ],
+  "verify": {
+   "mode": "manual",
+   "reference": "Slide 312: URL = scheme://username:password@host:port/path?query#fragment"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0020",
+  "chapter": "S8",
+  "topic": "urls",
+  "tags": [
+   "port",
+   "default-port",
+   "https"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the default port of an HTTPS server, used when a URL starting with `https://` does not specify one?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "80",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "443",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "22",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "8000",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "Some ports are implicit: 80 for HTTP and 443 for HTTPS. The browser adds the port matching the scheme when it is not written in the URL.",
+  "distractor_notes": {
+   "a": "80 is the default for plain HTTP.",
+   "c": "22 is SSH.",
+   "d": "8000 is the port used by `python -m http.server`, not a standard HTTPS port."
+  },
+  "slides": [
+   292,
+   316
+  ],
+  "verify": {
+   "mode": "manual",
+   "reference": "Slide 316 '80 for HTTP server by default (443 HTTPS)'; slide 292 'HTTPS servers listen to 443'"
+  },
+  "reviewed": 1
+ }
+]

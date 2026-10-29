@@ -1,0 +1,1082 @@
+[
+  {
+    "id": "S4-0021",
+    "chapter": "S4",
+    "topic": "aliasing",
+    "tags": [
+      "dict",
+      "alias"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "prices = {'apple': 1}\nbackup = prices\nbackup['pear'] = 2\nprint(len(prices))",
+    "options": [
+      {
+        "id": "a",
+        "text": "1",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "2",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "KeyError",
+        "out": "!KeyError"
+      },
+      {
+        "id": "d",
+        "text": "None",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "`backup = prices` does not copy the dictionary: both names refer to the same dict object. Adding a key through backup is therefore visible through prices, which now has 2 keys.",
+    "distractor_notes": {
+      "a": "Assumes that assignment makes a copy; it only binds a second name to the same dict.",
+      "c": "Assigning to a new key creates it; KeyError only happens when *reading* a missing key.",
+      "d": "len always returns an int."
+    },
+    "slides": [
+      174,
+      173
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0022",
+    "chapter": "S4",
+    "topic": "aliasing",
+    "tags": [
+      "rebinding",
+      "alias"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "a = [1, 2, 3]\nb = a\na = [4, 5]\nprint(b)",
+    "options": [
+      {
+        "id": "a",
+        "text": "[1, 2, 3, 4, 5]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[4, 5]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[1, 2, 3]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "`b = a` makes b refer to the same list as a. `a = [4, 5]` then rebinds only the name a to a brand-new list; it does not modify the old list, which b still refers to.",
+    "distractor_notes": {
+      "a": "Nothing is appended; a is simply rebound to another list.",
+      "b": "Rebinding a name is not a mutation: only mutations (append, item assignment...) are seen through aliases.",
+      "d": "The original list is not emptied."
+    },
+    "slides": [
+      174,
+      173
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0023",
+    "chapter": "S4",
+    "topic": "aliasing",
+    "tags": [
+      "function-arguments",
+      "mutation-vs-rebinding",
+      "select-all"
+    ],
+    "type": "multi",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "For which of the following bodies of `f` does the code below print `[]`? Select all that apply.",
+    "code": "def f(items):\n    ...   # one of the bodies below\n\ndata = [1, 2]\nf(data)\nprint(data)",
+    "options": [
+      {
+        "id": "a",
+        "text": "items.clear()",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "items = []",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "del items[:]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "items[:] = []",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "items = items[:0]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "c",
+      "d"
+    ],
+    "explanation": "The parameter items refers to the caller's list. Operations that mutate that object (clear(), del items[:], the slice assignment items[:] = []) empty the caller's list. `items = ...` only rebinds the local name to another list; data is unchanged.",
+    "distractor_notes": {
+      "b": "Rebinding the parameter makes it refer to a new local list; data still refers to [1, 2].",
+      "e": "items[:0] builds a new empty list and the assignment only rebinds the local name."
+    },
+    "slides": [
+      174,
+      173
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": "",
+      "probe_template": "def f(items):\n    __OPTION_RAW__\ndata = [1, 2]\nf(data)\nprint(data == [])"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0024",
+    "chapter": "S4",
+    "topic": "aliasing",
+    "tags": [
+      "function-arguments",
+      "mutation-vs-rebinding"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "def f(a, b):\n    a = a + [0]\n    b.append(0)\nx, y = [1], [1]\nf(x, y)\nprint(x, y)",
+    "options": [
+      {
+        "id": "a",
+        "text": "[1, 0] [1, 0]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[1] [1, 0]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[1] [1]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[1, 0] [1]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "`a + [0]` builds a new list and `a = ...` rebinds the local parameter, so x is unchanged. `b.append(0)` mutates the very list that y refers to, so y becomes [1, 0].",
+    "distractor_notes": {
+      "a": "`a + [0]` creates a new list; only the local name a is rebound.",
+      "c": "append mutates the caller's list in place.",
+      "d": "Swaps the two behaviours."
+    },
+    "slides": [
+      174,
+      173
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0025",
+    "chapter": "S4",
+    "topic": "aliasing",
+    "tags": [
+      "nested-list",
+      "shared-reference"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "row = [0, 0]\ngrid = [row, row]\ngrid[0][0] = 5\nprint(grid)",
+    "options": [
+      {
+        "id": "a",
+        "text": "[[5, 5], [0, 0]]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[[5, 0], [0, 0]]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[[5, 0], [5, 0]]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[5, [0, 0]]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "grid contains two references to the same list object row. Changing grid[0][0] mutates that shared list, so the change appears in both 'rows' (and in row itself).",
+    "distractor_notes": {
+      "a": "grid[0][0] is a single element of the first row, not the whole row.",
+      "b": "That would require two separate lists, e.g. [row[:], row[:]].",
+      "d": "Item assignment on the inner list does not replace grid[0]."
+    },
+    "slides": [
+      174
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0026",
+    "chapter": "S4",
+    "topic": "aliasing",
+    "tags": [
+      "nested-list",
+      "shared-reference"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Find the output of the code?",
+    "code": "a = [1, 2]\nl = [a, a, a]\nl[2] = [9]\na[1] = 7\nprint(l)",
+    "options": [
+      {
+        "id": "a",
+        "text": "[[1, 7], [1, 2], [9]]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[[1, 7], [1, 7], [1, 7]]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[[1, 2], [1, 2], [9]]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[[1, 7], [1, 7], [9]]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "l starts with three references to the same list a. `l[2] = [9]` replaces the third slot with a different list (it does not touch a). `a[1] = 7` mutates a, which is still referenced by l[0] and l[1].",
+    "distractor_notes": {
+      "a": "l[0] and l[1] are the same object: they cannot differ.",
+      "b": "l[2] was rebound to a new list, so it no longer refers to a.",
+      "c": "l[0] and l[1] are references to a, so they see the mutation."
+    },
+    "slides": [
+      174
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0027",
+    "chapter": "S4",
+    "topic": "aliasing",
+    "tags": [
+      "dict",
+      "shared-reference"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "d = dict.fromkeys(['a', 'b'], [])\nd['a'].append(1)\nprint(d)",
+    "options": [
+      {
+        "id": "a",
+        "text": "{'a': [1], 'b': [1]}",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "{'a': [1], 'b': []}",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "{'a': [1]}",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "TypeError",
+        "out": "!TypeError"
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "dict.fromkeys uses the *same* value object for every key: both keys refer to one single list. Appending through d['a'] is therefore also visible under d['b'].",
+    "distractor_notes": {
+      "b": "That needs a separate list per key, e.g. {k: [] for k in ['a', 'b']}.",
+      "c": "fromkeys creates an entry for every key of the list.",
+      "d": "fromkeys accepts any value, including a list."
+    },
+    "slides": [
+      174
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0028",
+    "chapter": "S4",
+    "topic": "aliasing",
+    "tags": [
+      "dict",
+      "shallow-copy",
+      "select-all"
+    ],
+    "type": "multi",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "After running the code below, which expressions are `True`? Select all that apply.",
+    "code": "x = {'k': [1]}\ny = x\nz = dict(x)\ny['k'].append(2)\ny['j'] = 0",
+    "options": [
+      {
+        "id": "a",
+        "text": "len(x) == 2",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "len(z) == 2",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "z['k'] == [1, 2]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "x is y",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "z is x",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "c",
+      "d"
+    ],
+    "explanation": "y is an alias of x: adding the key 'j' through y adds it to x (a), and `x is y` (d). z = dict(x) is a new dictionary, so z is not x and does not get the key 'j' - but it is a shallow copy: z['k'] is the same inner list as x['k'], so the append is visible through z (c).",
+    "distractor_notes": {
+      "b": "z is a separate dict; adding 'j' through y does not add it to z.",
+      "e": "dict(x) creates a new dictionary object."
+    },
+    "slides": [
+      174,
+      173
+    ],
+    "verify": {
+      "mode": "truth",
+      "probe_template": "print((__OPTION_RAW__) is True)"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0029",
+    "chapter": "S4",
+    "topic": "aliasing",
+    "tags": [
+      "function-arguments",
+      "return-value"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "def add(item, bag):\n    bag.append(item)\n    return bag\nmine = []\nyours = add(1, mine)\nyours.append(2)\nprint(mine)",
+    "options": [
+      {
+        "id": "a",
+        "text": "[]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[1]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[1, 2]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "None",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "add mutates the list it receives and returns that same object. yours is therefore another name for mine, so appending 2 through yours also shows in mine.",
+    "distractor_notes": {
+      "a": "Lists are not copied when passed to a function: add appends to mine itself.",
+      "b": "The returned list is the same object as mine, not a copy.",
+      "d": "add returns bag (the list), not None."
+    },
+    "slides": [
+      174,
+      173
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0030",
+    "chapter": "S4",
+    "topic": "aliasing",
+    "tags": [
+      "function-arguments",
+      "augmented-assignment"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "def extend(lst):\n    lst += [3]\n    lst = [0]\nnums = [1, 2]\nextend(nums)\nprint(nums)",
+    "options": [
+      {
+        "id": "a",
+        "text": "[1, 2]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[1, 2, 3]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[0]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "UnboundLocalError",
+        "out": "!UnboundLocalError"
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "For a list, `lst += [3]` extends the object in place, i.e. the caller's list. The next line `lst = [0]` only rebinds the local parameter to a new list, which has no effect on nums.",
+    "distractor_notes": {
+      "a": "+= on a list is an in-place mutation (like extend), not a rebinding.",
+      "c": "Rebinding a parameter never changes the caller's variable.",
+      "d": "lst is a parameter, so it already has a value when += reads it."
+    },
+    "slides": [
+      174,
+      173
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0031",
+    "chapter": "S4",
+    "topic": "aliasing",
+    "tags": [
+      "for-loop",
+      "rebinding"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "nums = [1, 2, 3]\nfor n in nums:\n    n = n * 10\nprint(nums)",
+    "options": [
+      {
+        "id": "a",
+        "text": "[10, 20, 30]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "TypeError",
+        "out": "!TypeError"
+      },
+      {
+        "id": "c",
+        "text": "[]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[1, 2, 3]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "The loop variable n is bound to each element in turn. `n = n * 10` rebinds n to a new int; it does not write anything back into the list. To change the list, assign to nums[i] or build a new list.",
+    "distractor_notes": {
+      "a": "n is a name for the current element, not a slot of the list: rebinding it does not modify the list.",
+      "b": "Multiplying ints is fine.",
+      "c": "The loop does not remove anything."
+    },
+    "slides": [
+      174,
+      169
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0032",
+    "chapter": "S4",
+    "topic": "aliasing",
+    "tags": [
+      "for-loop",
+      "mutation-vs-rebinding",
+      "nested-list"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "Analyze the code. What does it print?",
+    "code": "rows = [[1], [2]]\nfor r in rows:\n    r.append(0)\n    r = [9]\nprint(rows)",
+    "options": [
+      {
+        "id": "a",
+        "text": "[[1, 0], [2, 0]]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[[1], [2]]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[[9], [9]]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[[1, 0, 9], [2, 0, 9]]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "At each iteration r refers to one of the inner lists, so r.append(0) mutates that inner list inside rows. `r = [9]` merely rebinds the loop variable to a new list and does not affect rows.",
+    "distractor_notes": {
+      "b": "append mutates the inner list object that rows contains.",
+      "c": "Rebinding r does not replace the element stored in rows.",
+      "d": "[9] is a new list bound to r; nothing is appended."
+    },
+    "slides": [
+      174,
+      169
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0033",
+    "chapter": "S4",
+    "topic": "aliasing",
+    "tags": [
+      "sort",
+      "sorted",
+      "alias"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "a = [3, 1, 2]\nb = a\nb.sort()\nc = sorted(a, reverse=True)\nprint(a, c)",
+    "options": [
+      {
+        "id": "a",
+        "text": "[3, 1, 2] [3, 2, 1]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[1, 2, 3] [3, 2, 1]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[1, 2, 3] [1, 2, 3]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "None of the above",
+        "out": null
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "b is an alias of a, so b.sort() sorts that single list in place: a becomes [1, 2, 3]. sorted() returns a new list (here in descending order) and leaves a unchanged.",
+    "distractor_notes": {
+      "a": "sort() through the alias b modifies the list that a refers to.",
+      "c": "sorted(..., reverse=True) returns a new descending list; it does not affect a.",
+      "d": "Option b is exactly the output."
+    },
+    "slides": [
+      174,
+      173
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0034",
+    "chapter": "S4",
+    "topic": "aliasing",
+    "tags": [
+      "true-false",
+      "function-arguments"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "True or False: when a list is passed to a function, the function receives a copy of the list, so changes made inside the function are never seen by the caller.",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "True",
+        "probe": "def f(x):\n    x.append(1)\nl = []\nf(l)\nprint(l == [])"
+      },
+      {
+        "id": "b",
+        "text": "False",
+        "probe": "def f(x):\n    x.append(1)\nl = []\nf(l)\nprint(l == [1])"
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "False. Arguments are passed by object reference: the parameter is a new name for the caller's object. Mutations made through it (append, item assignment...) are visible to the caller; only rebinding the parameter is invisible.",
+    "distractor_notes": {
+      "a": "Python never copies arguments implicitly; write list(x) or x[:] inside the function if a copy is needed."
+    },
+    "slides": [
+      174,
+      173
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": ""
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0035",
+    "chapter": "S4",
+    "topic": "identity-equality",
+    "tags": [
+      "is",
+      "==",
+      "list"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "a = [1, 2]\nb = [1, 2]\nprint(a == b, a is b)",
+    "options": [
+      {
+        "id": "a",
+        "text": "True True",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "False True",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "False False",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "True False",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "`==` compares values: both lists contain the same items, so it is True. `is` compares identity: the two list displays create two distinct objects, so `a is b` is False.",
+    "distractor_notes": {
+      "a": "Equal contents do not make two lists the same object.",
+      "b": "An object is always equal to itself, so `is` True with `==` False is not possible for lists.",
+      "c": "`==` compares contents, which are equal."
+    },
+    "slides": [
+      33,
+      63,
+      173
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0036",
+    "chapter": "S4",
+    "topic": "identity-equality",
+    "tags": [
+      "None",
+      "is",
+      "implicit-return"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "def f():\n    pass\nr = f()\nprint(r is None, r == None)",
+    "options": [
+      {
+        "id": "a",
+        "text": "True True",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "False False",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "True False",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "NameError",
+        "out": "!NameError"
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "A function without a return statement returns None. There is a single None object, so `r is None` is True, and None == None is also True (although PEP 8 recommends writing `is None`).",
+    "distractor_notes": {
+      "b": "f() returns None, which is a real object (not 'nothing').",
+      "c": "None is equal to itself.",
+      "d": "r is defined: it holds the return value of f(), which is None."
+    },
+    "slides": [
+      33,
+      63
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0037",
+    "chapter": "S4",
+    "topic": "identity-equality",
+    "tags": [
+      "__eq__",
+      "objects"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Find the output of the code?",
+    "code": "class Point:\n    def __init__(self, x):\n        self.x = x\np = Point(1)\nq = Point(1)\nprint(p == q, p.x == q.x)",
+    "options": [
+      {
+        "id": "a",
+        "text": "True True",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "False False",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "False True",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "True False",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "For a class that does not define `__eq__`, `==` falls back to identity: p and q are two different objects, so p == q is False even though their attributes are equal. p.x == q.x compares two ints: True.",
+    "distractor_notes": {
+      "a": "Without __eq__, Python does not compare attributes; it compares identity.",
+      "b": "The attributes are ints and 1 == 1.",
+      "d": "Reversed: the objects differ, their attributes are equal."
+    },
+    "slides": [
+      173
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0038",
+    "chapter": "S4",
+    "topic": "identity-equality",
+    "tags": [
+      "__eq__",
+      "in",
+      "is"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "class Box:\n    def __init__(self, v):\n        self.v = v\n    def __eq__(self, other):\n        return self.v == other.v\nboxes = [Box(1), Box(2)]\nprint(Box(2) in boxes, Box(2) is boxes[1])",
+    "options": [
+      {
+        "id": "a",
+        "text": "True True",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "False False",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "True False",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "False True",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "`in` on a list compares the elements with `==`, which now uses Box.__eq__ (comparing v), so a new Box(2) is found. `is` checks identity and is not affected by __eq__: the new Box(2) is a different object from boxes[1].",
+    "distractor_notes": {
+      "a": "__eq__ customises ==, never `is`.",
+      "b": "With __eq__ defined, == (and therefore `in`) compares the v attributes.",
+      "d": "A brand-new object cannot be identical to an element created earlier."
+    },
+    "slides": [
+      173,
+      33
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0039",
+    "chapter": "S4",
+    "topic": "identity-equality",
+    "tags": [
+      "is",
+      "==",
+      "select-all"
+    ],
+    "type": "multi",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Given the code below, which expressions evaluate to `True`? Select all that apply.",
+    "code": "a = [1, 2]\nb = a\nc = [1, 2]\nd = a[:]",
+    "options": [
+      {
+        "id": "a",
+        "text": "a is b",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "a is c",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "a == c",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "d is a",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "d == b",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "c",
+      "e"
+    ],
+    "explanation": "b is an alias of a (same object). c and d are other objects (a new list display, and a slice copy) whose contents equal a's, so they are `==` to a and b but not identical to them.",
+    "distractor_notes": {
+      "b": "Two separately created lists are distinct objects, even when equal.",
+      "d": "Slicing creates a new list object."
+    },
+    "slides": [
+      33,
+      173,
+      174
+    ],
+    "verify": {
+      "mode": "truth",
+      "probe_template": "print((__OPTION_RAW__) is True)"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0040",
+    "chapter": "S4",
+    "topic": "identity-equality",
+    "tags": [
+      "None",
+      "is",
+      "truthiness"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Which expression is `True` exactly when the variable `x` refers to `None`, and `False` for every other value (such as `0`, `''`, `[]` or `False`)?",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "not x",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "x is None",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "x == 'None'",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "x is False",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "None is a singleton, so the identity test `x is None` is True only for None - it is the idiom recommended by PEP 8. `not x` is also True for every falsy value (0, '', [], False); `x == 'None'` compares with a string; `x is False` is True only for the False object.",
+    "distractor_notes": {
+      "a": "`not x` treats all falsy values (0, '', [], False) like None.",
+      "c": "'None' is a 4-character string, not the None object.",
+      "d": "None and False are different objects: `None is False` is False."
+    },
+    "slides": [
+      33,
+      63
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": "",
+      "probe_template": "vals = [None, 0, '', [], 'None', False, 1]\nprint(all(((__OPTION_RAW__) is True) == (x is None) for x in vals))"
+    },
+    "reviewed": 1
+  }
+]

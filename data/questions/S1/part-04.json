@@ -1,0 +1,1182 @@
+[
+ {
+  "id": "S1-0071",
+  "chapter": "S1",
+  "topic": "conditionals",
+  "tags": [
+   "elif",
+   "order"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "score = 85\nif score >= 60:\n    print(\"pass\")\nelif score >= 80:\n    print(\"good\")\nelse:\n    print(\"fail\")",
+  "options": [
+   {
+    "id": "a",
+    "text": "fail",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "pass\ngood",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "good",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "pass",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "The conditions of an if/elif/else chain are tested in order and only the **first** true branch runs. 85 >= 60 is already True, so 'pass' is printed and the elif is never tested.",
+  "distractor_notes": {
+   "a": "85 >= 60 is True.",
+   "b": "At most one branch of an if/elif/else chain runs.",
+   "c": "The elif is skipped because an earlier condition was true (put the stricter test first)."
+  },
+  "slides": [
+   32,
+   33,
+   34
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0072",
+  "chapter": "S1",
+  "topic": "conditionals",
+  "tags": [
+   "if",
+   "elif"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "x = 15\nif x > 10:\n    print(\"A\")\nif x > 5:\n    print(\"B\")\nelse:\n    print(\"C\")",
+  "options": [
+   {
+    "id": "a",
+    "text": "A",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "A\nC",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "A\nB",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "B",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "These are two **independent** if statements (the second one starts with `if`, not `elif`). The first prints A; the second is tested anyway: 15 > 5, so it prints B. Its else belongs to the second if only.",
+  "distractor_notes": {
+   "a": "Would be the output with `elif x > 5:` - here the second if is a separate statement.",
+   "b": "The else belongs to the second if, whose condition is True.",
+   "d": "The first if is True too."
+  },
+  "slides": [
+   32,
+   33,
+   34
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0073",
+  "chapter": "S1",
+  "topic": "conditionals",
+  "tags": [
+   "ternary"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "n = -3\nsign = \"pos\" if n > 0 else \"zero\" if n == 0 else \"neg\"\nprint(sign)",
+  "options": [
+   {
+    "id": "a",
+    "text": "pos",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "neg",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "SyntaxError",
+    "out": "!SyntaxError"
+   },
+   {
+    "id": "d",
+    "text": "zero",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "The conditional expression `A if cond else B` can be chained: it reads as `'pos' if n > 0 else ('zero' if n == 0 else 'neg')`. n is negative, so both tests fail: 'neg'.",
+  "distractor_notes": {
+   "a": "-3 > 0 is False.",
+   "c": "Ternary expressions can be nested after else.",
+   "d": "-3 == 0 is False, so the last else value is used."
+  },
+  "slides": [
+   65
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0074",
+  "chapter": "S1",
+  "topic": "conditionals",
+  "tags": [
+   "truthiness"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "items = []\nif items:\n    print(\"has items\")\nelse:\n    print(\"empty\")",
+  "options": [
+   {
+    "id": "a",
+    "text": "empty",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "TypeError",
+    "out": "!TypeError"
+   },
+   {
+    "id": "c",
+    "text": "has items",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "Nothing is printed",
+    "out": ""
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "In `if x:` the value is evaluated as a boolean. An empty list (like 0, '', None) is falsy, so the else branch runs.",
+  "distractor_notes": {
+   "b": "Any object can be used as a condition.",
+   "c": "An empty list is falsy.",
+   "d": "The else branch prints 'empty'."
+  },
+  "slides": [
+   34
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0075",
+  "chapter": "S1",
+  "topic": "conditionals",
+  "tags": [
+   "SyntaxError",
+   "assignment-vs-equality"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "x = 5\nif x = 5:\n    print(\"five\")",
+  "options": [
+   {
+    "id": "a",
+    "text": "Nothing is printed",
+    "out": ""
+   },
+   {
+    "id": "b",
+    "text": "five",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "SyntaxError",
+    "out": "!SyntaxError"
+   },
+   {
+    "id": "d",
+    "text": "NameError",
+    "out": "!NameError"
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "`=` is assignment, which is a statement and not allowed as an if condition. The comparison operator is `==`. The file does not compile: SyntaxError.",
+  "distractor_notes": {
+   "a": "The program does not run at all: it is rejected at compile time.",
+   "b": "Would need `if x == 5:`.",
+   "d": "x is defined; the problem is the syntax."
+  },
+  "slides": [
+   33,
+   34
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0076",
+  "chapter": "S1",
+  "topic": "conditionals",
+  "tags": [
+   "elif",
+   "order",
+   "hands-on",
+   "leap-year"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "def is_leap(y):\n    if y % 4 == 0:\n        return True\n    elif y % 100 == 0:\n        return False\n    elif y % 400 == 0:\n        return True\n    return False\n\nprint(is_leap(1900), is_leap(2000), is_leap(2023))",
+  "options": [
+   {
+    "id": "a",
+    "text": "False False False",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "True True False",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "True False False",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "False True False",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "The order of the tests is wrong: every year divisible by 4 (including 1900 and 2000) returns True at the first branch, so the elif branches for 100 and 400 are never reached for them. 2023 fails all tests -> False. The correct rule tests 400 first, then 100, then 4 (which gives False True False).",
+  "distractor_notes": {
+   "a": "1900 % 4 == 0, so the first branch returns True.",
+   "c": "2000 is divisible by 4, so it returns True at the first test.",
+   "d": "That is the correct leap-year answer, but this code tests `% 4` first and returns immediately."
+  },
+  "slides": [
+   34,
+   50
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0077",
+  "chapter": "S1",
+  "topic": "conditionals",
+  "tags": [
+   "elif",
+   "hands-on"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "age = 19\nif age <= 12:\n    cat = \"Kid\"\nelif age <= 19:\n    cat = \"Teenager\"\nelif age <= 30:\n    cat = \"Young Adult\"\nelif age < 65:\n    cat = \"Adult\"\nelse:\n    cat = \"Senior\"\nprint(cat)",
+  "options": [
+   {
+    "id": "a",
+    "text": "Teenager\nYoung Adult",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "Young Adult",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "Teenager",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "Kid",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "19 <= 12 is False, 19 <= 19 is True: the second branch runs and the chain stops.",
+  "distractor_notes": {
+   "a": "Only one branch of an elif chain is executed, and print is called once.",
+   "b": "`<=` includes the bound: 19 <= 19 is True.",
+   "d": "19 <= 12 is False."
+  },
+  "slides": [
+   34,
+   46
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0078",
+  "chapter": "S1",
+  "topic": "conditionals",
+  "tags": [
+   "nested-if",
+   "indentation"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "x = 7\nif x > 5:\n    if x > 10:\n        print(\"huge\")\nelse:\n    print(\"small\")\nprint(\"end\")",
+  "options": [
+   {
+    "id": "a",
+    "text": "Nothing is printed",
+    "out": ""
+   },
+   {
+    "id": "b",
+    "text": "small\nend",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "end",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "huge\nend",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "Indentation decides which if the else belongs to: here it is aligned with the **outer** if. x > 5 is True, so the outer else is skipped; the inner if is False, so nothing is printed inside. Only 'end' remains.",
+  "distractor_notes": {
+   "a": "print('end') is outside the if, so it always runs.",
+   "b": "The else is attached to the outer if (same indentation), whose condition is True.",
+   "d": "7 > 10 is False."
+  },
+  "slides": [
+   34,
+   35
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0079",
+  "chapter": "S1",
+  "topic": "conditionals",
+  "tags": [
+   "elif",
+   "evaluation-order"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "def check(n):\n    print(\"check\", n)\n    return n > 1\n\nif check(1):\n    print(\"A\")\nelif check(2):\n    print(\"B\")\nelif check(3):\n    print(\"C\")",
+  "options": [
+   {
+    "id": "a",
+    "text": "B",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "check 1\ncheck 2\nB",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "check 1\ncheck 2\ncheck 3\nB",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "check 1\ncheck 2\nB\ncheck 3\nC",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "Conditions are evaluated one at a time, in order. check(1) prints and returns False; check(2) prints and returns True, so B is printed and the chain stops: check(3) is never called.",
+  "distractor_notes": {
+   "a": "Evaluating a condition calls check, which prints.",
+   "c": "Conditions after the first true one are not evaluated.",
+   "d": "Once a branch has run, the remaining elif branches are skipped."
+  },
+  "slides": [
+   34
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0080",
+  "chapter": "S1",
+  "topic": "conditionals",
+  "tags": [
+   "string-comparison",
+   "input"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "answer = \"10\"\nif answer > \"9\":\n    print(\"bigger\")\nelse:\n    print(\"smaller\")",
+  "options": [
+   {
+    "id": "a",
+    "text": "bigger",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "smaller",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "TypeError",
+    "out": "!TypeError"
+   },
+   {
+    "id": "d",
+    "text": "ValueError",
+    "out": "!ValueError"
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "Both operands are strings (as returned by input()), so they are compared character by character: '1' < '9', hence '10' < '9' and the else branch runs. Convert with int() to compare numbers.",
+  "distractor_notes": {
+   "a": "That would be 10 > 9 with ints; strings are compared lexicographically.",
+   "c": "Comparing two strings with > is allowed.",
+   "d": "No conversion is attempted."
+  },
+  "slides": [
+   33,
+   34,
+   28
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0081",
+  "chapter": "S1",
+  "topic": "conditionals",
+  "tags": [
+   "ternary",
+   "and-or"
+  ],
+  "type": "multi",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "Which of the following set `status` to `'adult'` when `age >= 18` and to `'minor'` otherwise? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "status = age >= 18 ? \"adult\" : \"minor\"",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "status = \"adult\" if age >= 18 else \"minor\"",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "status = age >= 18 and \"adult\" or \"minor\"",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "status = if age >= 18 \"adult\" else \"minor\"",
+    "mono": true
+   },
+   {
+    "id": "e",
+    "text": "status = \"minor\"\nif age >= 18: status = \"adult\"",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b",
+   "c",
+   "e"
+  ],
+  "explanation": "Python's ternary operator is `value_if_true if condition else value_if_false`. A default value overwritten by a one-line if also works. `cond and A or B` works too here because 'adult' is truthy (and/or return their operands). `?:` does not exist in Python.",
+  "distractor_notes": {
+   "a": "C-style `cond ? a : b` is a SyntaxError in Python.",
+   "d": "The condition goes in the middle: `\"adult\" if age >= 18 else \"minor\"`."
+  },
+  "slides": [
+   65,
+   28
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "",
+   "probe_template": "def _run(age):\n    ns = {'age': age}\n    exec(__OPTION__, ns)\n    return ns.get('status')\ntry:\n    print(_run(20) == 'adult' and _run(10) == 'minor')\nexcept SyntaxError:\n    print(False)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0082",
+  "chapter": "S1",
+  "topic": "conditionals",
+  "tags": [
+   "elif",
+   "keywords"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "Which keyword introduces an extra condition in an `if` statement (an 'else if' branch)?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "else if",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "elsif",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "elseif",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "elif",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "Python uses the keyword `elif` (short for else if). The other spellings are SyntaxErrors.",
+  "distractor_notes": {
+   "a": "`else if` (C/Java style) is a SyntaxError on one line: else must be followed by a colon.",
+   "b": "Not a keyword in Python (Perl/Ruby).",
+   "c": "Not a keyword in Python (PHP)."
+  },
+  "slides": [
+   34
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "",
+   "probe_template": "try:\n    compile('if x:\\n    pass\\n' + __OPTION__ + ' y:\\n    pass\\n', 'q', 'exec')\n    print(True)\nexcept SyntaxError:\n    print(False)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0083",
+  "chapter": "S1",
+  "topic": "conditionals",
+  "tags": [
+   "one-line-if",
+   "ternary",
+   "truthiness"
+  ],
+  "type": "multi",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Given the code below, which of the following snippets print exactly `yes`? Select all that apply.",
+  "code": "x = 4",
+  "options": [
+   {
+    "id": "a",
+    "text": "if x % 2 == 0: print(\"yes\")",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "if not x == 4: print(\"yes\")",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "if x: print(\"no\")\nelse: print(\"yes\")",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "print(\"yes\" if x > 3 else \"no\")",
+    "mono": true
+   },
+   {
+    "id": "e",
+    "text": "if x > 5: print(\"no\")\nelse: print(\"yes\")",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a",
+   "d",
+   "e"
+  ],
+  "explanation": "4 is even; 4 > 3; 4 > 5 is False so the else branch prints yes. A non-zero int is truthy, so `if x:` takes the first branch. `not x == 4` is `not (x == 4)` = False, so nothing is printed.",
+  "distractor_notes": {
+   "b": "not applies to the comparison: not True = False, nothing printed.",
+   "c": "4 is truthy: the if branch prints 'no'."
+  },
+  "slides": [
+   34,
+   65
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "x = 4",
+   "probe_template": "import io, contextlib\n_buf = io.StringIO()\ntry:\n    with contextlib.redirect_stdout(_buf):\n        exec(__OPTION__, globals())\n    _ok = _buf.getvalue() == 'yes\\n'\nexcept Exception:\n    _ok = False\nprint(_ok)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0084",
+  "chapter": "S1",
+  "topic": "conditionals",
+  "tags": [
+   "or",
+   "truthiness",
+   "classic-bug"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "x = 5\nif x == 1 or 2:\n    print(\"one or two\")\nelse:\n    print(\"other\")",
+  "options": [
+   {
+    "id": "a",
+    "text": "TypeError",
+    "out": "!TypeError"
+   },
+   {
+    "id": "b",
+    "text": "other",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "SyntaxError",
+    "out": "!SyntaxError"
+   },
+   {
+    "id": "d",
+    "text": "one or two",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "The condition is `(x == 1) or 2`, not 'x equals 1 or 2'. x == 1 is False, so `or` returns 2, which is truthy: the if branch always runs. Write `x == 1 or x == 2` (or `x in (1, 2)`).",
+  "distractor_notes": {
+   "a": "Mixing a bool and an int in or is allowed.",
+   "b": "Would be right for `x == 1 or x == 2`; the second operand here is just the truthy value 2.",
+   "c": "The code is valid; it just does not mean what it seems to."
+  },
+  "slides": [
+   28,
+   34
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0085",
+  "chapter": "S1",
+  "topic": "conditionals",
+  "tags": [
+   "modulo",
+   "elif",
+   "return"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "def rest(i):\n    if i % 3 == 0:\n        return \"divisible\"\n    elif i % 3 == 1:\n        return \"rest 1\"\n    return \"rest 2\"\n\nprint(rest(-1))",
+  "options": [
+   {
+    "id": "a",
+    "text": "rest 1",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "rest 2",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "None",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "divisible",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "With a positive divisor Python's `%` is never negative: -1 % 3 == 2 (because -1 = 3 * (-1) + 2). Neither the if nor the elif matches, so the final return gives 'rest 2'.",
+  "distractor_notes": {
+   "a": "Assumes -1 % 3 is 1 (taking the absolute value); Python gives 2.",
+   "c": "The function always reaches a return statement.",
+   "d": "-1 is not a multiple of 3."
+  },
+  "slides": [
+   64,
+   28
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0086",
+  "chapter": "S1",
+  "topic": "conditionals",
+  "tags": [
+   "control-structures"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "Which of the following control structures does **not** exist in Python?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "while condition: ...",
+    "mono": true,
+    "probe": "try:\n    compile('while False:\\n    pass\\n', 'q', 'exec')\n    print(False)\nexcept SyntaxError:\n    print(True)"
+   },
+   {
+    "id": "b",
+    "text": "if ... elif ... else",
+    "mono": true,
+    "probe": "try:\n    compile('if False:\\n    pass\\nelif True:\\n    pass\\nelse:\\n    pass\\n', 'q', 'exec')\n    print(False)\nexcept SyntaxError:\n    print(True)"
+   },
+   {
+    "id": "c",
+    "text": "for item in iterable: ...",
+    "mono": true,
+    "probe": "try:\n    compile('for item in []:\\n    pass\\n', 'q', 'exec')\n    print(False)\nexcept SyntaxError:\n    print(True)"
+   },
+   {
+    "id": "d",
+    "text": "do ... while condition",
+    "mono": true,
+    "probe": "try:\n    compile('do:\\n    pass\\nwhile False\\n', 'q', 'exec')\n    print(False)\nexcept SyntaxError:\n    print(True)"
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "Python has if/elif/else, while and for (plus try/except). There is no do...while or repeat...until loop: write `while True:` with a `break` when the condition is met.",
+  "distractor_notes": {
+   "a": "while exists: it repeats as long as the condition is true.",
+   "b": "if/elif/else exists.",
+   "c": "for exists: it iterates over an iterable (range, string, list...)."
+  },
+  "slides": [
+   32,
+   39
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": ""
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0087",
+  "chapter": "S1",
+  "topic": "python-intro",
+  "tags": [
+   "characteristics",
+   "dynamic-typing"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "Which of the following is **not** a characteristic of Python as presented in the course?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "It is statically typed: every variable must be declared with its type."
+   },
+   {
+    "id": "b",
+    "text": "It is multi-paradigm: imperative, object-oriented, functional..."
+   },
+   {
+    "id": "c",
+    "text": "It is interpreted."
+   },
+   {
+    "id": "d",
+    "text": "It is garbage collected: no manual memory management."
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "Python's typing is dynamic and implicit (duck typing): a variable is just a name bound to a value and is never declared with a type. Python is interpreted, garbage collected and multi-paradigm.",
+  "distractor_notes": {
+   "b": "True: Python supports several programming paradigms.",
+   "c": "True: you need the Python interpreter to run a program.",
+   "d": "True: memory is reclaimed automatically."
+  },
+  "slides": [
+   10,
+   26,
+   62
+  ],
+  "verify": {
+   "mode": "manual",
+   "reference": "Slide 10 (interpreted, garbage collected, multi paradigm); slides 26 and 62 (typing is dynamic/implicit, no need to declare variables)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0088",
+  "chapter": "S1",
+  "topic": "python-intro",
+  "tags": [
+   "pip",
+   "PyPI"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is `pip`?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "A built-in Python function used inside a script to install packages"
+   },
+   {
+    "id": "b",
+    "text": "A Python keyword used to import a module"
+   },
+   {
+    "id": "c",
+    "text": "A terminal command that installs packages from PyPI, the Python Package Index"
+   },
+   {
+    "id": "d",
+    "text": "The program that displays Jupyter notebooks"
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "pip ('Pip Installs Packages', a recursive acronym) is a command run in a terminal, e.g. `pip install numpy`. It downloads packages from PyPI (pypi.org). It is not Python code.",
+  "distractor_notes": {
+   "a": "pip is not called from Python code; it is a console command.",
+   "b": "The keyword for importing is `import`.",
+   "d": "Notebooks are served by the jupyter application (which can itself be installed with pip)."
+  },
+  "slides": [
+   18,
+   21
+  ],
+  "verify": {
+   "mode": "manual",
+   "reference": "Slide 18 (pip = Pip Installs Packages, pypi.org); slide 21 (pip is a console command, not a python command)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0089",
+  "chapter": "S1",
+  "topic": "python-intro",
+  "tags": [
+   "pip",
+   "SyntaxError"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "A student types the following line at the Python prompt (`>>>`). What happens?",
+  "code": "pip install numpy",
+  "options": [
+   {
+    "id": "a",
+    "text": "SyntaxError",
+    "out": "!SyntaxError"
+   },
+   {
+    "id": "b",
+    "text": "numpy is installed and nothing is printed",
+    "out": ""
+   },
+   {
+    "id": "c",
+    "text": "ModuleNotFoundError",
+    "out": "!ModuleNotFoundError"
+   },
+   {
+    "id": "d",
+    "text": "NameError",
+    "out": "!NameError"
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "pip is a terminal (shell) command, not Python code. For the Python parser, `pip install numpy` is three names in a row, which is invalid syntax: SyntaxError. Run it in a terminal instead.",
+  "distractor_notes": {
+   "b": "Packages are installed from a terminal, not from the Python prompt.",
+   "c": "Nothing is imported here.",
+   "d": "The line is rejected by the parser before any name is looked up."
+  },
+  "slides": [
+   18,
+   21
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0090",
+  "chapter": "S1",
+  "topic": "python-intro",
+  "tags": [
+   "jupyter",
+   "notebooks"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "Which statement about Jupyter notebooks is correct?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "A notebook cell can only contain a single line of code."
+   },
+   {
+    "id": "b",
+    "text": "Notebooks run without any server, directly from the command line."
+   },
+   {
+    "id": "c",
+    "text": "A notebook is made of cells containing either executable code or text (Markdown)."
+   },
+   {
+    "id": "d",
+    "text": "Notebooks compile Python code to machine code before running it."
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "A notebook interleaves code cells (executable) and text cells (Markdown, static). It is displayed in the web browser; the jupyter application acts as a local web server that runs the code.",
+  "distractor_notes": {
+   "a": "A code cell can contain a whole program.",
+   "b": "The jupyter application is a web server and notebooks are displayed in a browser.",
+   "d": "The code is still run by the Python interpreter (the kernel)."
+  },
+  "slides": [
+   18,
+   19
+  ],
+  "verify": {
+   "mode": "manual",
+   "reference": "Slide 19 (notebooks: cells of 2 kinds, code and text, displayed in the web browser, the jupyter application is a web server)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0091",
+  "chapter": "S1",
+  "topic": "python-intro",
+  "tags": [
+   "history"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Who created Python, and in which year was Python 3.0 released?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "Linus Torvalds; 2008"
+   },
+   {
+    "id": "b",
+    "text": "Guido van Rossum; 2000"
+   },
+   {
+    "id": "c",
+    "text": "James Gosling; 1991"
+   },
+   {
+    "id": "d",
+    "text": "Guido van Rossum; 2008"
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "Python was created by the Dutch programmer Guido van Rossum (first public release 0.9.0 in 1991). Python 2.0 came out in 2000 and Python 3.0, which is not backward compatible with Python 2, in 2008.",
+  "distractor_notes": {
+   "a": "Linus Torvalds created Linux.",
+   "b": "2000 is the release year of Python 2.0.",
+   "c": "James Gosling created Java; 1991 is Python's first public release."
+  },
+  "slides": [
+   9
+  ],
+  "verify": {
+   "mode": "manual",
+   "reference": "Slide 9 (history: creation by Guido van Rossum, 1991 first public release, 2000 Python 2.0, 2008 Python 3.0)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0092",
+  "chapter": "S1",
+  "topic": "python-intro",
+  "tags": [
+   "all-of-the-above",
+   "characteristics"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Which of the following statements about Python is true?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "Variables need no type declaration and can be rebound to values of another type.",
+    "probe": "print(A and not ALL)"
+   },
+   {
+    "id": "b",
+    "text": "Integers have arbitrary precision: they never overflow.",
+    "probe": "print(B and not ALL)"
+   },
+   {
+    "id": "c",
+    "text": "Code blocks are delimited by indentation, not by braces.",
+    "probe": "print(C and not ALL)"
+   },
+   {
+    "id": "d",
+    "text": "All of the above",
+    "probe": "print(ALL)"
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "All three statements are true: typing is dynamic (a name can be rebound to any type), ints have infinite precision (2 ** 100 is computed exactly), and blocks are defined by the colon plus indentation - a missing indentation is an IndentationError.",
+  "distractor_notes": {
+   "a": "True, but not the only true statement.",
+   "b": "True, but not the only true statement.",
+   "c": "True, but not the only true statement."
+  },
+  "slides": [
+   10,
+   22,
+   24,
+   26
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "x = 1\nx = 'one'\nA = isinstance(x, str)\nB = 2 ** 100 == 1267650600228229401496703205376\ntry:\n    compile('if True:\\nprint(1)\\n', 'q', 'exec')\n    C = False\nexcept IndentationError:\n    C = True\nALL = A and B and C"
+  },
+  "reviewed": 1
+ }
+]

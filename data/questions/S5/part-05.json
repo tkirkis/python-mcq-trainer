@@ -1,0 +1,1097 @@
+[
+  {
+    "id": "S5-0081",
+    "chapter": "S5",
+    "topic": "oop-concepts",
+    "tags": [
+      "4-pillars",
+      "encapsulation"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "Which pillar of OOP consists in wrapping data and the functions that work on it together into a single unit, the class?",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "Abstraction"
+      },
+      {
+        "id": "b",
+        "text": "Encapsulation"
+      },
+      {
+        "id": "c",
+        "text": "Inheritance"
+      },
+      {
+        "id": "d",
+        "text": "Polymorphism"
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "Encapsulation bundles the data (attributes) and the functions that operate on it (methods) into one unit: the class.",
+    "distractor_notes": {
+      "a": "Abstraction means exposing only the essential features of an object and hiding the irrelevant details.",
+      "c": "Inheritance is a subclass acquiring the members of another class.",
+      "d": "Polymorphism is objects having their own behaviour while sharing the interface of their parent class."
+    },
+    "slides": [
+      187
+    ],
+    "verify": {
+      "mode": "manual",
+      "reference": "Slide 187 (The 4 pillars of OOP)"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0082",
+    "chapter": "S5",
+    "topic": "oop-concepts",
+    "tags": [
+      "4-pillars",
+      "abstraction"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "Showing only the essential features of an object to the outside world and hiding the irrelevant information is called:",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "Encapsulation"
+      },
+      {
+        "id": "b",
+        "text": "Polymorphism"
+      },
+      {
+        "id": "c",
+        "text": "Abstraction"
+      },
+      {
+        "id": "d",
+        "text": "Instantiation"
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "Abstraction is about the outside view of an object: only the necessary features are shown, the rest is hidden.",
+    "distractor_notes": {
+      "a": "Encapsulation is bundling data and functions into a class; abstraction is about what is exposed to the outside.",
+      "b": "Polymorphism is the same interface with different behaviours.",
+      "d": "Instantiation is creating an object from a class; it is not one of the 4 pillars."
+    },
+    "slides": [
+      187
+    ],
+    "verify": {
+      "mode": "manual",
+      "reference": "Slide 187 (The 4 pillars of OOP)"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0083",
+    "chapter": "S5",
+    "topic": "oop-concepts",
+    "tags": [
+      "4-pillars",
+      "polymorphism"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "Classes `Cat` and `Fish` both inherit from `Animal` and each redefines the method `move()`. A loop calls `a.move()` on every element of a mixed list of animals, and the same call produces a different behaviour depending on the object's class. Which OOP concept does this illustrate?",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "Encapsulation"
+      },
+      {
+        "id": "b",
+        "text": "Abstraction"
+      },
+      {
+        "id": "c",
+        "text": "Polymorphism"
+      },
+      {
+        "id": "d",
+        "text": "Instantiation"
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "Polymorphism: one call (`a.move()`), many behaviours, chosen by the class of the object. Overriding a parent method in child classes is exactly what the course calls polymorphism.",
+    "distractor_notes": {
+      "a": "Encapsulation is bundling data and methods in a class, not choosing behaviour per object.",
+      "b": "Abstraction is hiding irrelevant details from the outside.",
+      "d": "Instantiation is creating objects, not the varying behaviour of one call."
+    },
+    "slides": [
+      187,
+      194
+    ],
+    "verify": {
+      "mode": "manual",
+      "reference": "Slides 187 (4 pillars) and 194 (overriding methods is polymorphism)"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0084",
+    "chapter": "S5",
+    "topic": "oop-concepts",
+    "tags": [
+      "built-in-types-are-classes",
+      "type",
+      "dir"
+    ],
+    "type": "multi",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Which expressions evaluate to True? (Select all that apply.)",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "type([]) is list",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "isinstance('abc', str)",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "type(list) is list",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "isinstance(3, object)",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "'append' in dir(list)",
+        "mono": true
+      },
+      {
+        "id": "f",
+        "text": "type(5) == 'int'",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "b",
+      "d",
+      "e"
+    ],
+    "explanation": "Built-in types are classes: [] is an instance of list, 'abc' of str, and every value (even 3) is an object. `dir(list)` lists the members of the class, including `append`. The class list itself is an instance of `type` (so `type(list) is type`), and `type()` returns a class, not a string.",
+    "distractor_notes": {
+      "c": "list is a class; the type of a class is `type`.",
+      "f": "`type(5)` is the class int, not the string 'int'."
+    },
+    "slides": [
+      196
+    ],
+    "verify": {
+      "mode": "truth",
+      "probe_template": "print((__OPTION_RAW__) is True)"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0085",
+    "chapter": "S5",
+    "topic": "oop-concepts",
+    "tags": [
+      "encapsulation",
+      "name-mangling",
+      "private"
+    ],
+    "type": "multi",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Given the code, which expressions run without raising an error? (Select all that apply.)",
+    "code": "class Safe:\n    def __init__(self):\n        self._code = 1234\n        self.__key = 'abc'\n    def reveal(self):\n        return self.__key\n\ns = Safe()",
+    "options": [
+      {
+        "id": "a",
+        "text": "s._code",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "s.__key",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "s._Safe__key",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "s.reveal()",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "c",
+      "d"
+    ],
+    "explanation": "A single leading underscore (`_code`) is only a convention meaning 'internal': access still works. Two leading underscores trigger name mangling: inside the class `__key` is stored as `_Safe__key`, so `s.__key` from outside raises AttributeError, while the class's own methods and the mangled name still reach it. Python encapsulation relies on conventions, not on strict privacy.",
+    "distractor_notes": {
+      "b": "Outside the class the name is not mangled, and no attribute literally named `__key` exists → AttributeError."
+    },
+    "slides": [
+      187
+    ],
+    "verify": {
+      "mode": "truth",
+      "probe_template": "try:\n    __OPTION_RAW__\n    print(True)\nexcept AttributeError:\n    print(False)"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0086",
+    "chapter": "S5",
+    "topic": "oop-concepts",
+    "tags": [
+      "name-mangling",
+      "encapsulation"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "class Safe:\n    def __init__(self):\n        self.__key = 'abc'\n    def reveal(self):\n        return self.__key\n\ns = Safe()\ns.__key = 'xyz'\nprint(s.reveal(), s.__key)",
+    "options": [
+      {
+        "id": "a",
+        "text": "xyz xyz",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "abc abc",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "abc xyz",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "AttributeError",
+        "mono": true,
+        "out": "!AttributeError"
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "Inside the class, `self.__key` is mangled into `self._Safe__key`. Outside the class no mangling happens, so `s.__key = 'xyz'` creates a different attribute literally named `__key`. `reveal()` still reads `_Safe__key` → 'abc', and `s.__key` now exists → 'xyz'.",
+    "distractor_notes": {
+      "a": "The outside assignment does not touch the mangled attribute `_Safe__key`.",
+      "d": "After the assignment, an attribute named `__key` exists on s.",
+      "b": "`s.__key` reads the new attribute created outside the class."
+    },
+    "slides": [
+      187
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0087",
+    "chapter": "S5",
+    "topic": "args-kwargs-advanced",
+    "tags": [
+      "*args",
+      "keyword-only",
+      "unpacking"
+    ],
+    "type": "multi",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Given the function, which calls return 10? (Select all that apply.)",
+    "code": "def total(*args, verbose=False, start=0):\n    s = start\n    for a in args:\n        s += a\n    if verbose:\n        print('adding', args)\n    return s",
+    "options": [
+      {
+        "id": "a",
+        "text": "total(1, 2, 3, 4)",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "total(2, 3, start=5, verbose=True)",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "total([1, 2, 3, 4])",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "total(*[1, 2, 3, 4])",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "total(5, 5, 10)",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "b",
+      "d"
+    ],
+    "explanation": "`*args` collects all the positional arguments into a tuple; the parameters after it (`verbose`, `start`) are keyword-only and can only be set by name. `total(5, 5, 10)` sums all three (20): 10 does not go into start. Passing a list gives `args = ([1, 2, 3, 4],)` and `0 + list` fails, while `*[...]` unpacks it into 4 separate arguments.",
+    "distractor_notes": {
+      "c": "The list is one single argument: `0 + [1, 2, 3, 4]` raises TypeError.",
+      "e": "10 is also collected in args (sum 20); start can only be given as `start=10`."
+    },
+    "slides": [
+      207,
+      208
+    ],
+    "verify": {
+      "mode": "truth",
+      "probe_template": "try:\n    print(__OPTION_RAW__ == 10)\nexcept TypeError:\n    print(False)"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0088",
+    "chapter": "S5",
+    "topic": "args-kwargs-advanced",
+    "tags": [
+      "keyword-only",
+      "TypeError"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What happens in the below code?",
+    "code": "def scale(*values, factor):\n    return [v * factor for v in values]\n\nprint(scale(1, 2, 3))",
+    "options": [
+      {
+        "id": "a",
+        "text": "TypeError",
+        "mono": true,
+        "out": "!TypeError"
+      },
+      {
+        "id": "b",
+        "text": "[3, 6]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[1, 2, 3]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "`factor` comes after `*values`, so it is a keyword-only parameter, and it has no default. All the positional arguments go into values and factor is never given: TypeError (missing 1 required keyword-only argument: 'factor'). Call it as `scale(1, 2, 3, factor=2)`.",
+    "distractor_notes": {
+      "b": "Python never uses the last positional argument for a keyword-only parameter.",
+      "d": "The function body never runs.",
+      "c": "factor has no default value of 1."
+    },
+    "slides": [
+      207,
+      208
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0089",
+    "chapter": "S5",
+    "topic": "args-kwargs-advanced",
+    "tags": [
+      "*args",
+      "**kwargs",
+      "tuple",
+      "dict"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "def show(*args, **kwargs):\n    print(type(args).__name__, type(kwargs).__name__, len(args), len(kwargs))\n\nshow(1, 2, a=3)",
+    "options": [
+      {
+        "id": "a",
+        "text": "list list 2 1",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "list dict 2 1",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "tuple dict 3 0",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "tuple dict 2 1",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "`*args` collects the extra positional arguments into a tuple (1, 2), and `**kwargs` collects the keyword arguments into a dict {'a': 3}.",
+    "distractor_notes": {
+      "b": "args is a tuple, not a list.",
+      "c": "`a=3` is a keyword argument, so it goes into kwargs.",
+      "a": "kwargs is a dict and args a tuple."
+    },
+    "slides": [
+      207,
+      208
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0090",
+    "chapter": "S5",
+    "topic": "args-kwargs-advanced",
+    "tags": [
+      "shadowing-built-ins",
+      "*args",
+      "TypeError"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "def sum(*args, start=0):\n    s = start\n    for a in args:\n        s += a\n    return s\n\nprint(sum([1, 2, 3]))",
+    "options": [
+      {
+        "id": "a",
+        "text": "6",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[1, 2, 3]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "TypeError",
+        "mono": true,
+        "out": "!TypeError"
+      },
+      {
+        "id": "d",
+        "text": "0",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "The `def` rebinds the name `sum`, hiding the built-in function. The new sum receives a single argument, the list, so `args = ([1, 2, 3],)` and the loop computes `0 + [1, 2, 3]` → TypeError. The built-in would give 6; this version expects `sum(1, 2, 3)`. Avoid reusing built-in names.",
+    "distractor_notes": {
+      "a": "The built-in sum is shadowed by the new definition.",
+      "b": "`0 + list` fails instead of producing the list.",
+      "d": "The loop body runs once (with the list) and fails."
+    },
+    "slides": [
+      207,
+      208
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0091",
+    "chapter": "S5",
+    "topic": "args-kwargs-advanced",
+    "tags": [
+      "*args",
+      "**kwargs",
+      "keyword-only"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "def order(item, *extras, size='M', **notes):\n    print(item, extras, size, notes)\n\norder('tea', 'milk', 'L', sugar=2)",
+    "options": [
+      {
+        "id": "a",
+        "text": "tea ('milk',) L {'sugar': 2}",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "tea ('milk', 'L') M {'sugar': 2}",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "tea ['milk', 'L'] M {'sugar': 2}",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "TypeError",
+        "mono": true,
+        "out": "!TypeError"
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "item takes 'tea'; every other positional argument goes into the tuple extras, including 'L', because size comes after `*extras` and is keyword-only, so it keeps 'M'. The unknown keyword `sugar=2` goes into the dict notes.",
+    "distractor_notes": {
+      "a": "A keyword-only parameter is never filled by a positional argument.",
+      "c": "extras is a tuple, not a list.",
+      "d": "`**notes` accepts any extra keyword argument."
+    },
+    "slides": [
+      207,
+      208
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0092",
+    "chapter": "S5",
+    "topic": "args-kwargs-advanced",
+    "tags": [
+      "multiple-values",
+      "TypeError"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What happens in the below code?",
+    "code": "def f(a, *args, **kwargs):\n    return a\n\nprint(f(1, 2, a=3))",
+    "options": [
+      {
+        "id": "a",
+        "text": "TypeError",
+        "mono": true,
+        "out": "!TypeError"
+      },
+      {
+        "id": "b",
+        "text": "3",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "1",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "(1, 2)",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "Positional arguments are bound first: 1 goes to a and 2 into args. Then `a=3` tries to bind a a second time → TypeError (got multiple values for argument 'a'). `**kwargs` only collects keywords that do not match a named parameter.",
+    "distractor_notes": {
+      "b": "A keyword argument does not override a positional one; they conflict.",
+      "d": "The function never returns.",
+      "c": "The call fails before the function body runs."
+    },
+    "slides": [
+      207,
+      208
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0093",
+    "chapter": "S5",
+    "topic": "args-kwargs-advanced",
+    "tags": [
+      "keyword-only",
+      "parameter-order"
+    ],
+    "type": "multi",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "Given the function, which calls run without a TypeError? (Select all that apply.)",
+    "code": "def g(a, b=2, *args, c, **kw):\n    return a",
+    "options": [
+      {
+        "id": "a",
+        "text": "g(1, c=3)",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "g(1, 2, 3)",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "g(1, 2, 3, 4, c=5, d=6)",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "g(c=1, a=2)",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "g(1, 2, c=3, b=4)",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "c",
+      "d"
+    ],
+    "explanation": "a is required, b has a default, extra positional arguments go into args, c is keyword-only and required (no default), and unknown keywords go into kw. `g(1, 2, 3)` never supplies c, and `g(1, 2, c=3, b=4)` gives b twice (by position and by keyword).",
+    "distractor_notes": {
+      "b": "c is keyword-only and required: 3 goes into args → TypeError (missing keyword-only argument 'c').",
+      "e": "b receives 2 by position and 4 by keyword → TypeError (multiple values for 'b')."
+    },
+    "slides": [
+      207,
+      208
+    ],
+    "verify": {
+      "mode": "truth",
+      "probe_template": "try:\n    __OPTION_RAW__\n    print(True)\nexcept TypeError:\n    print(False)"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0094",
+    "chapter": "S5",
+    "topic": "args-kwargs-advanced",
+    "tags": [
+      "unpacking",
+      "*args",
+      "none-of-the-above"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "def foo(*args, **kwargs):\n    print(args)\n    print(kwargs)\n\nwords = ['one', 'two']\nfoo(words)",
+    "options": [
+      {
+        "id": "a",
+        "text": "('one', 'two')\n{}",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "['one', 'two']\n{}",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "('one', 'two')\nNone",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "None of the above",
+        "out": null
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "Without `*`, the list is passed as one single argument, so args is a tuple containing the list: the program prints `(['one', 'two'],)` and then `{}` (no keyword arguments gives an empty dict). None of the listed outputs matches. `foo(*words)` would unpack the list and print ('one', 'two').",
+    "distractor_notes": {
+      "a": "That is the output of `foo(*words)`; without `*` the list is not unpacked.",
+      "b": "args is always a tuple, even with a single argument: here a tuple containing the list.",
+      "c": "kwargs is an empty dict, never None (and the list was not unpacked)."
+    },
+    "slides": [
+      207,
+      208
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1,
+    "expected_output": "(['one', 'two'],)\n{}"
+  },
+  {
+    "id": "S5-0095",
+    "chapter": "S5",
+    "topic": "gui-mvc",
+    "tags": [
+      "MVC",
+      "model"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "In the MVC pattern, which component holds the data and its related logic?",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "Model"
+      },
+      {
+        "id": "b",
+        "text": "View"
+      },
+      {
+        "id": "c",
+        "text": "Controller"
+      },
+      {
+        "id": "d",
+        "text": "Router"
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "Model = the data and the logic attached to it; View = presentation and user interaction; Controller = the interface between Model and View.",
+    "distractor_notes": {
+      "b": "The View presents data to the user and handles user interaction.",
+      "c": "The Controller is the interface between Model and View.",
+      "d": "Router is not one of the three MVC components."
+    },
+    "slides": [
+      201
+    ],
+    "verify": {
+      "mode": "manual",
+      "reference": "Slide 201 (MVC)"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0096",
+    "chapter": "S5",
+    "topic": "gui-mvc",
+    "tags": [
+      "3-tier",
+      "architecture"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "In a 3-tier architecture, which tier coordinates the application, processes commands, makes logical decisions and performs calculations?",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "Presentation tier"
+      },
+      {
+        "id": "b",
+        "text": "Logic tier"
+      },
+      {
+        "id": "c",
+        "text": "Data tier"
+      },
+      {
+        "id": "d",
+        "text": "Network tier"
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "The logic (application) tier sits in the middle: it processes commands, makes decisions and calculations, and moves data between the presentation tier (user interface) and the data tier (database / file storage).",
+    "distractor_notes": {
+      "a": "The presentation tier is the user interface: it translates tasks and results for the user.",
+      "c": "The data tier stores and retrieves information from a database or file system.",
+      "d": "There is no network tier among the 3 tiers."
+    },
+    "slides": [
+      199,
+      200
+    ],
+    "verify": {
+      "mode": "manual",
+      "reference": "Slides 199-200 (3 tiers)"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0097",
+    "chapter": "S5",
+    "topic": "gui-mvc",
+    "tags": [
+      "callback",
+      "command=f()",
+      "Tk"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "This mini `Button` class mimics a Tk button. What is the output of the code?",
+    "code": "class Button:\n    def __init__(self, text, command=None):\n        self.text = text\n        self.command = command\n    def click(self):\n        if self.command:\n            self.command()\n\ndef say_hi():\n    print('hi')\n\nb = Button('Go', command=say_hi())\nprint('created')\nb.click()",
+    "options": [
+      {
+        "id": "a",
+        "text": "created\nhi",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "TypeError",
+        "mono": true,
+        "out": "!TypeError"
+      },
+      {
+        "id": "c",
+        "text": "hi\ncreated\nhi",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "hi\ncreated",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "`command=say_hi()` calls the function immediately, while the arguments are built: 'hi' is printed at creation and command receives the return value, None. `click()` then does nothing. To register a callback, pass the function itself: `command=say_hi` (or a lambda).",
+    "distractor_notes": {
+      "a": "That is what `command=say_hi` (without parentheses) would print.",
+      "c": "say_hi ran once, at creation; the stored command is None.",
+      "b": "`click` tests `if self.command`, so a None command is silently skipped."
+    },
+    "slides": [
+      205
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0098",
+    "chapter": "S5",
+    "topic": "gui-mvc",
+    "tags": [
+      "callback",
+      "lambda",
+      "late-binding",
+      "closure"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "These lambdas could be the `command` callbacks of three buttons created in a loop. What is the output of the code?",
+    "code": "callbacks = []\nfor i in range(3):\n    callbacks.append(lambda: print(i))\n\nfor cb in callbacks:\n    cb()",
+    "options": [
+      {
+        "id": "a",
+        "text": "0\n1\n2",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "0\n0\n0",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "2\n2\n2",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "NameError",
+        "mono": true,
+        "out": "!NameError"
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "A lambda captures the variable i, not its value at creation time: the value is looked up when the lambda is called. By then the loop is over and i is 2. The usual fix is `lambda i=i: print(i)`, since a default value is evaluated at creation.",
+    "distractor_notes": {
+      "a": "That is the behaviour of `lambda i=i: print(i)`.",
+      "d": "i still exists after the loop (a for loop has no block scope).",
+      "b": "The lookup happens at call time and finds the last value of i."
+    },
+    "slides": [
+      205
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0099",
+    "chapter": "S5",
+    "topic": "gui-mvc",
+    "tags": [
+      "Tk",
+      "widgets"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "Which Tkinter widget is meant for single-line text input?",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "Entry"
+      },
+      {
+        "id": "b",
+        "text": "Label"
+      },
+      {
+        "id": "c",
+        "text": "Text"
+      },
+      {
+        "id": "d",
+        "text": "Canvas"
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "Entry is the single-line input field; Text is the multi-line text widget, Label displays text, Canvas draws vector and pixel graphics.",
+    "distractor_notes": {
+      "b": "A Label only displays text; the user cannot type in it.",
+      "c": "Text is the multi-line text widget.",
+      "d": "Canvas is for drawing (vector and pixel graphics)."
+    },
+    "slides": [
+      204
+    ],
+    "verify": {
+      "mode": "manual",
+      "reference": "Slide 204 (Tk widgets)"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0100",
+    "chapter": "S5",
+    "topic": "gui-mvc",
+    "tags": [
+      "callback",
+      "lambda",
+      "callable-object",
+      "Tk"
+    ],
+    "type": "multi",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "With these definitions, which expressions can be passed as `command=` to a Tk button so that something is appended to `calls` **only when the button is clicked** (Tk calls the command with no argument)? (Select all that apply.)",
+    "code": "calls = []\n\ndef save():\n    calls.append('save')\n\ndef save_as(name):\n    calls.append(name)\n\nclass Saver:\n    def __call__(self):\n        calls.append('obj')",
+    "options": [
+      {
+        "id": "a",
+        "text": "save",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "save()",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "lambda: save_as('x')",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "save_as('x')",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "Saver()",
+        "mono": true
+      },
+      {
+        "id": "f",
+        "text": "Saver",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "c",
+      "e"
+    ],
+    "explanation": "Tk needs a callable that it will call later with no argument: a function name (`save`), a lambda wrapping a call that needs arguments, or a callable object (an instance of a class with `__call__`). `save()` and `save_as('x')` run immediately when the button is created and pass their result, None. `Saver` is the class: calling it only builds a new object and records nothing.",
+    "distractor_notes": {
+      "b": "The parentheses call save immediately; command receives None.",
+      "d": "Called at creation and returns None; wrap it in a lambda instead.",
+      "f": "Calling the class creates an instance; `__call__` is not executed."
+    },
+    "slides": [
+      192,
+      205
+    ],
+    "verify": {
+      "mode": "truth",
+      "probe_template": "cmd = __OPTION_RAW__\nbefore = list(calls)\ntry:\n    cmd()\n    print(before == [] and len(calls) == 1)\nexcept TypeError:\n    print(False)"
+    },
+    "reviewed": 1
+  }
+]

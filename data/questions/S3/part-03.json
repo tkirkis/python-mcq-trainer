@@ -1,0 +1,1124 @@
+[
+  {
+    "id": "S3-0041",
+    "chapter": "S3",
+    "topic": "files-io",
+    "tags": [
+      "file-parsing",
+      "split",
+      "map-of-france"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "`france_lite.map` contains the 4 lines `Nantes:300:500`, `Angers:400:450`, `--` and `Nantes:Angers:90`. What is the output?",
+    "code": "cities = {}\nwith open(\"france_lite.map\") as f:\n    for line in f:\n        if line.strip() == \"--\":\n            break\n        name, x, y = line.split(\":\")\n        cities[name] = (int(x), int(y))\nprint(cities)",
+    "options": [
+      {
+        "id": "a",
+        "text": "{'Nantes': (300, 500), 'Angers': (400, 450)}",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "{'Nantes': ('300', '500'), 'Angers': ('400', '450')}",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "ValueError",
+        "mono": true,
+        "out": "!ValueError"
+      },
+      {
+        "id": "d",
+        "text": "{'Nantes': (300, 500)}",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "Each line before `--` is split on `:` into name, x and y. `y` still ends with `'\\n'` (e.g. `'500\\n'`), but `int()` ignores surrounding whitespace, so the conversion works. The loop stops at the `--` separator, so the road line is never parsed.",
+    "distractor_notes": {
+      "b": "`int()` converts the strings to numbers.",
+      "c": "`int('500\\n')` is valid: `int()` strips surrounding whitespace.",
+      "d": "The `break` only happens on the `--` line, after both cities were read."
+    },
+    "slides": [
+      133,
+      148
+    ],
+    "verify": {
+      "mode": "output",
+      "files": {
+        "france_lite.map": "Nantes:300:500\nAngers:400:450\n--\nNantes:Angers:90\n"
+      }
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0042",
+    "chapter": "S3",
+    "topic": "files-io",
+    "tags": [
+      "open-modes"
+    ],
+    "type": "multi",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "`data.txt` exists and `new.txt` does not. Which of the following calls return a file object that you can **write** to? Select all that apply.",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "open('data.txt', 'a')",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "open('data.txt', 'r+')",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "open('data.txt')",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "open('data.txt', 'rb')",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "open('new.txt', 'x')",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "b",
+      "e"
+    ],
+    "explanation": "`'a'` (append), `'r+'` (read and write an existing file) and `'x'` (create a new file, which works here because `new.txt` does not exist yet) all allow writing. The default mode `'r'` and `'rb'` are read-only.",
+    "distractor_notes": {
+      "c": "The default mode is `'r'`: read only.",
+      "d": "`'rb'` reads in binary mode; it does not allow writing."
+    },
+    "slides": [
+      133
+    ],
+    "verify": {
+      "mode": "truth",
+      "files": {
+        "data.txt": "x\n"
+      },
+      "probe_template": "f = __OPTION_RAW__\nprint(f.writable())"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0043",
+    "chapter": "S3",
+    "topic": "files-io",
+    "tags": [
+      "read",
+      "readline",
+      "file-position"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "The file `alpha.txt` contains `abcdefgh` followed by a newline. What is the output?",
+    "code": "with open(\"alpha.txt\") as f:\n    a = f.read(3)\n    b = f.read(2)\n    c = f.readline()\nprint(a, b, c.strip())",
+    "options": [
+      {
+        "id": "a",
+        "text": "abc de abcdefgh",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "abc ab abcdefgh",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "abc de fgh",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "abc de",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "`read(3)` returns the next 3 characters `'abc'`, `read(2)` continues from the current position with `'de'`, and `readline()` returns the rest of the current line, `'fgh\\n'`. Every read moves the file position forward.",
+    "distractor_notes": {
+      "a": "`readline()` reads from the current position, not from the start of the line.",
+      "b": "Reads continue from the current position; they do not restart at the beginning.",
+      "d": "There are characters left on the line after `de`: `readline()` returns `'fgh\\n'`."
+    },
+    "slides": [
+      133
+    ],
+    "verify": {
+      "mode": "output",
+      "files": {
+        "alpha.txt": "abcdefgh\n"
+      }
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0044",
+    "chapter": "S3",
+    "topic": "files-io",
+    "tags": [
+      "with",
+      "close"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the main advantage of `with open(...) as f:` over `f = open(...)`?",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "The file is opened in binary mode",
+        "probe": "with open('data.txt') as f:\n    print('b' in f.mode)"
+      },
+      {
+        "id": "b",
+        "text": "The file is opened for reading and writing at the same time",
+        "probe": "with open('data.txt') as f:\n    print(f.writable())"
+      },
+      {
+        "id": "c",
+        "text": "The file is closed automatically at the end of the block, even if an exception occurs",
+        "probe": "try:\n    with open('data.txt') as f:\n        raise ValueError\nexcept ValueError:\n    pass\nprint(f.closed)"
+      },
+      {
+        "id": "d",
+        "text": "A missing file is created instead of raising an error",
+        "probe": "try:\n    with open('nofile.txt') as f:\n        pass\n    print(True)\nexcept FileNotFoundError:\n    print(False)"
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "`with` guarantees that the file is closed when the block is left, whether normally or because of an exception (no need to call `f.close()`). The mode is still decided by `open()` (default `'r'`: text, read-only), and opening a missing file in `'r'` mode still raises `FileNotFoundError`.",
+    "distractor_notes": {
+      "a": "Text vs binary depends only on the mode string (`'b'`).",
+      "b": "`with` does not change the mode: `open()` without a mode is read-only.",
+      "d": "`with open('missing.txt')` still raises `FileNotFoundError` in `'r'` mode."
+    },
+    "slides": [
+      133
+    ],
+    "verify": {
+      "mode": "truth",
+      "files": {
+        "data.txt": "x\n"
+      }
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0045",
+    "chapter": "S3",
+    "topic": "files-io",
+    "tags": [
+      "encoding",
+      "binary-mode",
+      "utf-8"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "The file `cafe.txt` contains the word `café` saved in UTF-8, without newline. What is the output?",
+    "code": "with open(\"cafe.txt\", encoding=\"utf-8\") as f:\n    text = f.read()\nwith open(\"cafe.txt\", \"rb\") as f:\n    raw = f.read()\nprint(len(text), len(raw))",
+    "options": [
+      {
+        "id": "a",
+        "text": "4 4",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "4 5",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "5 5",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "5 4",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "In text mode the bytes are decoded into the `str` `'café'`, which has 4 characters. In binary mode you get the raw bytes: in UTF-8, `é` is encoded with 2 bytes, so there are 5 bytes.",
+    "distractor_notes": {
+      "a": "Non-ASCII characters take more than one byte in UTF-8.",
+      "c": "Decoding turns the two bytes of `é` into a single character.",
+      "d": "A text never has more characters than its UTF-8 encoding has bytes."
+    },
+    "slides": [
+      133
+    ],
+    "verify": {
+      "mode": "output",
+      "files": {
+        "cafe.txt": "café"
+      }
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0046",
+    "chapter": "S3",
+    "topic": "files-io",
+    "tags": [
+      "writelines",
+      "readlines"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "lines = [\"a\", \"b\", \"c\"]\nwith open(\"out.txt\", \"w\") as f:\n    f.writelines(lines)\nwith open(\"out.txt\") as f:\n    print(f.readlines())",
+    "options": [
+      {
+        "id": "a",
+        "text": "['a', 'b', 'c']",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "['a\\n', 'b\\n', 'c\\n']",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "['a\\n', 'b\\n', 'c']",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "['abc']",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "Despite its name, `writelines()` writes each string as is, without adding newlines. The file contains `abc` (no newline at all), so `readlines()` returns a single line.",
+    "distractor_notes": {
+      "a": "No newline was written, so there is only one line to read.",
+      "b": "`writelines()` does not add `'\\n'` after each item.",
+      "c": "No newline is written at all."
+    },
+    "slides": [
+      133
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0047",
+    "chapter": "S3",
+    "topic": "files-io",
+    "tags": [
+      "open-modes",
+      "r+"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "The file `code.txt` contains `12345` followed by a newline. What is the output?",
+    "code": "with open(\"code.txt\", \"r+\") as f:\n    f.write(\"ab\")\nwith open(\"code.txt\") as f:\n    print(f.read().strip())",
+    "options": [
+      {
+        "id": "a",
+        "text": "ab345",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "ab",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "12345ab",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "ab12345",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "`'r+'` opens an existing file for reading and writing without truncating it, with the position at the beginning. Writing `ab` therefore overwrites the first two characters and the rest of the file is kept.",
+    "distractor_notes": {
+      "b": "Only `'w'` empties the file; `'r+'` keeps the existing content.",
+      "c": "The position starts at 0, not at the end (that would be `'a'`).",
+      "d": "Writing overwrites characters; it does not insert."
+    },
+    "slides": [
+      133
+    ],
+    "verify": {
+      "mode": "output",
+      "files": {
+        "code.txt": "12345\n"
+      }
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0048",
+    "chapter": "S3",
+    "topic": "files-io",
+    "tags": [
+      "open-modes",
+      "FileNotFoundError"
+    ],
+    "type": "multi",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "`ghost.txt` does **not** exist. Which of the following calls raise `FileNotFoundError`? Select all that apply.",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "open('ghost.txt')",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "open('ghost.txt', 'r+')",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "open('ghost.txt', 'w')",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "open('ghost.txt', 'a')",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "open('ghost.txt', 'rb')",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "b",
+      "e"
+    ],
+    "explanation": "Every mode based on `'r'` (`'r'`, `'r+'`, `'rb'`) needs an existing file and raises `FileNotFoundError` otherwise. `'w'` and `'a'` create the file when it does not exist.",
+    "distractor_notes": {
+      "c": "`'w'` creates the file (or truncates it if it exists).",
+      "d": "`'a'` creates the file if needed and writes at its end."
+    },
+    "slides": [
+      133
+    ],
+    "verify": {
+      "mode": "truth",
+      "probe_template": "try:\n    __OPTION_RAW__\n    print(False)\nexcept FileNotFoundError:\n    print(True)"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0049",
+    "chapter": "S3",
+    "topic": "serialization",
+    "tags": [
+      "json",
+      "dumps"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "import json\ns = json.dumps({\"a\": 1, \"b\": [1, 2]})\nprint(type(s).__name__, s)",
+    "options": [
+      {
+        "id": "a",
+        "text": "str {\"a\": 1, \"b\": [1, 2]}",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "dict {\"a\": 1, \"b\": [1, 2]}",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "str {'a': 1, 'b': [1, 2]}",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "bytes {\"a\": 1, \"b\": [1, 2]}",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "`json.dumps` (\"dump to string\") serializes an object into a `str` containing JSON text, and JSON always writes strings with double quotes.",
+    "distractor_notes": {
+      "b": "`dumps` returns text; it is `json.loads` that would give a dict back.",
+      "c": "JSON uses double quotes, so the text differs from the Python repr of the dict.",
+      "d": "`json` works with text (`str`); `pickle.dumps` is the one that returns bytes."
+    },
+    "slides": [
+      136
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0050",
+    "chapter": "S3",
+    "topic": "serialization",
+    "tags": [
+      "json",
+      "round-trip",
+      "tuple"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "import json\npoint = {\"name\": \"Nantes\", \"coords\": (300, 500)}\nback = json.loads(json.dumps(point))\nprint(back[\"coords\"], back == point)",
+    "options": [
+      {
+        "id": "a",
+        "text": "(300, 500) True",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[300, 500] False",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[300, 500] True",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "TypeError",
+        "mono": true,
+        "out": "!TypeError"
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "JSON has arrays but no tuples: the tuple is written as `[300, 500]` and read back as a list. A list is never equal to a tuple, so the round-tripped dict differs from the original.",
+    "distractor_notes": {
+      "a": "JSON does not remember that the value was a tuple.",
+      "c": "`[300, 500] == (300, 500)` is `False`, so the dicts are not equal.",
+      "d": "Tuples are serializable: they become JSON arrays."
+    },
+    "slides": [
+      136
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0051",
+    "chapter": "S3",
+    "topic": "serialization",
+    "tags": [
+      "json",
+      "dict-keys",
+      "round-trip"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "import json\nscores = {1: \"gold\", 2: \"silver\"}\nrestored = json.loads(json.dumps(scores))\nprint(restored.get(1), restored.get(\"1\"))",
+    "options": [
+      {
+        "id": "a",
+        "text": "gold gold",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "gold None",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "KeyError",
+        "mono": true,
+        "out": "!KeyError"
+      },
+      {
+        "id": "d",
+        "text": "None gold",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "JSON object keys are always strings, so the int keys 1 and 2 are written as `\"1\"` and `\"2\"`. After `loads`, the dict has the str keys `'1'` and `'2'`: `get(1)` finds nothing (`None`) while `get(\"1\")` returns `'gold'`.",
+    "distractor_notes": {
+      "a": "The key is now the string `'1'`, and `1 != '1'`.",
+      "b": "It is the other way round: the keys became strings.",
+      "c": "`dict.get` returns `None` for a missing key instead of raising."
+    },
+    "slides": [
+      136
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0052",
+    "chapter": "S3",
+    "topic": "serialization",
+    "tags": [
+      "json",
+      "serializable-types",
+      "set"
+    ],
+    "type": "multi",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Which of the following values can be passed to `json.dumps` without raising an error? Select all that apply.",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "{\"a\": [1, 2]}",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "(1, 2)",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "{1, 2}",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "{\"k\": None}",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "b'bytes'",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "b",
+      "d"
+    ],
+    "explanation": "JSON handles dicts with string keys, lists (tuples are converted to lists), strings, numbers, `True`/`False` and `None` (written `null`). Sets and bytes have no JSON equivalent: `json.dumps` raises `TypeError` (\"not JSON serializable\").",
+    "distractor_notes": {
+      "c": "Sets are not JSON serializable (`TypeError`): convert them with `list()` first.",
+      "e": "bytes are not JSON serializable: decode them to `str` first."
+    },
+    "slides": [
+      136
+    ],
+    "verify": {
+      "mode": "truth",
+      "probe_template": "import json\ntry:\n    json.dumps(__OPTION_RAW__)\n    print(True)\nexcept TypeError:\n    print(False)"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0053",
+    "chapter": "S3",
+    "topic": "serialization",
+    "tags": [
+      "pickle",
+      "round-trip",
+      "bank-account"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "import pickle\naccount = {\"owner\": \"Ann\", \"history\": [(\"deposit\", 50)], \"flags\": {1, 2}}\nwith open(\"account.pkl\", \"wb\") as f:\n    pickle.dump(account, f)\nwith open(\"account.pkl\", \"rb\") as f:\n    restored = pickle.load(f)\nprint(restored == account, type(restored[\"history\"][0]).__name__)",
+    "options": [
+      {
+        "id": "a",
+        "text": "True list",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "False list",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "True tuple",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "TypeError",
+        "mono": true,
+        "out": "!TypeError"
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "`pickle` stores Python objects exactly, including tuples and sets (unlike JSON), so the reconstructed dict is equal to the original and the history entry is still a tuple.",
+    "distractor_notes": {
+      "a": "If the entry had become a list, the dicts would not be equal.",
+      "b": "That is what JSON does with tuples; pickle keeps them as tuples.",
+      "d": "pickle can serialize tuples and sets, and the file is correctly opened in binary mode."
+    },
+    "slides": [
+      135,
+      147
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0054",
+    "chapter": "S3",
+    "topic": "serialization",
+    "tags": [
+      "pickle",
+      "binary-mode",
+      "TypeError"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "import pickle\nwith open(\"data.pkl\", \"w\") as f:\n    pickle.dump([1, 2, 3], f)\nprint(\"saved\")",
+    "options": [
+      {
+        "id": "a",
+        "text": "saved",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[1, 2, 3]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "TypeError",
+        "mono": true,
+        "out": "!TypeError"
+      },
+      {
+        "id": "d",
+        "text": "FileNotFoundError",
+        "mono": true,
+        "out": "!FileNotFoundError"
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "`pickle` produces bytes, so the file must be opened in binary mode (`'wb'` to write, `'rb'` to read). Writing bytes into a file opened in text mode (`'w'`) raises `TypeError`.",
+    "distractor_notes": {
+      "a": "Binary mode is mandatory for pickle files.",
+      "b": "`pickle.dump` writes to the file; it never prints anything.",
+      "d": "`'w'` creates the file; the problem is text vs binary mode."
+    },
+    "slides": [
+      135
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0055",
+    "chapter": "S3",
+    "topic": "serialization",
+    "tags": [
+      "json",
+      "pickle",
+      "dump-vs-dumps"
+    ],
+    "type": "multi",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Which of the following statements are true? Select all that apply.",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "`json.dumps` returns a `str`",
+        "probe": "print(isinstance(json.dumps([1]), str))"
+      },
+      {
+        "id": "b",
+        "text": "`pickle.dumps` returns `bytes`",
+        "probe": "print(isinstance(pickle.dumps([1]), bytes))"
+      },
+      {
+        "id": "c",
+        "text": "`json.load` reads from an open file, while `json.loads` parses a string",
+        "probe": "with open('data.json') as f:\n    a = json.load(f)\nprint(a == json.loads('[1, 2]') == [1, 2])"
+      },
+      {
+        "id": "d",
+        "text": "A JSON file must be opened in binary mode, like a pickle file",
+        "probe": "try:\n    with open('out.json', 'wb') as f:\n        json.dump([1], f)\n    print(True)\nexcept TypeError:\n    print(False)"
+      },
+      {
+        "id": "e",
+        "text": "`json.loads` returns a `str`",
+        "probe": "print(isinstance(json.loads('[1, 2]'), str))"
+      }
+    ],
+    "correct": [
+      "a",
+      "b",
+      "c"
+    ],
+    "explanation": "The *s* of `dumps`/`loads` means *string*: they convert to and from a `str`, while `dump`/`load` work with file objects. JSON is a text format, so JSON files are opened in text mode (`'w'`/`'r'`); pickle produces bytes and needs `'wb'`/`'rb'`. `json.loads` returns the decoded Python object (here a list).",
+    "distractor_notes": {
+      "d": "JSON is text: `json.dump` into a `'wb'` file even raises `TypeError`. Binary mode is for pickle.",
+      "e": "`loads` returns the Python object described by the JSON text (list, dict, ...)."
+    },
+    "slides": [
+      135,
+      136
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": "import json, pickle",
+      "files": {
+        "data.json": "[1, 2]"
+      }
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0056",
+    "chapter": "S3",
+    "topic": "serialization",
+    "tags": [
+      "json",
+      "dump-vs-dumps",
+      "bank-account"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "import json\nwith open(\"account.json\", \"w\") as f:\n    result = json.dump({\"balance\": 100}, f)\nprint(result)\nwith open(\"account.json\") as f:\n    print(f.read())",
+    "options": [
+      {
+        "id": "a",
+        "text": "{\"balance\": 100}\n{\"balance\": 100}",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "None\n{\"balance\": 100}",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "None\n{'balance': 100}",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "True\n{\"balance\": 100}",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "`json.dump` writes the JSON text into the file and returns `None` (it is `json.dumps` that returns the text). The file then contains the JSON text, with double quotes.",
+    "distractor_notes": {
+      "a": "`dump` writes to the file; `dumps` is the one that returns a string.",
+      "c": "The file contains JSON text, which uses double quotes.",
+      "d": "`json.dump` returns `None`, not a success flag."
+    },
+    "slides": [
+      136,
+      147
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0057",
+    "chapter": "S3",
+    "topic": "serialization",
+    "tags": [
+      "json",
+      "dumps",
+      "null"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "import json\nprint(json.dumps([True, None, 1.5, \"a\"]))",
+    "options": [
+      {
+        "id": "a",
+        "text": "[True, None, 1.5, 'a']",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[\"true\", \"null\", \"1.5\", \"a\"]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[True, None, 1.5, \"a\"]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[true, null, 1.5, \"a\"]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "JSON spells the booleans `true`/`false` and writes `None` as `null`; strings use double quotes. `json.dumps` produces this JSON text.",
+    "distractor_notes": {
+      "a": "That is the Python repr of the list, not JSON.",
+      "b": "Numbers and literals are not turned into strings.",
+      "c": "JSON literals are lowercase: `true` and `null`."
+    },
+    "slides": [
+      136
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0058",
+    "chapter": "S3",
+    "topic": "serialization",
+    "tags": [
+      "json",
+      "loads",
+      "JSONDecodeError"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "import json\ntext = \"{'name': 'Ann'}\"\ntry:\n    print(json.loads(text)[\"name\"])\nexcept ValueError:\n    print(\"invalid JSON\")",
+    "options": [
+      {
+        "id": "a",
+        "text": "invalid JSON",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "Ann",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "{'name': 'Ann'}",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "KeyError",
+        "mono": true,
+        "out": "!KeyError"
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "JSON requires double quotes around keys and strings: `{'name': 'Ann'}` is a Python literal, not valid JSON. `json.loads` raises `json.JSONDecodeError`, a subclass of `ValueError`, which the `except` clause catches.",
+    "distractor_notes": {
+      "b": "Single-quoted strings are not valid JSON.",
+      "c": "`loads` either returns a Python object or raises; here it raises.",
+      "d": "The error happens inside `json.loads`, before the `[\"name\"]` lookup."
+    },
+    "slides": [
+      136
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0059",
+    "chapter": "S3",
+    "topic": "modules-packages",
+    "tags": [
+      "import",
+      "module-cache"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "A project contains the files shown below. What is printed when `main.py` is run (`python main.py`)?",
+    "code": "# --- greet.py ---\nprint(\"loading greet\")\nname = \"greet\"\n\n# --- main.py ---\nimport greet\nimport greet\nfrom greet import name\nprint(name)",
+    "options": [
+      {
+        "id": "a",
+        "text": "loading greet\ngreet",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "loading greet\nloading greet\nloading greet\ngreet",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "greet",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "loading greet\nloading greet\ngreet",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "The first `import` executes `greet.py` and caches the module (in `sys.modules`). Later imports of the same module, including `from greet import name`, reuse it without executing the file again, so `loading greet` is printed only once.",
+    "distractor_notes": {
+      "b": "A module's code runs only on its first import.",
+      "c": "Importing executes the module's top-level code, including its `print`.",
+      "d": "`from greet import name` also reuses the already loaded module."
+    },
+    "slides": [
+      137,
+      138
+    ],
+    "verify": {
+      "mode": "output",
+      "code": "import sys; sys.path.insert(0, '.')\nimport greet\nimport greet\nfrom greet import name\nprint(name)",
+      "files": {
+        "greet.py": "print(\"loading greet\")\nname = \"greet\"\n"
+      }
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0060",
+    "chapter": "S3",
+    "topic": "modules-packages",
+    "tags": [
+      "__name__",
+      "__main__",
+      "import"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "A project contains the files shown below. What is printed when `main.py` is run (`python main.py`)?",
+    "code": "# --- tools.py ---\nprint(\"tools:\", __name__)\nif __name__ == \"__main__\":\n    print(\"running tools\")\n\n# --- main.py ---\nimport tools\nprint(\"main:\", __name__)",
+    "options": [
+      {
+        "id": "a",
+        "text": "tools: __main__\nrunning tools\nmain: __main__",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "tools: tools\nmain: __main__",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "tools: tools\nrunning tools\nmain: __main__",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "main: __main__",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "When a file is imported, its `__name__` is the module name (`'tools'`), so the guarded block does not run. Only the file started by the interpreter (`main.py`) has `__name__ == '__main__'`.",
+    "distractor_notes": {
+      "a": "`__name__` is `'__main__'` only for the script being run, not for imported modules.",
+      "c": "The `if` block is skipped because `__name__` is `'tools'` in the imported module.",
+      "d": "Importing `tools` runs its top-level `print`."
+    },
+    "slides": [
+      137,
+      138
+    ],
+    "verify": {
+      "mode": "output",
+      "code": "import sys; sys.path.insert(0, '.')\nimport tools\nprint(\"main:\", __name__)",
+      "files": {
+        "tools.py": "print(\"tools:\", __name__)\nif __name__ == \"__main__\":\n    print(\"running tools\")\n"
+      }
+    },
+    "reviewed": 1
+  }
+]

@@ -1,0 +1,1119 @@
+[
+  {
+    "id": "S3-0021",
+    "chapter": "S3",
+    "topic": "exceptions",
+    "tags": [
+      "TypeError",
+      "none-of-the-above"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "try:\n    \"5\" + 5\nexcept Exception as e:\n    print(type(e).__name__)",
+    "options": [
+      {
+        "id": "a",
+        "text": "ValueError",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "SyntaxError",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "55",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "None of the above",
+        "out": null
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "Concatenating a str and an int raises `TypeError` (incompatible types). `except Exception` catches it and the code prints the class name `TypeError`, which is not among the first three options.",
+    "distractor_notes": {
+      "a": "The values are fine; the problem is mixing two types, hence `TypeError`.",
+      "b": "The code is syntactically valid: the error happens at run time.",
+      "c": "Python never converts the int to a str implicitly."
+    },
+    "slides": [
+      139,
+      140
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1,
+    "expected_output": "TypeError"
+  },
+  {
+    "id": "S3-0022",
+    "chapter": "S3",
+    "topic": "exceptions",
+    "tags": [
+      "except-as",
+      "NameError",
+      "scope"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What happens when the following code is run?",
+    "code": "try:\n    1 / 0\nexcept ZeroDivisionError as e:\n    msg = \"caught\"\nprint(msg)\nprint(e)",
+    "options": [
+      {
+        "id": "a",
+        "text": "caught\ndivision by zero",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "It prints `caught`, then stops with a NameError",
+        "out": "caught\n!NameError"
+      },
+      {
+        "id": "c",
+        "text": "caught\nZeroDivisionError",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "It stops with a NameError before printing anything",
+        "out": "!NameError"
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "`msg` is an ordinary variable and survives the `except` block. But the name bound by `except ... as e` is automatically deleted when the handler ends (Python 3), so `print(e)` raises `NameError`.",
+    "distractor_notes": {
+      "a": "This would require `e` to survive the handler; in Python 3 it is deleted at the end of the `except` block.",
+      "c": "Even inside the handler, printing `e` shows the message, not the class name.",
+      "d": "`print(msg)` runs first: names assigned inside the handler remain defined."
+    },
+    "slides": [
+      139,
+      140
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0023",
+    "chapter": "S3",
+    "topic": "exceptions",
+    "tags": [
+      "SyntaxError",
+      "syntax-vs-exception"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What happens when the following program is run?",
+    "code": "print(\"one\")\nprint(\"two\"\nprint(\"three\")",
+    "options": [
+      {
+        "id": "a",
+        "text": "It stops with a SyntaxError and nothing is printed",
+        "out": "!SyntaxError"
+      },
+      {
+        "id": "b",
+        "text": "It prints `one`, then stops with a SyntaxError",
+        "out": "one\n!SyntaxError"
+      },
+      {
+        "id": "c",
+        "text": "one\ntwo\nthree",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "one\nthree",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "A syntax error (here the unclosed parenthesis) is detected when the whole file is compiled, before any statement runs. Unlike exceptions raised at run time, it prevents the program from starting, so even `print(\"one\")` never executes.",
+    "distractor_notes": {
+      "b": "Syntax errors are found before execution starts, not when the line is reached.",
+      "c": "The missing `)` is a syntax error: the program cannot run at all.",
+      "d": "Python does not skip invalid lines."
+    },
+    "slides": [
+      139,
+      140
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0024",
+    "chapter": "S3",
+    "topic": "exceptions",
+    "tags": [
+      "raise",
+      "input-validation",
+      "loop"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "answers = [\"abc\", \"-3\", \"7\"]\nfor text in answers:\n    try:\n        n = int(text)\n        if n < 0:\n            raise ValueError(\"negative\")\n        break\n    except ValueError:\n        print(\"retry\")\nprint(n)",
+    "options": [
+      {
+        "id": "a",
+        "text": "retry\n-3",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "retry\n7",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "retry\nretry\n7",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "It prints `retry`, then stops with a ValueError",
+        "out": "retry\n!ValueError"
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "`\"abc\"` fails in `int()` and prints `retry`. `-3` converts, but the explicit `raise ValueError` is inside the `try` block, so the same `except` clause handles it: `retry` again. `7` passes, `break` leaves the loop and 7 is printed.",
+    "distractor_notes": {
+      "a": "`-3` triggers the `raise`, so the loop goes on to the next answer.",
+      "b": "An exception raised explicitly with `raise` is caught like any other.",
+      "d": "The `raise` is inside the `try` block, so `except ValueError` handles it."
+    },
+    "slides": [
+      139,
+      140
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0025",
+    "chapter": "S3",
+    "topic": "exceptions",
+    "tags": [
+      "built-in-exceptions"
+    ],
+    "type": "multi",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "Which of the following are names of built-in Python exceptions? Select all that apply.",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "ZeroDivisionError",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "FileNotFoundError",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "KeyError",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "NullPointerException",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "IndexOutOfRangeError",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "b",
+      "c"
+    ],
+    "explanation": "`ZeroDivisionError`, `FileNotFoundError` and `KeyError` are built-in exceptions. `NullPointerException` comes from Java, and an out-of-range index raises `IndexError` in Python.",
+    "distractor_notes": {
+      "d": "A Java exception; in Python, using an attribute of `None` raises `AttributeError`.",
+      "e": "Python's exception for a bad index is `IndexError`."
+    },
+    "slides": [
+      139,
+      140
+    ],
+    "verify": {
+      "mode": "truth",
+      "probe_template": "import builtins\nobj = getattr(builtins, __OPTION__, None)\nprint(isinstance(obj, type) and issubclass(obj, BaseException))"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0026",
+    "chapter": "S3",
+    "topic": "exceptions",
+    "tags": [
+      "finally",
+      "return"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "def h():\n    x = 1\n    try:\n        return x\n    finally:\n        x = 99\n\nprint(h())",
+    "options": [
+      {
+        "id": "a",
+        "text": "None",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "99",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "1",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "UnboundLocalError",
+        "mono": true,
+        "out": "!UnboundLocalError"
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "The expression of `return x` is evaluated (value 1) before `finally` runs. Rebinding `x` to 99 in `finally` does not change the value already chosen for the return; only a `return` statement inside `finally` would override it.",
+    "distractor_notes": {
+      "a": "The function does return a value: 1.",
+      "b": "The value is fixed when `return x` is evaluated; rebinding `x` afterwards has no effect on it.",
+      "d": "`x` is assigned before the `try`, so it is a defined local variable."
+    },
+    "slides": [
+      139,
+      140
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0027",
+    "chapter": "S3",
+    "topic": "files-io",
+    "tags": [
+      "readlines",
+      "newline"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "The file `notes.txt` contains the three lines `first`, `second` and `third`, each ending with a newline. What is the output of the following code?",
+    "code": "with open(\"notes.txt\") as f:\n    lines = f.readlines()\nprint(lines)",
+    "options": [
+      {
+        "id": "a",
+        "text": "first\nsecond\nthird",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "['first', 'second', 'third']",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "['first\\nsecond\\nthird\\n']",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "['first\\n', 'second\\n', 'third\\n']",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "`readlines()` returns a list with one string per line, and each string keeps its trailing newline character `'\\n'`.",
+    "distractor_notes": {
+      "a": "Printing a list shows its representation (brackets, quotes), not the raw text.",
+      "b": "Lines keep their `'\\n'`; you need `line.strip()` or `f.read().splitlines()` to remove it.",
+      "c": "That would be `[f.read()]`: `readlines()` splits the content into lines."
+    },
+    "slides": [
+      133
+    ],
+    "verify": {
+      "mode": "output",
+      "files": {
+        "notes.txt": "first\nsecond\nthird\n"
+      }
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0028",
+    "chapter": "S3",
+    "topic": "files-io",
+    "tags": [
+      "read",
+      "readline",
+      "readlines",
+      "file-iteration"
+    ],
+    "type": "multi",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "The file `poem.txt` contains the text `'roses\\nare red\\n'` (two lines). In the code below, which expressions put exactly this whole text, as a single string, into `s`? Select all that apply.",
+    "code": "with open(\"poem.txt\") as f:\n    s = ...  # one of the expressions below",
+    "options": [
+      {
+        "id": "a",
+        "text": "f.read()",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "''.join(f.readlines())",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "f.readline()",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "''.join(f)",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "str(f.readlines())",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "b",
+      "d"
+    ],
+    "explanation": "`read()` returns everything. `readlines()` returns the list of lines (each keeping its `'\\n'`), so joining them with `''` rebuilds the text; iterating over the file object also yields its lines, so `''.join(f)` works too. `readline()` returns only the first line, and `str()` of a list gives its representation with brackets and quotes.",
+    "distractor_notes": {
+      "c": "`readline()` reads a single line: `'roses\\n'`.",
+      "e": "`str()` of a list gives its representation (`\"['roses\\\\n', 'are red\\\\n']\"`), not the file text."
+    },
+    "slides": [
+      133
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": "",
+      "files": {
+        "poem.txt": "roses\nare red\n"
+      },
+      "probe_template": "with open('poem.txt') as f:\n    s = __OPTION_RAW__\nprint(s == 'roses\\nare red\\n')"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0029",
+    "chapter": "S3",
+    "topic": "files-io",
+    "tags": [
+      "file-iteration",
+      "print",
+      "newline"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "The file `names.txt` contains two lines, `Ann` and `Bob`, each followed by a newline. What does the following code display?",
+    "code": "with open(\"names.txt\") as f:\n    for line in f:\n        print(line)",
+    "options": [
+      {
+        "id": "a",
+        "text": "`Ann`, an empty line, `Bob`, an empty line",
+        "out": "Ann\n\nBob"
+      },
+      {
+        "id": "b",
+        "text": "`Ann` and `Bob` on two consecutive lines",
+        "out": "Ann\nBob"
+      },
+      {
+        "id": "c",
+        "text": "['Ann\\n', 'Bob\\n']",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "AnnBob",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "Iterating over a file yields its lines including the trailing `'\\n'`, and `print` adds its own newline, so each name is followed by an empty line. Use `print(line, end='')` or `line.rstrip('\\n')` to avoid it.",
+    "distractor_notes": {
+      "b": "Each line already ends with `'\\n'` and `print` adds another one.",
+      "c": "The loop prints the lines one by one; nothing prints a list.",
+      "d": "Each `print` call ends with a newline."
+    },
+    "slides": [
+      133
+    ],
+    "verify": {
+      "mode": "output",
+      "files": {
+        "names.txt": "Ann\nBob\n"
+      }
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0030",
+    "chapter": "S3",
+    "topic": "files-io",
+    "tags": [
+      "read",
+      "file-position"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "The file `data.txt` contains `abc` followed by a newline. What is the output?",
+    "code": "with open(\"data.txt\") as f:\n    first = f.read()\n    second = f.read()\nprint(len(first), len(second))",
+    "options": [
+      {
+        "id": "a",
+        "text": "4 4",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "4 0",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "3 0",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "3 3",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "The first `read()` returns the whole content `'abc\\n'` (4 characters: the newline counts) and leaves the file position at the end. The second `read()` starts from there and returns the empty string `''`.",
+    "distractor_notes": {
+      "a": "The position is not reset between reads (you would need `f.seek(0)` to re-read).",
+      "c": "The newline character is part of the content: 4 characters.",
+      "d": "Two mistakes: the `'\\n'` counts, and the second `read()` returns `''`."
+    },
+    "slides": [
+      133
+    ],
+    "verify": {
+      "mode": "output",
+      "files": {
+        "data.txt": "abc\n"
+      }
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0031",
+    "chapter": "S3",
+    "topic": "files-io",
+    "tags": [
+      "open-modes",
+      "w-truncates"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "The file `log.txt` initially contains `old line` followed by a newline. What is the output?",
+    "code": "with open(\"log.txt\", \"w\") as f:\n    f.write(\"new\")\nwith open(\"log.txt\") as f:\n    print(f.read())",
+    "options": [
+      {
+        "id": "a",
+        "text": "old line\nnew",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "new",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "old linenew",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "FileExistsError",
+        "mono": true,
+        "out": "!FileExistsError"
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "Mode `'w'` truncates (empties) an existing file as soon as it is opened, so only the newly written text remains. To keep the old content and add to it, use mode `'a'`.",
+    "distractor_notes": {
+      "a": "That would be mode `'a'` (append).",
+      "c": "`'w'` does not append: it erases the previous content.",
+      "d": "Only mode `'x'` fails when the file already exists."
+    },
+    "slides": [
+      133
+    ],
+    "verify": {
+      "mode": "output",
+      "files": {
+        "log.txt": "old line\n"
+      }
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0032",
+    "chapter": "S3",
+    "topic": "files-io",
+    "tags": [
+      "open-modes",
+      "append",
+      "write"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "The file `log.txt` initially contains `A` followed by a newline. What is the output?",
+    "code": "with open(\"log.txt\", \"a\") as f:\n    f.write(\"B\")\n    f.write(\"C\\n\")\nwith open(\"log.txt\") as f:\n    print(f.readlines())",
+    "options": [
+      {
+        "id": "a",
+        "text": "['A\\nBC\\n']",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "['A\\n', 'B\\n', 'C\\n']",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "['BC\\n']",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "['A\\n', 'BC\\n']",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "`'a'` keeps the existing content and writes at the end. `write()` writes exactly the given string and adds no newline, so `B` and `C` end up on the same line: the file becomes `'A\\nBC\\n'`.",
+    "distractor_notes": {
+      "a": "`readlines()` splits the content after each `'\\n'`.",
+      "b": "`write()` does not add a newline after each call (unlike `print`).",
+      "c": "`'a'` appends; it does not erase the file like `'w'`."
+    },
+    "slides": [
+      133
+    ],
+    "verify": {
+      "mode": "output",
+      "files": {
+        "log.txt": "A\n"
+      }
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0033",
+    "chapter": "S3",
+    "topic": "files-io",
+    "tags": [
+      "write",
+      "return-value"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "with open(\"out.txt\", \"w\") as f:\n    n = f.write(\"hello\\n\")\nprint(n)",
+    "options": [
+      {
+        "id": "a",
+        "text": "6",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "5",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "None",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "True",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "In text mode, `write()` returns the number of characters written. `'hello\\n'` has 6 characters (the newline counts as one).",
+    "distractor_notes": {
+      "b": "The `'\\n'` is a character too.",
+      "c": "Unlike `list.append`, `write()` returns a value: the number of characters written.",
+      "d": "`write()` returns a count, not a success flag."
+    },
+    "slides": [
+      133
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0034",
+    "chapter": "S3",
+    "topic": "files-io",
+    "tags": [
+      "open-modes",
+      "x-mode",
+      "FileExistsError"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "The file `report.txt` already exists and contains `draft`. What is the output?",
+    "code": "try:\n    with open(\"report.txt\", \"x\") as f:\n        f.write(\"final\")\n    print(\"created\")\nexcept FileExistsError:\n    print(\"already there\")\nwith open(\"report.txt\") as f:\n    print(f.read().strip())",
+    "options": [
+      {
+        "id": "a",
+        "text": "created\nfinal",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "already there\nfinal",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "already there\ndraft",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "created\ndraft",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "Mode `'x'` (exclusive creation) creates a new file but raises `FileExistsError` if the file already exists. The exception is raised by `open()` before anything is written, so `report.txt` keeps its original content.",
+    "distractor_notes": {
+      "a": "`'x'` refuses to open an existing file.",
+      "b": "The write never happens: `open()` itself raised the exception.",
+      "d": "`open()` fails before `print(\"created\")` can run."
+    },
+    "slides": [
+      133
+    ],
+    "verify": {
+      "mode": "output",
+      "files": {
+        "report.txt": "draft\n"
+      }
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0035",
+    "chapter": "S3",
+    "topic": "files-io",
+    "tags": [
+      "open-modes",
+      "UnsupportedOperation",
+      "none-of-the-above"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "`data.txt` exists and contains one line. What happens when the following code runs?",
+    "code": "with open(\"data.txt\") as f:\n    f.write(\"y\")\nprint(\"done\")",
+    "options": [
+      {
+        "id": "a",
+        "text": "It raises `FileNotFoundError`",
+        "out": "!FileNotFoundError"
+      },
+      {
+        "id": "b",
+        "text": "It raises `PermissionError`",
+        "out": "!PermissionError"
+      },
+      {
+        "id": "c",
+        "text": "`y` is added to the file and `done` is printed",
+        "out": "done"
+      },
+      {
+        "id": "d",
+        "text": "None of the above",
+        "out": null
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "`open()` without a mode opens the file in `'r'` (read-only) mode, so `write()` raises `io.UnsupportedOperation` (a subclass of `OSError`) and `done` is never printed. That exception is not among the listed ones, hence None of the above.",
+    "distractor_notes": {
+      "a": "The file exists, so opening it works; the problem is the write.",
+      "b": "The operating system is not involved: Python refuses because the file object is read-only.",
+      "c": "The default mode is `'r'`: read only."
+    },
+    "slides": [
+      133
+    ],
+    "verify": {
+      "mode": "output",
+      "files": {
+        "data.txt": "x\n"
+      }
+    },
+    "reviewed": 1,
+    "expected_output": "!UnsupportedOperation"
+  },
+  {
+    "id": "S3-0036",
+    "chapter": "S3",
+    "topic": "files-io",
+    "tags": [
+      "with",
+      "close"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "`data.txt` exists. What is the output of the following code?",
+    "code": "with open(\"data.txt\") as f:\n    inside = f.closed\nprint(inside, f.closed)",
+    "options": [
+      {
+        "id": "a",
+        "text": "False False",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "False True",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "True True",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "NameError",
+        "mono": true,
+        "out": "!NameError"
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "Inside the `with` block the file is open, so `closed` is `False`. Leaving the block closes the file automatically. The name `f` still exists after the block (`with` does not create a scope), so `f.closed` can be read: `True`.",
+    "distractor_notes": {
+      "a": "`with` closes the file when the block ends.",
+      "c": "The file is open inside the block.",
+      "d": "`with` does not delete the variable; it only closes the file."
+    },
+    "slides": [
+      133
+    ],
+    "verify": {
+      "mode": "output",
+      "files": {
+        "data.txt": "x\n"
+      }
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0037",
+    "chapter": "S3",
+    "topic": "files-io",
+    "tags": [
+      "binary-mode",
+      "bytes"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "The file `data.txt` contains `hi` followed by a newline. What is the output?",
+    "code": "with open(\"data.txt\", \"rb\") as f:\n    content = f.read()\nprint(content)",
+    "options": [
+      {
+        "id": "a",
+        "text": "b'hi\\n'",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "hi",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "'hi\\n'",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[104, 105, 10]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "With `'rb'` the file is read in binary mode: `read()` returns a `bytes` object, which `print` displays as `b'...'` with the newline shown as `\\n`.",
+    "distractor_notes": {
+      "b": "In binary mode you get bytes, and `print` shows their `b'...'` representation.",
+      "c": "The result is `bytes`, not `str`.",
+      "d": "A bytes object is displayed as `b'...'`, not as a list of integers."
+    },
+    "slides": [
+      133
+    ],
+    "verify": {
+      "mode": "output",
+      "files": {
+        "data.txt": "hi\n"
+      }
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0038",
+    "chapter": "S3",
+    "topic": "files-io",
+    "tags": [
+      "binary-mode",
+      "bytes",
+      "TypeError"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "with open(\"out.bin\", \"wb\") as f:\n    f.write(\"hello\")\nprint(\"written\")",
+    "options": [
+      {
+        "id": "a",
+        "text": "written",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "ValueError",
+        "mono": true,
+        "out": "!ValueError"
+      },
+      {
+        "id": "c",
+        "text": "TypeError",
+        "mono": true,
+        "out": "!TypeError"
+      },
+      {
+        "id": "d",
+        "text": "UnicodeEncodeError",
+        "mono": true,
+        "out": "!UnicodeEncodeError"
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "A file opened in binary mode (`'wb'`) only accepts bytes. Passing a `str` raises `TypeError`; you would need `f.write(b\"hello\")` or `f.write(\"hello\".encode())`.",
+    "distractor_notes": {
+      "a": "`str` and `bytes` are not interchangeable in Python 3.",
+      "b": "The value is not the problem; its type (`str` instead of `bytes`) is.",
+      "d": "Python does not try to encode the string automatically in binary mode."
+    },
+    "slides": [
+      133
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0039",
+    "chapter": "S3",
+    "topic": "files-io",
+    "tags": [
+      "read",
+      "split",
+      "word-statistics"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "`book.txt` contains the 4 lines `It is a truth`, `universally acknowledged`, an empty line, and `that a single man`; the file ends with a newline. What is the output?",
+    "code": "with open(\"book.txt\") as f:\n    text = f.read()\nprint(len(text.split(\"\\n\")), len(text.split()))",
+    "options": [
+      {
+        "id": "a",
+        "text": "4 10",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "5 10",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "3 10",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "5 11",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "`split(\"\\n\")` cuts at each of the 4 newlines and gives 5 pieces: the 4 lines (the empty one becomes `''`) plus an empty string after the final newline. `split()` without argument splits on any run of whitespace and drops empty strings: 4 + 2 + 4 = 10 words.",
+    "distractor_notes": {
+      "a": "The final newline produces one more, empty, element.",
+      "c": "`split(\"\\n\")` keeps empty strings, including the empty third line.",
+      "d": "`split()` ignores empty lines: there are only 10 words."
+    },
+    "slides": [
+      133,
+      146
+    ],
+    "verify": {
+      "mode": "output",
+      "files": {
+        "book.txt": "It is a truth\nuniversally acknowledged\n\nthat a single man\n"
+      }
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0040",
+    "chapter": "S3",
+    "topic": "files-io",
+    "tags": [
+      "file-iteration",
+      "word-count",
+      "dict"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "`words.txt` contains the two lines `the cat and the hat` and `the end`. What is the output?",
+    "code": "counts = {}\nwith open(\"words.txt\") as f:\n    for line in f:\n        for w in line.split():\n            counts[w] = counts.get(w, 0) + 1\nbest = sorted(counts.items(), key=lambda kv: kv[1], reverse=True)\nprint(best[0], len(counts))",
+    "options": [
+      {
+        "id": "a",
+        "text": "('end', 1) 5",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "('the', 3) 7",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "('the', 2) 5",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "('the', 3) 5",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "Each word of each line is counted with `counts.get(w, 0) + 1`. `the` appears 3 times and there are 5 distinct words (the, cat, and, hat, end). Sorting the items by count in decreasing order puts `('the', 3)` first.",
+    "distractor_notes": {
+      "a": "`reverse=True` sorts from the highest count to the lowest.",
+      "b": "`len(counts)` is the number of distinct words (keys), not of all 7 words.",
+      "c": "Both lines are read: `the` appears 3 times in total."
+    },
+    "slides": [
+      133,
+      146
+    ],
+    "verify": {
+      "mode": "output",
+      "files": {
+        "words.txt": "the cat and the hat\nthe end\n"
+      }
+    },
+    "reviewed": 1
+  }
+]

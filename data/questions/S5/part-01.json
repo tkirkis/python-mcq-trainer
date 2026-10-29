@@ -1,0 +1,1129 @@
+[
+  {
+    "id": "S5-0001",
+    "chapter": "S5",
+    "topic": "classes-objects",
+    "tags": [
+      "instance-attributes",
+      "independent-objects"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "class Car:\n    def __init__(self, brand):\n        self.brand = brand\n\nc1 = Car('Fiat')\nc2 = Car('Opel')\nc1.brand = 'Tesla'\nprint(c2.brand)",
+    "options": [
+      {
+        "id": "a",
+        "text": "AttributeError",
+        "mono": true,
+        "out": "!AttributeError"
+      },
+      {
+        "id": "b",
+        "text": "Tesla",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "Fiat",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "Opel",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "Each instance gets its own `brand` attribute from `__init__`. Rebinding `c1.brand` changes only the object c1; c2 keeps 'Opel'.",
+    "distractor_notes": {
+      "b": "Instance attributes belong to one object; changing c1 does not touch c2.",
+      "c": "'Fiat' was c1's initial brand, never c2's.",
+      "a": "`brand` is created by `__init__`, so every Car has it."
+    },
+    "slides": [
+      186,
+      189,
+      191
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0002",
+    "chapter": "S5",
+    "topic": "classes-objects",
+    "tags": [
+      "dynamic-attributes",
+      "AttributeError"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "class Book:\n    def __init__(self, title):\n        self.title = title\n\nb1 = Book('Dune')\nb2 = Book('Emma')\nb1.pages = 412\nprint(b1.pages)\nprint(b2.pages)",
+    "options": [
+      {
+        "id": "a",
+        "text": "412\n412",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "412\nNone",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "412\nAttributeError",
+        "mono": true,
+        "out": "412\n!AttributeError"
+      },
+      {
+        "id": "d",
+        "text": "AttributeError",
+        "mono": true,
+        "out": "!AttributeError"
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "`b1.pages = 412` adds an attribute to the object b1 only. b2 never got a `pages` attribute and the class does not define one, so `b2.pages` raises AttributeError after 412 has been printed.",
+    "distractor_notes": {
+      "a": "Adding an attribute to one instance does not add it to the class or to the other instances.",
+      "b": "A missing attribute raises AttributeError; it never defaults to None.",
+      "d": "`b1.pages` exists, so the first print succeeds before the error."
+    },
+    "slides": [
+      186,
+      189,
+      191
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0003",
+    "chapter": "S5",
+    "topic": "classes-objects",
+    "tags": [
+      "__init__",
+      "TypeError",
+      "constructor"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What happens when this code runs?",
+    "code": "class Point:\n    def __init__(self, x, y):\n        self.x = x\n        self.y = y\n\np = Point(3)\nprint(p.x)",
+    "options": [
+      {
+        "id": "a",
+        "text": "3",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "TypeError",
+        "mono": true,
+        "out": "!TypeError"
+      },
+      {
+        "id": "c",
+        "text": "None",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "AttributeError",
+        "mono": true,
+        "out": "!AttributeError"
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "Calling `Point(3)` calls `__init__(self, x, y)`: `self` is supplied automatically and 3 binds to x, but y is missing, so Python raises TypeError (missing 1 required positional argument: 'y'). The object is never created.",
+    "distractor_notes": {
+      "a": "The instance is never created, so nothing is printed.",
+      "d": "The error happens in the call `Point(3)`, before any attribute is read.",
+      "c": "A parameter without a default must be given; it does not become None."
+    },
+    "slides": [
+      186,
+      189,
+      191
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0004",
+    "chapter": "S5",
+    "topic": "classes-objects",
+    "tags": [
+      "__init__",
+      "return",
+      "TypeError"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "class Counter:\n    def __init__(self, start):\n        self.value = start\n        return self.value\n\nc = Counter(5)\nprint(c.value)",
+    "options": [
+      {
+        "id": "a",
+        "text": "TypeError",
+        "mono": true,
+        "out": "!TypeError"
+      },
+      {
+        "id": "b",
+        "text": "None",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "5",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "SyntaxError",
+        "mono": true,
+        "out": "!SyntaxError"
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "`__init__` initialises an object that already exists; it must return None. A `return` with a value is valid syntax, but when the class is called Python checks the result and raises TypeError (`__init__() should return None`).",
+    "distractor_notes": {
+      "b": "`c` is never created, so nothing is printed.",
+      "d": "`return` inside a method is legal syntax; the check happens at run time.",
+      "c": "The return value of `__init__` is not ignored: a non-None value is an error."
+    },
+    "slides": [
+      186,
+      189,
+      191
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0005",
+    "chapter": "S5",
+    "topic": "classes-objects",
+    "tags": [
+      "self",
+      "AttributeError",
+      "local-variable"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "class Account:\n    def __init__(self, balance):\n        balance = balance\n\nacc = Account(100)\nprint(acc.balance)",
+    "options": [
+      {
+        "id": "a",
+        "text": "100",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "None",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "NameError",
+        "mono": true,
+        "out": "!NameError"
+      },
+      {
+        "id": "d",
+        "text": "AttributeError",
+        "mono": true,
+        "out": "!AttributeError"
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "Inside `__init__`, `balance = balance` only rebinds the local parameter. Nothing is stored on the instance without `self.`, so `acc.balance` raises AttributeError. The fix is `self.balance = balance`.",
+    "distractor_notes": {
+      "a": "A plain local assignment does not create an attribute; `self.balance = ...` is needed.",
+      "b": "Missing attributes raise AttributeError, they are never None.",
+      "c": "`balance` is a valid local name inside `__init__` (it is the parameter); the error comes from the attribute lookup `acc.balance`."
+    },
+    "slides": [
+      186,
+      189,
+      191
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0006",
+    "chapter": "S5",
+    "topic": "classes-objects",
+    "tags": [
+      "instantiation",
+      "type",
+      "isinstance"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "class Robot:\n    pass\n\nr = Robot()\nprint(type(r).__name__, isinstance(r, Robot))",
+    "options": [
+      {
+        "id": "a",
+        "text": "Robot False",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "object True",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "Robot True",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "type True",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "Calling a class creates an instance of it, even when the class body is just `pass`. `type(r)` is the class Robot (its name is 'Robot') and `isinstance(r, Robot)` is True.",
+    "distractor_notes": {
+      "b": "type() returns the most specific class of the object, not its base class `object`.",
+      "d": "`type` is the class of classes (that is `type(Robot)`), not the class of r.",
+      "a": "r was created by `Robot()`, so it is an instance of Robot."
+    },
+    "slides": [
+      186,
+      189,
+      191
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0007",
+    "chapter": "S5",
+    "topic": "classes-objects",
+    "tags": [
+      "aliasing",
+      "objects"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "class Box:\n    def __init__(self, content):\n        self.content = content\n\na = Box('apples')\nb = a\nb.content = 'pears'\nprint(a.content)",
+    "options": [
+      {
+        "id": "a",
+        "text": "apples",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "pears",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "AttributeError",
+        "mono": true,
+        "out": "!AttributeError"
+      },
+      {
+        "id": "d",
+        "text": "None",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "`b = a` does not copy the object: both names refer to the same Box instance. Changing the attribute through b is therefore visible through a.",
+    "distractor_notes": {
+      "a": "Assignment copies the reference, not the object; there is only one Box.",
+      "c": "`content` exists: it was created by `__init__`.",
+      "d": "print shows the attribute's value; nothing here returns None."
+    },
+    "slides": [
+      186,
+      189,
+      191
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0008",
+    "chapter": "S5",
+    "topic": "classes-objects",
+    "tags": [
+      "mutable-default",
+      "__init__",
+      "shared-list"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "class Basket:\n    def __init__(self, items=[]):\n        self.items = items\n    def add(self, x):\n        self.items.append(x)\n\nb1 = Basket()\nb2 = Basket()\nb1.add('apple')\nprint(b2.items)",
+    "options": [
+      {
+        "id": "a",
+        "text": "['apple']",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "AttributeError",
+        "mono": true,
+        "out": "!AttributeError"
+      },
+      {
+        "id": "d",
+        "text": "None",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "The default list `[]` is created once, when `def __init__` is executed, and reused by every call that omits `items`. b1.items and b2.items are the same list object, so the append through b1 is visible through b2. Use `items=None` and create a new list inside `__init__`.",
+    "distractor_notes": {
+      "c": "`items` is set by `__init__` on every Basket.",
+      "d": "print shows the list itself.",
+      "b": "That would require a fresh list per call; default values are evaluated only once."
+    },
+    "slides": [
+      186,
+      189,
+      191
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0009",
+    "chapter": "S5",
+    "topic": "classes-objects",
+    "tags": [
+      "instantiation",
+      "class-vs-instance",
+      "AttributeError"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What happens in the below code?",
+    "code": "class Lamp:\n    def __init__(self):\n        self.on = False\n\nl = Lamp\nprint(l.on)",
+    "options": [
+      {
+        "id": "a",
+        "text": "False",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "True",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "TypeError",
+        "mono": true,
+        "out": "!TypeError"
+      },
+      {
+        "id": "d",
+        "text": "AttributeError",
+        "mono": true,
+        "out": "!AttributeError"
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "Without parentheses, `l = Lamp` just gives a second name to the class; no instance is created and `__init__` never runs. `on` is an instance attribute, the class itself has none, so `l.on` raises AttributeError.",
+    "distractor_notes": {
+      "a": "That needs an instance: `l = Lamp()`.",
+      "b": "Nothing ever sets `on` to True.",
+      "c": "No call with wrong arguments happens; the failure is an attribute lookup on the class."
+    },
+    "slides": [
+      186,
+      189,
+      191
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0010",
+    "chapter": "S5",
+    "topic": "classes-objects",
+    "tags": [
+      "__init__",
+      "default-arguments",
+      "instance-attributes"
+    ],
+    "type": "multi",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Given the code, which statements are true? (Select all that apply.)",
+    "code": "class Cup:\n    def __init__(self, size='M'):\n        self.size = size\n\nc = Cup()",
+    "options": [
+      {
+        "id": "a",
+        "text": "`c.size` is `'M'`",
+        "probe": "print(c.size == 'M')"
+      },
+      {
+        "id": "b",
+        "text": "`Cup.size` is `'M'`",
+        "probe": "try:\n    print(Cup.size == 'M')\nexcept AttributeError:\n    print(False)"
+      },
+      {
+        "id": "c",
+        "text": "`Cup('L').size` is `'L'`",
+        "probe": "print(Cup('L').size == 'L')"
+      },
+      {
+        "id": "d",
+        "text": "`Cup('S', 'L')` raises TypeError",
+        "probe": "try:\n    Cup('S', 'L')\n    print(False)\nexcept TypeError:\n    print(True)"
+      },
+      {
+        "id": "e",
+        "text": "`isinstance(c, Cup)` is True",
+        "probe": "print(isinstance(c, Cup) is True)"
+      }
+    ],
+    "correct": [
+      "a",
+      "c",
+      "d",
+      "e"
+    ],
+    "explanation": "`size` is an instance attribute created by `__init__` (default 'M'), so `c.size == 'M'` and `Cup('L').size == 'L'`. The class object itself has no `size` (AttributeError). `__init__` takes at most one argument besides self, so two arguments raise TypeError. c was created by calling Cup, so it is a Cup instance.",
+    "distractor_notes": {
+      "b": "`size` only exists on instances (set through `self.size`); `Cup.size` raises AttributeError."
+    },
+    "slides": [
+      186,
+      189,
+      191
+    ],
+    "verify": {
+      "mode": "truth"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0011",
+    "chapter": "S5",
+    "topic": "classes-objects",
+    "tags": [
+      "self",
+      "convention"
+    ],
+    "type": "multi",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Given the code, which statements are true? (Select all that apply.)",
+    "code": "class Pen:\n    def __init__(this, color):\n        this.color = color\n    def me(self):\n        return self\n\np = Pen('red')",
+    "options": [
+      {
+        "id": "a",
+        "text": "`p.me() is p` is True",
+        "probe": "print(p.me() is p)"
+      },
+      {
+        "id": "b",
+        "text": "The class is broken because the first parameter of `__init__` is not named `self`",
+        "probe": "print(p.color != 'red')"
+      },
+      {
+        "id": "c",
+        "text": "`self` is a reserved keyword of Python",
+        "probe": "import keyword\nprint(keyword.iskeyword('self'))"
+      },
+      {
+        "id": "d",
+        "text": "`p.me()` does the same as `Pen.me(p)`",
+        "probe": "print(Pen.me(p) is p.me())"
+      },
+      {
+        "id": "e",
+        "text": "To call `me` you must pass the instance explicitly: `p.me(p)`",
+        "probe": "try:\n    p.me(p)\n    print(True)\nexcept TypeError:\n    print(False)"
+      }
+    ],
+    "correct": [
+      "a",
+      "d"
+    ],
+    "explanation": "The first parameter of a method receives the instance the method is called on; `self` is only a naming convention (here `__init__` uses `this` and works: p.color is 'red'). `p.me()` is translated into `Pen.me(p)` and returns p itself. Passing p again gives two arguments to a one-parameter method: TypeError.",
+    "distractor_notes": {
+      "b": "Any parameter name works; `self` is a convention, not a rule.",
+      "c": "`self` is an ordinary identifier (`keyword.iskeyword('self')` is False).",
+      "e": "The instance is passed automatically; `p.me(p)` gives 2 arguments → TypeError."
+    },
+    "slides": [
+      186,
+      189,
+      191
+    ],
+    "verify": {
+      "mode": "truth"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0012",
+    "chapter": "S5",
+    "topic": "classes-objects",
+    "tags": [
+      "identity",
+      "instances"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "class Tag:\n    def __init__(self, label):\n        self.label = label\n\nt1 = Tag('x')\nt2 = Tag('x')\nprint(t1 is t2, t1.label == t2.label)",
+    "options": [
+      {
+        "id": "a",
+        "text": "False True",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "True True",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "False False",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "True False",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "Each call `Tag(...)` creates a new, distinct object, so `t1 is t2` is False even though they were built with the same argument. Their labels are equal strings, so `==` gives True.",
+    "distractor_notes": {
+      "c": "The two labels are both 'x': `==` compares values.",
+      "d": "Reversed: the objects are distinct but their labels are equal.",
+      "b": "Same constructor arguments do not give the same object."
+    },
+    "slides": [
+      186,
+      189,
+      191
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0013",
+    "chapter": "S5",
+    "topic": "classes-objects",
+    "tags": [
+      "class-body",
+      "execution-order"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "class Greeter:\n    print('A')\n    def __init__(self):\n        print('B')\n\nprint('C')\ng = Greeter()",
+    "options": [
+      {
+        "id": "a",
+        "text": "C\nB",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "A\nB\nC",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "C\nA\nB",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "A\nC\nB",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "The body of a `class` statement is executed once, when the class is defined: `print('A')` runs immediately while `def` only creates the method. Then 'C' is printed, and `__init__` prints 'B' when `Greeter()` creates the instance.",
+    "distractor_notes": {
+      "a": "Statements placed directly in the class body do run, at definition time.",
+      "c": "The class body runs when the class statement is reached, before the next top-level line.",
+      "b": "`__init__` runs only when `Greeter()` is called, which is after `print('C')`."
+    },
+    "slides": [
+      186,
+      189,
+      191
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0014",
+    "chapter": "S5",
+    "topic": "classes-objects",
+    "tags": [
+      "attributes-outside-init"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "class Timer:\n    def __init__(self):\n        self.ticks = 0\n    def start(self):\n        self.running = True\n\nt = Timer()\nt.start()\nprint(t.ticks, t.running)",
+    "options": [
+      {
+        "id": "a",
+        "text": "AttributeError",
+        "mono": true,
+        "out": "!AttributeError"
+      },
+      {
+        "id": "b",
+        "text": "0 False",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "0 True",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "None True",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "Attributes can be created by any method, not only by `__init__`: after `t.start()` the instance has `running = True`. `ticks` is 0 from `__init__`.",
+    "distractor_notes": {
+      "b": "`start` sets `running` to True.",
+      "d": "`ticks` is set to 0 by `__init__`.",
+      "a": "AttributeError would only happen if `t.running` were read before `t.start()` is called."
+    },
+    "slides": [
+      186,
+      189,
+      191
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0015",
+    "chapter": "S5",
+    "topic": "classes-objects",
+    "tags": [
+      "__init__",
+      "typo",
+      "TypeError"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What happens in the below code?",
+    "code": "class Fruit:\n    def _init_(self, name):\n        self.name = name\n\nf = Fruit('kiwi')\nprint(f.name)",
+    "options": [
+      {
+        "id": "a",
+        "text": "kiwi",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "TypeError",
+        "mono": true,
+        "out": "!TypeError"
+      },
+      {
+        "id": "c",
+        "text": "AttributeError",
+        "mono": true,
+        "out": "!AttributeError"
+      },
+      {
+        "id": "d",
+        "text": "None",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "The initializer must be spelled `__init__` (two underscores on each side). `_init_` is an ordinary method that is never called automatically, so the default initializer inherited from `object` is used, and it accepts no arguments: `Fruit('kiwi')` raises TypeError (Fruit() takes no arguments).",
+    "distractor_notes": {
+      "a": "`_init_` is never invoked, so `name` is never set.",
+      "d": "Missing attributes never default to None.",
+      "c": "The error happens earlier, in `Fruit('kiwi')`. Only `Fruit()` would succeed and then fail with AttributeError on `f.name`."
+    },
+    "slides": [
+      186,
+      189,
+      191
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0016",
+    "chapter": "S5",
+    "topic": "classes-objects",
+    "tags": [
+      "sorting-objects",
+      "TypeError",
+      "key"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "class Square:\n    def __init__(self, side):\n        self.side = side\n\nshapes = [Square(3), Square(1), Square(2)]\nprint([s.side for s in sorted(shapes)])",
+    "options": [
+      {
+        "id": "a",
+        "text": "TypeError",
+        "mono": true,
+        "out": "!TypeError"
+      },
+      {
+        "id": "b",
+        "text": "[3, 1, 2]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[1, 2, 3]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[3, 2, 1]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "`sorted()` compares the elements with `<`. Square defines no ordering (no `__lt__`), so comparing two Square objects raises TypeError ('<' not supported). Sort with a key instead: `sorted(shapes, key=lambda s: s.side)`.",
+    "distractor_notes": {
+      "b": "sorted never silently keeps the original order when it cannot compare: it raises.",
+      "d": "Descending order would need `reverse=True`, and a key anyway.",
+      "c": "That needs `key=lambda s: s.side`: Python does not compare objects through their attributes."
+    },
+    "slides": [
+      189,
+      191,
+      211
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0017",
+    "chapter": "S5",
+    "topic": "methods",
+    "tags": [
+      "self",
+      "forgot-self",
+      "TypeError"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "class Bell:\n    def ring():\n        print('Ding!')\n\nb = Bell()\nb.ring()",
+    "options": [
+      {
+        "id": "a",
+        "text": "Ding!",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "SyntaxError",
+        "mono": true,
+        "out": "!SyntaxError"
+      },
+      {
+        "id": "c",
+        "text": "NameError",
+        "mono": true,
+        "out": "!NameError"
+      },
+      {
+        "id": "d",
+        "text": "TypeError",
+        "mono": true,
+        "out": "!TypeError"
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "`b.ring()` is executed as `Bell.ring(b)`: the instance is always passed as the first argument. `ring` was defined without a parameter, so Python raises TypeError (takes 0 positional arguments but 1 was given).",
+    "distractor_notes": {
+      "a": "The method would need a parameter: `def ring(self):`.",
+      "c": "The name `ring` is found on the class; the problem is the number of arguments.",
+      "b": "A `def` without parameters inside a class is valid syntax."
+    },
+    "slides": [
+      190,
+      191
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0018",
+    "chapter": "S5",
+    "topic": "methods",
+    "tags": [
+      "message-passing",
+      "b.f(x)"
+    ],
+    "type": "multi",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Given the code, which expressions evaluate to 15? (Select all that apply.)",
+    "code": "class Calc:\n    def __init__(self, base):\n        self.base = base\n    def add(self, x):\n        return self.base + x\n\nc = Calc(10)",
+    "options": [
+      {
+        "id": "a",
+        "text": "c.add(5)",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "Calc.add(c, 5)",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "Calc.add(5)",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "c.add(c, 5)",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "add(c, 5)",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "b"
+    ],
+    "explanation": "A method call `c.add(5)` is shorthand for `Calc.add(c, 5)`: the instance becomes `self`. `Calc.add(5)` binds 5 to self and misses x (TypeError), `c.add(c, 5)` passes three arguments (TypeError), and there is no global function `add` (NameError).",
+    "distractor_notes": {
+      "c": "5 becomes `self` and `x` is missing → TypeError.",
+      "d": "c is already passed automatically, so this gives 3 arguments → TypeError.",
+      "e": "Methods live in the class namespace; there is no global name `add` → NameError."
+    },
+    "slides": [
+      190,
+      191
+    ],
+    "verify": {
+      "mode": "truth",
+      "probe_template": "try:\n    print(__OPTION_RAW__ == 15)\nexcept Exception:\n    print(False)"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0019",
+    "chapter": "S5",
+    "topic": "methods",
+    "tags": [
+      "return-None",
+      "side-effects"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "class Wallet:\n    def __init__(self):\n        self.money = 0\n    def deposit(self, amount):\n        self.money += amount\n\nw = Wallet()\nprint(w.deposit(50))\nprint(w.money)",
+    "options": [
+      {
+        "id": "a",
+        "text": "50\n50",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "None\n50",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "None\n0",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "0\n50",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "`deposit` changes `self.money` but has no `return` statement, so the call evaluates to None, which is printed first. The side effect did happen: `w.money` is 50.",
+    "distractor_notes": {
+      "a": "A method without `return` returns None, not the new balance.",
+      "c": "The method ran and added 50 before returning None.",
+      "d": "Nothing returns the old balance; the call's value is None."
+    },
+    "slides": [
+      190,
+      191
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0020",
+    "chapter": "S5",
+    "topic": "methods",
+    "tags": [
+      "method-chaining",
+      "return-None",
+      "AttributeError"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What happens in the below code?",
+    "code": "class Builder:\n    def __init__(self):\n        self.parts = []\n    def add(self, p):\n        self.parts.append(p)\n\nb = Builder()\nb.add('a').add('b')\nprint(b.parts)",
+    "options": [
+      {
+        "id": "a",
+        "text": "AttributeError",
+        "mono": true,
+        "out": "!AttributeError"
+      },
+      {
+        "id": "b",
+        "text": "['a']",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "['a', 'b']",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "TypeError",
+        "mono": true,
+        "out": "!TypeError"
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "`b.add('a')` appends 'a' but returns None, and `.add('b')` is then looked up on None: AttributeError ('NoneType' object has no attribute 'add'). Chaining calls works only if the method ends with `return self`. The print is never reached.",
+    "distractor_notes": {
+      "b": "'a' was appended, but the error stops the program before print.",
+      "d": "The failure is a missing attribute on None, not a call with wrong arguments.",
+      "c": "That would require `return self` at the end of `add`."
+    },
+    "slides": [
+      190,
+      191
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  }
+]

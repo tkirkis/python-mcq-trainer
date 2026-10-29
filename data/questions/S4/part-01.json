@@ -1,0 +1,1096 @@
+[
+  {
+    "id": "S4-0001",
+    "chapter": "S4",
+    "topic": "scopes",
+    "tags": [
+      "local",
+      "global",
+      "shadowing"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "msg = \"outside\"\ndef change():\n    msg = \"inside\"\n    return msg\nresult = change()\nprint(msg, result)",
+    "options": [
+      {
+        "id": "a",
+        "text": "inside inside",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "outside inside",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "outside outside",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "UnboundLocalError",
+        "out": "!UnboundLocalError"
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "The assignment `msg = \"inside\"` inside `change` creates a new local variable that only exists during the call; the global `msg` is untouched. The function returns its local value, so `result` is 'inside' while the global `msg` is still 'outside'.",
+    "distractor_notes": {
+      "a": "Assumes that assigning inside a function overwrites the global variable; without `global msg` it creates a local one.",
+      "c": "The function returns its own local `msg`, which is 'inside'.",
+      "d": "UnboundLocalError only happens when a local name is read before it is assigned; here it is assigned first."
+    },
+    "slides": [
+      169,
+      171
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0002",
+    "chapter": "S4",
+    "topic": "scopes",
+    "tags": [
+      "UnboundLocalError",
+      "global",
+      "augmented-assignment"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "count = 0\ndef increment():\n    count += 1\n    return count\nprint(increment())",
+    "options": [
+      {
+        "id": "a",
+        "text": "1",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "0",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "UnboundLocalError",
+        "out": "!UnboundLocalError"
+      },
+      {
+        "id": "d",
+        "text": "SyntaxError",
+        "out": "!SyntaxError"
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "`count += 1` is an assignment to `count`, so the compiler treats `count` as a local variable in the whole function body. Evaluating `count + 1` reads that local before it has a value -> UnboundLocalError. Declaring `global count` in the function fixes it.",
+    "distractor_notes": {
+      "a": "That is what happens with `global count` at the top of the function.",
+      "b": "The function never reaches `return`: it raises on its first line.",
+      "d": "The code is syntactically valid; the error only occurs when the function is called."
+    },
+    "slides": [
+      169,
+      170,
+      171
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0003",
+    "chapter": "S4",
+    "topic": "scopes",
+    "tags": [
+      "global",
+      "lookup-time"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "rate = 0.2\ndef tax(amount):\n    return amount * rate\nrate = 0.5\nprint(tax(10))",
+    "options": [
+      {
+        "id": "a",
+        "text": "5.0",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "2.0",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "NameError",
+        "out": "!NameError"
+      },
+      {
+        "id": "d",
+        "text": "UnboundLocalError",
+        "out": "!UnboundLocalError"
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "A function that only *reads* a global variable needs no declaration. The global name is looked up when the function runs, not when it is defined: at call time `rate` is 0.5, so the result is 10 * 0.5 = 5.0.",
+    "distractor_notes": {
+      "b": "The value of `rate` is not frozen at `def` time; it is read when tax(10) executes.",
+      "c": "`rate` exists in the global scope, and reading a global from a function is allowed.",
+      "d": "There is no assignment to `rate` inside tax, so `rate` is not a local variable."
+    },
+    "slides": [
+      169,
+      171,
+      164
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0004",
+    "chapter": "S4",
+    "topic": "scopes",
+    "tags": [
+      "global"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "total = 10\ndef reset():\n    global total\n    total = 0\nreset()\nprint(total)",
+    "options": [
+      {
+        "id": "a",
+        "text": "10",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "SyntaxError",
+        "out": "!SyntaxError"
+      },
+      {
+        "id": "c",
+        "text": "None",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "0",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "`global total` tells Python that `total` inside reset is the module-level variable, so the assignment rebinds the global one.",
+    "distractor_notes": {
+      "a": "That would be the output without the `global` statement (the assignment would then create a local variable).",
+      "b": "A `global` declaration followed by an assignment is valid syntax.",
+      "c": "print shows the global variable `total`, not the return value of reset()."
+    },
+    "slides": [
+      170,
+      171
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0005",
+    "chapter": "S4",
+    "topic": "scopes",
+    "tags": [
+      "nonlocal",
+      "global",
+      "SyntaxError"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What happens when the following script is run?",
+    "code": "s = 'module'\ndef outer():\n    global s\n    s = 'outer'\n    def inner():\n        nonlocal s\n        s = 'inner'\n    inner()\n    print(s)\nouter()",
+    "options": [
+      {
+        "id": "a",
+        "text": "inner",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "SyntaxError",
+        "out": "!SyntaxError"
+      },
+      {
+        "id": "c",
+        "text": "module",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "outer",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "`nonlocal s` must refer to a local variable of an enclosing *function*. In outer, `s` is declared `global`, so there is no function-local `s` for inner to bind to. Python rejects the whole file at compile time with a SyntaxError (no binding for nonlocal 's' found), before any line is executed.",
+    "distractor_notes": {
+      "a": "That would be the output without the `global s` line: inner's nonlocal would then rebind outer's local s.",
+      "c": "Nothing runs at all: the nonlocal error is detected when the file is compiled.",
+      "d": "That would be the output without the `nonlocal s` line: inner's assignment would just create a local variable."
+    },
+    "slides": [
+      172
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0006",
+    "chapter": "S4",
+    "topic": "scopes",
+    "tags": [
+      "nonlocal",
+      "enclosing"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "v = 'g'\ndef outer():\n    v = 'o'\n    def inner():\n        nonlocal v\n        v = 'i'\n        print('inner:', v)\n    inner()\n    print('outer:', v)\nouter()\nprint('global:', v)",
+    "options": [
+      {
+        "id": "a",
+        "text": "inner: i\nouter: o\nglobal: i",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "inner: i\nouter: o\nglobal: g",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "inner: i\nouter: i\nglobal: i",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "inner: i\nouter: i\nglobal: g",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "`nonlocal v` makes inner rebind the `v` of the nearest enclosing function (outer), so outer's `v` becomes 'i'. The global `v` is a different variable that is never touched: it stays 'g'.",
+    "distractor_notes": {
+      "a": "Mixes up nonlocal with global.",
+      "b": "Ignores nonlocal: that is the output without the `nonlocal v` line.",
+      "c": "nonlocal never reaches the module level; only `global v` would change the global."
+    },
+    "slides": [
+      172
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0007",
+    "chapter": "S4",
+    "topic": "scopes",
+    "tags": [
+      "global",
+      "nested-functions"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Find the output of the code?",
+    "code": "level = 'top'\ndef a():\n    global level\n    level = 'A'\n    def b():\n        level = 'B'\n    b()\n    print(level)\na()\nprint(level)",
+    "options": [
+      {
+        "id": "a",
+        "text": "A\ntop",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "B\nB",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "A\nA",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "B\ntop",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "`global level` in a makes a's assignment rebind the module-level variable ('top' -> 'A'). The declaration only applies to a's own body: in b, `level = 'B'` creates a new local variable of b that disappears after the call. Both prints show 'A'.",
+    "distractor_notes": {
+      "a": "a declares level global, so its assignment does change the module-level variable.",
+      "b": "A `global` declaration is not inherited by nested functions: b's assignment is local to b.",
+      "d": "Combines both mistakes: b's assignment is local and a's assignment is global."
+    },
+    "slides": [
+      170,
+      172
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0008",
+    "chapter": "S4",
+    "topic": "scopes",
+    "tags": [
+      "block-scope",
+      "for-loop"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "for i in range(3):\n    square = i * i\nprint(i, square)",
+    "options": [
+      {
+        "id": "a",
+        "text": "2 4",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "3 9",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "NameError",
+        "out": "!NameError"
+      },
+      {
+        "id": "d",
+        "text": "0 0",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "A for loop does not create a new scope in Python: the loop variable and the names assigned in the loop body still exist after the loop, with the values of the last iteration (i = 2, square = 4).",
+    "distractor_notes": {
+      "b": "range(3) stops at 2; the loop variable is never set to 3.",
+      "c": "Unlike C or Java, if/for/while blocks have no scope of their own.",
+      "d": "The variables keep the values of the last iteration, not the first."
+    },
+    "slides": [
+      169
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0009",
+    "chapter": "S4",
+    "topic": "scopes",
+    "tags": [
+      "parameters",
+      "shadowing"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "x = 5\ndef double(x):\n    x = x * 2\n    return x\ny = double(x)\nprint(x, y)",
+    "options": [
+      {
+        "id": "a",
+        "text": "10 5",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "10 10",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "5 5",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "5 10",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "The parameter `x` is a local variable of double that shadows the global `x`. Rebinding it to 10 does not affect the global `x`, which stays 5; the function returns 10.",
+    "distractor_notes": {
+      "a": "Swaps the two values.",
+      "b": "Rebinding a parameter never changes the caller's variable.",
+      "c": "The function returns the doubled local value, 10."
+    },
+    "slides": [
+      169,
+      171
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0010",
+    "chapter": "S4",
+    "topic": "scopes",
+    "tags": [
+      "UnboundLocalError",
+      "compile-time-scope"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "Analyze the code. What does it print?",
+    "code": "value = 1\ndef show(flag):\n    if flag:\n        value = 2\n    print(value)\nshow(True)\nshow(False)",
+    "options": [
+      {
+        "id": "a",
+        "text": "2\n1",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "2\n2",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "2, then an UnboundLocalError is raised",
+        "out": null
+      },
+      {
+        "id": "d",
+        "text": "UnboundLocalError on the first call",
+        "out": null
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "Whether a name is local is decided when the function is compiled: since `value` is assigned somewhere in show, it is local everywhere in show. show(True) assigns it and prints 2. show(False) skips the assignment, so reading the local `value` raises UnboundLocalError; Python does not fall back to the global value 1.",
+    "distractor_notes": {
+      "a": "Assumes Python falls back to the global when the local was not assigned; it does not.",
+      "b": "Local variables do not survive from one call to the next.",
+      "d": "The first call takes the if branch, so `value` is assigned before it is read."
+    },
+    "slides": [
+      169,
+      171
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "expected_output": "2\n!UnboundLocalError",
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0011",
+    "chapter": "S4",
+    "topic": "scopes",
+    "tags": [
+      "global",
+      "nonlocal",
+      "nested-functions"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "x = 0\ndef outer():\n    x = 1\n    def inner():\n        global x\n        x = 2\n    inner()\n    print(x)\nouter()\nprint(x)",
+    "options": [
+      {
+        "id": "a",
+        "text": "2\n2",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "1\n2",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "1\n0",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "2\n0",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "`global x` in inner skips the enclosing function and targets the module-level x, which becomes 2. outer's own local x is not affected, so outer prints 1; the last line prints the global x, now 2.",
+    "distractor_notes": {
+      "a": "`global` always targets the module level, not the nearest x; `nonlocal x` would be needed to change outer's x.",
+      "c": "inner did change the module-level x.",
+      "d": "Confuses global with nonlocal."
+    },
+    "slides": [
+      170,
+      172
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0012",
+    "chapter": "S4",
+    "topic": "scopes",
+    "tags": [
+      "UnboundLocalError",
+      "global",
+      "select-all"
+    ],
+    "type": "multi",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "With the global variable below, which of the following functions can be called with `f()` without raising an error? Select all that apply.",
+    "code": "n = 0",
+    "options": [
+      {
+        "id": "a",
+        "text": "def f():\n    print(n)",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "def f():\n    n += 1",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "def f():\n    global n\n    n += 1",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "def f():\n    print(n)\n    n = 1",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "def f():\n    m = n + 1\n    return m",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "c",
+      "e"
+    ],
+    "explanation": "Reading a global is always allowed (a, e). Any assignment to `n` in the function (`n += 1`, `n = 1`) makes `n` local in the whole body, so reading it before it gets a value raises UnboundLocalError (b, d) - unless `global n` is declared (c).",
+    "distractor_notes": {
+      "b": "`n += 1` reads the local n before it has a value: UnboundLocalError.",
+      "d": "The later `n = 1` makes n local in the entire function, so the print before it raises UnboundLocalError."
+    },
+    "slides": [
+      169,
+      170,
+      171
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": "n = 0",
+      "probe_template": "__OPTION_RAW__\nf()\nprint(True)"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0013",
+    "chapter": "S4",
+    "topic": "scopes",
+    "tags": [
+      "LEGB",
+      "builtins",
+      "shadowing",
+      "none-of-the-above"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "def count(items):\n    len = 0\n    for _ in items:\n        len += 1\n    return len\nprint(count('abcd') + len('xy'))",
+    "options": [
+      {
+        "id": "a",
+        "text": "TypeError",
+        "out": "!TypeError"
+      },
+      {
+        "id": "b",
+        "text": "UnboundLocalError",
+        "out": "!UnboundLocalError"
+      },
+      {
+        "id": "c",
+        "text": "SyntaxError",
+        "out": "!SyntaxError"
+      },
+      {
+        "id": "d",
+        "text": "None of the above",
+        "out": null
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "`len` is a built-in name, not a keyword, so it can be used as a local variable. The local `len` shadows the built-in only inside count (count('abcd') returns 4). At module level `len` is still the built-in function, so len('xy') is 2. The program prints 6, which is not listed.",
+    "distractor_notes": {
+      "a": "The local `len` exists only in count's scope; the built-in len used at module level is untouched.",
+      "b": "`len` is assigned 0 before `len += 1` reads it.",
+      "c": "`len` is a built-in function name, not a reserved keyword: rebinding it is legal."
+    },
+    "slides": [
+      169,
+      179
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "expected_output": "6",
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0014",
+    "chapter": "S4",
+    "topic": "scopes",
+    "tags": [
+      "enclosing",
+      "closures",
+      "lookup-time"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "def outer():\n    def inner():\n        return y * 2\n    y = 10\n    return inner()\nprint(outer())",
+    "options": [
+      {
+        "id": "a",
+        "text": "20",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "NameError",
+        "out": "!NameError"
+      },
+      {
+        "id": "c",
+        "text": "UnboundLocalError",
+        "out": "!UnboundLocalError"
+      },
+      {
+        "id": "d",
+        "text": "None",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "inner reads `y` from the enclosing function's scope. Names are looked up when the code runs, not when `def` is executed: by the time inner() is called, outer has already set y = 10, so the result is 20.",
+    "distractor_notes": {
+      "b": "y is defined in the enclosing scope before inner is *called*; the order of `def` and assignment does not matter.",
+      "c": "inner never assigns y, so y is not a local variable of inner.",
+      "d": "outer returns the value returned by inner(), which is 20."
+    },
+    "slides": [
+      169,
+      172,
+      164
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0015",
+    "chapter": "S4",
+    "topic": "scopes",
+    "tags": [
+      "global",
+      "block-scope",
+      "parameters",
+      "select-all"
+    ],
+    "type": "multi",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "With the global variable below, which of the following snippets print `10` (each snippet run on its own)? Select all that apply.",
+    "code": "x = 5",
+    "options": [
+      {
+        "id": "a",
+        "text": "def f():\n    global x\n    x = 10\nf()\nprint(x)",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "def f():\n    x = 10\nf()\nprint(x)",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "def f():\n    return x * 2\nprint(f())",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "def f(x):\n    x = 10\nf(x)\nprint(x)",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "for x in range(11):\n    pass\nprint(x)",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "c",
+      "e"
+    ],
+    "explanation": "(a) `global x` makes the assignment rebind the module-level x. (c) reading a global inside a function is allowed: 5 * 2 = 10. (e) a for loop has no scope of its own: it rebinds the global x and leaves it at its last value, 10. In (b) and (d), `x = 10` only rebinds a local variable (a plain local, or the parameter), so 5 is printed.",
+    "distractor_notes": {
+      "b": "Without `global`, the assignment creates a local x; the global x is still 5.",
+      "d": "The parameter x is local to f; rebinding it does not change the caller's x."
+    },
+    "slides": [
+      169,
+      170,
+      171
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": "x = 5",
+      "probe_template": "import io, contextlib\nbuf = io.StringIO()\nwith contextlib.redirect_stdout(buf):\n    exec(__OPTION__)\nprint(buf.getvalue() == '10\\n')"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0016",
+    "chapter": "S4",
+    "topic": "scopes",
+    "tags": [
+      "which-is-false",
+      "block-scope",
+      "nonlocal"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Which of the following statements about scopes in Python is **false**?",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "A variable assigned inside a function is local to that function, unless it is declared `global` or `nonlocal`.",
+        "probe": "x = 0\ndef f():\n    x = 1\nf()\nprint(x != 0)"
+      },
+      {
+        "id": "b",
+        "text": "A `for` loop creates its own scope: its loop variable no longer exists after the loop.",
+        "probe": "for k in range(2):\n    pass\nprint(k == 1)"
+      },
+      {
+        "id": "c",
+        "text": "A function can read a global variable without declaring it.",
+        "probe": "g = 5\ndef f():\n    return g\nprint(f() != 5)"
+      },
+      {
+        "id": "d",
+        "text": "`nonlocal` cannot be used to modify a module-level (global) variable.",
+        "probe": "try:\n    compile('x = 1\\ndef f():\\n    nonlocal x\\n    x = 2\\n', 'q', 'exec')\n    print(True)\nexcept SyntaxError:\n    print(False)"
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "Python has no block scope: names bound by a for loop (including the loop variable) are still defined after the loop, so (b) is false. The other statements are true: assignment makes a name local (a), reading a global needs no declaration (c), and `nonlocal` only reaches variables of an enclosing function - `nonlocal` on a module-level name is a SyntaxError (d).",
+    "distractor_notes": {
+      "a": "True: that is why a global stays unchanged after a plain assignment inside a function.",
+      "c": "True: only assigning to a global requires a `global` declaration.",
+      "d": "True: nonlocal needs an enclosing function scope; for module-level names use `global`."
+    },
+    "slides": [
+      169,
+      171,
+      172
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": ""
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0017",
+    "chapter": "S4",
+    "topic": "interpreter-execution",
+    "tags": [
+      "def",
+      "execution-order"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "print('start')\ndef f():\n    print('inside')\nprint('end')",
+    "options": [
+      {
+        "id": "a",
+        "text": "start\nend",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "start\ninside\nend",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "start\nend\ninside",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "inside\nstart\nend",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "A `def` statement only creates the function object and binds it to the name f; its body runs only when f is called. f is never called, so 'inside' is never printed.",
+    "distractor_notes": {
+      "b": "Assumes `def` executes the body; it only defines the function.",
+      "c": "Functions are not run automatically at the end of the script.",
+      "d": "The script runs from top to bottom; nothing is moved or hoisted."
+    },
+    "slides": [
+      164,
+      161
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0018",
+    "chapter": "S4",
+    "topic": "interpreter-execution",
+    "tags": [
+      "NameError",
+      "def",
+      "execution-order"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What happens in the below code?",
+    "code": "print(square(3))\ndef square(x):\n    return x * x",
+    "options": [
+      {
+        "id": "a",
+        "text": "9",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "SyntaxError",
+        "out": "!SyntaxError"
+      },
+      {
+        "id": "c",
+        "text": "NameError",
+        "out": "!NameError"
+      },
+      {
+        "id": "d",
+        "text": "None",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "The interpreter executes a script line by line from the top. When line 1 runs, the `def` on line 2 has not been executed yet, so the name square does not exist: NameError. Python does not hoist function definitions.",
+    "distractor_notes": {
+      "a": "That would be the output if the def came before the call.",
+      "b": "The code is syntactically valid; the error is raised at run time.",
+      "d": "No call succeeds; and square would return 9, not None."
+    },
+    "slides": [
+      161,
+      164,
+      166
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0019",
+    "chapter": "S4",
+    "topic": "interpreter-execution",
+    "tags": [
+      "def",
+      "rebinding",
+      "execution-order"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "def main():\n    return helper() * 2\ndef helper():\n    return 1\nprint(main())\ndef helper():\n    return 5\nprint(main())",
+    "options": [
+      {
+        "id": "a",
+        "text": "10\n10",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "2\n2",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "NameError",
+        "out": "!NameError"
+      },
+      {
+        "id": "d",
+        "text": "2\n10",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "Inside main, the name helper is looked up each time main runs, not when main is defined. At the first call helper returns 1 -> 2. The second `def helper` simply rebinds the name helper to a new function, which the second call of main uses -> 10.",
+    "distractor_notes": {
+      "a": "The script runs top to bottom: when main is first called, only the first helper exists.",
+      "b": "main does not keep a frozen copy of the first helper; it looks the name up at call time.",
+      "c": "helper is defined (line 3) before main is first called (line 5), so the lookup succeeds."
+    },
+    "slides": [
+      161,
+      164,
+      166
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0020",
+    "chapter": "S4",
+    "topic": "interpreter-execution",
+    "tags": [
+      "hardware",
+      "RAM",
+      "CPU"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "While a Python script is running, where are its variables and objects (numbers, lists, strings...) stored?",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "In RAM (main memory)"
+      },
+      {
+        "id": "b",
+        "text": "On the hard disk, inside the .py file"
+      },
+      {
+        "id": "c",
+        "text": "In the CPU only"
+      },
+      {
+        "id": "d",
+        "text": "Inside the python interpreter's executable file"
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "When a program runs it is copied from disk into RAM, the fast short-term memory, and the objects it creates also live in RAM (they disappear when the program ends). The CPU executes the instructions; the disk stores files permanently (the .py source, the python executable) but is not where running variables live.",
+    "distractor_notes": {
+      "b": "The .py file only stores the source text; changing a variable never writes to it.",
+      "c": "The CPU performs the computations, but the data it works on is held in RAM.",
+      "d": "The interpreter executable is a program file on disk; your objects are never stored in it."
+    },
+    "slides": [
+      153,
+      155
+    ],
+    "verify": {
+      "mode": "manual",
+      "reference": "Slide 153 (CPU = calculator, RAM = short-term memory, hard disk = long-term storage) and slide 155 (a program is copied from disk to RAM when executed)"
+    },
+    "reviewed": 1
+  }
+]

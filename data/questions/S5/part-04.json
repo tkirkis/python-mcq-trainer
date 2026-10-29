@@ -1,0 +1,1072 @@
+[
+  {
+    "id": "S5-0061",
+    "chapter": "S5",
+    "topic": "inheritance",
+    "tags": [
+      "explicit-parent-call",
+      "b.f(x)",
+      "overriding"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "class Logger:\n    def log(self, msg):\n        return 'LOG: ' + msg\n\nclass TimedLogger(Logger):\n    def log(self, msg):\n        return Logger.log(self, '[t] ' + msg)\n\nprint(TimedLogger().log('start'))",
+    "options": [
+      {
+        "id": "a",
+        "text": "TypeError",
+        "mono": true,
+        "out": "!TypeError"
+      },
+      {
+        "id": "b",
+        "text": "[t] LOG: start",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "RecursionError",
+        "mono": true,
+        "out": "!RecursionError"
+      },
+      {
+        "id": "d",
+        "text": "LOG: [t] start",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "`Logger.log(self, ...)` calls the parent's function explicitly through the class and passes the instance by hand (`b.f(x)` is `Class.f(b, x)`). It does the same as `super().log('[t] ' + msg)`. Because it names Logger, it does not call TimedLogger.log again.",
+    "distractor_notes": {
+      "b": "'[t] ' is added to msg first, then Logger puts 'LOG: ' in front.",
+      "c": "`Logger.log` is the parent's function, so there is no recursion.",
+      "a": "When calling through the class, self must be passed explicitly, and it is."
+    },
+    "slides": [
+      190,
+      194,
+      195
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0062",
+    "chapter": "S5",
+    "topic": "inheritance",
+    "tags": [
+      "super",
+      "self-passed-twice",
+      "TypeError"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What happens in the below code?",
+    "code": "class Person:\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n\nclass Student(Person):\n    def __init__(self, name, age, school):\n        super().__init__(self, name, age)\n        self.school = school\n\ns = Student('Tom', 20, 'ESSEC')\nprint(s.name)",
+    "options": [
+      {
+        "id": "a",
+        "text": "Tom",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "AttributeError",
+        "mono": true,
+        "out": "!AttributeError"
+      },
+      {
+        "id": "c",
+        "text": "TypeError",
+        "mono": true,
+        "out": "!TypeError"
+      },
+      {
+        "id": "d",
+        "text": "NameError",
+        "mono": true,
+        "out": "!NameError"
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "`super().__init__` is already bound to the current object, so self must not be passed again. Person.__init__ receives self plus three arguments (self, 'Tom', 20) for two parameters: TypeError (takes 3 positional arguments but 4 were given).",
+    "distractor_notes": {
+      "a": "It would print Tom with `super().__init__(name, age)`.",
+      "d": "All names used are defined.",
+      "b": "The error happens inside the constructor call, before `s.name` is read."
+    },
+    "slides": [
+      194,
+      195
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0063",
+    "chapter": "S5",
+    "topic": "inheritance",
+    "tags": [
+      "class-attribute-inheritance",
+      "overriding"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "class Animal:\n    sound = '...'\n    def speak(self):\n        return self.sound\n\nclass Cow(Animal):\n    sound = 'moo'\n\nclass Calf(Cow):\n    pass\n\nprint(Animal().speak(), Calf().speak())",
+    "options": [
+      {
+        "id": "a",
+        "text": "... ...",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "... moo",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "moo moo",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "AttributeError",
+        "mono": true,
+        "out": "!AttributeError"
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "`self.sound` is looked up on the instance, then its class, then the parent classes. Calf has no own `sound`, so it gets Cow's 'moo'; a plain Animal gets '...'. Class attributes are inherited and overridden exactly like methods.",
+    "distractor_notes": {
+      "c": "Animal itself still has '...'.",
+      "d": "Class attributes are inherited like methods.",
+      "a": "Cow's class attribute overrides Animal's for Cow and its subclasses."
+    },
+    "slides": [
+      194,
+      195
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0064",
+    "chapter": "S5",
+    "topic": "inheritance",
+    "tags": [
+      "multiple-inheritance",
+      "super",
+      "AttributeError"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "class Engine:\n    def __init__(self):\n        self.hp = 100\n\nclass Radio:\n    def __init__(self):\n        self.station = 'FM'\n\nclass Car(Engine, Radio):\n    def __init__(self):\n        super().__init__()\n\nc = Car()\nprint(c.hp)\nprint(c.station)",
+    "options": [
+      {
+        "id": "a",
+        "text": "100\nAttributeError",
+        "mono": true,
+        "out": "100\n!AttributeError"
+      },
+      {
+        "id": "b",
+        "text": "100\nFM",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "AttributeError",
+        "mono": true,
+        "out": "!AttributeError"
+      },
+      {
+        "id": "d",
+        "text": "TypeError",
+        "mono": true,
+        "out": "!TypeError"
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "`super().__init__()` in Car calls only the next class of the MRO, Engine. Engine.__init__ does not call `super().__init__()`, so Radio.__init__ never runs and `station` does not exist: 100 is printed, then AttributeError.",
+    "distractor_notes": {
+      "c": "`hp` exists (Engine.__init__ ran), so the first print works.",
+      "d": "Every call has the right number of arguments.",
+      "b": "super() does not call all the parents automatically, only the next one in the MRO."
+    },
+    "slides": [
+      195,
+      212
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0065",
+    "chapter": "S5",
+    "topic": "inheritance",
+    "tags": [
+      "inheritance-direction",
+      "which-is-false",
+      "AttributeError"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "Given the code, which statement is **false**?",
+    "code": "class Phone:\n    def call(self):\n        return 'calling'\n\nclass SmartPhone(Phone):\n    def browse(self):\n        return 'browsing'\n\np = Phone()\ns = SmartPhone()",
+    "options": [
+      {
+        "id": "a",
+        "text": "`s.call()` returns `'calling'`",
+        "probe": "print(s.call() != 'calling')"
+      },
+      {
+        "id": "b",
+        "text": "`issubclass(SmartPhone, Phone)` is True",
+        "probe": "print(not issubclass(SmartPhone, Phone))"
+      },
+      {
+        "id": "c",
+        "text": "`p.browse()` returns `'browsing'`",
+        "probe": "try:\n    print(p.browse() != 'browsing')\nexcept AttributeError:\n    print(True)"
+      },
+      {
+        "id": "d",
+        "text": "`isinstance(s, Phone)` is True",
+        "probe": "print(not isinstance(s, Phone))"
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "Inheritance goes from parent to child only: SmartPhone gets Phone's `call`, but Phone does not get SmartPhone's `browse`. p is a plain Phone, so `p.browse()` raises AttributeError: that statement is false. A SmartPhone is also a Phone (isinstance/issubclass are True).",
+    "distractor_notes": {
+      "a": "True statement: `call` is inherited by SmartPhone.",
+      "b": "True statement: SmartPhone is declared as a subclass of Phone.",
+      "d": "True statement: an instance of a subclass is also an instance of the parent class."
+    },
+    "slides": [
+      194,
+      195
+    ],
+    "verify": {
+      "mode": "truth"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0066",
+    "chapter": "S5",
+    "topic": "inheritance",
+    "tags": [
+      "inherited-__str__",
+      "type(self)"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "class Animal:\n    def __init__(self, name):\n        self.name = name\n    def __str__(self):\n        return f'{type(self).__name__}({self.name})'\n\nclass Fox(Animal):\n    pass\n\nprint(Fox('Rox'))",
+    "options": [
+      {
+        "id": "a",
+        "text": "Fox(Rox)",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "Animal(Rox)",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "Rox",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "A text like `<__main__.Fox object at 0x...>`",
+        "out": null
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "Fox inherits both `__init__` and `__str__`. Inside `__str__`, self is the Fox object, so `type(self)` is Fox, not Animal: the method is written in Animal but runs on a Fox.",
+    "distractor_notes": {
+      "b": "`type(self)` is the class of the actual object, not the class where the method is written.",
+      "c": "`__str__` also includes the class name.",
+      "d": "`__str__` is inherited from Animal, so print uses it."
+    },
+    "slides": [
+      194,
+      195
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0067",
+    "chapter": "S5",
+    "topic": "class-instance-attributes",
+    "tags": [
+      "class-attribute",
+      "shared"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "class Planet:\n    moons = 0\n    def __init__(self, name):\n        self.name = name\n\nearth = Planet('Earth')\nmars = Planet('Mars')\nPlanet.moons = 1\nprint(earth.moons, mars.moons)",
+    "options": [
+      {
+        "id": "a",
+        "text": "0 0",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "1 1",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "1 0",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "AttributeError",
+        "mono": true,
+        "out": "!AttributeError"
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "`moons` is a class attribute shared by all instances. Neither instance has its own `moons`, so both lookups fall back to `Planet.moons`, which is now 1.",
+    "distractor_notes": {
+      "a": "Instances do not keep a copy: they read the class attribute when it is accessed.",
+      "c": "Neither instance has its own `moons`; both read the class value.",
+      "d": "Attribute lookup on an instance falls back to its class."
+    },
+    "slides": [
+      197
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0068",
+    "chapter": "S5",
+    "topic": "class-instance-attributes",
+    "tags": [
+      "shadowing",
+      "class-attribute"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "class Planet:\n    moons = 0\n\nearth = Planet()\nmars = Planet()\nmars.moons = 2\nPlanet.moons = 1\nprint(earth.moons, mars.moons, Planet.moons)",
+    "options": [
+      {
+        "id": "a",
+        "text": "1 2 1",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "1 2 2",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "2 2 1",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "0 2 1",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "`mars.moons = 2` creates an instance attribute on mars that shadows the class attribute. Changing `Planet.moons` afterwards affects instances without their own attribute (earth), not mars.",
+    "distractor_notes": {
+      "b": "Assigning through an instance never changes the class attribute.",
+      "c": "earth has no own `moons`; it reads `Planet.moons`.",
+      "d": "earth reads the current class value (1), not the original one."
+    },
+    "slides": [
+      197
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0069",
+    "chapter": "S5",
+    "topic": "class-instance-attributes",
+    "tags": [
+      "mutable-class-attribute",
+      "shared-list"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "class Student:\n    courses = []\n    def __init__(self, name):\n        self.name = name\n    def enroll(self, course):\n        self.courses.append(course)\n\na = Student('Ana')\nb = Student('Ben')\na.enroll('Math')\nb.enroll('Art')\nprint(a.courses)",
+    "options": [
+      {
+        "id": "a",
+        "text": "['Math']",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "AttributeError",
+        "mono": true,
+        "out": "!AttributeError"
+      },
+      {
+        "id": "c",
+        "text": "[]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "['Math', 'Art']",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "`courses` is a class attribute: one single list shared by every Student. `self.courses.append(...)` does not assign anything; it finds the class's list and mutates it. For one list per student, write `self.courses = []` in `__init__`.",
+    "distractor_notes": {
+      "a": "That is what you get with `self.courses = []` in `__init__`.",
+      "c": "Both students appended to the list.",
+      "b": "`self.courses` is found on the class."
+    },
+    "slides": [
+      197
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0070",
+    "chapter": "S5",
+    "topic": "class-instance-attributes",
+    "tags": [
+      "shadowing",
+      "+=",
+      "class-attribute"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "class Counter:\n    count = 0\n    def increment(self):\n        self.count += 1\n\na = Counter()\nb = Counter()\na.increment()\na.increment()\nb.increment()\nprint(Counter.count, a.count, b.count)",
+    "options": [
+      {
+        "id": "a",
+        "text": "3 3 3",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "3 2 1",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "0 2 1",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "0 0 0",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "`self.count += 1` means `self.count = self.count + 1`: the first read finds the class attribute 0, but the assignment creates an instance attribute. a ends with its own count 2, b with 1, and `Counter.count` is still 0. To update the shared value, write `Counter.count += 1`.",
+    "distractor_notes": {
+      "a": "That would need `Counter.count += 1`.",
+      "d": "Instance attributes were created and incremented.",
+      "b": "The class attribute is never modified."
+    },
+    "slides": [
+      197
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0071",
+    "chapter": "S5",
+    "topic": "class-instance-attributes",
+    "tags": [
+      "instance-counter",
+      "class-attribute"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "class Ticket:\n    issued = 0\n    def __init__(self):\n        Ticket.issued += 1\n        self.number = Ticket.issued\n\nt1 = Ticket()\nt2 = Ticket()\nt3 = Ticket()\nprint(t1.number, t3.number, t1.issued)",
+    "options": [
+      {
+        "id": "a",
+        "text": "1 1 1",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "1 3 3",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "3 3 3",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "1 3 1",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "`Ticket.issued += 1` updates the shared class attribute. Each instance copies the current count into its own `number` (1, 2, 3). `t1.issued` has no instance attribute behind it, so it reads the class attribute, now 3.",
+    "distractor_notes": {
+      "c": "`number` is an instance attribute fixed at creation time.",
+      "d": "`t1.issued` reads the class attribute (now 3); t1 has no own `issued`.",
+      "a": "The class attribute is shared and keeps increasing."
+    },
+    "slides": [
+      197
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0072",
+    "chapter": "S5",
+    "topic": "class-instance-attributes",
+    "tags": [
+      "rebinding-vs-mutating",
+      "class-attribute"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "class Team:\n    members = []\n    def join(self, name):\n        self.members = self.members + [name]\n\nx = Team()\ny = Team()\nx.join('Ana')\nprint(x.members, y.members)",
+    "options": [
+      {
+        "id": "a",
+        "text": "['Ana'] []",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "['Ana'] ['Ana']",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[] []",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "AttributeError",
+        "mono": true,
+        "out": "!AttributeError"
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "`self.members + [name]` builds a new list (from the class's empty list) and the assignment stores it as an instance attribute of x. The class list is never mutated, so y still sees []. By contrast, `append` or `+=` would mutate the shared list in place.",
+    "distractor_notes": {
+      "c": "x now has its own list ['Ana'].",
+      "d": "Reading `self.members` finds the class attribute.",
+      "b": "That happens with `self.members.append(name)`, which mutates the shared class list."
+    },
+    "slides": [
+      197
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0073",
+    "chapter": "S5",
+    "topic": "class-instance-attributes",
+    "tags": [
+      "class-vs-instance",
+      "AttributeError"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What happens in the below code?",
+    "code": "class Car:\n    wheels = 4\n    def __init__(self, color):\n        self.color = color\n\nc = Car('red')\nprint(c.wheels)\nprint(Car.color)",
+    "options": [
+      {
+        "id": "a",
+        "text": "4\nred",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "4\nNone",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "AttributeError",
+        "mono": true,
+        "out": "!AttributeError"
+      },
+      {
+        "id": "d",
+        "text": "4\nAttributeError",
+        "mono": true,
+        "out": "4\n!AttributeError"
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "An instance can read class attributes (`c.wheels` → 4), but a class cannot see the attributes of its instances: `color` only exists on c, so `Car.color` raises AttributeError.",
+    "distractor_notes": {
+      "a": "Lookup goes instance → class, never class → instance.",
+      "c": "`c.wheels` works because instance lookup falls back to the class.",
+      "b": "A missing attribute raises AttributeError, it is never None."
+    },
+    "slides": [
+      197
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0074",
+    "chapter": "S5",
+    "topic": "class-instance-attributes",
+    "tags": [
+      "class-attribute",
+      "scope",
+      "NameError"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "class Circle:\n    pi = 3.14\n    def __init__(self, r):\n        self.r = r\n    def area(self):\n        return pi * self.r ** 2\n\nprint(Circle(1).area())",
+    "options": [
+      {
+        "id": "a",
+        "text": "3.14",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "AttributeError",
+        "mono": true,
+        "out": "!AttributeError"
+      },
+      {
+        "id": "c",
+        "text": "NameError",
+        "mono": true,
+        "out": "!NameError"
+      },
+      {
+        "id": "d",
+        "text": "TypeError",
+        "mono": true,
+        "out": "!TypeError"
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "The class body is not an enclosing scope for its methods: inside `area`, the bare name `pi` is looked up as local, global, then built-in, and is not found → NameError. Write `self.pi` or `Circle.pi`.",
+    "distractor_notes": {
+      "a": "It would work with `self.pi` (or `Circle.pi`).",
+      "d": "The multiplication is never reached.",
+      "b": "There is no attribute access: `pi` is a bare name, so the error is NameError."
+    },
+    "slides": [
+      197
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0075",
+    "chapter": "S5",
+    "topic": "class-instance-attributes",
+    "tags": [
+      "shadowing",
+      "class-attribute",
+      "instance-attribute"
+    ],
+    "type": "multi",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Given the code, which statements are true? (Select all that apply.)",
+    "code": "class Lamp:\n    watts = 60\n    def __init__(self, room):\n        self.room = room\n\nl1 = Lamp('kitchen')\nl2 = Lamp('bedroom')\nl1.watts = 40",
+    "options": [
+      {
+        "id": "a",
+        "text": "`l2.watts` is 60",
+        "probe": "print(l2.watts == 60)"
+      },
+      {
+        "id": "b",
+        "text": "`Lamp.watts` is 40",
+        "probe": "print(Lamp.watts == 40)"
+      },
+      {
+        "id": "c",
+        "text": "`l1` now has its own instance attribute `watts`",
+        "probe": "print('watts' in l1.__dict__)"
+      },
+      {
+        "id": "d",
+        "text": "`l2` has its own instance attribute `watts`",
+        "probe": "print('watts' in l2.__dict__)"
+      },
+      {
+        "id": "e",
+        "text": "`Lamp.room` raises AttributeError",
+        "probe": "try:\n    Lamp.room\n    print(False)\nexcept AttributeError:\n    print(True)"
+      }
+    ],
+    "correct": [
+      "a",
+      "c",
+      "e"
+    ],
+    "explanation": "`l1.watts = 40` creates an attribute on l1 that shadows the class attribute; the class still holds 60, and l2, which has no own `watts`, reads it. `room` is an instance attribute, so the class itself does not have it.",
+    "distractor_notes": {
+      "b": "Assigning through an instance never modifies the class attribute.",
+      "d": "l2 only reads the class attribute; it does not own a copy."
+    },
+    "slides": [
+      197
+    ],
+    "verify": {
+      "mode": "truth"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0076",
+    "chapter": "S5",
+    "topic": "class-instance-attributes",
+    "tags": [
+      "shadowing",
+      "true-false"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "True or False: after running this code, `Pizza.size` is `'L'`.",
+    "code": "class Pizza:\n    size = 'M'\n\np = Pizza()\np.size = 'L'",
+    "options": [
+      {
+        "id": "a",
+        "text": "True",
+        "probe": "print(Pizza.size == 'L')"
+      },
+      {
+        "id": "b",
+        "text": "False",
+        "probe": "print(Pizza.size != 'L')"
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "`p.size = 'L'` creates an instance attribute on p; the class attribute is untouched, so `Pizza.size` is still 'M' (and other pizzas still see 'M'). To change it for everyone, assign `Pizza.size = 'L'`.",
+    "distractor_notes": {
+      "a": "Assigning through an instance shadows the class attribute; it does not change it."
+    },
+    "slides": [
+      197
+    ],
+    "verify": {
+      "mode": "truth"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0077",
+    "chapter": "S5",
+    "topic": "class-instance-attributes",
+    "tags": [
+      "class-attribute-inheritance"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "class Base:\n    color = 'red'\n\nclass Child(Base):\n    pass\n\nclass Other(Base):\n    color = 'blue'\n\nBase.color = 'green'\nprint(Child.color, Other.color)",
+    "options": [
+      {
+        "id": "a",
+        "text": "red red",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "red blue",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "green green",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "green blue",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "Child has no own `color`, so `Child.color` is looked up in Base when it is accessed → 'green'. Other defines its own class attribute, which shadows Base's → 'blue'.",
+    "distractor_notes": {
+      "b": "Child does not copy the value when it is defined; the lookup happens at access time.",
+      "c": "Other overrides `color` with its own class attribute.",
+      "a": "Child sees the new value, and Other has its own 'blue'."
+    },
+    "slides": [
+      194,
+      197
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0078",
+    "chapter": "S5",
+    "topic": "class-instance-attributes",
+    "tags": [
+      "shadowing",
+      "class-attribute",
+      "default-argument"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "class Bird:\n    can_fly = True\n    def __init__(self, can_fly=None):\n        if can_fly is not None:\n            self.can_fly = can_fly\n\npenguin = Bird(False)\neagle = Bird()\nBird.can_fly = 'maybe'\nprint(penguin.can_fly, eagle.can_fly)",
+    "options": [
+      {
+        "id": "a",
+        "text": "maybe maybe",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "False True",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "False maybe",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "None maybe",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "penguin received an instance attribute (False) in `__init__`, which shadows the class attribute. eagle received none (the `if` skips the assignment), so it reads the class attribute when accessed, and that is now 'maybe'.",
+    "distractor_notes": {
+      "b": "eagle reads the class attribute at access time, after it was changed to 'maybe'.",
+      "d": "penguin was given False, which is not None, so False is stored.",
+      "a": "penguin has its own attribute, so the class change does not affect it."
+    },
+    "slides": [
+      197
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0079",
+    "chapter": "S5",
+    "topic": "oop-concepts",
+    "tags": [
+      "built-in-types-are-classes",
+      "int-methods"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "n = 12\nprint(type(n).__name__, n.bit_length())",
+    "options": [
+      {
+        "id": "a",
+        "text": "int 12",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "int 4",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "<class 'int'> 4",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "AttributeError",
+        "mono": true,
+        "out": "!AttributeError"
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "Even integers are objects: n is an instance of the class int and has methods called with the dot syntax. 12 is 1100 in binary, so `bit_length()` is 4. `type(n).__name__` is the plain name 'int'.",
+    "distractor_notes": {
+      "c": "That would be `print(type(n), ...)`; `__name__` gives just 'int'.",
+      "d": "int objects have methods such as `bit_length`.",
+      "a": "`bit_length()` counts binary digits; it does not return the value."
+    },
+    "slides": [
+      196
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0080",
+    "chapter": "S5",
+    "topic": "oop-concepts",
+    "tags": [
+      "polymorphism",
+      "duck-typing",
+      "AttributeError"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "class Duck:\n    def sound(self):\n        return 'Quack'\n\nclass Robot:\n    def sound(self):\n        return 'Beep'\n\nclass Rock:\n    pass\n\nfor thing in [Duck(), Robot(), Rock()]:\n    print(thing.sound())",
+    "options": [
+      {
+        "id": "a",
+        "text": "Quack\nBeep\nAttributeError",
+        "mono": true,
+        "out": "Quack\nBeep\n!AttributeError"
+      },
+      {
+        "id": "b",
+        "text": "Quack\nBeep\nNone",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "Quack\nBeep",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "TypeError",
+        "mono": true,
+        "out": "!TypeError"
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "Polymorphism in Python does not need a common parent class: any object that has a `sound` method works in the loop (duck typing). Rock has none, so the third iteration raises AttributeError after two lines were printed.",
+    "distractor_notes": {
+      "b": "A missing method raises an error; it does not return None.",
+      "d": "Unrelated classes are fine; only the missing method is a problem, reported as AttributeError.",
+      "c": "The missing method is not silently skipped."
+    },
+    "slides": [
+      187
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  }
+]

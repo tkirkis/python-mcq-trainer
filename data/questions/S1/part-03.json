@@ -1,0 +1,1323 @@
+[
+ {
+  "id": "S1-0047",
+  "chapter": "S1",
+  "topic": "logic-comparisons",
+  "tags": [
+   "or",
+   "truthiness"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "print(0 or \"default\")",
+  "options": [
+   {
+    "id": "a",
+    "text": "False"
+   },
+   {
+    "id": "b",
+    "text": "0",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "True"
+   },
+   {
+    "id": "d",
+    "text": "default",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "`x or y` does not return a bool: it returns x if x is truthy, otherwise y. 0 is falsy, so the result is the second operand, the string 'default'.",
+  "distractor_notes": {
+   "a": "or returns an operand, and the second operand is truthy anyway.",
+   "b": "0 is falsy, so or moves on to the second operand.",
+   "c": "or returns one of its operands, not True/False."
+  },
+  "slides": [
+   28,
+   33,
+   34
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0048",
+  "chapter": "S1",
+  "topic": "logic-comparisons",
+  "tags": [
+   "and",
+   "or",
+   "truthiness"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "print(3 and 5, 0 and 5, [] or 0)",
+  "options": [
+   {
+    "id": "a",
+    "text": "True False False",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "3 0 []",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "5 0 []",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "5 0 0",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "`x and y` returns x if x is falsy, otherwise y: 3 and 5 -> 5; 0 and 5 -> 0. `x or y` returns x if x is truthy, otherwise y: [] is falsy, so [] or 0 -> 0 (the second operand, even though it is falsy too).",
+  "distractor_notes": {
+   "a": "and/or return one of their operands, not a bool.",
+   "b": "When the first operand of `and` is truthy, the **second** one is returned.",
+   "c": "When the first operand of `or` is falsy, the second one is returned, whatever it is."
+  },
+  "slides": [
+   28,
+   33,
+   34
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0049",
+  "chapter": "S1",
+  "topic": "logic-comparisons",
+  "tags": [
+   "identity",
+   "equality",
+   "is"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the difference between `==` and `is`?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "`is` compares the types of the operands.",
+    "probe": "a = [1]\nb = [2]\nprint((a is b) == (type(a) == type(b)))"
+   },
+   {
+    "id": "b",
+    "text": "`==` compares values (content); `is` checks that both operands are the very same object.",
+    "probe": "a = [1, 2]\nb = [1, 2]\nprint(a == b and not (a is b) and a is a)"
+   },
+   {
+    "id": "c",
+    "text": "They are synonyms.",
+    "probe": "a = [1, 2]\nb = [1, 2]\nprint((a == b) == (a is b))"
+   },
+   {
+    "id": "d",
+    "text": "`==` checks identity and `is` compares values.",
+    "probe": "a = [1, 2]\nb = [1, 2]\nprint(a is b)"
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "Equality (`==`) means the values are equal; identity (`is`) means the two names refer to the same object in memory. Two separately built lists [1, 2] are equal but not identical. Use `is` mainly to test `x is None`.",
+  "distractor_notes": {
+   "a": "is does not look at types; type(x) == type(y) does.",
+   "c": "Two equal lists can be distinct objects: == True, is False.",
+   "d": "It is the other way round."
+  },
+  "slides": [
+   33,
+   64,
+   28
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": ""
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0050",
+  "chapter": "S1",
+  "topic": "logic-comparisons",
+  "tags": [
+   "chained-comparison",
+   "bool"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "print(5 > 3 == True)",
+  "options": [
+   {
+    "id": "a",
+    "text": "True"
+   },
+   {
+    "id": "b",
+    "text": "False"
+   },
+   {
+    "id": "c",
+    "text": "SyntaxError",
+    "out": "!SyntaxError"
+   },
+   {
+    "id": "d",
+    "text": "TypeError",
+    "out": "!TypeError"
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "`==` is a comparison operator like `>`, so this is a chained comparison: `5 > 3 and 3 == True`. 3 == True is False (True equals 1), so the whole expression is False.",
+  "distractor_notes": {
+   "a": "It is not (5 > 3) == True: comparison operators chain instead of grouping left to right.",
+   "c": "The expression is syntactically valid.",
+   "d": "Comparing an int and a bool with == is allowed."
+  },
+  "slides": [
+   28,
+   33,
+   34
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0051",
+  "chapter": "S1",
+  "topic": "logic-comparisons",
+  "tags": [
+   "not",
+   "precedence"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "print(not 1 == 2)",
+  "options": [
+   {
+    "id": "a",
+    "text": "SyntaxError",
+    "out": "!SyntaxError"
+   },
+   {
+    "id": "b",
+    "text": "True"
+   },
+   {
+    "id": "c",
+    "text": "TypeError",
+    "out": "!TypeError"
+   },
+   {
+    "id": "d",
+    "text": "False"
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "`not` has a lower priority than comparison operators, so this is `not (1 == 2)` = not False = True.",
+  "distractor_notes": {
+   "a": "`not` can be placed in front of any expression.",
+   "c": "Nothing here mixes incompatible types.",
+   "d": "Would be (not 1) == 2, i.e. False == 2; but `==` is evaluated before `not`."
+  },
+  "slides": [
+   28,
+   33,
+   34
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0052",
+  "chapter": "S1",
+  "topic": "logic-comparisons",
+  "tags": [
+   "short-circuit",
+   "ZeroDivisionError"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "True or False: the following code raises a `ZeroDivisionError`.",
+  "code": "x = 0\nif x != 0 and 10 / x > 1:\n    print(\"big\")\nelse:\n    print(\"small\")",
+  "options": [
+   {
+    "id": "a",
+    "text": "True",
+    "out": null
+   },
+   {
+    "id": "b",
+    "text": "False",
+    "out": null
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "`and` short-circuits: `x != 0` is False, so the right operand `10 / x > 1` is never evaluated and no division by zero happens. The else branch prints 'small'. This is the usual guard pattern.",
+  "distractor_notes": {
+   "a": "Only true if both operands were always evaluated; `and` stops at the first falsy operand."
+  },
+  "slides": [
+   28,
+   33,
+   34
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "expected_output": "small",
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0053",
+  "chapter": "S1",
+  "topic": "logic-comparisons",
+  "tags": [
+   "short-circuit",
+   "or",
+   "ZeroDivisionError"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "x = 0\nprint(x == 0 or 10 / x)\nprint(x != 0 or 10 / x)",
+  "options": [
+   {
+    "id": "a",
+    "text": "True, then ZeroDivisionError",
+    "out": "True\n!ZeroDivisionError"
+   },
+   {
+    "id": "b",
+    "text": "ZeroDivisionError",
+    "out": "!ZeroDivisionError"
+   },
+   {
+    "id": "c",
+    "text": "True\nFalse",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "True\nTrue",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "First line: `x == 0` is True, so `or` returns it without evaluating `10 / x` -> prints True. Second line: `x != 0` is False, so `or` must evaluate `10 / x` -> ZeroDivisionError, after the first line was printed.",
+  "distractor_notes": {
+   "b": "The first print succeeds thanks to short-circuit evaluation.",
+   "c": "or does not convert the failing operand to False: evaluating it raises the exception.",
+   "d": "In the second line the left operand is False, so the division is evaluated."
+  },
+  "slides": [
+   28,
+   33,
+   34
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0054",
+  "chapter": "S1",
+  "topic": "logic-comparisons",
+  "tags": [
+   "identity",
+   "equality",
+   "is"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "a = [1, 2]\nb = [1, 2]\nc = a\nprint(a == b, a is b, a is c)",
+  "options": [
+   {
+    "id": "a",
+    "text": "True False False",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "True False True",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "False False True",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "True True True",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "`==` compares contents: a and b hold equal values. `is` compares identity: a and b are two distinct list objects, whereas `c = a` binds c to the very same object as a.",
+  "distractor_notes": {
+   "a": "c = a makes c refer to the same object, so a is c.",
+   "c": "== compares values, and the values are equal.",
+   "d": "Two separately created lists are different objects, even when equal."
+  },
+  "slides": [
+   33,
+   28,
+   64
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0055",
+  "chapter": "S1",
+  "topic": "logic-comparisons",
+  "tags": [
+   "None",
+   "is",
+   "truthiness"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "x = None\nprint(x is None, x == 0, not x)",
+  "options": [
+   {
+    "id": "a",
+    "text": "False False True",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "True True True",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "True False True",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "True False False",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "None is a singleton, so `x is None` is True. None is not equal to 0 (they only share being falsy). `not x` is True because None is falsy.",
+  "distractor_notes": {
+   "a": "`is None` is the standard test and it is True here.",
+   "b": "None == 0 is False: None is not a number.",
+   "d": "None is falsy, so `not None` is True."
+  },
+  "slides": [
+   24,
+   28,
+   34
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0056",
+  "chapter": "S1",
+  "topic": "logic-comparisons",
+  "tags": [
+   "truthiness",
+   "bool"
+  ],
+  "type": "multi",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Which of the following values are **falsy** (`bool(value)` is `False`)? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "\" \"",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "None",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "[]",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "0",
+    "mono": true
+   },
+   {
+    "id": "e",
+    "text": "0.0",
+    "mono": true
+   },
+   {
+    "id": "f",
+    "text": "\"0\"",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b",
+   "c",
+   "d",
+   "e"
+  ],
+  "explanation": "Zero numbers (0, 0.0), empty containers ([], '', {}...) and None are falsy. Any non-empty string is truthy, whatever it contains - including '0' and ' '.",
+  "distractor_notes": {
+   "a": "A string containing a space is not empty, so it is truthy.",
+   "f": "A non-empty string is truthy, even '0'."
+  },
+  "slides": [
+   34,
+   31
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "",
+   "probe_template": "print(bool(__OPTION_RAW__) is False)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0057",
+  "chapter": "S1",
+  "topic": "logic-comparisons",
+  "tags": [
+   "bool",
+   "truthiness"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "print(bool(\"False\"), bool(\"\"), bool(\" \"))",
+  "options": [
+   {
+    "id": "a",
+    "text": "True False True",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "True False False",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "False False False",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "False False True",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "bool() of a string only checks whether it is empty. 'False' is a non-empty string -> True; '' is empty -> False; ' ' contains a space -> True. bool() does not read the text.",
+  "distractor_notes": {
+   "b": "' ' is not empty (it contains one space).",
+   "c": "bool('False') does not parse the word: any non-empty string is True.",
+   "d": "Same misconception for 'False'."
+  },
+  "slides": [
+   31,
+   34
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0058",
+  "chapter": "S1",
+  "topic": "logic-comparisons",
+  "tags": [
+   "equality",
+   "type-promotion"
+  ],
+  "type": "multi",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Which of the following expressions evaluate to `True`? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "True == 1",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "\"abc\" != \"ABC\"",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "1 != 1.0",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "1 == 1.0",
+    "mono": true
+   },
+   {
+    "id": "e",
+    "text": "None == 0",
+    "mono": true
+   },
+   {
+    "id": "f",
+    "text": "1 == \"1\"",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a",
+   "b",
+   "d"
+  ],
+  "explanation": "Numbers compare by value across int/float/bool (1 == 1.0 == True). A number is never equal to a string, and None is only equal to None. String comparison is case-sensitive.",
+  "distractor_notes": {
+   "c": "1 and 1.0 have the same value, so != gives False.",
+   "e": "None is not equal to 0, even though both are falsy.",
+   "f": "An int never equals a str: no implicit conversion."
+  },
+  "slides": [
+   28,
+   33,
+   34
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "",
+   "probe_template": "print((__OPTION_RAW__) is True)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0059",
+  "chapter": "S1",
+  "topic": "logic-comparisons",
+  "tags": [
+   "comparison",
+   "TypeError"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "print(3 < \"4\")",
+  "options": [
+   {
+    "id": "a",
+    "text": "ValueError",
+    "out": "!ValueError"
+   },
+   {
+    "id": "b",
+    "text": "True"
+   },
+   {
+    "id": "c",
+    "text": "False"
+   },
+   {
+    "id": "d",
+    "text": "TypeError",
+    "out": "!TypeError"
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "Ordering comparisons (<, >, <=, >=) between an int and a str are not defined in Python 3: TypeError. (== between them is allowed and simply gives False.)",
+  "distractor_notes": {
+   "a": "ValueError is for a right type with a bad value (e.g. int('abc')).",
+   "b": "'4' is not converted to a number.",
+   "c": "No comparison result is produced: the operation itself is invalid."
+  },
+  "slides": [
+   28,
+   33,
+   34
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0060",
+  "chapter": "S1",
+  "topic": "logic-comparisons",
+  "tags": [
+   "precedence",
+   "and",
+   "or"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "print(True or False and False)",
+  "options": [
+   {
+    "id": "a",
+    "text": "None",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "SyntaxError",
+    "out": "!SyntaxError"
+   },
+   {
+    "id": "c",
+    "text": "False"
+   },
+   {
+    "id": "d",
+    "text": "True"
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "`and` has a higher priority than `or`, so this is `True or (False and False)` = True or False = True.",
+  "distractor_notes": {
+   "a": "Both operands are bools, so the result is a bool.",
+   "b": "Combining and/or without parentheses is valid.",
+   "c": "Reads the expression left to right: (True or False) and False. `and` binds tighter."
+  },
+  "slides": [
+   28,
+   33,
+   34
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0061",
+  "chapter": "S1",
+  "topic": "logic-comparisons",
+  "tags": [
+   "and",
+   "or",
+   "which-is-false"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Which of the following statements is **false**?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "`x or y` always returns a bool (`True` or `False`).",
+    "probe": "print(not isinstance(0 or 'a', bool))"
+   },
+   {
+    "id": "b",
+    "text": "`not x` always returns a bool.",
+    "probe": "print(not (isinstance(not 'abc', bool) and isinstance(not 0, bool) and isinstance(not [], bool)))"
+   },
+   {
+    "id": "c",
+    "text": "In `x and y`, `y` is not evaluated when `x` is falsy.",
+    "probe": "try:\n    r = 0 and 1 / 0\n    print(not (r == 0))\nexcept ZeroDivisionError:\n    print(True)"
+   },
+   {
+    "id": "d",
+    "text": "`x and y` returns `x` when `x` is falsy.",
+    "probe": "print(not ((0 and 5) == 0 and ('' and 'a') == '' and ([] and 1) == []))"
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "`or` and `and` return one of their **operands** (0 or 'a' gives 'a'), not necessarily a bool. Only `not` always produces True/False. Both and/or short-circuit.",
+  "distractor_notes": {
+   "b": "True: not always returns True or False.",
+   "c": "True: short-circuit evaluation (0 and 1/0 is 0, no error).",
+   "d": "True: and returns the first falsy operand (or the last one)."
+  },
+  "slides": [
+   28,
+   33,
+   34
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": ""
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0062",
+  "chapter": "S1",
+  "topic": "logic-comparisons",
+  "tags": [
+   "and",
+   "or",
+   "not",
+   "hands-on"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "age = 17\ncountry = \"de\"\nmay_drink = age >= 16 and country == \"de\"\nprint(may_drink, not may_drink or age > 18)",
+  "options": [
+   {
+    "id": "a",
+    "text": "False True",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "True True",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "True False",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "False False",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "Both comparisons are True, so may_drink is True. Then `not may_drink or age > 18` is `(not True) or (17 > 18)` = False or False = False.",
+  "distractor_notes": {
+   "a": "may_drink is True.",
+   "b": "`not` applies to may_drink only, and 17 > 18 is False.",
+   "d": "17 >= 16 and 'de' == 'de' are both True."
+  },
+  "slides": [
+   33,
+   49
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0063",
+  "chapter": "S1",
+  "topic": "syntax-basics",
+  "tags": [
+   "comments"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "x = 5  # x = 10\n# x = 20\nprint(x)",
+  "options": [
+   {
+    "id": "a",
+    "text": "20",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "SyntaxError",
+    "out": "!SyntaxError"
+   },
+   {
+    "id": "c",
+    "text": "5",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "10",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "Everything after `#` on a line is a comment and is ignored by Python, so the only executed assignment is x = 5.",
+  "distractor_notes": {
+   "a": "The whole line `# x = 20` is a comment.",
+   "b": "Comments may appear on their own line or at the end of a line.",
+   "d": "`# x = 10` is a comment at the end of the line."
+  },
+  "slides": [
+   22
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0064",
+  "chapter": "S1",
+  "topic": "syntax-basics",
+  "tags": [
+   "line-continuation"
+  ],
+  "type": "multi",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Which of the following snippets are syntactically valid? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "total = 1 + 2 +\n    3",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "total = 1 + 2 \\ + 3",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "total = 1 + 2 + \\\n    3",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "total = (1 + 2 +\n         3)",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c",
+   "d"
+  ],
+  "explanation": "A statement can continue on the next line inside parentheses (preferred), or with a backslash that is the **last** character of the line. Without either, the line ends the statement.",
+  "distractor_notes": {
+   "a": "The first line `total = 1 + 2 +` is incomplete: SyntaxError.",
+   "b": "A backslash must be the last character of the line to continue it."
+  },
+  "slides": [
+   22
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "",
+   "probe_template": "try:\n    compile(__OPTION__, 'q', 'exec')\n    print(True)\nexcept SyntaxError:\n    print(False)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0065",
+  "chapter": "S1",
+  "topic": "syntax-basics",
+  "tags": [
+   "pass",
+   "None"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "def todo():\n    pass\n\nprint(todo())",
+  "options": [
+   {
+    "id": "a",
+    "text": "Nothing is printed",
+    "out": ""
+   },
+   {
+    "id": "b",
+    "text": "SyntaxError",
+    "out": "!SyntaxError"
+   },
+   {
+    "id": "c",
+    "text": "None",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "pass",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "`pass` is the empty statement: it fills a block that is syntactically required and does nothing. The function therefore ends without `return` and returns None, which print displays.",
+  "distractor_notes": {
+   "a": "print(todo()) prints the return value, None.",
+   "b": "A body consisting only of pass is valid; it is exactly what pass is for.",
+   "d": "pass is a statement, not a value."
+  },
+  "slides": [
+   40,
+   42
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0066",
+  "chapter": "S1",
+  "topic": "syntax-basics",
+  "tags": [
+   "indentation",
+   "IndentationError"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "x = 3\nif x > 2:\n    print(\"big\")\n     print(\"really big\")",
+  "options": [
+   {
+    "id": "a",
+    "text": "big\nreally big",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "big",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "IndentationError",
+    "out": "!IndentationError"
+   },
+   {
+    "id": "d",
+    "text": "Nothing is printed",
+    "out": ""
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "All lines of a block must have the same indentation. The second print has one extra space, so the file does not even compile: IndentationError (unexpected indent) and nothing runs.",
+  "distractor_notes": {
+   "a": "Indentation is part of Python's syntax; inconsistent indentation is an error.",
+   "b": "The error is detected before execution starts, so not even 'big' is printed.",
+   "d": "It does not silently skip the code: an exception is raised."
+  },
+  "slides": [
+   35,
+   22
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0067",
+  "chapter": "S1",
+  "topic": "syntax-basics",
+  "tags": [
+   "pass",
+   "blocks"
+  ],
+  "type": "multi",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Which of the following snippets are syntactically valid? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "if True:\nelse:\n    pass",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "def f():\n    \"\"\"Docstring only.\"\"\"",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "while False: pass",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "if True:\n    pass",
+    "mono": true
+   },
+   {
+    "id": "e",
+    "text": "if True:\n# nothing\nx = 1",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b",
+   "c",
+   "d"
+  ],
+  "explanation": "A block after a colon cannot be empty: it needs at least one statement (pass, a docstring, any expression...). A comment does not count as a statement. A simple statement may follow the colon on the same line.",
+  "distractor_notes": {
+   "a": "The if branch has no body at all.",
+   "e": "A comment is not a statement: the if block is empty -> IndentationError (expected an indented block)."
+  },
+  "slides": [
+   22,
+   35,
+   40
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "",
+   "probe_template": "try:\n    compile(__OPTION__, 'q', 'exec')\n    print(True)\nexcept SyntaxError:\n    print(False)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0068",
+  "chapter": "S1",
+  "topic": "syntax-basics",
+  "tags": [
+   "docstring"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "def f(x):\n    \"\"\"Return x doubled.\"\"\"\n    return 2 * x\n\nprint(f(4))",
+  "options": [
+   {
+    "id": "a",
+    "text": "Return x doubled.\n8",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "SyntaxError",
+    "out": "!SyntaxError"
+   },
+   {
+    "id": "c",
+    "text": "8",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "None",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "The triple-quoted string right after `def` is the function's docstring: it documents the function (it is what help(f) shows) but it is not printed when the function runs.",
+  "distractor_notes": {
+   "a": "A docstring is never printed automatically.",
+   "b": "A string as first statement of a function is valid: it is the docstring.",
+   "d": "The function returns 2 * 4 = 8."
+  },
+  "slides": [
+   22
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0069",
+  "chapter": "S1",
+  "topic": "syntax-basics",
+  "tags": [
+   "expressions",
+   "statements"
+  ],
+  "type": "multi",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "Which of the following are **expressions**, i.e. could appear on the right-hand side of `x = ...`? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "len(\"abc\")",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "pass",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "import math",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "print(\"hi\")",
+    "mono": true
+   },
+   {
+    "id": "e",
+    "text": "3 * (2 + 1)",
+    "mono": true
+   },
+   {
+    "id": "f",
+    "text": "if a > b: pass",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a",
+   "d",
+   "e"
+  ],
+  "explanation": "An expression is anything that produces a value (possibly None). Function calls are expressions, even print(...), whose value is None. if, pass and import are statements: they cannot be assigned.",
+  "distractor_notes": {
+   "b": "pass is a statement that does nothing.",
+   "c": "import is a statement.",
+   "f": "An if statement does not produce a value (the conditional *expression* is `a if c else b`)."
+  },
+  "slides": [
+   40
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "",
+   "probe_template": "try:\n    compile('x = ' + __OPTION__, 'q', 'exec')\n    print(True)\nexcept SyntaxError:\n    print(False)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0070",
+  "chapter": "S1",
+  "topic": "syntax-basics",
+  "tags": [
+   "colon",
+   "SyntaxError"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "def greet(name)\n    return \"Hi \" + name\n\nprint(greet(\"Bo\"))",
+  "options": [
+   {
+    "id": "a",
+    "text": "SyntaxError",
+    "out": "!SyntaxError"
+   },
+   {
+    "id": "b",
+    "text": "Hi Bo",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "NameError",
+    "out": "!NameError"
+   },
+   {
+    "id": "d",
+    "text": "IndentationError",
+    "out": "!IndentationError"
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "The line introducing a block (def, if, for, while...) must end with a colon. Without it the file cannot be parsed: SyntaxError, and nothing runs.",
+  "distractor_notes": {
+   "b": "The code never runs: the parser rejects it first.",
+   "c": "NameError is a run-time error; this file does not even compile.",
+   "d": "The indentation is fine; the colon is missing."
+  },
+  "slides": [
+   35,
+   42
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ }
+]

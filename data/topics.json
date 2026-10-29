@@ -1,0 +1,105 @@
+{
+  "chapters": {
+    "S1": {"title": "Basics", "slides": [1, 67]},
+    "S2": {"title": "Functions & data structures", "slides": [68, 125]},
+    "S3": {"title": "Files, OS, modules, exceptions", "slides": [126, 149]},
+    "S4": {"title": "Under the hood: scopes, aliasing, mutability", "slides": [150, 181]},
+    "S5": {"title": "OOP & GUI", "slides": [182, 213]},
+    "S6": {"title": "NumPy, Pandas, visualization", "slides": [214, 246]},
+    "S7": {"title": "Pythonic code, testing, efficiency", "slides": [247, 278]},
+    "S8": {"title": "Web applications", "slides": [279, 319]}
+  },
+  "topics": {
+    "S1": {
+      "python-intro": "What Python is: interpreted, high-level, multi-paradigm, garbage collected, history, IDEs, notebooks, pip",
+      "syntax-basics": "Indentation and code blocks, colon, comments, docstrings, line continuation, pass, statements vs expressions",
+      "types": "Elementary types (None, bool, int, float, complex, str), type(), infinite-precision ints, float precision",
+      "variables": "Binding names to values, rebinding, dynamic typing, duck typing, multiple assignment",
+      "operators": "Arithmetic (/, //, %, **, divmod, pow), precedence, type promotion, str*int, str+int",
+      "logic-comparisons": "Comparisons, chained comparisons, ==/!= vs is, and/or/not short-circuit and return values, truthiness",
+      "strings": "Quotes, escapes, indexing, negative indices, slicing, immutability, methods (upper, split, join, strip, replace, count, find...), f-strings, min/max/len on strings",
+      "conditionals": "if/elif/else evaluation order, ternary operator, one-line forms, nested ifs",
+      "loops": "while and for loops, range(start, stop, step), iterating strings/lists, infinite loops, loop equivalence",
+      "loop-control": "break, continue, loop else clause",
+      "imports-main": "import, from ... import, aliases, module prefix, if __name__ == '__main__'",
+      "functions-basics": "def, parameters, return value, implicit None return, print vs return, rebinding function names, built-ins (len, id, type, print, int, float, bool)"
+    },
+    "S2": {
+      "function-arguments": "Positional vs keyword arguments, default values, parameter order rules, functions as arguments",
+      "program-flow": "Execution flow vs text flow, call stack (LIFO), mutually recursive calls",
+      "lists": "List creation, indexing, mutability, append/extend/insert/pop/remove/index/count, len, +, *, in, nested lists",
+      "slicing": "start:stop:step, defaults, negative steps, slice assignment, copies via slicing, out-of-range slices",
+      "enumerate-zip": "enumerate (start=), zip, iterating with index",
+      "tuples": "Tuple syntax, single-element tuples, immutability, packing/unpacking, swap, returning multiple values, concatenation",
+      "dicts": "Keys/values/items, lookup, KeyError, get, in tests keys, update, deletion, hashable keys, iteration order, dict()",
+      "sets": "Set literals, set() vs {}, uniqueness, union/intersection/difference/subset, add/remove/discard, membership",
+      "comprehensions": "List/dict/set comprehensions, conditions, nested comprehensions, generator expressions",
+      "conversions": "int()/float()/str()/list()/tuple()/set() conversions, int(s, base), ord/chr, str() of containers, bool()",
+      "args-kwargs": "*args and **kwargs, unpacking with * and ** at call site, keyword-only parameters",
+      "stdlib-pip": "Standard library modules, pip install, requirements.txt, PyPI, third-party packages"
+    },
+    "S3": {
+      "filesystem-paths": "Absolute vs relative paths, ., .., current working directory, os.getcwd/chdir, os.path, glob",
+      "shell-env": "Shell commands (ls, cd, pwd, mkdir, rm, cat, grep), environment variables, PATH, os.environ",
+      "files-io": "open() modes (r, w, a, b, +), with, reading (read, readline, readlines, iteration), writing, closing, encoding",
+      "serialization": "pickle (binary, dump/load), json (dump/dumps/load/loads), what can be serialized",
+      "modules-packages": "Modules and packages, __init__.py, import forms, __name__, project layout",
+      "exceptions": "try/except/else/finally, raise, exception hierarchy, catching specific vs Exception, custom exceptions, common built-in exceptions",
+      "time-dates": "time.time, time.sleep, datetime.now, timedelta, date arithmetic"
+    },
+    "S4": {
+      "interpreter-execution": "How CPython runs a script line by line, what def/import do, hardware basics (CPU/RAM/disk), running python (-m, -c)",
+      "scopes": "Local/enclosing/global/builtin (LEGB), global and nonlocal, shadowing, UnboundLocalError, no block scope",
+      "identity-equality": "id(), is vs ==, object identity, small int/str caching caveats, None comparisons",
+      "aliasing": "Several names bound to the same object, mutation visible through aliases, aliasing in function calls",
+      "mutability": "Mutable vs immutable types, in-place vs rebinding, += on lists vs tuples/strings, mutable default arguments",
+      "copying": "copy.copy vs copy.deepcopy, slicing/list() copies, [x]*n sharing trap",
+      "first-class-functions": "Functions as values, returning functions, closures, lambda, higher-order functions",
+      "recursion": "Recursive functions, base cases, call stack, RecursionError, recursion vs iteration",
+      "keywords": "Reserved keywords vs built-in names, shadowing built-ins"
+    },
+    "S5": {
+      "classes-objects": "class, instances, __init__ as initializer, self, instance attributes, dynamic attributes, AttributeError",
+      "methods": "Instance methods, b.f(x) == Class.f(b, x), forgetting self, calling methods, methods vs functions",
+      "special-methods": "__str__, __repr__, __eq__, __len__, __getitem__/__setitem__, __call__, __add__, __iter__ ...",
+      "inheritance": "Subclasses, overriding, super(), isinstance/issubclass, object base class, multiple inheritance and MRO",
+      "class-instance-attributes": "Class variables vs instance variables, shadowing a class attribute through an instance",
+      "oop-concepts": "4 pillars (abstraction, encapsulation, inheritance, polymorphism), classes as blueprints, built-in types are classes",
+      "gui-mvc": "MVC pattern, 3-tier architecture, Tkinter widgets, callbacks (function, lambda, closure, callable object), mainloop",
+      "args-kwargs-advanced": "Variable number of arguments, *args/**kwargs collection and unpacking, keyword-only arguments after *args"
+    },
+    "S6": {
+      "numpy-arrays": "np.array, dtype, shape, ndim, size, reshape (incl. -1), arange, linspace, zeros/ones",
+      "numpy-axes": "Axis semantics for sum/max/mean etc., aggregations over axis=0/1/None",
+      "numpy-indexing": "Multi-axis indexing a[i, j], slicing rows/columns, views vs copies, fancy indexing",
+      "numpy-broadcasting": "Broadcasting rules, compatible/incompatible shapes, scalar broadcasting",
+      "numpy-masking": "Boolean masks, filtering, element-wise comparison, &, |, ~ vs and/or",
+      "numpy-operations": "Element-wise ops vs Python lists, transpose, hstack/vstack/concatenate, sort, dot, vectorization, structured arrays",
+      "pandas-basics": "Series and DataFrame creation, index, columns, head/tail/shape/info, read_csv(index_col)",
+      "pandas-selection": "df['col'] (Series) vs df[['col']] (DataFrame), loc vs iloc, label slicing inclusive, boolean filtering, isin",
+      "pandas-cleaning": "isnull, dropna (axis), fillna, drop_duplicates, rename, inplace semantics",
+      "pandas-analysis": "describe, value_counts, mean, apply, groupby, vectorized column operations",
+      "visualization": "Matplotlib figures/axes, plt.subplots, plt.show, legend, pandas .plot(kind=...), Seaborn plots"
+    },
+    "S7": {
+      "generators": "Generator expressions vs list comprehensions, yield, lazy evaluation, exhaustion, memory",
+      "iterators": "Iterables vs iterators, iter/next, __iter__/__next__, StopIteration, for-loop protocol",
+      "functional": "lambda, map, filter, sorted/sort with key, any/all, zip, reduce, itertools/functools",
+      "assertions": "assert statement, AssertionError, assertion messages, disabling with -O",
+      "context-managers": "with statement, automatic closing, __enter__/__exit__",
+      "testing": "unittest TestCase, assert methods, test discovery, unittest.main, coverage",
+      "logging-debugging": "logging levels, default WARNING level, basicConfig, logging vs print, debuggers and breakpoints",
+      "argparse": "Command-line arguments, ArgumentParser, add_argument types and defaults, parse_args",
+      "efficiency": "Built-ins, vectorization with NumPy/Pandas, avoiding loops, complexity intuition, multiprocessing, Numba/Cython",
+      "good-practices": "Zen of Python, PEP 8, docstrings, type hints, project structure, __init__.py, README/requirements.txt, version control, code review"
+    },
+    "S8": {
+      "web-architecture": "Clients and servers, internet/ISP, IP addresses, DNS resolution, ports, TCP connections, packets",
+      "http": "HTTP request/response, methods (GET/POST/PUT/DELETE), status codes, headers, rendering, AJAX",
+      "urls": "URL anatomy: scheme, user info, host, port, path, query, fragment, default ports, escaping",
+      "requests-lib": "requests.get/post, status_code, text vs content, .json(), wget/curl",
+      "flask": "Flask(__name__), @app.route decorators, route variables, return values, render_template, app.run(port), localhost/127.0.0.1",
+      "web-serialization": "JSON and pickle for exchanging data, json.dumps/loads, API servers"
+    }
+  }
+}

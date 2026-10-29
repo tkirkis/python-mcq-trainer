@@ -1,0 +1,1344 @@
+[
+ {
+  "id": "S1-0023",
+  "chapter": "S1",
+  "topic": "operators",
+  "tags": [
+   "division",
+   "floor-division",
+   "modulo"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "print(7 / 2, 7 // 2, 7 % 2)",
+  "options": [
+   {
+    "id": "a",
+    "text": "3.5 3 1",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "3 3 1",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "3.5 3.5 1",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "3.5 3 0.5",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "`/` is true division and always gives a float (3.5). `//` is floor division (3) and `%` is the remainder (1); with two ints both give ints.",
+  "distractor_notes": {
+   "b": "Python 3's `/` never truncates: 7 / 2 is 3.5 (Python 2 behaviour).",
+   "c": "`//` drops the fractional part: 7 // 2 is 3.",
+   "d": "`%` is the remainder of the floor division (7 = 2*3 + 1), not the fractional part."
+  },
+  "slides": [
+   27,
+   28,
+   24
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0024",
+  "chapter": "S1",
+  "topic": "operators",
+  "tags": [
+   "floor-division",
+   "modulo",
+   "negative-numbers"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "print(-7 // 2, -7 % 2)",
+  "options": [
+   {
+    "id": "a",
+    "text": "-4 -1",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "-3 1",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "-3 -1",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "-4 1",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "`//` rounds **down** (towards minus infinity), not towards zero: -3.5 becomes -4. The remainder then satisfies a == (a // b) * b + a % b, so -7 % 2 = -7 - (-8) = 1 (it takes the sign of the divisor).",
+  "distractor_notes": {
+   "a": "With a positive divisor, Python's % is never negative.",
+   "b": "Floor of -3.5 is -4, not -3.",
+   "c": "Truncation towards zero is what C/Java do; Python floors: -7 // 2 is -4."
+  },
+  "slides": [
+   27,
+   28,
+   24
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0025",
+  "chapter": "S1",
+  "topic": "operators",
+  "tags": [
+   "power",
+   "precedence"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "print(-2 ** 2)",
+  "options": [
+   {
+    "id": "a",
+    "text": "0.25",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "SyntaxError",
+    "out": "!SyntaxError"
+   },
+   {
+    "id": "c",
+    "text": "4",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "-4",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "`**` binds more tightly than the unary minus, so `-2 ** 2` means `-(2 ** 2)` = -4. Write `(-2) ** 2` to square -2.",
+  "distractor_notes": {
+   "a": "That would be 2 ** -2.",
+   "b": "The expression is perfectly valid.",
+   "c": "That is (-2) ** 2: the parentheses are needed."
+  },
+  "slides": [
+   27,
+   28,
+   24
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0026",
+  "chapter": "S1",
+  "topic": "operators",
+  "tags": [
+   "power",
+   "associativity"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "print(2 ** 3 ** 2)",
+  "options": [
+   {
+    "id": "a",
+    "text": "36",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "12",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "64",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "512",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "`**` is right-associative: `2 ** 3 ** 2` is `2 ** (3 ** 2)` = 2 ** 9 = 512. (All other arithmetic operators group from left to right.)",
+  "distractor_notes": {
+   "a": "That is (2 * 3) ** 2: mixes up * and **.",
+   "b": "Confuses ** (power) with * (product): 2 * 3 * 2.",
+   "c": "That is (2 ** 3) ** 2: power groups from the right, not the left."
+  },
+  "slides": [
+   27,
+   28,
+   24
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0027",
+  "chapter": "S1",
+  "topic": "operators",
+  "tags": [
+   "floor-division",
+   "type-promotion"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "a = 10 // 4\nb = 10.0 // 4\nprint(a, b)",
+  "options": [
+   {
+    "id": "a",
+    "text": "2.0 2.0",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "2 2.0",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "2 2",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "2.5 2.5",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "Floor division keeps the operand types: int // int gives an int (2), but as soon as one operand is a float the result is a float, even though it is a whole number (2.0).",
+  "distractor_notes": {
+   "a": "With two ints, `//` returns an int.",
+   "c": "`//` does not convert to int: with a float operand the result is a float.",
+   "d": "`//` floors the quotient; 2.5 would be the result of `/`."
+  },
+  "slides": [
+   27,
+   28,
+   24
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0028",
+  "chapter": "S1",
+  "topic": "operators",
+  "tags": [
+   "divmod",
+   "hands-on"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "total = 3725\nh, rest = divmod(total, 3600)\nm, s = divmod(rest, 60)\nprint(f\"{h}:{m}:{s}\")",
+  "options": [
+   {
+    "id": "a",
+    "text": "1:2:5",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "1:02:05",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "1:62:5",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "1:2:125",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "`divmod(a, b)` returns the pair (a // b, a % b). 3725 = 1*3600 + 125, then 125 = 2*60 + 5. An f-string inserts the ints as they are, without zero padding (that would need `{m:02}`).",
+  "distractor_notes": {
+   "b": "Nothing pads with zeros here.",
+   "c": "The minutes come from the remainder (125 s), not from the total.",
+   "d": "The remaining 125 seconds are split again into 2 min 5 s."
+  },
+  "slides": [
+   28,
+   54
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0029",
+  "chapter": "S1",
+  "topic": "operators",
+  "tags": [
+   "type-promotion",
+   "division"
+  ],
+  "type": "multi",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "Which of the following expressions evaluate to the **int** `2` (type `int`, value 2)? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "5 // 2",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "int(2.9)",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "2 ** 1.0",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "5 / 2.5",
+    "mono": true
+   },
+   {
+    "id": "e",
+    "text": "10 // 4.0",
+    "mono": true
+   },
+   {
+    "id": "f",
+    "text": "8 % 3",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a",
+   "b",
+   "f"
+  ],
+  "explanation": "Integer operands give an int for `//` and `%`, and `int()` truncates 2.9 to 2. As soon as a float is involved (`/` always, or a float operand), the result is the float 2.0, which equals 2 but is not an int.",
+  "distractor_notes": {
+   "c": "A float exponent makes the result a float: 2.0.",
+   "d": "`/` always returns a float: 2.0.",
+   "e": "A float operand makes `//` return a float: 2.0."
+  },
+  "slides": [
+   27,
+   28,
+   24
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "",
+   "probe_template": "_v = (__OPTION_RAW__)\nprint(type(_v) is int and _v == 2)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0030",
+  "chapter": "S1",
+  "topic": "operators",
+  "tags": [
+   "TypeError",
+   "str+int",
+   "repetition"
+  ],
+  "type": "multi",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Which of the following expressions raise a `TypeError`? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "True + 4",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "3 + 4.0",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "\"3\" * 4.0",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "\"3\" * \"4\"",
+    "mono": true
+   },
+   {
+    "id": "e",
+    "text": "\"3\" + 4",
+    "mono": true
+   },
+   {
+    "id": "f",
+    "text": "\"3\" * 4",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c",
+   "d",
+   "e"
+  ],
+  "explanation": "Python never converts between str and numbers implicitly: str + int is an error, and a string can only be multiplied by an **int** (repetition). Mixing int and float, or bool and int, is fine (bool is a kind of int: True + 4 == 5).",
+  "distractor_notes": {
+   "a": "True behaves as 1 in arithmetic: 5.",
+   "b": "int + float promotes to float: 7.0.",
+   "f": "str * int is repetition: '3333'."
+  },
+  "slides": [
+   27,
+   28,
+   24,
+   30
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "",
+   "probe_template": "try:\n    __OPTION_RAW__\n    print(False)\nexcept TypeError:\n    print(True)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0031",
+  "chapter": "S1",
+  "topic": "operators",
+  "tags": [
+   "precedence"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "print(2 + 3 * 4 ** 2 // 5)",
+  "options": [
+   {
+    "id": "a",
+    "text": "11.6",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "80",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "11",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "10",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "Precedence: `**` first (4 ** 2 = 16), then `*` and `//` from left to right (3 * 16 = 48, 48 // 5 = 9), then `+`: 2 + 9 = 11.",
+  "distractor_notes": {
+   "a": "Uses true division `/` instead of floor division `//`.",
+   "b": "Evaluates strictly left to right ((2 + 3) * 4) ** 2 // 5: ignores precedence.",
+   "d": "Applies + before //: (2 + 48) // 5."
+  },
+  "slides": [
+   27,
+   28,
+   24
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0032",
+  "chapter": "S1",
+  "topic": "operators",
+  "tags": [
+   "precedence",
+   "power"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Among the following operators, which one has the **highest** priority (is evaluated first)?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "**",
+    "mono": true,
+    "probe": "print(-2 ** 2 == -4 and 2 * 3 ** 2 == 18 and 1 + 2 ** 3 == 9)"
+   },
+   {
+    "id": "b",
+    "text": "*",
+    "mono": true,
+    "probe": "print(2 * 3 ** 2 == 36)"
+   },
+   {
+    "id": "c",
+    "text": "+",
+    "mono": true,
+    "probe": "print(1 + 2 * 3 == 9)"
+   },
+   {
+    "id": "d",
+    "text": "not",
+    "mono": true,
+    "probe": "print((not 1 == 2) == False)"
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "Exponentiation binds tightest: it is applied before unary minus, `*`, `/`, `//`, `%`, which come before `+` and `-`, then comparisons, then `not`, `and`, `or`. So 2 * 3 ** 2 is 18 and -2 ** 2 is -4.",
+  "distractor_notes": {
+   "b": "* comes after **: 2 * 3 ** 2 is 2 * 9.",
+   "c": "+ comes after * and **: 1 + 2 * 3 is 7.",
+   "d": "not has a very low priority, below comparisons: not 1 == 2 is not (1 == 2)."
+  },
+  "slides": [
+   28
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": ""
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0033",
+  "chapter": "S1",
+  "topic": "operators",
+  "tags": [
+   "power",
+   "float"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "print(9 ** 0.5, 2 ** -1)",
+  "options": [
+   {
+    "id": "a",
+    "text": "3.0 0.5",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "3.0 -2",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "4.5 -2",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "3 0.5",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "A power of 0.5 is a square root, and a float exponent gives a float: 3.0. A negative exponent means 1 / 2 ** 1 = 0.5 (also a float).",
+  "distractor_notes": {
+   "b": "2 ** -1 is 1/2 = 0.5, not 2 * -1.",
+   "c": "Confuses ** with * : 9 * 0.5 and 2 * -1.",
+   "d": "A float exponent always produces a float (3.0)."
+  },
+  "slides": [
+   27,
+   28,
+   24
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0034",
+  "chapter": "S1",
+  "topic": "operators",
+  "tags": [
+   "floor-division",
+   "definition"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "In Python 3, what does `x // y` compute?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "The exact quotient, as a float",
+    "probe": "print(7 // 2 == 7 / 2)"
+   },
+   {
+    "id": "b",
+    "text": "The quotient rounded down (floor) to the nearest integer",
+    "probe": "import math\nprint(7 // 2 == 3 and -7 // 2 == math.floor(-7 / 2) == -4 and 7.5 // 2 == 3.0)"
+   },
+   {
+    "id": "c",
+    "text": "The remainder of the division",
+    "probe": "print(7 // 2 == 7 % 2)"
+   },
+   {
+    "id": "d",
+    "text": "The quotient truncated towards zero",
+    "probe": "print(-7 // 2 == int(-7 / 2))"
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "`//` is floor division: it rounds the quotient **down**, towards minus infinity (7 // 2 = 3, -7 // 2 = -4). The remainder is `%` and the exact quotient is `/`.",
+  "distractor_notes": {
+   "a": "The exact quotient is given by / (3.5).",
+   "c": "The remainder is given by %.",
+   "d": "For negative results floor and truncation differ: -7 // 2 is -4, not -3."
+  },
+  "slides": [
+   27,
+   28
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": ""
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0035",
+  "chapter": "S1",
+  "topic": "operators",
+  "tags": [
+   "augmented-assignment"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "x = 5\nx += 3\nx *= 2\nx //= 3\nx %= 4\nprint(x)",
+  "options": [
+   {
+    "id": "a",
+    "text": "2",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "5",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "1",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "0",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "Each augmented assignment applies the operator to the current value: 5 + 3 = 8, 8 * 2 = 16, 16 // 3 = 5, 5 % 4 = 1.",
+  "distractor_notes": {
+   "a": "Would need 16 // 3 to be 6 (rounding up); floor division gives 5, and 5 % 4 = 1.",
+   "b": "Stops after `//=`: forgets the final `%= 4`.",
+   "d": "5 % 4 is 1, not 0."
+  },
+  "slides": [
+   27,
+   28,
+   24
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0036",
+  "chapter": "S1",
+  "topic": "operators",
+  "tags": [
+   "bool",
+   "precedence"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "print(True + True * 3, True / 2)",
+  "options": [
+   {
+    "id": "a",
+    "text": "6 0.5",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "4 0.5",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "TypeError",
+    "out": "!TypeError"
+   },
+   {
+    "id": "d",
+    "text": "4 0",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "bool is a subtype of int: True behaves as 1 in arithmetic. `*` before `+`: 1 + 1 * 3 = 4. `/` gives a float: 1 / 2 = 0.5.",
+  "distractor_notes": {
+   "a": "Ignores precedence: (True + True) * 3.",
+   "c": "Booleans can be used in arithmetic (True == 1, False == 0).",
+   "d": "`/` is true division: 0.5."
+  },
+  "slides": [
+   27,
+   28,
+   24
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0037",
+  "chapter": "S1",
+  "topic": "operators",
+  "tags": [
+   "precedence",
+   "divmod"
+  ],
+  "type": "multi",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "Which of the following expressions evaluate to `True`? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "(-2) ** 2 == -2 ** 2",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "7 % 2 ** 2 == 1",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "divmod(9, 4) == (2, 1)",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "10 % 3 == 10 - 3 * (10 // 3)",
+    "mono": true
+   },
+   {
+    "id": "e",
+    "text": "7 // 2 == 7 / 2 - 0.5",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c",
+   "d",
+   "e"
+  ],
+  "explanation": "3 == 3.0 is True (int and float compare by value). `**` binds tighter than `%`, so 7 % 4 = 3. divmod returns (a // b, a % b). The identity a % b == a - b * (a // b) always holds. Unary minus binds looser than `**`: -2 ** 2 is -4.",
+  "distractor_notes": {
+   "a": "(-2) ** 2 is 4 but -2 ** 2 is -(2 ** 2) = -4.",
+   "b": "`2 ** 2` is computed first: 7 % 4 = 3, not (7 % 2) ** 2."
+  },
+  "slides": [
+   27,
+   28,
+   24
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "",
+   "probe_template": "print((__OPTION_RAW__) is True)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0038",
+  "chapter": "S1",
+  "topic": "operators",
+  "tags": [
+   "abs",
+   "int",
+   "truncation"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "print(abs(-3.5), int(-3.7))",
+  "options": [
+   {
+    "id": "a",
+    "text": "3 -4",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "3.5 -4",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "3.5 -3",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "-3.5 -3",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "`abs` returns the magnitude (3.5, still a float). `int()` on a float **truncates towards zero**: -3.7 becomes -3 (it does not round, and it does not floor).",
+  "distractor_notes": {
+   "a": "abs keeps the float type, and int() truncates towards zero.",
+   "b": "int() truncates towards zero; flooring (math.floor or //) would give -4.",
+   "d": "abs removes the sign."
+  },
+  "slides": [
+   28
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0039",
+  "chapter": "S1",
+  "topic": "variables",
+  "tags": [
+   "rebinding"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "a = 3\nb = a\na = a + 1\nprint(a, b)",
+  "options": [
+   {
+    "id": "a",
+    "text": "3 3",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "3 4",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "4 4",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "4 3",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "`b = a` binds b to the value 3. `a = a + 1` computes 4 and **rebinds** the name a to it; b is not affected and still refers to 3.",
+  "distractor_notes": {
+   "a": "a was rebound to 4.",
+   "b": "The names are swapped.",
+   "c": "Rebinding a does not change what b refers to."
+  },
+  "slides": [
+   25,
+   26
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0040",
+  "chapter": "S1",
+  "topic": "variables",
+  "tags": [
+   "multiple-assignment"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "x, y = 1, 2\nx, y = y, x + y\nprint(x, y)",
+  "options": [
+   {
+    "id": "a",
+    "text": "1 3",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "2 3",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "2 2",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "2 4",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "In a multiple assignment the whole right-hand side is evaluated **first** (y = 2, x + y = 3), then the values are bound to x and y. So the old x (1) is used in x + y.",
+  "distractor_notes": {
+   "a": "x is rebound to the old y, 2.",
+   "c": "y becomes x + y with the old values: 1 + 2 = 3.",
+   "d": "Assumes x is updated before x + y is computed (as with two separate statements)."
+  },
+  "slides": [
+   25,
+   26
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0041",
+  "chapter": "S1",
+  "topic": "variables",
+  "tags": [
+   "dynamic-typing",
+   "binding",
+   "definition"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "Which statement about variables in Python is correct?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "A variable keeps the type of the first value assigned to it.",
+    "probe": "x = 1\nx = 'one'\nprint(type(x) is int)"
+   },
+   {
+    "id": "b",
+    "text": "Assignment binds a name to a value; the same name can later be bound to a value of another type.",
+    "probe": "x = 1\nx = 'one'\nprint(type(x) is str)"
+   },
+   {
+    "id": "c",
+    "text": "A variable must be declared with its type before it is assigned.",
+    "probe": "ns = {}\nexec('brand_new = 1', ns)\nprint('brand_new' not in ns)"
+   },
+   {
+    "id": "d",
+    "text": "Variable names are case-insensitive: `Total` and `total` are the same variable.",
+    "probe": "Total = 1\ntotal = 2\nprint(Total == total)"
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "Python has no variable declarations: `x = value` binds the name x to a value, and a later assignment can rebind it to a value of any type (dynamic typing). Names are case-sensitive.",
+  "distractor_notes": {
+   "a": "Types belong to values, not to names: x can be rebound to a str.",
+   "c": "No declaration is needed: the first assignment creates the name.",
+   "d": "Total and total are two different names."
+  },
+  "slides": [
+   25,
+   26,
+   62
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": ""
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0042",
+  "chapter": "S1",
+  "topic": "variables",
+  "tags": [
+   "dynamic-typing",
+   "repetition"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "x = 5\nx = \"5\"\nx = x * 2\nprint(x)",
+  "options": [
+   {
+    "id": "a",
+    "text": "TypeError",
+    "out": "!TypeError"
+   },
+   {
+    "id": "b",
+    "text": "25",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "55",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "10",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "Typing is dynamic: the name x can refer to an int, then to a str. At the multiplication x refers to the string '5', and str * int repeats it: '55'.",
+  "distractor_notes": {
+   "a": "Rebinding a name to a value of another type is allowed, and str * int is valid.",
+   "b": "Nothing squares the value.",
+   "d": "x is the string '5' at that point, not the int 5."
+  },
+  "slides": [
+   25,
+   26
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0043",
+  "chapter": "S1",
+  "topic": "variables",
+  "tags": [
+   "NameError",
+   "case-sensitivity"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "total = 10\nprint(Total + 1)",
+  "options": [
+   {
+    "id": "a",
+    "text": "11",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "TypeError",
+    "out": "!TypeError"
+   },
+   {
+    "id": "c",
+    "text": "SyntaxError",
+    "out": "!SyntaxError"
+   },
+   {
+    "id": "d",
+    "text": "NameError",
+    "out": "!NameError"
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "Names are case-sensitive: `Total` and `total` are different names, and `Total` was never assigned, so evaluating it raises NameError.",
+  "distractor_notes": {
+   "a": "Would require names to be case-insensitive.",
+   "b": "The error is not about types: the name does not exist at all.",
+   "c": "The code is syntactically valid; the error happens at run time."
+  },
+  "slides": [
+   25,
+   26
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0044",
+  "chapter": "S1",
+  "topic": "variables",
+  "tags": [
+   "identifiers",
+   "keywords"
+  ],
+  "type": "multi",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Which of the following assignments are syntactically valid? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "my_var = 1",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "Class = 1",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "class = 1",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "first-name = 1",
+    "mono": true
+   },
+   {
+    "id": "e",
+    "text": "_hidden = 1",
+    "mono": true
+   },
+   {
+    "id": "f",
+    "text": "2nd_place = 1",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a",
+   "b",
+   "e"
+  ],
+  "explanation": "A name starts with a letter or an underscore, then contains letters, digits and underscores only. Reserved keywords such as `class` cannot be names, but `Class` is a different (valid) name because names are case-sensitive.",
+  "distractor_notes": {
+   "c": "`class` is a reserved keyword.",
+   "d": "`-` is the minus operator: Python reads `first - name = 1`, which is not assignable.",
+   "f": "A name cannot start with a digit."
+  },
+  "slides": [
+   25,
+   26
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "",
+   "probe_template": "try:\n    compile(__OPTION__, 'q', 'exec')\n    print(True)\nexcept SyntaxError:\n    print(False)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0045",
+  "chapter": "S1",
+  "topic": "variables",
+  "tags": [
+   "multiple-assignment",
+   "ValueError"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "a, b = 1, 2, 3\nprint(a, b)",
+  "options": [
+   {
+    "id": "a",
+    "text": "SyntaxError",
+    "out": "!SyntaxError"
+   },
+   {
+    "id": "b",
+    "text": "1 (2, 3)",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "ValueError",
+    "out": "!ValueError"
+   },
+   {
+    "id": "d",
+    "text": "1 2",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "In a multiple assignment the number of names must match the number of values. Three values for two names raises ValueError (too many values to unpack), so nothing is printed.",
+  "distractor_notes": {
+   "a": "The syntax is valid; the mismatch is detected at run time.",
+   "b": "The leftovers are not grouped automatically (that needs a starred name: `a, *b = 1, 2, 3`).",
+   "d": "Extra values are not silently dropped."
+  },
+  "slides": [
+   25,
+   26
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0046",
+  "chapter": "S1",
+  "topic": "variables",
+  "tags": [
+   "duck-typing"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "def double(x):\n    return x + x\n\nprint(double(3), double(\"ab\"), double(1.5))",
+  "options": [
+   {
+    "id": "a",
+    "text": "6 abab 3.0",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "6 abab 3",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "TypeError",
+    "out": "!TypeError"
+   },
+   {
+    "id": "d",
+    "text": "6 ab ab 3.0",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "Duck typing: no parameter type is declared, the function works with any object that supports `+`. For an int it adds (6), for a str it concatenates ('abab'), for a float it adds (3.0).",
+  "distractor_notes": {
+   "b": "1.5 + 1.5 is the float 3.0.",
+   "c": "Nothing restricts x to numbers: strings support + as well.",
+   "d": "Concatenation adds no space."
+  },
+  "slides": [
+   26,
+   61,
+   62
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ }
+]

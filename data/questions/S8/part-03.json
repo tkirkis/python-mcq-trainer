@@ -1,0 +1,1078 @@
+[
+ {
+  "id": "S8-0041",
+  "chapter": "S8",
+  "topic": "requests-lib",
+  "tags": [
+   "requests",
+   "text",
+   "content",
+   "bytes"
+  ],
+  "type": "multi",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "A server answers with the UTF-8 encoded body `café`, received with `resp = requests.get(url)`. Which statements are true? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "`resp.content.decode('utf-8') == resp.text`",
+    "probe": "print(resp.content.decode('utf-8') == resp.text)"
+   },
+   {
+    "id": "b",
+    "text": "`resp.text` is a `str`",
+    "probe": "print(type(resp.text) is str)"
+   },
+   {
+    "id": "c",
+    "text": "`resp.content` is a `bytes` object",
+    "probe": "print(type(resp.content) is bytes)"
+   },
+   {
+    "id": "d",
+    "text": "`len(resp.text) == len(resp.content)`",
+    "probe": "print(len(resp.text) == len(resp.content))"
+   }
+  ],
+  "correct": [
+   "a",
+   "b",
+   "c"
+  ],
+  "explanation": "`resp.content` is the raw body as bytes; `resp.text` is that body decoded into a str. 'é' takes 2 bytes in UTF-8, so the content has 5 bytes but the text only 4 characters. Use `.text` for HTML/text and `.content` for binary data such as images.",
+  "distractor_notes": {
+   "d": "'é' is one character but two bytes in UTF-8: 4 != 5."
+  },
+  "slides": [
+   302
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "import requests\nresp = requests.models.Response()\nresp.status_code = 200\nresp._content = 'café'.encode('utf-8')\nresp.encoding = 'utf-8'",
+   "note": "The Response is built offline (no network) with the body and encoding a real server would send."
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0042",
+  "chapter": "S8",
+  "topic": "requests-lib",
+  "tags": [
+   "requests",
+   "json"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "`resp = requests.get(url)` returned a response whose body is the JSON text `{\"a\": 14, \"b\": \"no\", \"c\": true}`. What does the following code print?",
+  "code": "data = resp.json()\nprint(type(data).__name__, data['c'])",
+  "options": [
+   {
+    "id": "a",
+    "text": "dict true",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "str true",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "dict True",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "str True",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "`.json()` deserializes the JSON body into Python objects: a JSON object becomes a dict and the JSON literal `true` becomes the Python bool `True`.",
+  "distractor_notes": {
+   "a": "The JSON literal `true` is converted to the Python `True`.",
+   "b": "That would describe `resp.text`; `.json()` parses the string.",
+   "d": "`.json()` does not return the raw string."
+  },
+  "slides": [
+   298,
+   302
+  ],
+  "verify": {
+   "mode": "output",
+   "code": "import requests\nresp = requests.models.Response()\nresp.status_code = 200\nresp._content = b'{\"a\": 14, \"b\": \"no\", \"c\": true}'\ndata = resp.json()\nprint(type(data).__name__, data['c'])",
+   "note": "The Response is built offline (no network) with the given JSON body."
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0043",
+  "chapter": "S8",
+  "topic": "requests-lib",
+  "tags": [
+   "wget",
+   "curl"
+  ],
+  "type": "multi",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "Which of the following are true about the command-line tools `wget` and `curl`? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "They are convenient to test a server you are developing"
+   },
+   {
+    "id": "b",
+    "text": "They return the raw HTML of a page without rendering it"
+   },
+   {
+    "id": "c",
+    "text": "They display the page with its images and layout, like a browser"
+   },
+   {
+    "id": "d",
+    "text": "They send HTTP requests from the terminal"
+   }
+  ],
+  "correct": [
+   "a",
+   "b",
+   "d"
+  ],
+  "explanation": "wget and curl perform HTTP requests from the command line and give back the response as is (pure HTML strings, no rendering). This makes them handy to test a server; curl also makes POST requests with data easy.",
+  "distractor_notes": {
+   "c": "Rendering is what browsers do; wget and curl only fetch the string."
+  },
+  "slides": [
+   301
+  ],
+  "verify": {
+   "mode": "manual",
+   "reference": "Slide 301 '2. In command-line': wget/curl do not perform any rendering, convenient tools to test a server"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0044",
+  "chapter": "S8",
+  "topic": "flask",
+  "tags": [
+   "flask",
+   "route",
+   "test_client"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "import flask\n\napp = flask.Flask(__name__)\n\n@app.route('/')\ndef index():\n    return 'Hello world!'\n\nclient = app.test_client()\nresp = client.get('/')\nprint(resp.status_code, resp.get_data(as_text=True))",
+  "options": [
+   {
+    "id": "a",
+    "text": "201 Hello world!",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "200 Hello world!",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "200 index",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "404 Hello world!",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "The handler bound to `/` returns a string, which becomes the body of the HTTP response; the status is 200 OK by default. `app.test_client()` sends requests to the app without any real network.",
+  "distractor_notes": {
+   "a": "201 Created must be returned explicitly by the handler.",
+   "c": "The body is the return value of the function, not its name.",
+   "d": "The route `/` exists, so there is no 404."
+  },
+  "slides": [
+   305
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0045",
+  "chapter": "S8",
+  "topic": "flask",
+  "tags": [
+   "flask",
+   "route-variable",
+   "404"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What will be the output of the code?",
+  "code": "import flask\n\napp = flask.Flask(__name__)\n\n@app.route('/custom/<name>')\ndef custom(name):\n    return 'Hello {}'.format(name)\n\nclient = app.test_client()\nprint(client.get('/custom/Ana').get_data(as_text=True))\nprint(client.get('/custom').status_code)",
+  "options": [
+   {
+    "id": "a",
+    "text": "Hello name\n404",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "Hello Ana\n200",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "Hello Ana\n404",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "Hello <name>\n500",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "`<name>` is a route variable: the part of the path after `/custom/` is passed to the handler as the argument `name`. `/custom` has no such part, so no route matches and Flask answers 404 Not Found.",
+  "distractor_notes": {
+   "a": "`name` is replaced by the value taken from the URL.",
+   "b": "The variable part is mandatory: `/custom` does not match `/custom/<name>`.",
+   "d": "The angle brackets are route syntax, not part of the value; and a path matching no route gives 404, not 500."
+  },
+  "slides": [
+   306
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0046",
+  "chapter": "S8",
+  "topic": "flask",
+  "tags": [
+   "flask",
+   "methods",
+   "405",
+   "post"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What does the following code print?",
+  "code": "import flask\n\napp = flask.Flask(__name__)\n\n@app.route('/buy', methods=['POST'])\ndef buy():\n    return 'Item sold'\n\nclient = app.test_client()\nprint(client.get('/buy').status_code)",
+  "options": [
+   {
+    "id": "a",
+    "text": "200",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "404",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "405",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "500",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "The route exists but only accepts POST. A GET request on it is answered with **405 Method Not Allowed**. (Without `methods=`, a route accepts only GET, plus the automatic HEAD and OPTIONS.)",
+  "distractor_notes": {
+   "a": "The handler is never called for a GET request.",
+   "b": "404 would mean that no route matches the path; here the path matches but not the method.",
+   "d": "Nothing crashes on the server: the request is rejected before the handler is called."
+  },
+  "slides": [
+   300,
+   309,
+   310
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0047",
+  "chapter": "S8",
+  "topic": "flask",
+  "tags": [
+   "flask",
+   "json",
+   "content-type",
+   "api"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "import flask\n\napp = flask.Flask(__name__)\n\n@app.route('/order')\ndef order():\n    return {'gums': 2, 'candy': 0}\n\nresp = app.test_client().get('/order')\nprint(resp.status_code, resp.content_type)",
+  "options": [
+   {
+    "id": "a",
+    "text": "200 text/html; charset=utf-8",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "200 application/json",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "500 text/html; charset=utf-8",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "200 text/plain",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "When a handler returns a dict, Flask serializes it to JSON and sets `Content-Type: application/json` - the typical behaviour of an API server. A returned string is sent as `text/html; charset=utf-8`.",
+  "distractor_notes": {
+   "a": "That is the content type used for a returned string.",
+   "c": "Returning a dict is allowed (Flask 1.1+): no error.",
+   "d": "Flask uses text/html for strings and application/json for dicts."
+  },
+  "slides": [
+   298,
+   304,
+   309
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0048",
+  "chapter": "S8",
+  "topic": "flask",
+  "tags": [
+   "flask",
+   "route-variable",
+   "converter",
+   "404"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "Analyze the code. What does it print?",
+  "code": "import flask\n\napp = flask.Flask(__name__)\n\n@app.route('/item/<int:item_id>')\ndef item(item_id):\n    return str(item_id + 1)\n\nclient = app.test_client()\nprint(client.get('/item/41').get_data(as_text=True))\nprint(client.get('/item/abc').status_code)",
+  "options": [
+   {
+    "id": "a",
+    "text": "411\n404",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "42\n404",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "42\n500",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "TypeError",
+    "mono": true,
+    "out": "!TypeError"
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "The `int:` converter turns the matched part of the path into an int before calling the handler, so `item_id + 1` is 42. A path whose part is not an integer does not match the route at all, so `/item/abc` gives 404 Not Found.",
+  "distractor_notes": {
+   "a": "That would be string concatenation ('41' + '1'); the converter gives an int.",
+   "c": "`abc` is never passed to the handler (no crash): the route simply does not match.",
+   "d": "With the int converter `item_id` is an int, so `item_id + 1` works."
+  },
+  "slides": [
+   306
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0049",
+  "chapter": "S8",
+  "topic": "flask",
+  "tags": [
+   "flask",
+   "redirect",
+   "302"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "import flask\n\napp = flask.Flask(__name__)\n\n@app.route('/')\ndef index():\n    return 'Machine'\n\n@app.route('/refill')\ndef refill():\n    return flask.redirect('/')\n\nclient = app.test_client()\nprint(client.get('/refill').status_code)\nresp = client.get('/refill', follow_redirects=True)\nprint(resp.status_code, resp.get_data(as_text=True))",
+  "options": [
+   {
+    "id": "a",
+    "text": "200\n200 Machine",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "302\n200 Machine",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "302\n302 Machine",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "301\n200 Machine",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "`redirect('/')` produces a **302 Found** response with a `Location: /` header. Without following it, the client sees 302; with `follow_redirects=True` the client sends a second request to `/` and gets 200 with the body 'Machine' - what a browser does automatically.",
+  "distractor_notes": {
+   "a": "The first response is the redirection itself (3xx), not the page.",
+   "c": "After following the redirection, the final response is the one of `/`: 200.",
+   "d": "redirect() uses 302 (temporary) by default; 301 must be asked for with code=301."
+  },
+  "slides": [
+   309
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0050",
+  "chapter": "S8",
+  "topic": "flask",
+  "tags": [
+   "flask",
+   "template",
+   "jinja"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Web frameworks use a template engine to fill placeholders in generic HTML. What does the following code print?",
+  "code": "import flask\n\napp = flask.Flask(__name__)\n\n@app.route('/custom/<name>')\ndef custom(name):\n    return flask.render_template_string(\n        '<h1>Welcome {{person}}</h1>', person=name)\n\nprint(app.test_client().get('/custom/Bob').get_data(as_text=True))",
+  "options": [
+   {
+    "id": "a",
+    "text": "<h1>Welcome name</h1>",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "<h1>Welcome {{person}}</h1>",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "<h1>Welcome Bob</h1>",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "Welcome Bob",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "A template is generic HTML containing symbols such as `{{person}}`, replaced by the values passed as keyword arguments when rendering. `render_template('hello.html', person=name)` does the same with a file of the templates folder.",
+  "distractor_notes": {
+   "a": "The keyword argument `person=name` passes the *value* of name ('Bob').",
+   "b": "Rendering replaces the placeholder by a value.",
+   "d": "Rendering only replaces placeholders; the HTML tags stay."
+  },
+  "slides": [
+   304,
+   307
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0051",
+  "chapter": "S8",
+  "topic": "flask",
+  "tags": [
+   "flask",
+   "decorator"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "Writing `@app.route('/')` just before `def index(): ...` is a decorator. Which statement, written after a plain `def index(): ...`, has the same effect?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "index = app.route(index)('/')",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "index = app.route('/')(index)",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "app.route('/') = index",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "index = app.route('/', index)",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "`@decorator` above a function means `f = decorator(f)`. Here the decorator is the value of `app.route('/')`, a function that registers `index` as the handler of `/` and returns it. So `@app.route('/')` is `index = app.route('/')(index)`.",
+  "distractor_notes": {
+   "a": "The arguments are swapped: the rule first, then the function.",
+   "c": "You cannot assign to a function call: SyntaxError.",
+   "d": "route() takes the rule (and keyword options) only; the function is given in a second call."
+  },
+  "slides": [
+   305
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "import flask\napp = flask.Flask(__name__)\n\ndef index():\n    return 'Hello'\n",
+   "probe_template": "__OPTION_RAW__\nprint(app.test_client().get('/').get_data(as_text=True) == 'Hello')"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0052",
+  "chapter": "S8",
+  "topic": "flask",
+  "tags": [
+   "decorator"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "A decorator is a function that takes a function and returns a function. What does the following code print?",
+  "code": "def shout(f):\n    def wrapper():\n        return f().upper() + '!'\n    return wrapper\n\n@shout\ndef hello():\n    return 'hello'\n\nprint(hello())",
+  "options": [
+   {
+    "id": "a",
+    "text": "HELLO",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "hello",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "hello!",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "HELLO!",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "`@shout` replaces `hello` by `shout(hello)`, i.e. by `wrapper`. Calling `hello()` therefore runs wrapper, which calls the original function and transforms its result: 'HELLO!'. Flask's `@app.route` uses the same mechanism to register handlers.",
+  "distractor_notes": {
+   "a": "The '!' is added after upper().",
+   "b": "The name hello now refers to wrapper, not to the original function.",
+   "c": "upper() is applied as well."
+  },
+  "slides": [
+   305
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0053",
+  "chapter": "S8",
+  "topic": "flask",
+  "tags": [
+   "flask",
+   "localhost",
+   "port"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "Your file `app.py` ends with `app.run(port=5000)` and you start it with `python3 app.py` on your computer. Which URL opens its `/` route in your browser?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "http://127.0.0.1:8000/",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "http://localhost/",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "https://flask.com:5000/",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "http://localhost:5000/",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "The server runs on your own machine (IP address 127.0.0.1, hostname localhost) and listens on port 5000, so the URL needs both: http://localhost:5000/ (or http://127.0.0.1:5000/).",
+  "distractor_notes": {
+   "a": "8000 is the default port of `python -m http.server`; this app listens on 5000.",
+   "b": "Without a port the browser uses 80, where nothing listens.",
+   "c": "The app runs on your machine, not on a remote domain (and app.run serves plain http)."
+  },
+  "slides": [
+   156,
+   305
+  ],
+  "verify": {
+   "mode": "manual",
+   "reference": "Slide 305: app.run(port=5000), the server runs on our computer, 127.0.0.1 or localhost"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0054",
+  "chapter": "S8",
+  "topic": "flask",
+  "tags": [
+   "flask",
+   "query",
+   "request-args"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Find the output of the code?",
+  "code": "import flask\n\napp = flask.Flask(__name__)\n\n@app.route('/search')\ndef search():\n    return 'q = ' + str(flask.request.args.get('q'))\n\nclient = app.test_client()\nprint(client.get('/search?q=ip+address').get_data(as_text=True))\nprint(client.get('/search').get_data(as_text=True))",
+  "options": [
+   {
+    "id": "a",
+    "text": "q = ip address\nq =",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "q = ip+address\nq = None",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "q = ip address\nq = None",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "q = ['ip address']\nq = None",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "Flask decodes the query string into `request.args` (`+` becomes a space). `args.get('q')` returns None when the parameter is absent, like dict.get; the path `/search` still matches the route because the query is not part of the path.",
+  "distractor_notes": {
+   "a": "`.get` returns None for a missing parameter, and str(None) is 'None'.",
+   "b": "Flask decodes the escaped value.",
+   "d": "`request.args.get` returns a single value (the first one), not a list like parse_qs."
+  },
+  "slides": [
+   306,
+   317,
+   318
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0055",
+  "chapter": "S8",
+  "topic": "flask",
+  "tags": [
+   "frameworks"
+  ],
+  "type": "multi",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "Which of the following are Python web frameworks? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "Flask"
+   },
+   {
+    "id": "b",
+    "text": "Bottle"
+   },
+   {
+    "id": "c",
+    "text": "Django"
+   },
+   {
+    "id": "d",
+    "text": "NumPy"
+   },
+   {
+    "id": "e",
+    "text": "Tkinter"
+   }
+  ],
+  "correct": [
+   "a",
+   "b",
+   "c"
+  ],
+  "explanation": "Django, Flask and Bottle (like Pyramid, CherryPy, Tornado or Web2Py) are web frameworks: they help define handlers that build the HTTP response for a route. NumPy is a numerical library and Tkinter a desktop GUI toolkit.",
+  "distractor_notes": {
+   "d": "Numerical array library; it does not serve web pages.",
+   "e": "Desktop GUI library (windows, buttons), not a web framework."
+  },
+  "slides": [
+   304
+  ],
+  "verify": {
+   "mode": "manual",
+   "reference": "Slide 304 'Web frameworks': Django, Pyramids, CherryPy, Bottle, Flask, Tornado, Web2Py"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0056",
+  "chapter": "S8",
+  "topic": "web-serialization",
+  "tags": [
+   "json",
+   "dumps"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "import json\n\nprint(json.dumps({1: (2, 3)}))",
+  "options": [
+   {
+    "id": "a",
+    "text": "{\"1\": [2, 3]}",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "{1: (2, 3)}",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "{\"1\": (2, 3)}",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "TypeError",
+    "mono": true,
+    "out": "!TypeError"
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "json.dumps returns a str in JSON syntax: object keys are always strings (the int key 1 becomes \"1\") and tuples are written as JSON arrays `[...]`, since JSON has no tuple type.",
+  "distractor_notes": {
+   "b": "That is the Python repr of the dict, not JSON.",
+   "c": "JSON has no parentheses/tuples: tuples become arrays.",
+   "d": "Int keys and tuples are accepted (converted); only unsupported types such as sets raise TypeError."
+  },
+  "slides": [
+   136,
+   298
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0057",
+  "chapter": "S8",
+  "topic": "web-serialization",
+  "tags": [
+   "json",
+   "round-trip",
+   "loads"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What will be the output of the code?",
+  "code": "import json\n\ndata = {'a': (1, 2), 3: 'x'}\nback = json.loads(json.dumps(data))\nprint(back == data, back)",
+  "options": [
+   {
+    "id": "a",
+    "text": "True {'a': [1, 2], 3: 'x'}",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "True {'a': (1, 2), 3: 'x'}",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "False {'a': (1, 2), '3': 'x'}",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "False {'a': [1, 2], '3': 'x'}",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "A JSON round trip is not always lossless: the tuple comes back as a list and the int key 3 comes back as the string '3', hence `back != data`. pickle, which is Python-specific, would restore the tuple and the int key.",
+  "distractor_notes": {
+   "a": "Keys become strings, and a list is never equal to a tuple.",
+   "b": "Assumes JSON preserves Python types exactly.",
+   "c": "Tuples are lost too: JSON arrays are loaded as lists."
+  },
+  "slides": [
+   135,
+   136,
+   298
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0058",
+  "chapter": "S8",
+  "topic": "web-serialization",
+  "tags": [
+   "json",
+   "dumps"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "import json\n\nprint(json.dumps({'c': True, 'd': None}))",
+  "options": [
+   {
+    "id": "a",
+    "text": "{\"c\": True, \"d\": None}",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "{'c': True, 'd': None}",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "{\"c\": true, \"d\": null}",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "{\"c\": \"true\", \"d\": \"null\"}",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "JSON is a language-independent text format: Python True becomes `true`, None becomes `null`, and strings use double quotes.",
+  "distractor_notes": {
+   "a": "True/None are Python spellings; JSON uses true/null.",
+   "b": "That is the Python repr of the dict, not JSON.",
+   "d": "true and null are JSON literals, not quoted strings."
+  },
+  "slides": [
+   136,
+   298
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0059",
+  "chapter": "S8",
+  "topic": "web-serialization",
+  "tags": [
+   "serialization",
+   "definition",
+   "api"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "An API server must send a Python dict to its clients in an HTTP response. What is **serialization**?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "Turning data (lists, dicts, objects...) into a string or bytes that can be sent or stored, e.g. with `json.dumps`"
+   },
+   {
+    "id": "b",
+    "text": "Sending several HTTP requests one after the other"
+   },
+   {
+    "id": "c",
+    "text": "Splitting the HTTP response into numbered packets"
+   },
+   {
+    "id": "d",
+    "text": "Sorting the keys of a dict before returning it"
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "The body of an HTTP response is a string. Serialization converts data into such a string (JSON: text, human readable, language-independent) or into bytes (pickle: binary, Python-specific); deserialization (json.loads, pickle.loads) rebuilds the objects.",
+  "distractor_notes": {
+   "b": "Sending requests in sequence has nothing to do with serialization.",
+   "c": "Packet splitting is done by the network, whatever the content.",
+   "d": "The order of the keys is irrelevant to the definition."
+  },
+  "slides": [
+   135,
+   298
+  ],
+  "verify": {
+   "mode": "manual",
+   "reference": "Slide 298 'Serialization': how to turn some data into a string; slide 135"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0060",
+  "chapter": "S8",
+  "topic": "web-serialization",
+  "tags": [
+   "json",
+   "pickle"
+  ],
+  "type": "multi",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Which of the following statements about `json` and `pickle` are true? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "`json.dumps({1, 2})` raises a TypeError",
+    "probe": "import json\ntry:\n    json.dumps({1, 2})\n    print(False)\nexcept TypeError:\n    print(True)"
+   },
+   {
+    "id": "b",
+    "text": "`json.loads(json.dumps((1, 2)))` returns the tuple `(1, 2)`",
+    "probe": "import json\nprint(json.loads(json.dumps((1, 2))) == (1, 2))"
+   },
+   {
+    "id": "c",
+    "text": "`pickle.dumps({'a': 1})` returns `bytes`",
+    "probe": "import pickle\nprint(type(pickle.dumps({'a': 1})) is bytes)"
+   },
+   {
+    "id": "d",
+    "text": "`json.dumps({'a': 1})` returns a `str`",
+    "probe": "import json\nprint(type(json.dumps({'a': 1})) is str)"
+   }
+  ],
+  "correct": [
+   "a",
+   "c",
+   "d"
+  ],
+  "explanation": "JSON produces text (a str) and only knows objects, arrays, strings, numbers, booleans and null: a set raises TypeError and a tuple comes back as a list. pickle produces bytes (binary - hence files opened with 'wb'/'rb') and can serialize almost any Python object.",
+  "distractor_notes": {
+   "b": "Tuples are encoded as JSON arrays and decoded as lists: the result is [1, 2]."
+  },
+  "slides": [
+   135,
+   136,
+   298
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": ""
+  },
+  "reviewed": 1
+ }
+]

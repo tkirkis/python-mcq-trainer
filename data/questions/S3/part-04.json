@@ -1,0 +1,1119 @@
+[
+  {
+    "id": "S3-0061",
+    "chapter": "S3",
+    "topic": "modules-packages",
+    "tags": [
+      "import-forms",
+      "alias",
+      "from-import"
+    ],
+    "type": "multi",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "The file `geometry.py` (in the current folder) defines `PI = 3.14`. Each snippet below is run on its own as the main script. Which of them print `3.14`? Select all that apply.",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "import geometry\nprint(geometry.PI)",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "import geometry\nprint(PI)",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "from geometry import PI\nprint(PI)",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "import geometry as g\nprint(g.PI)",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "import geometry as g\nprint(geometry.PI)",
+        "mono": true
+      },
+      {
+        "id": "f",
+        "text": "from geometry import *\nprint(PI)",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "c",
+      "d",
+      "f"
+    ],
+    "explanation": "`import geometry` binds only the name `geometry`, so its contents are reached as `geometry.PI`. `from geometry import PI` (or `import *`) binds `PI` directly in the importer. With an alias (`as g`), only `g` is bound, not `geometry`.",
+    "distractor_notes": {
+      "b": "`import geometry` does not put `PI` in your namespace: use `geometry.PI` (NameError otherwise).",
+      "e": "With `import ... as g` the module is only reachable as `g`: `geometry` is undefined (NameError)."
+    },
+    "slides": [
+      137,
+      138
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": "import sys; sys.path.insert(0, '.')",
+      "files": {
+        "geometry.py": "PI = 3.14\n\ndef area(r):\n    return PI * r * r\n"
+      },
+      "probe_template": "import io, contextlib\nbuf = io.StringIO()\nwith contextlib.redirect_stdout(buf):\n    exec(__OPTION__)\nprint(buf.getvalue() == '3.14\\n')"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0062",
+    "chapter": "S3",
+    "topic": "modules-packages",
+    "tags": [
+      "package",
+      "__init__.py",
+      "submodule"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "A project contains a package `shapes` (a folder holding the two files below) next to `main.py`. What is printed when `main.py` is run?",
+    "code": "# --- shapes/__init__.py ---\nprint(\"init shapes\")\nDEFAULT = \"circle\"\n\n# --- shapes/circle.py ---\ndef area(r):\n    return 3 * r * r\n\n# --- main.py ---\nimport shapes.circle\nprint(shapes.DEFAULT, shapes.circle.area(2))",
+    "options": [
+      {
+        "id": "a",
+        "text": "circle 12",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "ModuleNotFoundError",
+        "mono": true,
+        "out": "!ModuleNotFoundError"
+      },
+      {
+        "id": "c",
+        "text": "It prints `init shapes`, then stops with an AttributeError",
+        "out": "init shapes\n!AttributeError"
+      },
+      {
+        "id": "d",
+        "text": "init shapes\ncircle 12",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "Importing `shapes.circle` first imports the package `shapes`, which executes `shapes/__init__.py` (printing `init shapes` and defining `DEFAULT`), then the submodule `circle`. The name `shapes` is bound in `main.py`, with `circle` as one of its attributes: `3 * 2 * 2 = 12`.",
+    "distractor_notes": {
+      "a": "Importing a package runs its `__init__.py` first.",
+      "b": "`shapes` is a folder containing `__init__.py`: an importable package.",
+      "c": "`import shapes.circle` binds `shapes`, so the names defined in `__init__.py` are reachable."
+    },
+    "slides": [
+      137,
+      138
+    ],
+    "verify": {
+      "mode": "output",
+      "code": "import sys; sys.path.insert(0, '.')\nimport shapes.circle\nprint(shapes.DEFAULT, shapes.circle.area(2))",
+      "files": {
+        "shapes/__init__.py": "print(\"init shapes\")\nDEFAULT = \"circle\"\n",
+        "shapes/circle.py": "def area(r):\n    return 3 * r * r\n"
+      }
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0063",
+    "chapter": "S3",
+    "topic": "modules-packages",
+    "tags": [
+      "ModuleNotFoundError",
+      "import"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "No module called `numpyy` is installed. What is the output of the following code?",
+    "code": "try:\n    import numpyy as np\nexcept ModuleNotFoundError:\n    print(\"missing module\")\nexcept ImportError:\n    print(\"import problem\")",
+    "options": [
+      {
+        "id": "a",
+        "text": "missing module\nimport problem",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "import problem",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "missing module",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "NameError",
+        "mono": true,
+        "out": "!NameError"
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "Importing a module that cannot be found raises `ModuleNotFoundError` (a subclass of `ImportError`). The first matching `except` clause handles it, so only `missing module` is printed.",
+    "distractor_notes": {
+      "a": "Only one `except` clause runs.",
+      "b": "The first clause already matches; `ModuleNotFoundError` is the exact exception raised.",
+      "d": "A failed import raises `ModuleNotFoundError`, which is caught here."
+    },
+    "slides": [
+      137,
+      139
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0064",
+    "chapter": "S3",
+    "topic": "modules-packages",
+    "tags": [
+      "from-import",
+      "binding",
+      "global"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "A project contains the files shown below. What is printed when `main.py` is run (`python main.py`)?",
+    "code": "# --- config.py ---\nlevel = 1\n\ndef bump():\n    global level\n    level += 1\n\n# --- main.py ---\nimport config\nfrom config import level\nconfig.bump()\nprint(level, config.level)",
+    "options": [
+      {
+        "id": "a",
+        "text": "2 2",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "NameError",
+        "mono": true,
+        "out": "!NameError"
+      },
+      {
+        "id": "c",
+        "text": "1 1",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "1 2",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "`from config import level` creates a new name `level` in `main.py`, bound to the value it had at import time (1). `bump()` rebinds `config.level` to 2 inside the module, but the separate name in `main.py` still refers to 1.",
+    "distractor_notes": {
+      "a": "`from ... import` copies the binding at import time; it is not a live link to the module variable.",
+      "b": "Both names exist: `level` (imported) and `config` (the module).",
+      "c": "`config.level` was rebound to 2 by `bump()`."
+    },
+    "slides": [
+      137,
+      138
+    ],
+    "verify": {
+      "mode": "output",
+      "code": "import sys; sys.path.insert(0, '.')\nimport config\nfrom config import level\nconfig.bump()\nprint(level, config.level)",
+      "files": {
+        "config.py": "level = 1\n\ndef bump():\n    global level\n    level += 1\n"
+      }
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0065",
+    "chapter": "S3",
+    "topic": "modules-packages",
+    "tags": [
+      "import-star",
+      "private-names",
+      "NameError"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "A project contains the files shown below. What happens when `main.py` is run?",
+    "code": "# --- util.py ---\ndef public():\n    return \"pub\"\n\ndef _helper():\n    return \"help\"\n\n# --- main.py ---\nfrom util import *\nprint(public())\nprint(_helper())",
+    "options": [
+      {
+        "id": "a",
+        "text": "It prints `pub`, then stops with a NameError",
+        "out": "pub\n!NameError"
+      },
+      {
+        "id": "b",
+        "text": "pub\nhelp",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "It stops with a NameError before printing anything",
+        "out": "!NameError"
+      },
+      {
+        "id": "d",
+        "text": "ImportError",
+        "mono": true,
+        "out": "!ImportError"
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "`from module import *` imports the public names only: names starting with an underscore are skipped (unless listed in `__all__`). `public()` works, but `_helper` is not defined in `main.py`, so the second `print` raises `NameError`.",
+    "distractor_notes": {
+      "b": "Names starting with `_` are treated as private and are not imported by `*`.",
+      "c": "`public` is imported and its call runs first.",
+      "d": "The import itself succeeds; only the later use of `_helper` fails."
+    },
+    "slides": [
+      137,
+      138
+    ],
+    "verify": {
+      "mode": "output",
+      "code": "import sys; sys.path.insert(0, '.')\nfrom util import *\nprint(public())\nprint(_helper())",
+      "files": {
+        "util.py": "def public():\n    return \"pub\"\n\ndef _helper():\n    return \"help\"\n"
+      }
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0066",
+    "chapter": "S3",
+    "topic": "modules-packages",
+    "tags": [
+      "alias",
+      "import",
+      "NameError"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What happens when the following code is run?",
+    "code": "import math as m\nprint(m.sqrt(16))\nprint(math.sqrt(16))",
+    "options": [
+      {
+        "id": "a",
+        "text": "4.0\n4.0",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "4\n4",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "It prints `4.0`, then stops with a NameError",
+        "out": "4.0\n!NameError"
+      },
+      {
+        "id": "d",
+        "text": "It stops with a NameError before printing anything",
+        "out": "!NameError"
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "`import math as m` binds the module to the name `m` only. `m.sqrt(16)` gives `4.0` (`sqrt` returns a float), but the name `math` is not defined, so the second line raises `NameError`.",
+    "distractor_notes": {
+      "a": "With an alias, the original module name is not bound.",
+      "b": "`math.sqrt` returns a float: `4.0`.",
+      "d": "The first `print` runs before the error."
+    },
+    "slides": [
+      137,
+      138
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0067",
+    "chapter": "S3",
+    "topic": "filesystem-paths",
+    "tags": [
+      "os.path",
+      "basename",
+      "splitext"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "import os.path\np = os.path.join(\"data\", \"2024\", \"sales.csv\")\nprint(os.path.basename(p), os.path.splitext(p)[1])",
+    "options": [
+      {
+        "id": "a",
+        "text": "sales .csv",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "sales.csv .csv",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "data/2024 csv",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "sales.csv csv",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "`basename` returns the last component of the path, `'sales.csv'`. `splitext` splits off the extension, which keeps its dot: `('data/2024/sales', '.csv')`, so index 1 is `'.csv'`.",
+    "distractor_notes": {
+      "a": "`basename` keeps the extension; `splitext` is what separates it.",
+      "c": "`basename` returns the last component, not the folder part (that is `dirname`).",
+      "d": "The extension returned by `splitext` includes the dot."
+    },
+    "slides": [
+      134
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0068",
+    "chapter": "S3",
+    "topic": "filesystem-paths",
+    "tags": [
+      "os.path",
+      "dirname",
+      "splitext"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code (on Linux or macOS)?",
+    "code": "import os\npath = os.path.join(\"reports\", \"q1\", \"summary.final.txt\")\nname, ext = os.path.splitext(os.path.basename(path))\nprint(name, ext, os.path.basename(os.path.dirname(path)))",
+    "options": [
+      {
+        "id": "a",
+        "text": "summary .final.txt q1",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "summary.final .txt reports/q1",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "summary.final txt reports",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "summary.final .txt q1",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "`splitext` splits at the **last** dot: `('summary.final', '.txt')`. `dirname(path)` is `'reports/q1'`, whose `basename` is `'q1'`.",
+    "distractor_notes": {
+      "a": "`splitext` splits at the last dot, not the first.",
+      "b": "`basename('reports/q1')` is just `'q1'`.",
+      "c": "The extension keeps its dot, and the folder directly containing the file is `q1`."
+    },
+    "slides": [
+      134
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0069",
+    "chapter": "S3",
+    "topic": "filesystem-paths",
+    "tags": [
+      "getcwd",
+      "chdir",
+      "relative-path"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "The script starts in an empty working directory. What is the output?",
+    "code": "import os\nos.makedirs(os.path.join(\"project\", \"src\"))\nos.chdir(os.path.join(\"project\", \"src\"))\nos.chdir(\"..\")\nprint(os.path.basename(os.getcwd()))\nprint(os.path.exists(\"src\"), os.path.exists(\"project\"))",
+    "options": [
+      {
+        "id": "a",
+        "text": "src\nTrue False",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "project\nTrue False",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "project\nFalse True",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "..\nTrue False",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "`makedirs` creates `project/src`. After `chdir` into `project/src` and then into `..` (the parent), the current working directory is `project`. Relative paths are now resolved from `project`: `src` exists there, but there is no `project` folder inside `project`.",
+    "distractor_notes": {
+      "a": "`'..'` moves up one level, from `src` back to `project`.",
+      "c": "Relative paths are resolved against the new current directory, not the starting one.",
+      "d": "`os.getcwd()` returns the real directory path, never a literal `'..'`."
+    },
+    "slides": [
+      129,
+      134
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0070",
+    "chapter": "S3",
+    "topic": "filesystem-paths",
+    "tags": [
+      "glob",
+      "wildcards"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "The folder `class1` contains `a.py`, `b.py`, `notes.txt` and a subfolder `sub` that contains `c.py`. What is the output (on Linux or macOS)?",
+    "code": "import glob\nfiles = sorted(glob.glob(\"class1/*.py\"))\nprint(files)",
+    "options": [
+      {
+        "id": "a",
+        "text": "['class1/a.py', 'class1/b.py']",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "['class1/a.py', 'class1/b.py', 'class1/sub/c.py']",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "['a.py', 'b.py']",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "['class1/a.py', 'class1/b.py', 'class1/notes.txt']",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "`glob` returns the paths matching the pattern, written like the pattern (so they start with `class1/`). `*` matches names inside one folder only, so `sub/c.py` is not included (that would need `**` with `recursive=True`), and `*.py` excludes `notes.txt`.",
+    "distractor_notes": {
+      "b": "`*` does not cross folder boundaries.",
+      "c": "The returned paths include the folder part of the pattern.",
+      "d": "`*.py` only matches names ending in `.py`."
+    },
+    "slides": [
+      134
+    ],
+    "verify": {
+      "mode": "output",
+      "files": {
+        "class1/a.py": "x = 1\n",
+        "class1/b.py": "x = 2\n",
+        "class1/notes.txt": "notes\n",
+        "class1/sub/c.py": "x = 3\n"
+      }
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0071",
+    "chapter": "S3",
+    "topic": "filesystem-paths",
+    "tags": [
+      "absolute-vs-relative"
+    ],
+    "type": "multi",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "On Linux or macOS, which of the following paths are **relative** paths? Select all that apply.",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "data/file.txt",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "/home/ann/file.txt",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "../file.txt",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "./file.txt",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "/tmp/../file.txt",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "c",
+      "d"
+    ],
+    "explanation": "A path is absolute when it starts at the root `/`, and relative otherwise; a relative path is interpreted from the current working directory. `.` is the current directory and `..` its parent; a `..` inside a path starting with `/` does not make it relative.",
+    "distractor_notes": {
+      "b": "It starts with `/`: absolute.",
+      "e": "It starts with `/`: absolute, even though it contains `..`."
+    },
+    "slides": [
+      129
+    ],
+    "verify": {
+      "mode": "truth",
+      "probe_template": "import posixpath\nprint(not posixpath.isabs(__OPTION__))"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0072",
+    "chapter": "S3",
+    "topic": "filesystem-paths",
+    "tags": [
+      "getcwd",
+      "os.path",
+      "which-is-false"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Which of the following statements is **false**?",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "On Linux or macOS, `os.path.join('a', 'b')` returns `'a/b'`",
+        "probe": "import posixpath\nprint(posixpath.join('a', 'b') != 'a/b')"
+      },
+      {
+        "id": "b",
+        "text": "`'..'` refers to the parent of the current directory",
+        "probe": "import os\nos.makedirs(os.path.join('x', 'y'))\nos.chdir(os.path.join('x', 'y'))\nos.chdir('..')\nprint(os.path.basename(os.getcwd()) != 'x')"
+      },
+      {
+        "id": "c",
+        "text": "`os.getcwd()` always returns the folder that contains the running script",
+        "probe": "import os\nbefore = os.getcwd()\nos.makedirs('sub')\nos.chdir('sub')\nprint(os.getcwd() != before)"
+      },
+      {
+        "id": "d",
+        "text": "`os.path.exists` returns `False` for a missing path instead of raising an error",
+        "probe": "import os\nprint(os.path.exists('missing.txt') is not False)"
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "`os.getcwd()` returns the current working directory: the folder the program was started from, or the one set later with `os.chdir`. It is not necessarily the folder of the script (e.g. `python tools/run.py` started from the project root), and it changes after `os.chdir` while the script does not move.",
+    "distractor_notes": {
+      "a": "True: `join` inserts the OS separator, which is `/` on Linux and macOS.",
+      "b": "True: `.` is the current directory and `..` its parent.",
+      "d": "True: `exists` simply answers `False`."
+    },
+    "slides": [
+      129,
+      134
+    ],
+    "verify": {
+      "mode": "truth"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0073",
+    "chapter": "S3",
+    "topic": "shell-env",
+    "tags": [
+      "shell",
+      "pwd"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "Which shell command displays the path of the current working directory?",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "ls",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "cd",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "pwd",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "cat",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "`pwd` means *print working directory*. `ls` lists the files of a directory, `cd` changes the current directory, and `cat` displays the content of a file.",
+    "distractor_notes": {
+      "a": "`ls` lists the files, it does not show the directory path.",
+      "b": "`cd` changes directory (it prints nothing when it succeeds).",
+      "d": "`cat` displays the content of files."
+    },
+    "slides": [
+      130
+    ],
+    "verify": {
+      "mode": "manual",
+      "reference": "Slides p. 130 (shell commands: pwd = print working directory)"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0074",
+    "chapter": "S3",
+    "topic": "shell-env",
+    "tags": [
+      "environment",
+      "PATH"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the `PATH` environment variable used for?",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "It stores the current working directory"
+      },
+      {
+        "id": "b",
+        "text": "It lists the folders in which the operating system looks for the programs you run"
+      },
+      {
+        "id": "c",
+        "text": "It contains the path of the Python script being executed"
+      },
+      {
+        "id": "d",
+        "text": "It defines the folder where `open()` creates new files"
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "`PATH` is a list of directories (separated by `:` on Linux/macOS, `;` on Windows). When you type a command such as `python`, the system searches these directories, in order, for an executable with that name.",
+    "distractor_notes": {
+      "a": "The current directory is a property of the process (`pwd`, `os.getcwd()`), not `PATH`.",
+      "c": "`PATH` has nothing to do with the script being run.",
+      "d": "Relative file names in `open()` are resolved from the current working directory."
+    },
+    "slides": [
+      131
+    ],
+    "verify": {
+      "mode": "manual",
+      "reference": "Slides p. 131 (environment variables; PATH = where the OS looks for programs)"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0075",
+    "chapter": "S3",
+    "topic": "shell-env",
+    "tags": [
+      "os.environ",
+      "KeyError",
+      "TypeError"
+    ],
+    "type": "multi",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "Assume no environment variable `NOT_DEFINED` exists. Run after the code shown, which of the following lines execute without raising an error? Select all that apply.",
+    "code": "import os",
+    "options": [
+      {
+        "id": "a",
+        "text": "os.environ[\"MY_VAR\"] = \"42\"",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "os.environ[\"MY_VAR\"] = 42",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "value = os.environ.get(\"NOT_DEFINED\")",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "value = os.environ[\"NOT_DEFINED\"]",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "value = os.environ.get(\"NOT_DEFINED\", \"default\")",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "c",
+      "e"
+    ],
+    "explanation": "`os.environ` behaves like a dict of strings: values must be `str` (assigning an int raises `TypeError`), reading a missing variable with `[...]` raises `KeyError`, while `get()` returns `None` or the default you provide.",
+    "distractor_notes": {
+      "b": "Environment values must be strings: `TypeError`.",
+      "d": "A missing variable read with `[...]` raises `KeyError`; use `get()`."
+    },
+    "slides": [
+      131
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": "import os",
+      "probe_template": "__OPTION_RAW__\nprint(True)"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0076",
+    "chapter": "S3",
+    "topic": "shell-env",
+    "tags": [
+      "os.environ",
+      "str-repetition",
+      "KeyError"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "Assume no environment variable `TIMEOUT` is defined. What happens when this code runs?",
+    "code": "import os\nos.environ[\"RETRIES\"] = \"3\"\nn = os.environ[\"RETRIES\"] * 2\nprint(n)\nprint(os.environ[\"TIMEOUT\"])",
+    "options": [
+      {
+        "id": "a",
+        "text": "6\nNone",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "33\nNone",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "It prints `6`, then stops with a KeyError",
+        "out": "6\n!KeyError"
+      },
+      {
+        "id": "d",
+        "text": "It prints `33`, then stops with a KeyError",
+        "out": "33\n!KeyError"
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "Environment variables are always strings, so `\"3\" * 2` is string repetition: `'33'` (convert with `int()` first to compute). Reading a variable that does not exist with `os.environ[...]` raises `KeyError` (`os.environ.get` would return `None`).",
+    "distractor_notes": {
+      "a": "The value is the string `'3'`, and `[...]` does not return `None` for a missing key.",
+      "b": "Indexing a missing key raises `KeyError`; only `get()` returns `None`.",
+      "c": "`'3' * 2` repeats the string: `'33'`."
+    },
+    "slides": [
+      131
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0077",
+    "chapter": "S3",
+    "topic": "time-dates",
+    "tags": [
+      "datetime",
+      "timedelta",
+      "leap-year"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "from datetime import datetime, timedelta\nd = datetime(2024, 3, 1) - timedelta(days=1)\nprint(d.day, d.month)",
+    "options": [
+      {
+        "id": "a",
+        "text": "29 2",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "28 2",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "30 2",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "0 3",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "Subtracting a `timedelta` from a `datetime` gives another `datetime`, computed with the real calendar. 2024 is a leap year, so the day before 1 March 2024 is 29 February.",
+    "distractor_notes": {
+      "b": "2024 is a leap year: February has 29 days.",
+      "c": "February never has 30 days.",
+      "d": "`datetime` moves back into the previous month; there is no day 0."
+    },
+    "slides": [
+      142
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0078",
+    "chapter": "S3",
+    "topic": "time-dates",
+    "tags": [
+      "time",
+      "sleep",
+      "timestamp"
+    ],
+    "type": "multi",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Which of the following statements about the `time` module are true? Select all that apply.",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "`time.time()` returns a float: the number of seconds elapsed since 1 January 1970",
+        "probe": "t = time.time()\nprint(isinstance(t, float) and t > 1.6e9)"
+      },
+      {
+        "id": "b",
+        "text": "`time.sleep(0.2)` pauses the program for (at least) 0.2 seconds",
+        "probe": "t0 = time.monotonic()\ntime.sleep(0.2)\nprint(time.monotonic() - t0 >= 0.15)"
+      },
+      {
+        "id": "c",
+        "text": "`time.time()` returns a `datetime` object",
+        "probe": "print(isinstance(time.time(), datetime))"
+      },
+      {
+        "id": "d",
+        "text": "`time.sleep(2)` returns the number of seconds actually slept",
+        "probe": "print(time.sleep(0) is not None)"
+      }
+    ],
+    "correct": [
+      "a",
+      "b"
+    ],
+    "explanation": "`time.time()` is a timestamp: the number of seconds (a float) since 1 January 1970, so the difference of two timestamps measures a duration. `time.sleep(s)` suspends the program for `s` seconds and returns `None`. Date objects come from the `datetime` module (`datetime.datetime.now()`).",
+    "distractor_notes": {
+      "c": "`time.time()` returns a plain float; use `datetime.datetime.now()` for a datetime object.",
+      "d": "`time.sleep` returns `None`."
+    },
+    "slides": [
+      142
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": "import time\nfrom datetime import datetime"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0079",
+    "chapter": "S3",
+    "topic": "time-dates",
+    "tags": [
+      "datetime",
+      "strftime",
+      "weekday"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "from datetime import datetime\nd = datetime(2024, 7, 14, 9, 5)\nprint(d.strftime(\"%d/%m/%Y %H:%M\"), d.weekday())",
+    "options": [
+      {
+        "id": "a",
+        "text": "14/7/2024 9:5 6",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "14/07/2024 09:05 6",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "14/07/2024 09:05 0",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "14/07/2024 09:05 7",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "`%d`, `%m`, `%H` and `%M` are zero-padded two-digit fields and `%Y` is the 4-digit year. `weekday()` counts from Monday = 0 to Sunday = 6, and 14 July 2024 was a Sunday.",
+    "distractor_notes": {
+      "a": "These directives are zero-padded.",
+      "c": "`weekday()` gives 0 for Monday; Sunday is 6.",
+      "d": "`weekday()` ranges from 0 to 6 (it is `isoweekday()` that gives 7 for Sunday)."
+    },
+    "slides": [
+      142
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0080",
+    "chapter": "S3",
+    "topic": "time-dates",
+    "tags": [
+      "datetime",
+      "hour",
+      "greetings"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "from datetime import datetime\n\ndef greeting(now):\n    if now.hour < 12:\n        return \"Good morning\"\n    elif now.hour < 18:\n        return \"Good afternoon\"\n    elif now.hour < 22:\n        return \"Good evening\"\n    return \"Good night\"\n\nprint(greeting(datetime(2024, 5, 2, 18, 0)))",
+    "options": [
+      {
+        "id": "a",
+        "text": "Good morning",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "Good afternoon",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "Good night",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "Good evening",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "`now.hour` is 18. The conditions are tested in order: `18 < 12` is False, `18 < 18` is False, `18 < 22` is True, so the function returns `'Good evening'`.",
+    "distractor_notes": {
+      "a": "18 is not smaller than 12.",
+      "b": "`18 < 18` is False: hour 18 belongs to the next branch.",
+      "c": "The third condition is already true, so the final `return` is not reached."
+    },
+    "slides": [
+      142,
+      145
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  }
+]

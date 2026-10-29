@@ -1,0 +1,1130 @@
+[
+  {
+    "id": "S2-0091",
+    "chapter": "S2",
+    "topic": "dicts",
+    "tags": [
+      "update",
+      "len"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "stock = {'apple': 20, 'pear': 5}\nstock['apple'] -= 8\nstock['kiwi'] = 3\nprint(len(stock), stock['apple'])",
+    "options": [
+      {
+        "id": "a",
+        "text": "KeyError",
+        "out": "!KeyError"
+      },
+      {
+        "id": "b",
+        "text": "2 12",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "3 20",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "3 12",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "Assigning to an existing key updates its value (20 - 8 = 12); assigning to a new key ('kiwi') adds an entry, so the dict now has 3 keys.",
+    "distractor_notes": {
+      "a": "Only *reading* a missing key raises KeyError; assigning to it creates it.",
+      "b": "Assigning to a missing key creates it.",
+      "c": "`-=` updates the stored value."
+    },
+    "slides": [
+      97
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0092",
+    "chapter": "S2",
+    "topic": "dicts",
+    "tags": [
+      "KeyError",
+      "lookup"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "ages = {'Ann': 31, 'Bob': 25}\nprint(ages['ann'])",
+    "options": [
+      {
+        "id": "a",
+        "text": "31",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "None",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "KeyError",
+        "out": "!KeyError"
+      },
+      {
+        "id": "d",
+        "text": "IndexError",
+        "out": "!IndexError"
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "Keys are compared exactly: 'ann' and 'Ann' are different strings. Looking up a missing key with `[]` raises KeyError.",
+    "distractor_notes": {
+      "a": "String keys are case-sensitive.",
+      "b": "`[]` does not return None for a missing key (that is what `get` does).",
+      "d": "Dicts raise KeyError, not IndexError."
+    },
+    "slides": [
+      97
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0093",
+    "chapter": "S2",
+    "topic": "dicts",
+    "tags": [
+      "get",
+      "default"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "ages = {'Ann': 31}\nprint(ages.get('Bob'), ages.get('Bob', 0), len(ages))",
+    "options": [
+      {
+        "id": "a",
+        "text": "0 0 1",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "KeyError",
+        "out": "!KeyError"
+      },
+      {
+        "id": "c",
+        "text": "None 0 2",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "None 0 1",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "`get(key)` returns None when the key is missing and `get(key, default)` returns the default. get never adds the key, so the dict still has 1 entry.",
+    "distractor_notes": {
+      "a": "Without a default argument, get returns None.",
+      "b": "get never raises KeyError.",
+      "c": "get does not insert the missing key."
+    },
+    "slides": [
+      97
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0094",
+    "chapter": "S2",
+    "topic": "dicts",
+    "tags": [
+      "duplicate-keys",
+      "order"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "d = {'a': 1, 'b': 2, 'a': 3}\nprint(d, len(d))",
+    "options": [
+      {
+        "id": "a",
+        "text": "{'a': 1, 'b': 2} 2",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "{'a': 3, 'b': 2} 2",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "{'b': 2, 'a': 3} 2",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "{'a': 1, 'b': 2, 'a': 3} 3",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "Keys are unique: the second 'a' overwrites the value of the first, but the key keeps the position of its first insertion.",
+    "distractor_notes": {
+      "a": "The later value wins, not the first one.",
+      "c": "Updating the value of a key does not move it to the end.",
+      "d": "A dict cannot hold the same key twice."
+    },
+    "slides": [
+      98
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0095",
+    "chapter": "S2",
+    "topic": "dicts",
+    "tags": [
+      "in",
+      "keys",
+      "values",
+      "items"
+    ],
+    "type": "multi",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Which of the following expressions evaluate to `True`? Select all that apply.",
+    "code": "d = {1: 'one', 2: 'two'}",
+    "options": [
+      {
+        "id": "a",
+        "text": "'one' in d",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "2 in d",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "'two' in d.values()",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "(1, 'one') in d.items()",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "d.get(3) == 0",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b",
+      "c",
+      "d"
+    ],
+    "explanation": "`in` on a dict tests the **keys**; to test values or pairs, use `d.values()` or `d.items()`. `d.get(3)` returns None (not 0) when the key is missing.",
+    "distractor_notes": {
+      "a": "'one' is a value, not a key.",
+      "e": "get returns None by default, and None == 0 is False."
+    },
+    "slides": [
+      97
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": "d = {1: 'one', 2: 'two'}",
+      "probe_template": "print((__OPTION_RAW__) is True)"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0096",
+    "chapter": "S2",
+    "topic": "dicts",
+    "tags": [
+      "hashable",
+      "TypeError"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What happens in the below code?",
+    "code": "d = {}\nd[[1, 2]] = 'pair'\nprint(d)",
+    "options": [
+      {
+        "id": "a",
+        "text": "TypeError",
+        "out": "!TypeError"
+      },
+      {
+        "id": "b",
+        "text": "{(1, 2): 'pair'}",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "{[1, 2]: 'pair'}",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "KeyError",
+        "out": "!KeyError"
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "Dict keys must be hashable; a list is mutable and therefore unhashable, so Python raises `TypeError: unhashable type: 'list'`. Use the tuple `(1, 2)` instead.",
+    "distractor_notes": {
+      "b": "Python does not convert the list into a tuple automatically.",
+      "c": "A list can never be a dict key.",
+      "d": "KeyError is for reading a missing key; here the key itself is invalid."
+    },
+    "slides": [
+      98
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0097",
+    "chapter": "S2",
+    "topic": "dicts",
+    "tags": [
+      "hashable",
+      "conceptual"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "Why can a list **not** be used as a dictionary key?",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "Because dictionary keys must be strings"
+      },
+      {
+        "id": "b",
+        "text": "Because a list can contain duplicate elements"
+      },
+      {
+        "id": "c",
+        "text": "Because a list is mutable, so it is not hashable"
+      },
+      {
+        "id": "d",
+        "text": "Because a list is ordered"
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "A dict finds a key through its hash value, which must never change. Lists can change after creation, so they are unhashable (`hash([1, 2])` raises TypeError), whereas immutable tuples can be keys.",
+    "distractor_notes": {
+      "a": "Keys can be any hashable object: ints, floats, tuples, strings...",
+      "b": "Duplicates inside the key do not matter: (1, 1) is a valid key.",
+      "d": "Tuples are ordered too, and they are valid keys."
+    },
+    "slides": [
+      98
+    ],
+    "verify": {
+      "mode": "manual",
+      "reference": "Slide 98: keys must be unique and immutable; hash([1, 2]) raises TypeError: unhashable type: 'list', tuples are allowed because immutable"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0098",
+    "chapter": "S2",
+    "topic": "dicts",
+    "tags": [
+      "tuple-key"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "dist = {}\ndist[('A', 'B')] = 100\ndist[('B', 'A')] = 120\nprint(len(dist), dist[('A', 'B')])",
+    "options": [
+      {
+        "id": "a",
+        "text": "1 100",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "1 120",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "TypeError",
+        "out": "!TypeError"
+      },
+      {
+        "id": "d",
+        "text": "2 100",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "Tuples are hashable and can be keys. `('A', 'B')` and `('B', 'A')` are different tuples (order matters), so they are two different keys.",
+    "distractor_notes": {
+      "a": "There are two distinct keys.",
+      "b": "Tuples are ordered: ('B', 'A') != ('A', 'B'), so nothing is overwritten.",
+      "c": "Tuples of immutable items are valid keys."
+    },
+    "slides": [
+      98
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0099",
+    "chapter": "S2",
+    "topic": "dicts",
+    "tags": [
+      "iteration",
+      "keys"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "Find the output of the code?",
+    "code": "prices = {'tea': 2, 'cake': 5, 'jam': 3}\ntotal = 0\nfor k in prices:\n    total += prices[k]\nprint(total, list(prices)[1])",
+    "options": [
+      {
+        "id": "a",
+        "text": "10 5",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "10 cake",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "TypeError",
+        "out": "!TypeError"
+      },
+      {
+        "id": "d",
+        "text": "10 ('cake', 5)",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "Iterating over a dict (or calling list() on it) gives its keys, in insertion order. `prices[k]` reads each value: 2 + 5 + 3 = 10, and the second key is 'cake'.",
+    "distractor_notes": {
+      "a": "list(prices) is the list of keys, not of values.",
+      "c": "k is a key (a string) and prices[k] is an int, so the sum works.",
+      "d": "Iterating a dict yields keys, not (key, value) pairs (use .items() for pairs)."
+    },
+    "slides": [
+      97
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0100",
+    "chapter": "S2",
+    "topic": "dicts",
+    "tags": [
+      "iteration",
+      "unpacking",
+      "items"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "d = {'ab': 1, 'cd': 2}\nfor k, v in d:\n    print(k, v, end=' ')",
+    "options": [
+      {
+        "id": "a",
+        "text": "a b c d",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "ab 1 cd 2",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "ValueError",
+        "out": "!ValueError"
+      },
+      {
+        "id": "d",
+        "text": "TypeError",
+        "out": "!TypeError"
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "Looping over a dict yields its **keys** only. Each key is a 2-character string, which unpacks into 2 names: 'ab' gives k = 'a' and v = 'b'. The values 1 and 2 are never used. (With 3-letter keys this would raise ValueError.)",
+    "distractor_notes": {
+      "b": "That needs `for k, v in d.items()`.",
+      "c": "No error here, only because every key has exactly 2 characters.",
+      "d": "Strings are iterable, so unpacking them is allowed."
+    },
+    "slides": [
+      97
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0101",
+    "chapter": "S2",
+    "topic": "dicts",
+    "tags": [
+      "update",
+      "del"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "d = {'x': 1, 'y': 2}\nd.update({'y': 20, 'z': 30})\ndel d['x']\nprint(d)",
+    "options": [
+      {
+        "id": "a",
+        "text": "{'x': 1, 'y': 20, 'z': 30}",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "{'y': 2, 'z': 30}",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "{'y': 20, 'z': 30}",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "KeyError",
+        "out": "!KeyError"
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "`update` overwrites existing keys ('y' becomes 20) and adds new ones ('z'); `del d['x']` removes the key 'x'.",
+    "distractor_notes": {
+      "a": "del removes the 'x' entry.",
+      "b": "update overwrites the value of an existing key.",
+      "d": "'x' exists, so del does not raise."
+    },
+    "slides": [
+      97
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0102",
+    "chapter": "S2",
+    "topic": "dicts",
+    "tags": [
+      "pop",
+      "default"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "d = {'a': 1}\nprint(d.pop('a'), d.pop('b', 0), d)",
+    "options": [
+      {
+        "id": "a",
+        "text": "1 None {}",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "1 0 {}",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "KeyError",
+        "out": "!KeyError"
+      },
+      {
+        "id": "d",
+        "text": "('a', 1) 0 {}",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "`dict.pop(key)` removes the key and returns its value; with a second argument, a missing key returns that default instead of raising KeyError.",
+    "distractor_notes": {
+      "a": "The default given (0) is returned for the missing key.",
+      "c": "pop with a default never raises for a missing key.",
+      "d": "pop returns the value only (popitem returns a pair)."
+    },
+    "slides": [
+      97
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0103",
+    "chapter": "S2",
+    "topic": "dicts",
+    "tags": [
+      "dict()",
+      "zip"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "keys = ['a', 'b', 'c']\nvals = [1, 2]\nd = dict(zip(keys, vals))\nprint(d)",
+    "options": [
+      {
+        "id": "a",
+        "text": "[('a', 1), ('b', 2)]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "{'a': 1, 'b': 2, 'c': None}",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "ValueError",
+        "out": "!ValueError"
+      },
+      {
+        "id": "d",
+        "text": "{'a': 1, 'b': 2}",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "zip pairs keys and values and stops at the shorter list, so 'c' is dropped; dict() turns the pairs into a dictionary.",
+    "distractor_notes": {
+      "a": "dict() converts the pairs into a dict.",
+      "b": "zip does not pad missing values with None.",
+      "c": "zip silently truncates; there is no error."
+    },
+    "slides": [
+      92,
+      97
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0104",
+    "chapter": "S2",
+    "topic": "dicts",
+    "tags": [
+      "get",
+      "counting",
+      "order"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "counts = {}\nfor ch in 'banana':\n    counts[ch] = counts.get(ch, 0) + 1\nprint(counts)",
+    "options": [
+      {
+        "id": "a",
+        "text": "{'b': 1, 'a': 3, 'n': 2}",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "{'a': 3, 'b': 1, 'n': 2}",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "{'b': 1, 'a': 1, 'n': 1}",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "KeyError",
+        "out": "!KeyError"
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "`get(ch, 0)` returns 0 the first time a letter is seen, so each letter is counted without KeyError. Dicts keep insertion order: b, then a, then n.",
+    "distractor_notes": {
+      "b": "Dicts are not sorted; keys appear in insertion order (b first).",
+      "c": "Each later occurrence increments the stored count.",
+      "d": "get with a default avoids the KeyError."
+    },
+    "slides": [
+      97
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0105",
+    "chapter": "S2",
+    "topic": "dicts",
+    "tags": [
+      "order",
+      "true-false"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "True or False: a dictionary remembers the order in which its keys were inserted (Python 3.7 and later).",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "True",
+        "probe": "d = {}\nd['b'] = 1\nd['a'] = 2\nd['c'] = 3\nprint(list(d) == ['b', 'a', 'c'])"
+      },
+      {
+        "id": "b",
+        "text": "False",
+        "probe": "d = {}\nd['b'] = 1\nd['a'] = 2\nd['c'] = 3\nprint(list(d) != ['b', 'a', 'c'])"
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "Since Python 3.7, dicts preserve insertion order: iterating, printing or calling list() gives the keys in the order they were first added (not sorted).",
+    "distractor_notes": {
+      "b": "That was only true in old versions (before 3.7); modern dicts keep insertion order."
+    },
+    "slides": [
+      97
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": ""
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0106",
+    "chapter": "S2",
+    "topic": "dicts",
+    "tags": [
+      "dict()",
+      "creation"
+    ],
+    "type": "multi",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Which of the following expressions build the dictionary `{'a': 1, 'b': 2}`? Select all that apply.",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "dict(a=1, b=2)",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "dict([('a', 1), ('b', 2)])",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "{'a'=1, 'b'=2}",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "dict(zip('ab', [1, 2]))",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "dict(['a', 1], ['b', 2])",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "b",
+      "d"
+    ],
+    "explanation": "dict() accepts keyword arguments, an iterable of (key, value) pairs, or the pairs produced by zip. The literal syntax uses colons, not `=`, and dict() takes at most one positional argument.",
+    "distractor_notes": {
+      "c": "SyntaxError: dict literals use key: value.",
+      "e": "TypeError: dict() expects a single iterable of pairs, not two separate lists."
+    },
+    "slides": [
+      97,
+      107
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": "",
+      "probe_template": "try:\n    x = eval(__OPTION__)\n    print(x == {'a': 1, 'b': 2})\nexcept Exception:\n    print(False)"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0107",
+    "chapter": "S2",
+    "topic": "dicts",
+    "tags": [
+      "hashable",
+      "keys"
+    ],
+    "type": "multi",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "Which of the following can be used as a dictionary key? Select all that apply.",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "(1, 2)",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[1, 2]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "'key'",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "3.5",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "{1, 2}",
+        "mono": true
+      },
+      {
+        "id": "f",
+        "text": "(1, [2])",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "c",
+      "d"
+    ],
+    "explanation": "A key must be hashable: numbers, strings and tuples of hashable items are fine. Lists and sets are mutable, hence unhashable, and a tuple that **contains** a list is unhashable too.",
+    "distractor_notes": {
+      "b": "Lists are mutable: TypeError, unhashable type.",
+      "e": "Sets are mutable, hence unhashable.",
+      "f": "A tuple is hashable only if all its items are; this one contains a list."
+    },
+    "slides": [
+      98
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": "",
+      "probe_template": "try:\n    d = {__OPTION_RAW__: 0}\n    print(True)\nexcept TypeError:\n    print(False)"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0108",
+    "chapter": "S2",
+    "topic": "dicts",
+    "tags": [
+      "keys",
+      "values",
+      "items"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "d = {'x': 10, 'y': 20}\nk = list(d.keys())\nv = list(d.values())\nprint(k[1], v[0], list(d.items())[0])",
+    "options": [
+      {
+        "id": "a",
+        "text": "TypeError",
+        "out": "!TypeError"
+      },
+      {
+        "id": "b",
+        "text": "y 10 ['x', 10]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "x 20 ('x', 10)",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "y 10 ('x', 10)",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "keys(), values() and items() follow the insertion order; converting them with list() allows indexing. Each item is a `(key, value)` **tuple**.",
+    "distractor_notes": {
+      "a": "The views are converted with list() before indexing, so it works.",
+      "b": "items() produces tuples, not lists.",
+      "c": "Index 1 of the keys is 'y' and index 0 of the values is 10."
+    },
+    "slides": [
+      97
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0109",
+    "chapter": "S2",
+    "topic": "stdlib-pip",
+    "tags": [
+      "pip",
+      "requirements.txt"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "Your project lists its dependencies in `requirements.txt`. Which command installs all of them?",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "pip install requirements.txt",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "python requirements.txt",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "pip install -r requirements.txt",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "import requirements",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "`pip install -r <file>` reads the file and installs every package listed in it, with the pinned versions (lines such as `numpy==1.17.3`).",
+    "distractor_notes": {
+      "a": "Without -r, pip looks for a package named 'requirements.txt'.",
+      "b": "requirements.txt is not a Python script.",
+      "d": "import loads a module; it never installs packages."
+    },
+    "slides": [
+      123
+    ],
+    "verify": {
+      "mode": "manual",
+      "reference": "Slide 123: list the dependencies and their versions in requirements.txt, then run pip install -r requirements.txt"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0110",
+    "chapter": "S2",
+    "topic": "stdlib-pip",
+    "tags": [
+      "standard-library",
+      "third-party"
+    ],
+    "type": "multi",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Which of the following modules belong to Python's standard library (available without `pip install`)? Select all that apply.",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "json",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "numpy",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "random",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "pandas",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "itertools",
+        "mono": true
+      },
+      {
+        "id": "f",
+        "text": "requests",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "c",
+      "e"
+    ],
+    "explanation": "json, random and itertools ship with Python (they are listed in the library reference). NumPy, Pandas and requests are third-party packages published on PyPI and must be installed with pip.",
+    "distractor_notes": {
+      "b": "Third-party package: pip install numpy.",
+      "d": "Third-party package: pip install pandas.",
+      "f": "Third-party package: pip install requests."
+    },
+    "slides": [
+      121,
+      125
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": "",
+      "probe_template": "import sys\nprint(__OPTION__ in sys.stdlib_module_names)",
+      "note": "sys.stdlib_module_names exists since Python 3.10 (the verifier runs a recent Python)."
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0111",
+    "chapter": "S2",
+    "topic": "stdlib-pip",
+    "tags": [
+      "pypi",
+      "pip"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is PyPI?",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "A standard-library module that provides the constant π"
+      },
+      {
+        "id": "b",
+        "text": "The Python Package Index, the public repository from which `pip` downloads packages"
+      },
+      {
+        "id": "c",
+        "text": "An implementation of the Python interpreter written in Python"
+      },
+      {
+        "id": "d",
+        "text": "The file that lists the dependencies of a project"
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "PyPI (pypi.org) is the Python Package Index: hundreds of thousands of open-source packages that `pip install <name>` downloads.",
+    "distractor_notes": {
+      "a": "π is math.pi; PyPI has nothing to do with it.",
+      "c": "That is PyPy (note the spelling), an alternative interpreter.",
+      "d": "That is requirements.txt."
+    },
+    "slides": [
+      124
+    ],
+    "verify": {
+      "mode": "manual",
+      "reference": "Slide 124: the Python Package Index (https://pypi.org/) gathers the publicly available packages built by the open-source community"
+    },
+    "reviewed": 1
+  }
+]

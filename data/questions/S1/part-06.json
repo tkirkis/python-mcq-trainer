@@ -1,0 +1,1299 @@
+[
+ {
+  "id": "S1-0115",
+  "chapter": "S1",
+  "topic": "loop-control",
+  "tags": [
+   "break"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "for i in range(10):\n    if i == 3:\n        break\n    print(i, end=\" \")",
+  "options": [
+   {
+    "id": "a",
+    "text": "0 1 2 3",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "3",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "0 1 2 4 5 6 7 8 9",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "0 1 2",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "`break` leaves the loop immediately. When i == 3 the loop stops before the print, so only 0, 1, 2 are printed.",
+  "distractor_notes": {
+   "a": "break happens before print(3).",
+   "b": "The prints of the earlier iterations already happened.",
+   "c": "That is what `continue` would do (skip only 3)."
+  },
+  "slides": [
+   38
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0116",
+  "chapter": "S1",
+  "topic": "loop-control",
+  "tags": [
+   "continue"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "for i in range(1, 8):\n    if i % 3 == 0:\n        continue\n    print(i, end=\" \")",
+  "options": [
+   {
+    "id": "a",
+    "text": "3 6",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "1 2",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "1 2 4 5 7",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "1 2 3 4 5 6 7",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "`continue` skips the rest of the current iteration and goes on with the next value. Multiples of 3 (3 and 6) are skipped; the loop itself goes on until 7.",
+  "distractor_notes": {
+   "a": "The multiples of 3 are the ones skipped, not the ones printed.",
+   "b": "continue does not stop the loop (that is break).",
+   "d": "continue jumps over the print for 3 and 6."
+  },
+  "slides": [
+   38
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0117",
+  "chapter": "S1",
+  "topic": "loop-control",
+  "tags": [
+   "for-else"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "for i in range(3):\n    print(i, end=\" \")\nelse:\n    print(\"done\")",
+  "options": [
+   {
+    "id": "a",
+    "text": "0 1 2",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "0 1 2 done",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "done",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "0 done 1 done 2 done",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "A loop's `else` clause runs once, after the last iteration, when the loop was not interrupted by break. Here there is no break, so 'done' is printed after 0 1 2 (on the same line because of end=' ').",
+  "distractor_notes": {
+   "a": "The else block runs because the loop finished normally.",
+   "c": "The loop body runs first, for every value.",
+   "d": "The else clause runs once, after the loop, not at each iteration."
+  },
+  "slides": [
+   38
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0118",
+  "chapter": "S1",
+  "topic": "loop-control",
+  "tags": [
+   "for-else",
+   "break",
+   "search"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "for n in [3, 7, 9, 11]:\n    if n % 3 != 0:\n        print(\"found\", n)\n        break\nelse:\n    print(\"all multiples of 3\")",
+  "options": [
+   {
+    "id": "a",
+    "text": "found 7\nall multiples of 3",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "found 7\nfound 11",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "all multiples of 3",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "found 7",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "7 is the first value not divisible by 3: it is printed and break exits the loop. Because the loop ended with break, its else clause is skipped.",
+  "distractor_notes": {
+   "a": "The else clause of a loop does not run when the loop is exited by break.",
+   "b": "break stops the loop at the first match.",
+   "c": "7 is not a multiple of 3, so break happens."
+  },
+  "slides": [
+   38
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0119",
+  "chapter": "S1",
+  "topic": "loop-control",
+  "tags": [
+   "for-else",
+   "empty-range",
+   "prime",
+   "hands-on"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "n = 2\nfor d in range(2, n):\n    if n % d == 0:\n        print(\"not prime\")\n        break\nelse:\n    print(\"prime\")",
+  "options": [
+   {
+    "id": "a",
+    "text": "not prime\nprime",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "prime",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "Nothing is printed",
+    "out": ""
+   },
+   {
+    "id": "d",
+    "text": "not prime",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "range(2, 2) is empty, so the body never runs and break is never executed. The else clause runs whenever the loop ends without break - including a loop with zero iterations - so 'prime' is printed.",
+  "distractor_notes": {
+   "a": "The body is never executed.",
+   "c": "The else clause still runs after a loop with zero iterations.",
+   "d": "No divisor is tested: the range is empty."
+  },
+  "slides": [
+   38,
+   56
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0120",
+  "chapter": "S1",
+  "topic": "loop-control",
+  "tags": [
+   "while-else",
+   "break"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "i = 0\nwhile i < 5:\n    if i == 5:\n        break\n    i += 1\nelse:\n    print(\"else\", i)\nprint(\"end\", i)",
+  "options": [
+   {
+    "id": "a",
+    "text": "end 4",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "else 4\nend 4",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "else 5\nend 5",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "end 5",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "Inside the loop i is at most 4 when tested, so `i == 5` is never true and break never runs. The loop ends because `i < 5` becomes False (i = 5), so the while's else clause runs, then 'end 5'.",
+  "distractor_notes": {
+   "a": "i is 5 at the end, and the else clause runs.",
+   "b": "i is incremented to 5 before the condition fails.",
+   "d": "The loop ended normally (condition False), so its else clause runs."
+  },
+  "slides": [
+   38
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0121",
+  "chapter": "S1",
+  "topic": "loop-control",
+  "tags": [
+   "break",
+   "nested-loops"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "for i in range(3):\n    for j in range(3):\n        if j == 1:\n            break\n        print(i, j)",
+  "options": [
+   {
+    "id": "a",
+    "text": "0 0",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "0 0\n0 1\n1 0\n1 1\n2 0\n2 1",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "0 0\n0 2\n1 0\n1 2\n2 0\n2 2",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "0 0\n1 0\n2 0",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "`break` only exits the **innermost** loop. For each i, the inner loop prints (i, 0) and stops at j == 1; the outer loop then continues with the next i.",
+  "distractor_notes": {
+   "a": "break does not exit the outer loop.",
+   "b": "break happens before print when j == 1.",
+   "c": "That would be continue (skipping only j == 1)."
+  },
+  "slides": [
+   38,
+   37
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0122",
+  "chapter": "S1",
+  "topic": "loop-control",
+  "tags": [
+   "continue",
+   "while",
+   "infinite-loop"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "i = 0\nwhile i < 5:\n    if i == 2:\n        continue\n    print(i)\n    i += 1",
+  "options": [
+   {
+    "id": "a",
+    "text": "0\n1",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "0\n1\n3\n4",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "0 and 1 are printed, then the loop never ends",
+    "out": "!Timeout"
+   },
+   {
+    "id": "d",
+    "text": "0\n1\n2\n3\n4",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "When i == 2, continue jumps back to the test **before** `i += 1` is reached. i stays 2 forever: an infinite loop after printing 0 and 1. In a while loop, update the counter before continue.",
+  "distractor_notes": {
+   "a": "The program does not stop after 1: it keeps looping without printing.",
+   "b": "Would be true with a for loop over range(5); here the increment is skipped by continue.",
+   "d": "continue skips the print when i == 2, and i never moves past 2."
+  },
+  "slides": [
+   38,
+   39
+  ],
+  "verify": {
+   "mode": "output",
+   "timeout": 2
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0123",
+  "chapter": "S1",
+  "topic": "loop-control",
+  "tags": [
+   "break",
+   "continue",
+   "loop-else"
+  ],
+  "type": "multi",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Which of the following statements are true? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "`continue` ends the loop immediately.",
+    "probe": "out = []\nfor i in range(3):\n    if i == 0:\n        continue\n    out.append(i)\nprint(out == [])"
+   },
+   {
+    "id": "b",
+    "text": "The `else` clause of a loop runs only if the loop was not exited by `break`.",
+    "probe": "r = []\nfor i in range(2):\n    pass\nelse:\n    r.append('a')\nfor i in range(2):\n    break\nelse:\n    r.append('b')\nprint(r == ['a'])"
+   },
+   {
+    "id": "c",
+    "text": "`break` may be used in an `if` statement that is not inside any loop.",
+    "probe": "try:\n    compile('if True:\\n    break\\n', 'q', 'exec')\n    print(True)\nexcept SyntaxError:\n    print(False)"
+   },
+   {
+    "id": "d",
+    "text": "`break` exits only the innermost loop that contains it.",
+    "probe": "out = []\nfor i in range(2):\n    for j in range(3):\n        if j == 1:\n            break\n        out.append((i, j))\nprint(out == [(0, 0), (1, 0)])"
+   }
+  ],
+  "correct": [
+   "b",
+   "d"
+  ],
+  "explanation": "break leaves the innermost enclosing loop, continue only skips to the next iteration, and the loop's else clause is skipped when break was executed. break and continue are only valid inside a loop (SyntaxError otherwise).",
+  "distractor_notes": {
+   "a": "continue skips the rest of the current iteration only; the loop goes on.",
+   "c": "'break' outside loop is a SyntaxError."
+  },
+  "slides": [
+   38
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": ""
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0124",
+  "chapter": "S1",
+  "topic": "loop-control",
+  "tags": [
+   "for-else",
+   "while-else",
+   "break",
+   "continue"
+  ],
+  "type": "multi",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "For which of the following loops is the `else` block executed? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "while True:\n    break\nelse:\n    print('ELSE')",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "for i in range(3):\n    if i == 1:\n        break\nelse:\n    print('ELSE')",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "i = 0\nwhile i < 3:\n    i += 1\n    continue\nelse:\n    print('ELSE')",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "for i in range(3):\n    if i == 5:\n        break\nelse:\n    print('ELSE')",
+    "mono": true
+   },
+   {
+    "id": "e",
+    "text": "for i in range(3):\n    pass\nelse:\n    print('ELSE')",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c",
+   "d",
+   "e"
+  ],
+  "explanation": "A loop's else block runs when the loop terminates normally (iterable exhausted, or while condition False), and is skipped only when a break is actually executed. continue has no effect on it, and a break that is never reached does not count.",
+  "distractor_notes": {
+   "a": "The while True loop can only end through break, so its else never runs.",
+   "b": "break is executed when i == 1, so else is skipped."
+  },
+  "slides": [
+   38
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "",
+   "probe_template": "import io, contextlib\n_buf = io.StringIO()\nwith contextlib.redirect_stdout(_buf):\n    exec(__OPTION__, {})\nprint('ELSE' in _buf.getvalue())"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0125",
+  "chapter": "S1",
+  "topic": "loop-control",
+  "tags": [
+   "while-true",
+   "break"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "total = 0\nn = 1\nwhile True:\n    total += n\n    if total > 10:\n        break\n    n += 1\nprint(n, total)",
+  "options": [
+   {
+    "id": "a",
+    "text": "5 15",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "6 21",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "4 10",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "5 10",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "total takes the values 1, 3, 6, 10, 15. At 15 (> 10) the loop breaks **before** n is incremented, so n is still 5. `while True` + `break` is Python's way to write a do...until loop.",
+  "distractor_notes": {
+   "b": "break happens before `n += 1`, and no further iteration runs.",
+   "c": "10 > 10 is False: the loop continues once more.",
+   "d": "total is 15 when the loop stops (10 + 5)."
+  },
+  "slides": [
+   38,
+   39
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0126",
+  "chapter": "S1",
+  "topic": "loop-control",
+  "tags": [
+   "break",
+   "continue",
+   "strings"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "word = \"banana\"\ncount = 0\nfor ch in word:\n    if ch == \"n\":\n        break\n    if ch == \"a\":\n        continue\n    count += 1\nprint(count)",
+  "options": [
+   {
+    "id": "a",
+    "text": "0",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "1",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "2",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "3",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "'b' is counted (count = 1); the first 'a' is skipped by continue; at the first 'n' the loop breaks. The remaining characters are never visited.",
+  "distractor_notes": {
+   "a": "'b' reaches `count += 1`.",
+   "c": "Would count the 'n' as well; but break happens before `count += 1` for the first 'n'.",
+   "d": "Counts the 'a' characters; continue skips them instead."
+  },
+  "slides": [
+   38
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0127",
+  "chapter": "S1",
+  "topic": "functions-basics",
+  "tags": [
+   "return",
+   "loops"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "def f(n):\n    for i in range(n):\n        return i\n    return -1\n\nprint(f(5), f(0))",
+  "options": [
+   {
+    "id": "a",
+    "text": "0 None",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "4 -1",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "0 -1",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "4 None",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "`return` ends the function immediately, even inside a loop: f(5) returns 0 at the first iteration. For f(0) the loop body never runs, so execution reaches `return -1`.",
+  "distractor_notes": {
+   "a": "With n = 0 the final `return -1` is reached.",
+   "b": "return does not wait for the loop to finish.",
+   "d": "Both mistakes: return exits at the first iteration, and f(0) returns -1."
+  },
+  "slides": [
+   29,
+   42,
+   63
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0128",
+  "chapter": "S1",
+  "topic": "functions-basics",
+  "tags": [
+   "return",
+   "dead-code"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "def square(x):\n    return x * x\n    print(\"done\")\n\nprint(square(4))",
+  "options": [
+   {
+    "id": "a",
+    "text": "None",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "16",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "16\ndone",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "done\n16",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "`return` leaves the function at once, so the print after it is never executed (dead code). The returned value 16 is printed by the caller.",
+  "distractor_notes": {
+   "a": "The function returns x * x = 16.",
+   "c": "Same: the function has already returned.",
+   "d": "Code after return in the same block never runs."
+  },
+  "slides": [
+   29,
+   42,
+   63
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0129",
+  "chapter": "S1",
+  "topic": "functions-basics",
+  "tags": [
+   "rebinding",
+   "functions-as-values"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "def f():\n    return 1\n\ng = f\n\ndef f():\n    return 2\n\nprint(f(), g())",
+  "options": [
+   {
+    "id": "a",
+    "text": "2 2",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "1 1",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "2 1",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "1 2",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "`def` binds a name to a function object. `g = f` binds g to the first function. The second def rebinds the name f to a new function, but g still refers to the first one.",
+  "distractor_notes": {
+   "a": "g refers to the function object, not to the name f.",
+   "b": "The second def rebinds f.",
+   "d": "Swapped: f is the new function, g the old one."
+  },
+  "slides": [
+   42
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0130",
+  "chapter": "S1",
+  "topic": "functions-basics",
+  "tags": [
+   "shadowing",
+   "builtins",
+   "TypeError"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "len = 5\nprint(len(\"abc\"))",
+  "options": [
+   {
+    "id": "a",
+    "text": "3",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "5",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "NameError",
+    "out": "!NameError"
+   },
+   {
+    "id": "d",
+    "text": "TypeError",
+    "out": "!TypeError"
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "Built-in function names are ordinary names: `len = 5` rebinds `len` to an int (shadowing the built-in). Calling an int raises TypeError ('int' object is not callable).",
+  "distractor_notes": {
+   "a": "The built-in len is no longer reachable through the name len.",
+   "b": "len is now 5, but `5('abc')` is a call, which fails.",
+   "c": "The name len exists: it refers to 5."
+  },
+  "slides": [
+   42,
+   63
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0131",
+  "chapter": "S1",
+  "topic": "functions-basics",
+  "tags": [
+   "NameError",
+   "definition-order"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "print(double(4))\n\ndef double(x):\n    return 2 * x",
+  "options": [
+   {
+    "id": "a",
+    "text": "None",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "8",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "SyntaxError",
+    "out": "!SyntaxError"
+   },
+   {
+    "id": "d",
+    "text": "NameError",
+    "out": "!NameError"
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "A script is executed from top to bottom. When print(double(4)) runs, the `def` statement has not been executed yet, so the name double does not exist: NameError.",
+  "distractor_notes": {
+   "a": "The call fails before anything is returned.",
+   "b": "Would work if the def came first.",
+   "c": "The code is syntactically fine; the error happens at run time."
+  },
+  "slides": [
+   42
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0132",
+  "chapter": "S1",
+  "topic": "functions-basics",
+  "tags": [
+   "None",
+   "implicit-return"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "def sign(x):\n    if x > 0:\n        return \"positive\"\n    elif x < 0:\n        return \"negative\"\n\nprint(sign(0))",
+  "options": [
+   {
+    "id": "a",
+    "text": "negative",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "Nothing is printed",
+    "out": ""
+   },
+   {
+    "id": "c",
+    "text": "None",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "positive",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "For x = 0 neither branch runs, so the function reaches its end without a return statement and implicitly returns None. print then displays None.",
+  "distractor_notes": {
+   "a": "0 < 0 is False.",
+   "b": "print(None) still prints the word None.",
+   "d": "0 > 0 is False."
+  },
+  "slides": [
+   29,
+   42,
+   63
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0133",
+  "chapter": "S1",
+  "topic": "functions-basics",
+  "tags": [
+   "builtins",
+   "return-values"
+  ],
+  "type": "multi",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "Which of the following calls return a value of type `int`? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "float(3)",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "len(\"abc\")",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "type(3)",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "round(2.7)",
+    "mono": true
+   },
+   {
+    "id": "e",
+    "text": "int(\"12\")",
+    "mono": true
+   },
+   {
+    "id": "f",
+    "text": "print(3)",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b",
+   "d",
+   "e"
+  ],
+  "explanation": "len() and int() return ints, and round() with a single argument returns an int (3). float() returns a float, type() returns a class (the type int itself, not an int), and print() returns None.",
+  "distractor_notes": {
+   "a": "float(3) is 3.0, a float.",
+   "c": "type(3) returns the class int, which is not itself an int value.",
+   "f": "print displays 3 but returns None."
+  },
+  "slides": [
+   31,
+   63,
+   28
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "",
+   "probe_template": "_v = __OPTION_RAW__\nprint(type(_v) is int)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0134",
+  "chapter": "S1",
+  "topic": "functions-basics",
+  "tags": [
+   "parameters",
+   "arguments"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "def area(radius):\n    pi = 3\n    return pi * radius * radius\n\nradius = 2\nprint(area(radius + 1))",
+  "options": [
+   {
+    "id": "a",
+    "text": "36",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "27",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "13",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "12",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "The argument expression radius + 1 is evaluated first (3) and bound to the parameter radius inside the function: 3 * 3 * 3 = 27.",
+  "distractor_notes": {
+   "a": "Computes 3 * 3 * 4: the same parameter value is used twice.",
+   "c": "Adds 1 to the result instead of to the argument.",
+   "d": "Uses radius = 2: the argument is radius + 1 = 3."
+  },
+  "slides": [
+   42
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0135",
+  "chapter": "S1",
+  "topic": "functions-basics",
+  "tags": [
+   "parameters",
+   "TypeError"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "def greet(name, greeting):\n    return greeting + \", \" + name\n\nprint(greet(\"Ana\"))",
+  "options": [
+   {
+    "id": "a",
+    "text": ", Ana",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "TypeError",
+    "out": "!TypeError"
+   },
+   {
+    "id": "c",
+    "text": "Ana",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "NameError",
+    "out": "!NameError"
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "greet has two parameters without default values, so it must be called with two arguments. A missing argument raises TypeError (missing 1 required positional argument).",
+  "distractor_notes": {
+   "a": "Parameters do not default to an empty string.",
+   "c": "A missing parameter is not ignored.",
+   "d": "The function is defined; the problem is the number of arguments."
+  },
+  "slides": [
+   42
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0136",
+  "chapter": "S1",
+  "topic": "functions-basics",
+  "tags": [
+   "print-vs-return",
+   "None"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "x = print(\"hi\")\nprint(x)",
+  "options": [
+   {
+    "id": "a",
+    "text": "hi",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "hi\nhi",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "hi\nNone",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "None",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "print displays its argument but has no explicit return value: it returns None. So the first line prints hi and binds x to None; the second line prints None.",
+  "distractor_notes": {
+   "a": "The second print displays the value of x, None.",
+   "b": "print does not return the text it displays.",
+   "d": "The first print still displays hi."
+  },
+  "slides": [
+   29,
+   63
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0137",
+  "chapter": "S1",
+  "topic": "functions-basics",
+  "tags": [
+   "return",
+   "None",
+   "def"
+  ],
+  "type": "multi",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Which of the following statements are true? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "`print()` returns the text it displays.",
+    "probe": "import io, contextlib\nwith contextlib.redirect_stdout(io.StringIO()):\n    r = print('x')\nprint(r == 'x')"
+   },
+   {
+    "id": "b",
+    "text": "A function without a `return` statement returns `None`.",
+    "probe": "def f():\n    x = 1\nprint(f() is None)"
+   },
+   {
+    "id": "c",
+    "text": "A function can be bound to another name and called through it.",
+    "probe": "def f():\n    return 3\ng = f\nprint(g() == 3)"
+   },
+   {
+    "id": "d",
+    "text": "The body of a function is executed when the `def` statement runs.",
+    "probe": "calls = []\ndef f():\n    calls.append(1)\nprint(len(calls) == 1)"
+   }
+  ],
+  "correct": [
+   "b",
+   "c"
+  ],
+  "explanation": "Falling off the end of a function returns None. Functions are values bound to names, so they can be rebound (`g = f`). `def` only creates the function: its body runs when the function is called. print() returns None.",
+  "distractor_notes": {
+   "a": "print returns None; it only displays text.",
+   "d": "def creates the function object; the body runs at each call."
+  },
+  "slides": [
+   29,
+   42
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": ""
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0138",
+  "chapter": "S1",
+  "topic": "functions-basics",
+  "tags": [
+   "print-vs-return",
+   "definition"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the difference between `return` and `print` in a function?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "`return` sends a value back to the caller; `print` only displays text and the function then returns None.",
+    "probe": "import io, contextlib\ndef f():\n    return 5\ndef g():\n    print(5)\n_buf = io.StringIO()\nwith contextlib.redirect_stdout(_buf):\n    rf = f()\n    rg = g()\nprint(rf == 5 and rg is None and _buf.getvalue() == '5\\n')"
+   },
+   {
+    "id": "b",
+    "text": "There is none: both make the value available to the caller.",
+    "probe": "import io, contextlib\ndef f():\n    return 5\ndef g():\n    print(5)\n_buf = io.StringIO()\nwith contextlib.redirect_stdout(_buf):\n    rf = f()\n    rg = g()\nprint(rf == rg)"
+   },
+   {
+    "id": "c",
+    "text": "`print` ends the execution of the function, like `return`.",
+    "probe": "import io, contextlib\ndef h():\n    print('x')\n    return 2\nwith contextlib.redirect_stdout(io.StringIO()):\n    r = h()\nprint(r != 2)"
+   },
+   {
+    "id": "d",
+    "text": "`return` displays the value on the screen.",
+    "probe": "import io, contextlib\ndef f():\n    return 5\n_buf = io.StringIO()\nwith contextlib.redirect_stdout(_buf):\n    f()\nprint(_buf.getvalue() != '')"
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "`return value` ends the function and hands the value to the caller, who can store or reuse it; it prints nothing. `print(...)` writes text to the terminal and execution continues; a function that only prints returns None.",
+  "distractor_notes": {
+   "b": "A function that only prints returns None to its caller.",
+   "c": "print does not stop the function.",
+   "d": "return does not display anything (the REPL echoes values, a script does not)."
+  },
+  "slides": [
+   29,
+   42
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": ""
+  },
+  "reviewed": 1
+ }
+]

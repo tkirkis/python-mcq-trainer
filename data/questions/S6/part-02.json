@@ -1,0 +1,1098 @@
+[
+ {
+  "id": "S6-0021",
+  "chapter": "S6",
+  "topic": "numpy-axes",
+  "tags": [
+   "axis",
+   "mean",
+   "image"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "An RGB image loaded with `plt.imread` is an array of shape (height, width, 3). What is the output of the following code?",
+  "code": "import numpy as np\nimg = np.ones((480, 640, 3))\ngray = img.mean(axis=2)\nprint(gray.shape)",
+  "options": [
+   {
+    "id": "a",
+    "text": "(480, 640)",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "(640, 3)",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "(480, 640, 1)",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "(3,)",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "Averaging over axis 2 (the 3 colour channels) replaces the 3 values of each pixel by one and removes that axis: a (480, 640) grayscale image.",
+  "distractor_notes": {
+   "c": "The reduced axis is dropped, not kept with length 1.",
+   "b": "That would be the result of reducing axis 0 (the height).",
+   "d": "That is one mean per channel, i.e. reducing axes 0 and 1."
+  },
+  "slides": [
+   219,
+   246
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0022",
+  "chapter": "S6",
+  "topic": "numpy-axes",
+  "tags": [
+   "axis",
+   "max",
+   "sum"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "import numpy as np\nt = np.array([[4, 1, 6],\n              [2, 8, 3]])\nprint(t.max(axis=1).sum(), t.max(axis=0).sum())",
+  "options": [
+   {
+    "id": "a",
+    "text": "8 8",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "18 14",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "14 18",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "14 14",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "`t.max(axis=1)` gives the max of each row, [6 8], whose sum is 14. `t.max(axis=0)` gives the max of each column, [4 8 6], whose sum is 18.",
+  "distractor_notes": {
+   "b": "The axes are swapped: `axis=0` produces one value per column.",
+   "d": "Row maxima and column maxima are different sets of values.",
+   "a": "8 is the overall maximum, but `.sum()` adds the per-row or per-column maxima."
+  },
+  "slides": [
+   219
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0023",
+  "chapter": "S6",
+  "topic": "numpy-axes",
+  "tags": [
+   "axis",
+   "shape",
+   "transpose"
+  ],
+  "type": "multi",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "Given `a = np.array([[1, 2], [3, 4], [5, 6]])`, which expressions return an array of shape `(3,)`? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "a.sum(axis=1)",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "a.sum(axis=0)",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "a.mean(axis=1)",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "a.min()",
+    "mono": true
+   },
+   {
+    "id": "e",
+    "text": "a.T.max(axis=0)",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a",
+   "c",
+   "e"
+  ],
+  "explanation": "`a` has shape (3, 2). Reducing axis 1 keeps the 3 rows, giving shape (3,). `a.T` has shape (2, 3), so reducing its axis 0 also leaves (3,).",
+  "distractor_notes": {
+   "b": "`axis=0` collapses the 3 rows: one value per column, shape (2,).",
+   "d": "Without axis the whole array is reduced to a single scalar (shape `()`)."
+  },
+  "slides": [
+   219
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "import numpy as np\na = np.array([[1, 2], [3, 4], [5, 6]])",
+   "probe_template": "print(np.shape(__OPTION_RAW__) == (3,))"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0024",
+  "chapter": "S6",
+  "topic": "numpy-axes",
+  "tags": [
+   "axis",
+   "max"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "Given the array `t` below, which call returns `[8 6 9]`?",
+  "code": "import numpy as np\nt = np.array([[8, 2, 5],\n              [1, 6, 4],\n              [9, 3, 7]])",
+  "options": [
+   {
+    "id": "a",
+    "text": "t.max(axis=1)",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "t.max()",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "t.max(axis=None)",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "t.max(axis=0)",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "[8 6 9] are the row maxima (one value per row), so the columns are collapsed: `axis=1`. `axis=0` gives the column maxima [9 6 7], and no axis (or `axis=None`) gives the single value 9.",
+  "distractor_notes": {
+   "d": "`axis=0` gives one value per column: [9 6 7].",
+   "b": "Without axis the result is the overall maximum, 9.",
+   "c": "`axis=None` is the default: overall maximum 9."
+  },
+  "slides": [
+   219
+  ],
+  "verify": {
+   "mode": "truth",
+   "probe_template": "print(np.array_equal(__OPTION_RAW__, [8, 6, 9]))"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0025",
+  "chapter": "S6",
+  "topic": "numpy-indexing",
+  "tags": [
+   "indexing",
+   "2D"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "import numpy as np\na = np.array([[1, 2, 3],\n              [4, 5, 6],\n              [7, 8, 9]])\nprint(a[1, 2])",
+  "options": [
+   {
+    "id": "a",
+    "text": "8",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "2",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "IndexError",
+    "out": "!IndexError"
+   },
+   {
+    "id": "d",
+    "text": "6",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "`a[row, column]` uses 0-based indices for each axis: row 1 is [4 5 6] and its element at column 2 is 6.",
+  "distractor_notes": {
+   "a": "8 is `a[2, 1]`: row and column swapped.",
+   "b": "2 is `a[0, 1]`: that counts rows and columns from 1 instead of 0.",
+   "c": "NumPy accepts one comma-separated index per axis, and both indices are in range."
+  },
+  "slides": [
+   220,
+   221
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0026",
+  "chapter": "S6",
+  "topic": "numpy-indexing",
+  "tags": [
+   "slicing",
+   "column"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What will be the output of the code?",
+  "code": "import numpy as np\nm = np.array([[10, 20, 30],\n              [40, 50, 60]])\nprint(m[:, 1])",
+  "options": [
+   {
+    "id": "a",
+    "text": "[[20]\n [50]]",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "[40 50 60]",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "[10 20 30]",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "[20 50]",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "`:` selects every row and `1` selects column 1, so you get the second column, [20 50]. Because the column is given as a single integer, that axis disappears: the result is 1D.",
+  "distractor_notes": {
+   "b": "That is row 1 (`m[1]` or `m[1, :]`).",
+   "a": "An integer index gives a 1D result; `m[:, 1:2]` would keep a 2D column.",
+   "c": "That is row 0."
+  },
+  "slides": [
+   220,
+   221
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0027",
+  "chapter": "S6",
+  "topic": "numpy-indexing",
+  "tags": [
+   "slicing",
+   "shape",
+   "1D-vs-2D"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "import numpy as np\na = np.arange(12).reshape(3, 4)\nprint(a[:, 1].shape, a[:, 1:2].shape)",
+  "options": [
+   {
+    "id": "a",
+    "text": "(1, 3) (3, 1)",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "(3,) (3, 1)",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "(3, 1) (3, 1)",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "(3,) (3,)",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "An integer index removes its axis, so `a[:, 1]` is 1D with shape (3,). A slice keeps the axis even if it has length 1, so `a[:, 1:2]` is a 2D column of shape (3, 1).",
+  "distractor_notes": {
+   "c": "The integer index drops the column axis.",
+   "d": "A slice of length 1 still keeps its axis.",
+   "a": "A 1D array has shape (3,), not (1, 3)."
+  },
+  "slides": [
+   220,
+   221
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0028",
+  "chapter": "S6",
+  "topic": "numpy-indexing",
+  "tags": [
+   "view",
+   "slicing",
+   "mutability"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Find the output of the code?",
+  "code": "import numpy as np\na = np.array([1, 2, 3, 4, 5])\nb = a[1:3]\nb[0] = 99\nprint(a)",
+  "options": [
+   {
+    "id": "a",
+    "text": "[ 1 99  3  4  5]",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "[99  2  3  4  5]",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "[1 2 3 4 5]",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "[ 1  2 99  4  5]",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "Basic slicing of a NumPy array returns a **view** on the same data (unlike list slicing, which copies). `b[0]` is the same memory cell as `a[1]`, so the original array changes.",
+  "distractor_notes": {
+   "c": "That would be true for a Python list; an array slice is a view, not a copy.",
+   "b": "`b` starts at `a[1]`, not at `a[0]`.",
+   "d": "`b[0]` is the first element of the slice, i.e. index 1 of `a`, not index 2."
+  },
+  "slides": [
+   220,
+   221
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0029",
+  "chapter": "S6",
+  "topic": "numpy-indexing",
+  "tags": [
+   "fancy-indexing",
+   "copy",
+   "view"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following snippet?",
+  "code": "import numpy as np\na = np.arange(5)\nb = a[[0, 2, 4]]\nb *= 10\nprint(a.sum(), b.sum())",
+  "options": [
+   {
+    "id": "a",
+    "text": "10 60",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "10 6",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "64 60",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "60 60",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "Indexing with a list of positions (fancy indexing) returns a new array, a copy, not a view. Multiplying `b` in place leaves `a` untouched: `a` still sums to 0+1+2+3+4 = 10, and `b` = [0 20 40] sums to 60.",
+  "distractor_notes": {
+   "c": "That is what a view would give (`a` would become [0 1 20 3 40]); fancy indexing copies.",
+   "d": "`a` is not modified, so its sum is still 10.",
+   "b": "`b *= 10` really multiplies `b` in place: [0 20 40]."
+  },
+  "slides": [
+   220,
+   221
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0030",
+  "chapter": "S6",
+  "topic": "numpy-indexing",
+  "tags": [
+   "indexing",
+   "list-vs-array",
+   "TypeError"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "import numpy as np\nlst = [[1, 2, 3], [4, 5, 6]]\narr = np.array(lst)\nprint(arr[1, 2])\nprint(lst[1, 2])",
+  "options": [
+   {
+    "id": "a",
+    "text": "6\n6",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "TypeError",
+    "out": "!TypeError"
+   },
+   {
+    "id": "c",
+    "text": "6\nIndexError",
+    "mono": true,
+    "out": "6\n!IndexError"
+   },
+   {
+    "id": "d",
+    "text": "6\nTypeError",
+    "mono": true,
+    "out": "6\n!TypeError"
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "NumPy arrays take one index per axis separated by commas, so `arr[1, 2]` is 6. A Python list does not: `lst[1, 2]` passes the tuple (1, 2) as the index and raises TypeError (list indices must be integers or slices). For a list write `lst[1][2]`.",
+  "distractor_notes": {
+   "a": "Lists do not support comma-separated multi-axis indexing.",
+   "b": "`arr[1, 2]` is valid and is printed before the error.",
+   "c": "The problem is the type of the index (a tuple), not an out-of-range position: TypeError."
+  },
+  "slides": [
+   220
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0031",
+  "chapter": "S6",
+  "topic": "numpy-indexing",
+  "tags": [
+   "slicing",
+   "subarray"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What will be the output of the code?",
+  "code": "import numpy as np\na = np.arange(1, 10).reshape(3, 3)\nprint(a[1:3, 0:2])",
+  "options": [
+   {
+    "id": "a",
+    "text": "[[1 2]\n [4 5]]",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "[[2 3]\n [5 6]]",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "[[4 5]\n [7 8]]",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "[[4 5 6]\n [7 8 9]]",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "`a` is [[1 2 3] [4 5 6] [7 8 9]]. The first slice keeps rows 1 and 2 (end excluded), the second keeps columns 0 and 1.",
+  "distractor_notes": {
+   "d": "The column slice `0:2` is ignored: only 2 columns are kept.",
+   "b": "That is `a[0:2, 1:3]`: row and column slices swapped.",
+   "a": "That is `a[0:2, 0:2]`: `1:3` starts at the second row."
+  },
+  "slides": [
+   221
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0032",
+  "chapter": "S6",
+  "topic": "numpy-indexing",
+  "tags": [
+   "slicing",
+   "negative-step"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "import numpy as np\na = np.arange(10)\nprint(a[::-3])",
+  "options": [
+   {
+    "id": "a",
+    "text": "[9 6 3 0]",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "[0 3 6 9]",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "[7 4 1]",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "[9 6 3]",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "With a negative step and no start/stop, the slice starts at the last element and walks backwards to the beginning: 9, 6, 3, 0 (index 0 is reached, so it is included).",
+  "distractor_notes": {
+   "d": "Without an explicit stop the slice goes all the way to the start, so 0 is included.",
+   "b": "A negative step reverses the order.",
+   "c": "The walk starts at the last element (9), not at 7."
+  },
+  "slides": [
+   221
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0033",
+  "chapter": "S6",
+  "topic": "numpy-indexing",
+  "tags": [
+   "indexing",
+   "negative-index",
+   "step"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Find the output of the code?",
+  "code": "import numpy as np\na = np.arange(12).reshape(3, 4)\nprint(a[-1, ::2])",
+  "options": [
+   {
+    "id": "a",
+    "text": "[ 8 10]",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "[ 9 11]",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "[ 8  9 10 11]",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "[ 3 11]",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "`a` is [[0 1 2 3] [4 5 6 7] [8 9 10 11]]. `-1` selects the last row [8 9 10 11] and `::2` keeps every second column starting at column 0: 8 and 10.",
+  "distractor_notes": {
+   "b": "`::2` starts at index 0, not 1.",
+   "d": "That is `a[::2, -1]`: the axes are swapped.",
+   "c": "`::2` keeps only every other element."
+  },
+  "slides": [
+   220,
+   221
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0034",
+  "chapter": "S6",
+  "topic": "numpy-indexing",
+  "tags": [
+   "fancy-indexing"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following snippet?",
+  "code": "import numpy as np\na = np.arange(9).reshape(3, 3)\nprint(a[[0, 2], [1, 2]])",
+  "options": [
+   {
+    "id": "a",
+    "text": "[[1 2]\n [7 8]]",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "[1 2 7 8]",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "IndexError",
+    "out": "!IndexError"
+   },
+   {
+    "id": "d",
+    "text": "[1 8]",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "With two index lists, NumPy pairs them element by element: positions (0, 1) and (2, 2), i.e. 1 and 8 in [[0 1 2] [3 4 5] [6 7 8]]. To get the 2x2 sub-grid you would write `a[[0, 2]][:, [1, 2]]`.",
+  "distractor_notes": {
+   "a": "That is the sub-grid of rows 0, 2 and columns 1, 2: the two lists are paired, not combined.",
+   "b": "Same sub-grid misconception, flattened.",
+   "c": "Both lists have the same length and all indices are valid."
+  },
+  "slides": [
+   220,
+   221
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0035",
+  "chapter": "S6",
+  "topic": "numpy-indexing",
+  "tags": [
+   "indexing",
+   "negative-index",
+   "scalar"
+  ],
+  "type": "multi",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "Given `a = np.arange(12).reshape(3, 4)`, which expressions return the single value `6` (a scalar, not an array)? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "a[1, 2]",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "a[1][2]",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "a[2, 1]",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "a[1:2, 2]",
+    "mono": true
+   },
+   {
+    "id": "e",
+    "text": "a[-2, -2]",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a",
+   "b",
+   "e"
+  ],
+  "explanation": "`a` is [[0 1 2 3] [4 5 6 7] [8 9 10 11]]: 6 sits in row 1, column 2. `a[1][2]` first takes row 1 and then its element 2: same value. Negative indices count from the end: row -2 is row 1 and column -2 is column 2.",
+  "distractor_notes": {
+   "c": "Row 2, column 1 is 9.",
+   "d": "The slice `1:2` keeps the row axis: the result is the 1D array [6], not a scalar."
+  },
+  "slides": [
+   220,
+   221
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "import numpy as np\na = np.arange(12).reshape(3, 4)",
+   "probe_template": "x = __OPTION_RAW__\nprint(bool(np.ndim(x) == 0 and x == 6))"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0036",
+  "chapter": "S6",
+  "topic": "numpy-indexing",
+  "tags": [
+   "slicing",
+   "1D-vs-2D",
+   "ndim"
+  ],
+  "type": "multi",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Given `a = np.arange(12).reshape(3, 4)`, which expressions return a **2D** array? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "a[0]",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "a[0:1]",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "a[:, 0]",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "a[:, [0]]",
+    "mono": true
+   },
+   {
+    "id": "e",
+    "text": "a[1:, 1:]",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b",
+   "d",
+   "e"
+  ],
+  "explanation": "An integer index removes its axis; a slice (even of length 1) or a list of indices keeps it. `a[0:1]` has shape (1, 4), `a[:, [0]]` (3, 1) and `a[1:, 1:]` (2, 3).",
+  "distractor_notes": {
+   "a": "A single integer selects row 0 as a 1D array of shape (4,).",
+   "c": "A single integer for the column gives a 1D array of shape (3,)."
+  },
+  "slides": [
+   220,
+   221
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "import numpy as np\na = np.arange(12).reshape(3, 4)",
+   "probe_template": "print(__OPTION_RAW__.ndim == 2)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0037",
+  "chapter": "S6",
+  "topic": "numpy-broadcasting",
+  "tags": [
+   "broadcasting",
+   "row-vector"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "import numpy as np\narr = np.array([[1, 2, 3],\n                [4, 5, 6]])\nrow = np.array([10, 20, 30])\nprint(arr + row)",
+  "options": [
+   {
+    "id": "a",
+    "text": "ValueError",
+    "out": "!ValueError"
+   },
+   {
+    "id": "b",
+    "text": "[[11 12 13]\n [24 25 26]]",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "[[11 22 33]]",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "[[11 22 33]\n [14 25 36]]",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "The (3,) row vector is broadcast (virtually repeated) over each row of the (2, 3) array, because the trailing dimensions match (3 and 3). Each row gets +10, +20, +30.",
+  "distractor_notes": {
+   "b": "A 1D array is matched with the last axis (the columns), not with the rows.",
+   "a": "Shapes (2, 3) and (3,) are compatible.",
+   "c": "The result has the broadcast shape (2, 3): both rows are kept."
+  },
+  "slides": [
+   222,
+   223,
+   224
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0038",
+  "chapter": "S6",
+  "topic": "numpy-broadcasting",
+  "tags": [
+   "broadcasting",
+   "ValueError"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "Find the output of the code?",
+  "code": "import numpy as np\na = np.array([1, 2])\nb = np.array([1, 2, 3])\nprint(a + b)",
+  "options": [
+   {
+    "id": "a",
+    "text": "[2 4 3]",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "[1 2 1 2 3]",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "[2 4]",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "ValueError",
+    "out": "!ValueError"
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "Shapes (2,) and (3,) are incompatible: broadcasting needs each pair of dimensions to be equal or 1. NumPy raises ValueError (operands could not be broadcast together).",
+  "distractor_notes": {
+   "a": "NumPy never pads the shorter array.",
+   "c": "NumPy does not truncate to the shorter length (that is what `zip` does).",
+   "b": "That is list concatenation `[1, 2] + [1, 2, 3]`; arrays add element-wise."
+  },
+  "slides": [
+   222,
+   223,
+   224
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0039",
+  "chapter": "S6",
+  "topic": "numpy-broadcasting",
+  "tags": [
+   "broadcasting",
+   "shape",
+   "none-of-the-above"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following snippet?",
+  "code": "import numpy as np\na = np.arange(4).reshape(4, 1)\nb = np.arange(3)\nprint((a + b).shape)",
+  "options": [
+   {
+    "id": "a",
+    "text": "(4, 1)",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "(3, 4)",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "ValueError",
+    "out": "!ValueError"
+   },
+   {
+    "id": "d",
+    "text": "None of the above",
+    "out": null
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "Align the shapes on the right: (4, 1) and (3,). Last axis: 1 vs 3, the 1 is stretched to 3; first axis: 4 vs nothing, kept as 4. The result has shape (4, 3), which is not listed.",
+  "distractor_notes": {
+   "a": "The size-1 axis is stretched to 3; it does not stay 1.",
+   "b": "Dimensions are aligned from the right and the result keeps the order (4, 3).",
+   "c": "A dimension of size 1 is compatible with any size."
+  },
+  "slides": [
+   222,
+   223,
+   224
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1,
+  "expected_output": "(4, 3)"
+ },
+ {
+  "id": "S6-0040",
+  "chapter": "S6",
+  "topic": "numpy-broadcasting",
+  "tags": [
+   "broadcasting",
+   "outer-product"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "import numpy as np\ncol = np.array([[1], [2], [3]])\nrow = np.array([10, 20])\nprint(col * row)",
+  "options": [
+   {
+    "id": "a",
+    "text": "[[10 20]\n [20 40]\n [30 60]]",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "[[10 20 30]\n [20 40 60]]",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "[10 40]",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "ValueError",
+    "out": "!ValueError"
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "`col` has shape (3, 1) and `row` (2,). Both are stretched: the result has shape (3, 2) with element [i, j] = col[i] * row[j] (an outer product).",
+  "distractor_notes": {
+   "d": "Size-1 dimensions are compatible with anything: (3, 1) and (2,) broadcast to (3, 2).",
+   "c": "Broadcasting does not pair elements of arrays with different lengths.",
+   "b": "That is the transpose (2, 3): the rows come from `col`, which has 3 rows."
+  },
+  "slides": [
+   222,
+   223,
+   224
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ }
+]

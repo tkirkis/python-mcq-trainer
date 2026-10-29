@@ -1,0 +1,1184 @@
+[
+  {
+    "id": "S2-0121",
+    "chapter": "S2",
+    "topic": "function-arguments",
+    "tags": [
+      "default-values"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "def greet(name, msg='Hello'):\n    return msg + ' ' + name\n\nprint(greet('Ann'), greet('Bob', 'Hi'))",
+    "options": [
+      {
+        "id": "a",
+        "text": "Hello Ann Hi Bob",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "Hello Ann Hello Bob",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "Ann Hello Bob Hi",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "TypeError",
+        "out": "!TypeError"
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "A default value is used only when the argument is omitted: the first call uses 'Hello', the second replaces it with 'Hi'.",
+    "distractor_notes": {
+      "b": "An explicit argument replaces the default value.",
+      "c": "The function returns msg + ' ' + name: msg comes first.",
+      "d": "msg has a default value, so greet('Ann') is a valid call."
+    },
+    "slides": [
+      82
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0122",
+    "chapter": "S2",
+    "topic": "function-arguments",
+    "tags": [
+      "default-values",
+      "parameter-order",
+      "SyntaxError"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What happens when the following code is run?",
+    "code": "def power(base=2, exp):\n    return base ** exp\n\nprint(power(3))",
+    "options": [
+      {
+        "id": "a",
+        "text": "8",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "9",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "SyntaxError",
+        "out": "!SyntaxError"
+      },
+      {
+        "id": "d",
+        "text": "TypeError",
+        "out": "!TypeError"
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "Ordinary (positional) parameters with default values must come **after** the parameters without defaults. This `def` is rejected when the code is compiled (SyntaxError), so nothing runs.",
+    "distractor_notes": {
+      "a": "The definition itself is invalid; Python does not guess that 3 is meant for exp.",
+      "b": "The code never runs: the def line is a syntax error.",
+      "d": "The problem is detected at compile time (SyntaxError), not when the function is called."
+    },
+    "slides": [
+      82
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0123",
+    "chapter": "S2",
+    "topic": "function-arguments",
+    "tags": [
+      "keyword-arguments",
+      "SyntaxError"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "def f(a, b, c):\n    return a + b + c\n\nprint(f(1, b=2, 3))",
+    "options": [
+      {
+        "id": "a",
+        "text": "6",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "None",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "TypeError",
+        "out": "!TypeError"
+      },
+      {
+        "id": "d",
+        "text": "SyntaxError",
+        "out": "!SyntaxError"
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "In a call, all positional arguments must come before the keyword arguments. `f(1, b=2, 3)` is a SyntaxError (positional argument follows keyword argument).",
+    "distractor_notes": {
+      "a": "Python does not assign 3 to c after a keyword argument.",
+      "b": "The program does not run at all.",
+      "c": "The call is rejected at compile time, before running: it is a SyntaxError."
+    },
+    "slides": [
+      82
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0124",
+    "chapter": "S2",
+    "topic": "function-arguments",
+    "tags": [
+      "keyword-arguments",
+      "TypeError"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "def f(a, b=5):\n    return a * b\n\nprint(f(2, a=3))",
+    "options": [
+      {
+        "id": "a",
+        "text": "6",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "TypeError",
+        "out": "!TypeError"
+      },
+      {
+        "id": "c",
+        "text": "15",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "SyntaxError",
+        "out": "!SyntaxError"
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "The positional 2 is bound to `a`, then the keyword `a=3` tries to bind `a` again: TypeError (f() got multiple values for argument 'a'). The call itself is valid syntax (keyword after positional).",
+    "distractor_notes": {
+      "a": "2 is not passed to b: positional arguments fill the parameters from the left.",
+      "c": "a cannot receive both 2 and 3.",
+      "d": "Positional-then-keyword order is valid syntax; the error happens at run time."
+    },
+    "slides": [
+      82
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0125",
+    "chapter": "S2",
+    "topic": "function-arguments",
+    "tags": [
+      "missing-argument",
+      "TypeError"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "Find the output of the code?",
+    "code": "def area(w, h):\n    return w * h\n\nprint(area(4))",
+    "options": [
+      {
+        "id": "a",
+        "text": "TypeError",
+        "out": "!TypeError"
+      },
+      {
+        "id": "b",
+        "text": "16",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "0",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "4",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "h has no default value, so calling `area` with a single argument raises TypeError (missing 1 required positional argument: 'h').",
+    "distractor_notes": {
+      "b": "Python does not reuse w for h.",
+      "c": "Missing arguments do not default to 0.",
+      "d": "Missing arguments are not ignored."
+    },
+    "slides": [
+      82
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0126",
+    "chapter": "S2",
+    "topic": "function-arguments",
+    "tags": [
+      "keyword-arguments",
+      "default-values"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "def describe(name, age, city='Paris'):\n    print(name, age, city)\n\ndescribe(age=30, city='Lyon', name='Eva')",
+    "options": [
+      {
+        "id": "a",
+        "text": "SyntaxError",
+        "out": "!SyntaxError"
+      },
+      {
+        "id": "b",
+        "text": "30 Lyon Eva",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "Eva 30 Paris",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "Eva 30 Lyon",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "Keyword arguments are matched by name, so their order in the call does not matter; city='Lyon' replaces the default value.",
+    "distractor_notes": {
+      "a": "Keyword arguments may be given in any order.",
+      "b": "Keyword arguments go to the parameter with that name, not by position.",
+      "c": "The default is replaced by the value passed."
+    },
+    "slides": [
+      82
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0127",
+    "chapter": "S2",
+    "topic": "function-arguments",
+    "tags": [
+      "function-as-argument"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "def apply(func, x):\n    return func(func(x))\n\ndef inc(n):\n    return n + 1\n\nprint(apply(inc, 5))",
+    "options": [
+      {
+        "id": "a",
+        "text": "7",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "6",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "TypeError",
+        "out": "!TypeError"
+      },
+      {
+        "id": "d",
+        "text": "10",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "Functions are objects that can be passed as arguments. Inside apply, `func` is inc, called twice: inc(inc(5)) = inc(6) = 7.",
+    "distractor_notes": {
+      "b": "func is applied twice.",
+      "c": "Passing a function (its name, without parentheses) is allowed.",
+      "d": "inc adds 1 (5 -> 6 -> 7); it does not double."
+    },
+    "slides": [
+      81
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0128",
+    "chapter": "S2",
+    "topic": "function-arguments",
+    "tags": [
+      "function-as-argument",
+      "TypeError"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "def apply(func, x):\n    return func(x)\n\ndef double(n):\n    return 2 * n\n\nprint(apply(double(3), 4))",
+    "options": [
+      {
+        "id": "a",
+        "text": "8",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "TypeError",
+        "out": "!TypeError"
+      },
+      {
+        "id": "c",
+        "text": "6",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "24",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "`double(3)` is evaluated first, so apply receives the **int** 6, not the function. Inside apply, `func(x)` becomes `6(4)`, which raises TypeError: 'int' object is not callable. Pass `double` without parentheses.",
+    "distractor_notes": {
+      "a": "That would be apply(double, 4).",
+      "c": "double(3) = 6 is computed, but apply then tries to call it.",
+      "d": "An int cannot be called like a function."
+    },
+    "slides": [
+      81
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0129",
+    "chapter": "S2",
+    "topic": "function-arguments",
+    "tags": [
+      "default-values",
+      "keyword-arguments"
+    ],
+    "type": "multi",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Given the definitions below, which calls run without error? Select all that apply.",
+    "code": "def dichotomy(func, a=-10, b=10, eps=0.000001):\n    return func(a), func(b), eps\n\ndef f(x):\n    return x ** 3 + x + 1",
+    "options": [
+      {
+        "id": "a",
+        "text": "dichotomy(f)",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "dichotomy(f, eps=0.001, b=2)",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "dichotomy(a=-2, f)",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "dichotomy(func=f, a=-2)",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "dichotomy(f, -2, 2, 0.001, 5)",
+        "mono": true
+      },
+      {
+        "id": "f",
+        "text": "dichotomy()",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "b",
+      "d"
+    ],
+    "explanation": "Parameters with defaults may be omitted, and keyword arguments can come in any order after the positional ones. A positional argument after a keyword argument is a SyntaxError; too many arguments, or a missing required one, is a TypeError.",
+    "distractor_notes": {
+      "c": "Positional argument after a keyword argument: SyntaxError.",
+      "e": "Five arguments for four parameters: TypeError.",
+      "f": "func has no default value: TypeError (missing required argument)."
+    },
+    "slides": [
+      82
+    ],
+    "verify": {
+      "mode": "truth",
+      "probe_template": "try:\n    exec(__OPTION__)\n    print(True)\nexcept (SyntaxError, TypeError):\n    print(False)"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0130",
+    "chapter": "S2",
+    "topic": "function-arguments",
+    "tags": [
+      "default-values",
+      "evaluation-time"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "x = 10\n\ndef f(a=x):\n    return a\n\nx = 20\nprint(f())",
+    "options": [
+      {
+        "id": "a",
+        "text": "NameError",
+        "out": "!NameError"
+      },
+      {
+        "id": "b",
+        "text": "20",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "10",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "None",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "A default value is evaluated **once**, when the `def` statement runs. At that moment x is 10, so the default stays 10 even after x is rebound to 20.",
+    "distractor_notes": {
+      "a": "x exists when the def statement is executed.",
+      "b": "The default is not re-evaluated at each call.",
+      "d": "f returns a, whose default value is 10."
+    },
+    "slides": [
+      82
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0131",
+    "chapter": "S2",
+    "topic": "function-arguments",
+    "tags": [
+      "parameter-order",
+      "SyntaxError"
+    ],
+    "type": "multi",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "Which of the following function definitions are syntactically valid? Select all that apply.",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "def f(a, b=1, c=2): pass",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "def f(a=1, b): pass",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "def f(a, b=1, *args): pass",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "def f(a, a): pass",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "def f(*, a): pass",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "c",
+      "e"
+    ],
+    "explanation": "Parameters without defaults come first, `*args` may follow, and a bare `*` makes the following parameters keyword-only. A parameter without default after one with a default, or the same name twice, is a SyntaxError.",
+    "distractor_notes": {
+      "b": "A parameter without default cannot follow one with a default.",
+      "d": "Duplicate parameter names are a SyntaxError."
+    },
+    "slides": [
+      82,
+      120
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": "",
+      "probe_template": "try:\n    compile(__OPTION__, 'q', 'exec')\n    print(True)\nexcept SyntaxError:\n    print(False)"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0132",
+    "chapter": "S2",
+    "topic": "function-arguments",
+    "tags": [
+      "default-values",
+      "keyword-arguments",
+      "concepts"
+    ],
+    "type": "multi",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "Which of the following statements about function arguments are true? Select all that apply.",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "In a parameter list without `*`, parameters with a default value must come after the parameters without one",
+        "probe": "try:\n    compile('def f(a=1, b): pass', 'q', 'exec')\n    print(False)\nexcept SyntaxError:\n    print(True)"
+      },
+      {
+        "id": "b",
+        "text": "A parameter that has a default value cannot be passed by keyword",
+        "probe": "def f(a, b=1):\n    return b\nprint(f(0, b=5) != 5)"
+      },
+      {
+        "id": "c",
+        "text": "Calling a function with fewer arguments than it has parameters always raises an error",
+        "probe": "def f(a, b=2):\n    return a + b\ntry:\n    f(1)\n    print(False)\nexcept TypeError:\n    print(True)"
+      },
+      {
+        "id": "d",
+        "text": "Keyword arguments can be given in any order",
+        "probe": "def f(a, b):\n    return a - b\nprint(f(b=1, a=5) == f(a=5, b=1) == 4)"
+      },
+      {
+        "id": "e",
+        "text": "Default values must be numbers",
+        "probe": "def f(a='x', b=None):\n    return a\nprint(f() != 'x')"
+      }
+    ],
+    "correct": [
+      "a",
+      "d"
+    ],
+    "explanation": "Ordinary parameters with defaults go after the required ones, and keyword arguments are matched by name, so their order is free. Any parameter can be passed by keyword, a call may omit the parameters that have defaults, and a default can be any object.",
+    "distractor_notes": {
+      "b": "Any parameter can be passed by keyword, e.g. f(0, b=5).",
+      "c": "Parameters that have a default value may be omitted.",
+      "e": "Defaults can be strings, None, tuples... any object."
+    },
+    "slides": [
+      82
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": ""
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0133",
+    "chapter": "S2",
+    "topic": "function-arguments",
+    "tags": [
+      "keyword-arguments",
+      "TypeError"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What happens in the below code?",
+    "code": "def f(width, height):\n    return width * height\n\nprint(f(width=2, heigth=3))",
+    "options": [
+      {
+        "id": "a",
+        "text": "6",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "NameError",
+        "out": "!NameError"
+      },
+      {
+        "id": "c",
+        "text": "TypeError",
+        "out": "!TypeError"
+      },
+      {
+        "id": "d",
+        "text": "SyntaxError",
+        "out": "!SyntaxError"
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "There is no parameter called `heigth` (typo), so Python raises TypeError (got an unexpected keyword argument 'heigth').",
+    "distractor_notes": {
+      "a": "Keyword names must match a parameter name exactly.",
+      "b": "Argument names are not variables looked up in a scope; the call itself is invalid (TypeError).",
+      "d": "The call is syntactically fine; the error is detected when it runs."
+    },
+    "slides": [
+      82
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0134",
+    "chapter": "S2",
+    "topic": "function-arguments",
+    "tags": [
+      "function-as-argument",
+      "first-class"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "def square(x):\n    return x * x\n\ndef neg(x):\n    return -x\n\nops = [square, neg, abs]\nprint([op(-3) for op in ops])",
+    "options": [
+      {
+        "id": "a",
+        "text": "[9, -3, 3]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[9, 3, 3]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[-9, 3, 3]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "TypeError",
+        "out": "!TypeError"
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "Functions, including built-ins such as abs, are objects that can be stored in a list and called later: square(-3) = 9, neg(-3) = 3, abs(-3) = 3.",
+    "distractor_notes": {
+      "a": "neg(-3) is -(-3) = 3.",
+      "c": "(-3) * (-3) = 9, a positive number.",
+      "d": "Storing functions in a list and calling them is allowed."
+    },
+    "slides": [
+      81
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0135",
+    "chapter": "S2",
+    "topic": "args-kwargs",
+    "tags": [
+      "args",
+      "kwargs"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "def foo(*args, **kwargs):\n    print(args, kwargs)\n\nfoo(1, 2, x=3)",
+    "options": [
+      {
+        "id": "a",
+        "text": "(1, 2) ('x', 3)",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[1, 2] {'x': 3}",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "(1, 2, 3) {}",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "(1, 2) {'x': 3}",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "`*args` collects the extra positional arguments in a **tuple**, `**kwargs` collects the keyword arguments in a **dict**.",
+    "distractor_notes": {
+      "a": "kwargs is a dict mapping names to values.",
+      "b": "args is a tuple, not a list.",
+      "c": "x=3 is a keyword argument, so it goes into kwargs."
+    },
+    "slides": [
+      120
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0136",
+    "chapter": "S2",
+    "topic": "args-kwargs",
+    "tags": [
+      "unpacking",
+      "call-site"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "def add(a, b, c):\n    return a + b + c\n\nnums = [1, 2, 3]\nprint(add(*nums))",
+    "options": [
+      {
+        "id": "a",
+        "text": "6",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[1, 2, 3]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "TypeError",
+        "out": "!TypeError"
+      },
+      {
+        "id": "d",
+        "text": "123",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "`*nums` at the call site unpacks the list into three positional arguments: add(1, 2, 3).",
+    "distractor_notes": {
+      "b": "The star unpacks the list, and the function returns a sum.",
+      "c": "Three values for three parameters: the call is valid.",
+      "d": "The numbers are added, not concatenated as strings."
+    },
+    "slides": [
+      120
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0137",
+    "chapter": "S2",
+    "topic": "args-kwargs",
+    "tags": [
+      "unpacking",
+      "kwargs",
+      "call-site"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "def show(name, age):\n    print(name, age)\n\ninfo = {'age': 40, 'name': 'Max'}\nshow(**info)",
+    "options": [
+      {
+        "id": "a",
+        "text": "40 Max",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "Max 40",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "age name",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "TypeError",
+        "out": "!TypeError"
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "`**info` passes each key/value pair as a keyword argument: show(age=40, name='Max'). Keywords are matched by name, so the order of the dict does not matter.",
+    "distractor_notes": {
+      "a": "Values are matched by key name, not by their position in the dict.",
+      "c": "** passes the values, using the keys as parameter names.",
+      "d": "The keys match the parameter names exactly, so the call is valid."
+    },
+    "slides": [
+      120
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0138",
+    "chapter": "S2",
+    "topic": "args-kwargs",
+    "tags": [
+      "args",
+      "unpacking"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "def count(*args):\n    return len(args)\n\nprint(count([1, 2, 3]), count(*[1, 2, 3]), count())",
+    "options": [
+      {
+        "id": "a",
+        "text": "3 3 0",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "TypeError",
+        "out": "!TypeError"
+      },
+      {
+        "id": "c",
+        "text": "1 3 None",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "1 3 0",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "Without a star, the list is **one** argument, so args is `([1, 2, 3],)` of length 1. With `*`, the list is unpacked into 3 arguments. With no argument at all, args is the empty tuple.",
+    "distractor_notes": {
+      "a": "The list is passed as a single argument when there is no star.",
+      "b": "*args accepts any number of arguments, including zero.",
+      "c": "args is always a tuple (possibly empty), so len gives 0."
+    },
+    "slides": [
+      120
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0139",
+    "chapter": "S2",
+    "topic": "args-kwargs",
+    "tags": [
+      "keyword-only",
+      "args"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "def f(a, *args, b=0):\n    return a + sum(args) + b\n\nprint(f(1, 2, 3), f(1, 2, b=10))",
+    "options": [
+      {
+        "id": "a",
+        "text": "6 13",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "4 13",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "TypeError",
+        "out": "!TypeError"
+      },
+      {
+        "id": "d",
+        "text": "6 3",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "After `*args`, b can only be passed **by keyword**. In f(1, 2, 3), 2 and 3 both go into args and b keeps its default 0: 6. In f(1, 2, b=10): 1 + 2 + 10 = 13.",
+    "distractor_notes": {
+      "b": "3 does not go to b: every extra positional argument is captured by *args.",
+      "c": "Both calls are valid.",
+      "d": "b=10 is used in the second call: 1 + 2 + 10."
+    },
+    "slides": [
+      120
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0140",
+    "chapter": "S2",
+    "topic": "args-kwargs",
+    "tags": [
+      "kwargs",
+      "items"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "def tag(name, **attrs):\n    parts = [name] + [k + '=' + str(v) for k, v in attrs.items()]\n    return ' '.join(parts)\n\nprint(tag('img', src='a.png', width=10))",
+    "options": [
+      {
+        "id": "a",
+        "text": "TypeError",
+        "out": "!TypeError"
+      },
+      {
+        "id": "b",
+        "text": "img width=10 src=a.png",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "img src=a.png width=10",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "img {'src': 'a.png', 'width': 10}",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "The keyword arguments are collected into the dict attrs, which keeps the order in which they were passed; each (key, value) pair is formatted and the parts are joined with spaces.",
+    "distractor_notes": {
+      "a": "str(v) converts 10 before the concatenation, so there is no TypeError.",
+      "b": "kwargs preserves the order of the call (src first).",
+      "d": "The dict is iterated with items(), not printed as a whole."
+    },
+    "slides": [
+      120
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0141",
+    "chapter": "S2",
+    "topic": "args-kwargs",
+    "tags": [
+      "args",
+      "kwargs"
+    ],
+    "type": "multi",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "After running the code, which statements are true? Select all that apply.",
+    "code": "def f(*args, **kwargs):\n    return args, kwargs\n\nargs, kwargs = f(1, 'a', k=2)",
+    "options": [
+      {
+        "id": "a",
+        "text": "`args` is a tuple",
+        "probe": "print(type(args) is tuple)"
+      },
+      {
+        "id": "b",
+        "text": "`kwargs` is a dict",
+        "probe": "print(type(kwargs) is dict)"
+      },
+      {
+        "id": "c",
+        "text": "`args == [1, 'a']`",
+        "probe": "print(args == [1, 'a'])"
+      },
+      {
+        "id": "d",
+        "text": "`kwargs['k'] == 2`",
+        "probe": "print(kwargs['k'] == 2)"
+      },
+      {
+        "id": "e",
+        "text": "`len(args) == 3`",
+        "probe": "print(len(args) == 3)"
+      }
+    ],
+    "correct": [
+      "a",
+      "b",
+      "d"
+    ],
+    "explanation": "The extra positional arguments are packed into the tuple `(1, 'a')` and the keyword ones into the dict `{'k': 2}`. A tuple never compares equal to a list, and k=2 is not counted in args.",
+    "distractor_notes": {
+      "c": "args is the tuple (1, 'a'); a tuple is never == to a list.",
+      "e": "k=2 is a keyword argument: it goes to kwargs, so len(args) is 2."
+    },
+    "slides": [
+      120
+    ],
+    "verify": {
+      "mode": "truth"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0142",
+    "chapter": "S2",
+    "topic": "args-kwargs",
+    "tags": [
+      "unpacking",
+      "zip",
+      "transpose"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "m = [(1, 2, 3), (4, 5, 6)]\nprint(list(zip(*m)))",
+    "options": [
+      {
+        "id": "a",
+        "text": "[(1, 2, 3), (4, 5, 6)]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[(1, 4), (2, 5), (3, 6)]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[[1, 4], [2, 5], [3, 6]]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "TypeError",
+        "out": "!TypeError"
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "`zip(*m)` unpacks the rows as separate arguments: zip((1, 2, 3), (4, 5, 6)), which pairs the 1st elements, then the 2nd, then the 3rd - a transpose. zip produces tuples.",
+    "distractor_notes": {
+      "a": "zip(*m) regroups the values by column; the rows are not returned unchanged.",
+      "c": "zip yields tuples, not lists.",
+      "d": "* unpacking in a call works with any iterable."
+    },
+    "slides": [
+      112,
+      120
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  }
+]

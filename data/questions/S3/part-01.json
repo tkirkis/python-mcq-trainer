@@ -1,0 +1,1086 @@
+[
+  {
+    "id": "S3-0001",
+    "chapter": "S3",
+    "topic": "exceptions",
+    "tags": [
+      "try-except",
+      "ValueError",
+      "int"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "try:\n    print(\"start\")\n    n = int(\"ten\")\n    print(\"converted\")\nexcept ValueError:\n    print(\"bad value\")\nprint(\"end\")",
+    "options": [
+      {
+        "id": "a",
+        "text": "bad value\nend",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "start\nconverted\nbad value\nend",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "start\nbad value\nend",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "start, then the program stops with a ValueError",
+        "out": "start\n!ValueError"
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "`int(\"ten\")` raises `ValueError`, so the rest of the `try` block (`print(\"converted\")`) is skipped and control jumps to the matching `except` clause. The exception is handled, so execution then continues normally after the `try` statement and prints `end`.",
+    "distractor_notes": {
+      "a": "`print(\"start\")` runs before the error occurs.",
+      "b": "Statements after the failing line in the `try` block are skipped.",
+      "d": "`except ValueError` catches the exception, so the program does not stop."
+    },
+    "slides": [
+      139,
+      140
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0002",
+    "chapter": "S3",
+    "topic": "exceptions",
+    "tags": [
+      "try-except-else",
+      "ZeroDivisionError"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "def check(x):\n    try:\n        r = 10 / x\n    except ZeroDivisionError:\n        return \"error\"\n    else:\n        return \"ok\"\n\nprint(check(0), check(5))",
+    "options": [
+      {
+        "id": "a",
+        "text": "error error",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "error ok",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "ok ok",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "ZeroDivisionError",
+        "mono": true,
+        "out": "!ZeroDivisionError"
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "`10 / 0` raises `ZeroDivisionError`, so the `except` clause returns `'error'`. `10 / 5` succeeds, so the `else` clause (which runs only when the `try` block raised nothing) returns `'ok'`.",
+    "distractor_notes": {
+      "a": "For `x = 5` no exception occurs, so the `else` clause runs, not the `except` clause.",
+      "c": "`10 / 0` does raise `ZeroDivisionError`, so the `except` branch is taken for `check(0)`.",
+      "d": "The exception is caught inside the function and never reaches the caller."
+    },
+    "slides": [
+      139,
+      140
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0003",
+    "chapter": "S3",
+    "topic": "exceptions",
+    "tags": [
+      "finally",
+      "return"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "def f():\n    try:\n        return \"try\"\n    finally:\n        print(\"finally\")\n\nprint(f())",
+    "options": [
+      {
+        "id": "a",
+        "text": "try",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "finally",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "try\nfinally",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "finally\ntry",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "The value `'try'` is prepared for return, but before the function actually returns, the `finally` clause runs and prints `finally`. Only then does the caller receive `'try'` and print it.",
+    "distractor_notes": {
+      "a": "`finally` always runs, even when the `try` block executes a `return`.",
+      "b": "The return value is still delivered to the caller after `finally` has run.",
+      "c": "The `print` inside `finally` happens before `f()` hands its value back to the outer `print`."
+    },
+    "slides": [
+      139,
+      140
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0004",
+    "chapter": "S3",
+    "topic": "exceptions",
+    "tags": [
+      "finally",
+      "return"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "def g():\n    try:\n        return 1\n    finally:\n        return 2\n\nprint(g())",
+    "options": [
+      {
+        "id": "a",
+        "text": "2",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "1",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "None",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "SyntaxError",
+        "mono": true,
+        "out": "!SyntaxError"
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "`finally` runs after `return 1` has been prepared, and a `return` inside `finally` replaces the pending return value, so `g()` returns 2. It is legal but bad practice, because it hides the original result (and would even swallow an exception); Python 3.14 starts emitting a `SyntaxWarning` for it.",
+    "distractor_notes": {
+      "b": "The `return` in `finally` overrides the pending `return 1`.",
+      "c": "The function does return a value: the one of the last `return` executed, 2.",
+      "d": "A `return` in a `finally` clause is syntactically allowed (just discouraged)."
+    },
+    "slides": [
+      139,
+      140
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0005",
+    "chapter": "S3",
+    "topic": "exceptions",
+    "tags": [
+      "except-order",
+      "LookupError",
+      "KeyError",
+      "hierarchy"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "d = {\"a\": 1}\ntry:\n    print(d[\"b\"])\nexcept LookupError:\n    print(\"lookup\")\nexcept KeyError:\n    print(\"key\")",
+    "options": [
+      {
+        "id": "a",
+        "text": "key",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "lookup",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "lookup\nkey",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "KeyError",
+        "mono": true,
+        "out": "!KeyError"
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "`KeyError` is a subclass of `LookupError`. The `except` clauses are tested from top to bottom and only the first matching one runs, so `lookup` is printed and the more specific clause is never reached.",
+    "distractor_notes": {
+      "a": "Python does not look for the most specific clause: the first matching clause wins.",
+      "c": "At most one `except` clause runs for a given exception.",
+      "d": "`except LookupError` matches a `KeyError`, so the exception is handled."
+    },
+    "slides": [
+      139,
+      140
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0006",
+    "chapter": "S3",
+    "topic": "exceptions",
+    "tags": [
+      "except-tuple",
+      "ValueError",
+      "TypeError"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "for value in [\"3\", \"x\", None]:\n    try:\n        print(int(value) * 2)\n    except (ValueError, TypeError):\n        print(\"skip\")",
+    "options": [
+      {
+        "id": "a",
+        "text": "6, skip, then the program stops with a TypeError",
+        "out": "6\nskip\n!TypeError"
+      },
+      {
+        "id": "b",
+        "text": "33\nskip\nskip",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "6\nskip\n0",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "6\nskip\nskip",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "`int(\"3\") * 2` is the integer 6. `int(\"x\")` raises `ValueError` and `int(None)` raises `TypeError`; an `except` clause can name a tuple of exception classes, and both are in it, so each failure prints `skip`.",
+    "distractor_notes": {
+      "a": "`TypeError` is listed in the tuple, so it is caught too.",
+      "b": "`int(\"3\")` is the number 3, so `* 2` is a multiplication, not a string repetition.",
+      "c": "`int(None)` is not 0: it raises `TypeError`."
+    },
+    "slides": [
+      139,
+      140
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0007",
+    "chapter": "S3",
+    "topic": "exceptions",
+    "tags": [
+      "hierarchy",
+      "which-is-false"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Which of the following statements is **false**?",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "`ZeroDivisionError` is a subclass of `ArithmeticError`",
+        "probe": "print(not issubclass(ZeroDivisionError, ArithmeticError))"
+      },
+      {
+        "id": "b",
+        "text": "`KeyError` and `IndexError` are both subclasses of `LookupError`",
+        "probe": "print(not (issubclass(KeyError, LookupError) and issubclass(IndexError, LookupError)))"
+      },
+      {
+        "id": "c",
+        "text": "`ValueError` is a subclass of `TypeError`",
+        "probe": "print(not issubclass(ValueError, TypeError))"
+      },
+      {
+        "id": "d",
+        "text": "`FileNotFoundError` is a subclass of `OSError`",
+        "probe": "print(not issubclass(FileNotFoundError, OSError))"
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "`ValueError` and `TypeError` are siblings: both derive directly from `Exception`, so `except TypeError` does not catch a `ValueError`. The three other statements describe the real hierarchy (which is why `except LookupError` catches both `KeyError` and `IndexError`).",
+    "distractor_notes": {
+      "a": "True: `1 / 0` can be caught with `except ArithmeticError`.",
+      "b": "True: both are lookup failures, grouped under `LookupError`.",
+      "d": "True: `except OSError` also catches a missing file."
+    },
+    "slides": [
+      139,
+      140
+    ],
+    "verify": {
+      "mode": "truth"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0008",
+    "chapter": "S3",
+    "topic": "exceptions",
+    "tags": [
+      "uncaught",
+      "ZeroDivisionError",
+      "program-flow"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What happens when the following code is run?",
+    "code": "def divide(a, b):\n    return a / b\n\nprint(\"before\")\nprint(divide(4, 2))\nprint(divide(1, 0))\nprint(\"after\")",
+    "options": [
+      {
+        "id": "a",
+        "text": "It prints `before` and `2.0`, then stops with a ZeroDivisionError traceback (`after` is never printed)",
+        "out": "before\n2.0\n!ZeroDivisionError"
+      },
+      {
+        "id": "b",
+        "text": "It prints `before` and `2.0`, shows a ZeroDivisionError traceback, then prints `after`",
+        "out": null
+      },
+      {
+        "id": "c",
+        "text": "It prints `before` and `2`, then stops with a ZeroDivisionError traceback",
+        "out": "before\n2\n!ZeroDivisionError"
+      },
+      {
+        "id": "d",
+        "text": "It only shows a ZeroDivisionError traceback: nothing is printed",
+        "out": "!ZeroDivisionError"
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "Statements run in order: `before`, then `4 / 2` = `2.0` (true division always gives a float). `divide(1, 0)` raises `ZeroDivisionError`, which nothing catches, so the program stops immediately and the last `print` never runs.",
+    "distractor_notes": {
+      "b": "An uncaught exception terminates the program: nothing after it runs.",
+      "c": "`/` always returns a float: `4 / 2` is `2.0`.",
+      "d": "A run-time error only happens when its line is reached; the earlier prints have already run."
+    },
+    "slides": [
+      139,
+      140
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0009",
+    "chapter": "S3",
+    "topic": "exceptions",
+    "tags": [
+      "raise",
+      "custom-message",
+      "fibonacci"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "def fib(n):\n    if n < 0:\n        raise ValueError(\"n must be >= 0, got \" + str(n))\n    a, b = 1, 1\n    for _ in range(n):\n        a, b = b, a + b\n    return a\n\ntry:\n    print(fib(5))\n    print(fib(-1))\nexcept ValueError as e:\n    print(\"Error:\", e)",
+    "options": [
+      {
+        "id": "a",
+        "text": "8\nError: n must be >= 0, got -1",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "5\nError: n must be >= 0, got -1",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "8\nError: ValueError",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "8, then the program stops with a ValueError traceback",
+        "out": "8\n!ValueError"
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "With fib(0) = fib(1) = 1, the sequence is 1, 1, 2, 3, 5, 8, so `fib(5)` is 8. `fib(-1)` raises a `ValueError` with a custom message; it is caught, and printing the exception object shows that message.",
+    "distractor_notes": {
+      "b": "The loop runs 5 times starting from 1, 1: fib(5) is 8, not 5.",
+      "c": "Printing an exception shows its message (`str(e)`), not its class name.",
+      "d": "The call is inside the `try` block, so `except ValueError` catches the raised exception."
+    },
+    "slides": [
+      139,
+      144
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0010",
+    "chapter": "S3",
+    "topic": "exceptions",
+    "tags": [
+      "custom-exception",
+      "hierarchy",
+      "bank-account"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "class BankError(Exception):\n    pass\n\nclass InsufficientFunds(BankError):\n    pass\n\ntry:\n    raise InsufficientFunds(\"balance too low\")\nexcept BankError as e:\n    print(type(e).__name__, e)",
+    "options": [
+      {
+        "id": "a",
+        "text": "BankError balance too low",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "InsufficientFunds balance too low",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "Exception balance too low",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "An uncaught InsufficientFunds traceback",
+        "out": "!InsufficientFunds"
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "Custom exceptions are classes derived from `Exception`. `except BankError` catches instances of `BankError` and of all its subclasses; `e` is still the `InsufficientFunds` object, so `type(e).__name__` is `InsufficientFunds` and `str(e)` is the message.",
+    "distractor_notes": {
+      "a": "Catching through a parent class does not change the type of the exception object.",
+      "c": "`type(e)` is the most specific class of the raised object.",
+      "d": "`except BankError` also catches its subclasses, such as `InsufficientFunds`."
+    },
+    "slides": [
+      139,
+      147
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0011",
+    "chapter": "S3",
+    "topic": "exceptions",
+    "tags": [
+      "exception-in-except",
+      "finally",
+      "NameError"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "Analyze the code. What happens when it runs?",
+    "code": "try:\n    x = 1 / 0\nexcept ZeroDivisionError:\n    print(\"handling\")\n    y = undefined_name\nexcept NameError:\n    print(\"name error caught\")\nfinally:\n    print(\"cleanup\")",
+    "options": [
+      {
+        "id": "a",
+        "text": "handling\nname error caught\ncleanup",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "handling\nname error caught",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "It prints `handling`, then stops with a NameError (`cleanup` is not printed)",
+        "out": "handling\n!NameError"
+      },
+      {
+        "id": "d",
+        "text": "It prints `handling` and `cleanup`, then stops with a NameError",
+        "out": "handling\ncleanup\n!NameError"
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "The `except` clauses of a `try` statement only protect its `try` block. The `NameError` raised inside the `ZeroDivisionError` handler is therefore not caught by the sibling `except NameError` clause. `finally` still runs (`cleanup`), then the `NameError` propagates and stops the program.",
+    "distractor_notes": {
+      "a": "A sibling `except` clause never catches an exception raised inside another handler.",
+      "b": "The `NameError` escapes, and `finally` always runs.",
+      "c": "`finally` runs even while an exception is escaping."
+    },
+    "slides": [
+      139,
+      140
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0012",
+    "chapter": "S3",
+    "topic": "exceptions",
+    "tags": [
+      "re-raise",
+      "raise",
+      "ValueError"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "def parse(s):\n    try:\n        return int(s)\n    except ValueError:\n        print(\"logging:\", s)\n        raise\n\ntry:\n    parse(\"4x\")\nexcept ValueError:\n    print(\"caller handled it\")",
+    "options": [
+      {
+        "id": "a",
+        "text": "caller handled it",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "logging: 4x",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "logging: 4x\ncaller handled it",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "It prints `logging: 4x`, then stops with a ValueError traceback",
+        "out": "logging: 4x\n!ValueError"
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "A bare `raise` inside an `except` block re-raises the exception being handled. `parse` logs the input and passes the same `ValueError` up to its caller, whose `except` clause handles it.",
+    "distractor_notes": {
+      "a": "The handler inside `parse` runs first and prints the log line.",
+      "b": "`raise` without argument re-raises: the exception is not swallowed by `parse`.",
+      "d": "The re-raised `ValueError` is caught by the caller's `try`/`except`."
+    },
+    "slides": [
+      139,
+      140
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0013",
+    "chapter": "S3",
+    "topic": "exceptions",
+    "tags": [
+      "assert",
+      "AssertionError"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "def mean(values):\n    assert len(values) > 0, \"empty list\"\n    return sum(values) / len(values)\n\ntry:\n    print(mean([]))\nexcept AssertionError as e:\n    print(\"Error:\", e)",
+    "options": [
+      {
+        "id": "a",
+        "text": "Error: AssertionError",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "0",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "A ZeroDivisionError traceback",
+        "out": "!ZeroDivisionError"
+      },
+      {
+        "id": "d",
+        "text": "Error: empty list",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "`assert condition, message` raises `AssertionError(message)` when the condition is false. The check fails before the division is attempted; the `AssertionError` is caught and printing `e` shows the message.",
+    "distractor_notes": {
+      "a": "Printing the exception shows its message, not its class name.",
+      "b": "`sum([]) / len([])` is never computed: the `assert` fails first.",
+      "c": "The `assert` stops the function before the division by zero."
+    },
+    "slides": [
+      139,
+      140
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0014",
+    "chapter": "S3",
+    "topic": "exceptions",
+    "tags": [
+      "ValueError",
+      "built-in-exceptions"
+    ],
+    "type": "multi",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "Which of the following statements raise a `ValueError`? Select all that apply.",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "int(\"3.5\")",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "int(3.5)",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "float(\"abc\")",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[1, 2].index(3)",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "{\"a\": 1}[\"b\"]",
+        "mono": true
+      },
+      {
+        "id": "f",
+        "text": "\"abc\" + 1",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "c",
+      "d"
+    ],
+    "explanation": "`int()` only parses strings that look like integers, so `int(\"3.5\")` fails (whereas `int(3.5)` simply truncates the float to 3). `float(\"abc\")` cannot be parsed, and `list.index` raises `ValueError` when the item is absent. A missing dict key raises `KeyError`, and `str + int` raises `TypeError`.",
+    "distractor_notes": {
+      "b": "`int(3.5)` truncates the float to 3 without any error.",
+      "e": "A missing dictionary key raises `KeyError`, not `ValueError`.",
+      "f": "Adding a str and an int is a type problem: `TypeError`."
+    },
+    "slides": [
+      139,
+      140
+    ],
+    "verify": {
+      "mode": "truth",
+      "probe_template": "try:\n    __OPTION_RAW__\n    print(False)\nexcept ValueError:\n    print(True)"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0015",
+    "chapter": "S3",
+    "topic": "exceptions",
+    "tags": [
+      "hierarchy",
+      "except-matching"
+    ],
+    "type": "multi",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Each snippet below is run on its own. Which of them print `caught`? Select all that apply.",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "try:\n    [1, 2][5]\nexcept LookupError:\n    print('caught')",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "try:\n    {'a': 1}['b']\nexcept IndexError:\n    print('caught')",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "try:\n    10 % 0\nexcept ArithmeticError:\n    print('caught')",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "try:\n    int('x')\nexcept TypeError:\n    print('caught')",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "try:\n    open('nofile.txt')\nexcept OSError:\n    print('caught')",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "c",
+      "e"
+    ],
+    "explanation": "An `except` clause catches the named class and all its subclasses. `IndexError` is a `LookupError`, the `ZeroDivisionError` raised by `% 0` is an `ArithmeticError`, and `FileNotFoundError` is an `OSError`. In (b) the `KeyError` is not an `IndexError`, and in (d) `int('x')` raises `ValueError`, not `TypeError`, so those exceptions escape.",
+    "distractor_notes": {
+      "b": "`KeyError` and `IndexError` are siblings under `LookupError`: `except IndexError` misses a `KeyError`.",
+      "d": "`int('x')` raises `ValueError`, which `except TypeError` does not match."
+    },
+    "slides": [
+      139,
+      140
+    ],
+    "verify": {
+      "mode": "truth",
+      "probe_template": "import io, contextlib\nbuf = io.StringIO()\nwith contextlib.redirect_stdout(buf):\n    exec(__OPTION__)\nprint(buf.getvalue() == 'caught\\n')"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0016",
+    "chapter": "S3",
+    "topic": "exceptions",
+    "tags": [
+      "try-except-else-finally",
+      "ValueError"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What happens when the following code is run?",
+    "code": "try:\n    print(\"try\")\nexcept ValueError:\n    print(\"except\")\nelse:\n    print(\"else\")\n    int(\"oops\")\nfinally:\n    print(\"finally\")",
+    "options": [
+      {
+        "id": "a",
+        "text": "It prints `try`, `else`, `finally`, then stops with a ValueError",
+        "out": "try\nelse\nfinally\n!ValueError"
+      },
+      {
+        "id": "b",
+        "text": "try\nelse\nexcept\nfinally",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "It prints `try`, `else`, then stops with a ValueError (`finally` is skipped)",
+        "out": "try\nelse\n!ValueError"
+      },
+      {
+        "id": "d",
+        "text": "try\nelse\nfinally",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "The `try` block raises nothing, so the `else` clause runs. The `ValueError` raised inside `else` is not handled by the `except` clause above it (`except` only covers the `try` block). `finally` runs anyway, then the exception propagates and stops the program.",
+    "distractor_notes": {
+      "b": "`except` clauses do not catch exceptions raised in the `else` block.",
+      "c": "`finally` always runs, even when an exception is propagating.",
+      "d": "The `ValueError` from `int(\"oops\")` is not caught, so the program ends with a traceback."
+    },
+    "slides": [
+      139,
+      140
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0017",
+    "chapter": "S3",
+    "topic": "exceptions",
+    "tags": [
+      "finally",
+      "continue",
+      "loop"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "count = 0\nfor s in [\"1\", \"2\", \"a\", \"4\"]:\n    try:\n        n = int(s)\n    except ValueError:\n        continue\n    finally:\n        count += 1\nprint(count)",
+    "options": [
+      {
+        "id": "a",
+        "text": "3",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "2",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "4",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "A ValueError traceback",
+        "out": "!ValueError"
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "`finally` runs on every exit from the `try` statement, including the `continue` executed in the `except` clause. So `count` is incremented for all four strings; the `ValueError` for `\"a\"` is handled.",
+    "distractor_notes": {
+      "a": "`continue` does not skip the `finally` clause.",
+      "b": "Only `\"a\"` fails to convert, and even then `finally` runs.",
+      "d": "The `ValueError` is caught by `except ValueError`."
+    },
+    "slides": [
+      139,
+      140
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0018",
+    "chapter": "S3",
+    "topic": "exceptions",
+    "tags": [
+      "finally",
+      "true-false"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "True or False: a `finally` clause runs even when the `try` block raises an exception that none of the `except` clauses catches.",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "True",
+        "probe": "print(log == ['finally'])"
+      },
+      {
+        "id": "b",
+        "text": "False",
+        "probe": "print(log != ['finally'])"
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "`finally` runs whatever happens in the `try` statement: normal completion, `return`/`break`/`continue`, a handled exception or an unhandled one. In the last case the exception continues to propagate once the `finally` block has run.",
+    "distractor_notes": {
+      "b": "That is precisely the purpose of `finally`: clean-up code that always runs."
+    },
+    "slides": [
+      139,
+      140
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": "log = []\ntry:\n    try:\n        raise KeyError('k')\n    except ValueError:\n        pass\n    finally:\n        log.append('finally')\nexcept KeyError:\n    pass"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0019",
+    "chapter": "S3",
+    "topic": "exceptions",
+    "tags": [
+      "try-except-else-finally",
+      "IOError",
+      "Exception"
+    ],
+    "type": "multi",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "Which of the following statements are true? Select all that apply.",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "`except Exception:` also catches a `KeyError`",
+        "probe": "try:\n    {}['x']\nexcept Exception:\n    print(True)"
+      },
+      {
+        "id": "b",
+        "text": "The `else` clause of a `try` statement runs only if the `try` block raised no exception",
+        "probe": "ran = []\nfor v in (1, 0):\n    try:\n        1 / v\n    except ZeroDivisionError:\n        pass\n    else:\n        ran.append(v)\nprint(ran == [1])"
+      },
+      {
+        "id": "c",
+        "text": "In Python 3, `IOError` is just another name for `OSError`",
+        "probe": "print(IOError is OSError)"
+      },
+      {
+        "id": "d",
+        "text": "An exception raised inside a `finally` block is silently ignored",
+        "probe": "try:\n    try:\n        pass\n    finally:\n        raise ValueError('boom')\n    print(True)\nexcept ValueError:\n    print(False)"
+      }
+    ],
+    "correct": [
+      "a",
+      "b",
+      "c"
+    ],
+    "explanation": "`Exception` is the base class of all ordinary exceptions, so it catches `KeyError`. `else` runs only when the `try` block completed without an exception. `IOError` is an alias of `OSError` in Python 3. An exception raised in `finally` is not ignored: it propagates like any other.",
+    "distractor_notes": {
+      "d": "An exception raised in `finally` propagates normally (it even replaces an exception already in flight)."
+    },
+    "slides": [
+      139,
+      140
+    ],
+    "verify": {
+      "mode": "truth"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S3-0020",
+    "chapter": "S3",
+    "topic": "exceptions",
+    "tags": [
+      "propagation",
+      "finally",
+      "IndexError"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "def inner():\n    try:\n        return [1, 2][2]\n    finally:\n        print(\"inner finally\")\n\ndef outer():\n    try:\n        inner()\n    except IndexError:\n        print(\"outer caught\")\n    return \"done\"\n\nprint(outer())",
+    "options": [
+      {
+        "id": "a",
+        "text": "outer caught\ninner finally\ndone",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "inner finally\nouter caught\ndone",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "outer caught\ndone",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "It prints `inner finally`, then stops with an IndexError",
+        "out": "inner finally\n!IndexError"
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "`[1, 2][2]` raises `IndexError` in `inner`. Before the exception leaves `inner`, its `finally` clause prints `inner finally`. The exception then propagates to `outer`, which catches it, prints `outer caught` and returns `'done'`.",
+    "distractor_notes": {
+      "a": "The callee's `finally` runs as the exception leaves it, before the caller's handler.",
+      "c": "`inner`'s `finally` clause always runs.",
+      "d": "`outer` catches the `IndexError` raised in `inner`."
+    },
+    "slides": [
+      139,
+      140
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  }
+]

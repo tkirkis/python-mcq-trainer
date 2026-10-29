@@ -1,0 +1,1304 @@
+[
+  {
+    "id": "S2-0061",
+    "chapter": "S2",
+    "topic": "tuples",
+    "tags": [
+      "single-element",
+      "comma"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "a = (5)\nb = (5,)\nprint(type(a).__name__, type(b).__name__)",
+    "options": [
+      {
+        "id": "a",
+        "text": "tuple tuple",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "tuple int",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "int int",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "int tuple",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "Parentheses alone only group an expression: `(5)` is the int 5. It is the **comma** that makes a tuple, so `(5,)` is a one-element tuple.",
+    "distractor_notes": {
+      "a": "(5) is not a tuple; a single-element tuple needs a trailing comma.",
+      "b": "The two results are swapped.",
+      "c": "The trailing comma makes (5,) a tuple."
+    },
+    "slides": [
+      93
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0062",
+    "chapter": "S2",
+    "topic": "tuples",
+    "tags": [
+      "tuple()",
+      "TypeError",
+      "conversion"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What happens in the below code?",
+    "code": "t = tuple(5)\nprint(t)",
+    "options": [
+      {
+        "id": "a",
+        "text": "(5,)",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "(0, 1, 2, 3, 4)",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "()",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "TypeError",
+        "out": "!TypeError"
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "`tuple(x)` converts an **iterable** into a tuple; an int is not iterable, so TypeError is raised. A one-element tuple is written `(5,)`.",
+    "distractor_notes": {
+      "a": "That tuple is built with the literal (5,), not with the tuple() function.",
+      "b": "tuple() is not range(): it does not count up to the number.",
+      "c": "tuple() without argument gives (), but an int argument is an error."
+    },
+    "slides": [
+      93,
+      107
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0063",
+    "chapter": "S2",
+    "topic": "tuples",
+    "tags": [
+      "immutability",
+      "AttributeError"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "t = (1, 2, 3)\nt.append(4)\nprint(t)",
+    "options": [
+      {
+        "id": "a",
+        "text": "(1, 2, 3, 4)",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "AttributeError",
+        "out": "!AttributeError"
+      },
+      {
+        "id": "c",
+        "text": "TypeError",
+        "out": "!TypeError"
+      },
+      {
+        "id": "d",
+        "text": "[1, 2, 3, 4]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "Tuples are immutable and simply have no `append` method: calling a method that does not exist raises AttributeError. (Item assignment such as `t[0] = 4` would raise TypeError instead.)",
+    "distractor_notes": {
+      "a": "Tuples cannot grow; build a new one with t + (4,).",
+      "c": "TypeError is raised by item assignment (t[0] = ...); a missing method gives AttributeError.",
+      "d": "Python never converts a tuple into a list implicitly."
+    },
+    "slides": [
+      93
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0064",
+    "chapter": "S2",
+    "topic": "tuples",
+    "tags": [
+      "immutability",
+      "mutable-element"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "t = (1, [2, 3])\nt[1].append(4)\nprint(t)",
+    "options": [
+      {
+        "id": "a",
+        "text": "(1, [2, 3, 4])",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "TypeError",
+        "out": "!TypeError"
+      },
+      {
+        "id": "c",
+        "text": "(1, [2, 3])",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "(1, [2, 3], 4)",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "The tuple itself is not modified: it still holds the same two objects. But its second element is a list, which is mutable, so appending to it is allowed and the change is visible through the tuple.",
+    "distractor_notes": {
+      "b": "No item of the tuple is reassigned; only the list inside it is mutated.",
+      "c": "t[1] is the list itself (not a copy), so the change is visible.",
+      "d": "4 is appended to the inner list, not to the tuple."
+    },
+    "slides": [
+      93
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0065",
+    "chapter": "S2",
+    "topic": "tuples",
+    "tags": [
+      "immutability",
+      "augmented-assignment"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "Analyze the code. What does it print?",
+    "code": "t = (1, [2, 3])\ntry:\n    t[1] += [4]\nexcept TypeError:\n    print('error')\nprint(t)",
+    "options": [
+      {
+        "id": "a",
+        "text": "error\n(1, [2, 3])",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "(1, [2, 3, 4])",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "error\n(1, [2, 3, 4])",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "TypeError",
+        "out": "!TypeError"
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "`t[1] += [4]` first extends the list in place (this succeeds), then tries to store the result back into `t[1]`, which fails because tuples do not support item assignment. So the TypeError is caught **and** the list has already been modified.",
+    "distractor_notes": {
+      "a": "The in-place extension of the list happens before the failing assignment.",
+      "b": "Storing back into the tuple does raise TypeError, so 'error' is printed.",
+      "d": "The exception is caught by the try/except."
+    },
+    "slides": [
+      93
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0066",
+    "chapter": "S2",
+    "topic": "tuples",
+    "tags": [
+      "parallel-assignment",
+      "swap"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "a, b = 1, 2\na, b = b, a + b\nprint(a, b)",
+    "options": [
+      {
+        "id": "a",
+        "text": "1 2",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "2 4",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "2 3",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "2 2",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "In a parallel assignment the whole right-hand side `(b, a + b)` = `(2, 3)` is evaluated **before** anything is assigned.",
+    "distractor_notes": {
+      "a": "The assignment does change both variables.",
+      "b": "Assumes a is updated before a + b is computed (sequential assignment).",
+      "d": "a + b uses the old values 1 and 2."
+    },
+    "slides": [
+      93
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0067",
+    "chapter": "S2",
+    "topic": "tuples",
+    "tags": [
+      "unpacking",
+      "ValueError"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "point = (3, 4, 5)\nx, y = point\nprint(x, y)",
+    "options": [
+      {
+        "id": "a",
+        "text": "ValueError",
+        "out": "!ValueError"
+      },
+      {
+        "id": "b",
+        "text": "3 4",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "TypeError",
+        "out": "!TypeError"
+      },
+      {
+        "id": "d",
+        "text": "3 (4, 5)",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "Unpacking requires exactly as many names as elements: 3 values into 2 names raises ValueError (too many values to unpack).",
+    "distractor_notes": {
+      "b": "Extra values are not silently dropped.",
+      "c": "The types are fine; the problem is the count, which is a ValueError.",
+      "d": "Collecting the rest needs a starred name: x, *y = point (and y would then be a list)."
+    },
+    "slides": [
+      93
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0068",
+    "chapter": "S2",
+    "topic": "tuples",
+    "tags": [
+      "concatenation",
+      "repetition"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "a = (1, 2)\nb = a + (3,)\nc = a * 2\nprint(len(b), c)",
+    "options": [
+      {
+        "id": "a",
+        "text": "3 (2, 4)",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "3 (1, 2, 1, 2)",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "2 (1, 2, 1, 2)",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "TypeError",
+        "out": "!TypeError"
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "A tuple cannot be modified, but `+` and `*` build **new** tuples: `a + (3,)` has 3 elements and `a * 2` repeats the elements.",
+    "distractor_notes": {
+      "a": "* repeats the tuple; it does not multiply each element.",
+      "c": "b is a new tuple with 3 elements.",
+      "d": "+ and * are allowed on tuples; they create new tuples."
+    },
+    "slides": [
+      93
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0069",
+    "chapter": "S2",
+    "topic": "tuples",
+    "tags": [
+      "return-multiple-values",
+      "single-element"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "def roots(a, b, c):\n    d = b ** 2 - 4 * a * c\n    if d < 0:\n        return None\n    elif d == 0:\n        return (-b / (2 * a),)\n    return (-b + d ** 0.5) / (2 * a), (-b - d ** 0.5) / (2 * a)\n\nprint(len(roots(1, 2, 1)), len(roots(1, -3, 2)))",
+    "options": [
+      {
+        "id": "a",
+        "text": "1 1",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "2 2",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "TypeError",
+        "out": "!TypeError"
+      },
+      {
+        "id": "d",
+        "text": "1 2",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "For d == 0 the function returns `(-1.0,)`, a one-element tuple (thanks to the comma). For d = 1 it returns two values separated by a comma, i.e. a 2-tuple. Neither call reaches `return None`.",
+    "distractor_notes": {
+      "a": "`return x, y` returns a tuple of 2 values.",
+      "b": "With d == 0 only one root is returned, in a 1-tuple.",
+      "c": "`(-b / (2 * a),)` is a tuple, so len works; len(None) would fail, but d is never negative here."
+    },
+    "slides": [
+      94
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0070",
+    "chapter": "S2",
+    "topic": "tuples",
+    "tags": [
+      "syntax",
+      "single-element"
+    ],
+    "type": "multi",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Which of the following expressions create a tuple? Select all that apply.",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "(7)",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "7,",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "()",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "tuple('ab')",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "[7]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b",
+      "c",
+      "d"
+    ],
+    "explanation": "A tuple is made by commas (`7,`), by empty parentheses `()`, or by `tuple(iterable)` (`tuple('ab')` is `('a', 'b')`). `(7)` is just the int 7 in parentheses and `[7]` is a list.",
+    "distractor_notes": {
+      "a": "Without a comma, parentheses only group: (7) is an int.",
+      "e": "Square brackets build a list."
+    },
+    "slides": [
+      93
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": "",
+      "probe_template": "x = __OPTION_RAW__\nprint(type(x) is tuple)"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0071",
+    "chapter": "S2",
+    "topic": "tuples",
+    "tags": [
+      "immutability",
+      "concepts"
+    ],
+    "type": "multi",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Which of the following statements about tuples are true? Select all that apply.",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "A tuple can be used as a dictionary key",
+        "probe": "d = {(1, 2): 'x'}\nprint(d[(1, 2)] == 'x')"
+      },
+      {
+        "id": "b",
+        "text": "A tuple has an `append` method",
+        "probe": "print(hasattr((1, 2), 'append'))"
+      },
+      {
+        "id": "c",
+        "text": "Two tuples can be concatenated with `+`",
+        "probe": "print((1,) + (2, 3) == (1, 2, 3))"
+      },
+      {
+        "id": "d",
+        "text": "`del t[0]` removes the first element of a tuple `t`",
+        "probe": "t = (1, 2)\ntry:\n    del t[0]\n    print(t == (2,))\nexcept TypeError:\n    print(False)"
+      },
+      {
+        "id": "e",
+        "text": "Tuples support slicing",
+        "probe": "print((1, 2, 3)[1:] == (2, 3))"
+      }
+    ],
+    "correct": [
+      "a",
+      "c",
+      "e"
+    ],
+    "explanation": "Tuples are immutable sequences: they are hashable (when their items are), so they can be dict keys, and they support `+`, `*`, indexing and slicing, which all create new tuples. They have no append and do not support item deletion.",
+    "distractor_notes": {
+      "b": "Tuples only have count() and index(); append would modify them.",
+      "d": "del t[0] raises TypeError: tuples do not support item deletion."
+    },
+    "slides": [
+      93,
+      98
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": ""
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0072",
+    "chapter": "S2",
+    "topic": "tuples",
+    "tags": [
+      "unpacking",
+      "nested"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "data = [('a', (1, 2)), ('b', (3, 4))]\nfor name, (x, y) in data:\n    print(name, x + y, end=' ')",
+    "options": [
+      {
+        "id": "a",
+        "text": "a 1 b 3",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "a (1, 2) b (3, 4)",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "ValueError",
+        "out": "!ValueError"
+      },
+      {
+        "id": "d",
+        "text": "a 3 b 7",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "Each element is a pair `(name, (x, y))`; the loop target `name, (x, y)` has the same nested shape, so x and y receive the two numbers and their sum is printed.",
+    "distractor_notes": {
+      "a": "x + y adds both numbers of the inner tuple.",
+      "b": "The inner tuple is unpacked into x and y, and x + y is printed.",
+      "c": "The nested target matches the nested structure exactly, so there is no error."
+    },
+    "slides": [
+      93
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0073",
+    "chapter": "S2",
+    "topic": "tuples",
+    "tags": [
+      "unpacking",
+      "star"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "first, *rest = (1, 2, 3, 4)\nprint(first, rest)",
+    "options": [
+      {
+        "id": "a",
+        "text": "1 (2, 3, 4)",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "ValueError",
+        "out": "!ValueError"
+      },
+      {
+        "id": "c",
+        "text": "1 [2, 3, 4]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "1 2",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "A starred target collects all the remaining values, and it is **always a list**, even when the right-hand side is a tuple.",
+    "distractor_notes": {
+      "a": "The starred name receives a list, not a tuple.",
+      "b": "With a starred name, any number of extra values is accepted.",
+      "d": "*rest takes all the remaining values, not just one."
+    },
+    "slides": [
+      93
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0074",
+    "chapter": "S2",
+    "topic": "tuples",
+    "tags": [
+      "list-of-tuples",
+      "unpacking",
+      "hands-on"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "categories = [(12, 'Kid'), (19, 'Teenager'), (30, 'Young Adult'), (64, 'Adult')]\n\ndef category(age):\n    for limit, name in categories:\n        if age <= limit:\n            return name\n    return 'Senior'\n\nprint(category(19), category(65))",
+    "options": [
+      {
+        "id": "a",
+        "text": "Young Adult Senior",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "Teenager Senior",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "Teenager None",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "Kid Senior",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "The loop unpacks each `(limit, name)` tuple and returns at the first limit with age <= limit: 19 <= 19 gives 'Teenager'. For 65 no limit matches, the loop ends and the final `return 'Senior'` runs.",
+    "distractor_notes": {
+      "a": "The test is age <= limit, so 19 already matches the (19, 'Teenager') tuple.",
+      "c": "After the loop the function reaches return 'Senior', so it does not return None.",
+      "d": "19 <= 12 is False, so the first tuple does not match."
+    },
+    "slides": [
+      95
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0075",
+    "chapter": "S2",
+    "topic": "conversions",
+    "tags": [
+      "int",
+      "base"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "print(int('ff', 16), int('101', 2))",
+    "options": [
+      {
+        "id": "a",
+        "text": "255 5",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "ff 101",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "ValueError",
+        "out": "!ValueError"
+      },
+      {
+        "id": "d",
+        "text": "15 101",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "The second argument of int() is the base used to read the string: 'ff' in base 16 is 15 x 16 + 15 = 255, and '101' in base 2 is 4 + 1 = 5.",
+    "distractor_notes": {
+      "b": "int() returns integers; the base only says how to read the digits.",
+      "c": "'f' is a valid digit in base 16, and 0/1 are valid in base 2.",
+      "d": "'ff' has two hex digits (255), and '101' read in base 2 is 5."
+    },
+    "slides": [
+      107
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0076",
+    "chapter": "S2",
+    "topic": "conversions",
+    "tags": [
+      "int",
+      "ValueError"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "x = int('3.5')\nprint(x)",
+    "options": [
+      {
+        "id": "a",
+        "text": "3",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "ValueError",
+        "out": "!ValueError"
+      },
+      {
+        "id": "c",
+        "text": "3.5",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "4",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "int() accepts a float (`int(3.5)` is 3), but a **string** must look like an integer literal: '3.5' raises ValueError. Use `int(float('3.5'))` instead.",
+    "distractor_notes": {
+      "a": "That is int(3.5) with a float, or int(float('3.5')).",
+      "c": "int() never returns a float.",
+      "d": "int() never rounds up."
+    },
+    "slides": [
+      107
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0077",
+    "chapter": "S2",
+    "topic": "conversions",
+    "tags": [
+      "str",
+      "list"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "s = str([1, 2])\nprint(len(s), list('ab'))",
+    "options": [
+      {
+        "id": "a",
+        "text": "2 ['ab']",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "2 ['a', 'b']",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "6 ['ab']",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "6 ['a', 'b']",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "`str([1, 2])` is the printed representation `'[1, 2]'`: 6 characters (brackets, comma and space included). `list('ab')` iterates over the string and gives one element per character.",
+    "distractor_notes": {
+      "a": "Both rules are missed: the string has 6 characters and list() splits the string.",
+      "b": "str() of a list is its text representation, not its number of elements.",
+      "c": "list() splits a string into its characters."
+    },
+    "slides": [
+      107,
+      108
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0078",
+    "chapter": "S2",
+    "topic": "conversions",
+    "tags": [
+      "ord",
+      "chr"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "Find the output of the code?",
+    "code": "print(ord('a'), chr(ord('a') + 2))",
+    "options": [
+      {
+        "id": "a",
+        "text": "97 c",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "97 b",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "1 c",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "65 C",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "`ord` gives the code of a character ('a' is 97) and `chr` does the reverse: 97 + 2 = 99 is 'c'.",
+    "distractor_notes": {
+      "b": "Adding 2 to the code of 'a' gives 'c' (a -> b -> c).",
+      "c": "ord returns the character code (97), not the position in the alphabet.",
+      "d": "65 is the code of uppercase 'A'; lowercase letters start at 97."
+    },
+    "slides": [
+      107
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0079",
+    "chapter": "S2",
+    "topic": "conversions",
+    "tags": [
+      "int",
+      "float",
+      "truncation"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "print(int(2.9), int(-2.9))",
+    "options": [
+      {
+        "id": "a",
+        "text": "2 -3",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "3 -3",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "2 -2",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "3 -2",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "int() applied to a float **truncates towards zero**: it drops the fractional part, so 2.9 -> 2 and -2.9 -> -2 (no rounding, no flooring).",
+    "distractor_notes": {
+      "a": "That is flooring (math.floor); int() truncates towards zero.",
+      "b": "int() does not round to the nearest integer.",
+      "d": "int() never rounds up."
+    },
+    "slides": [
+      107
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0080",
+    "chapter": "S2",
+    "topic": "conversions",
+    "tags": [
+      "bool",
+      "truthiness"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "print(bool('False'), bool(0.0), bool([0]), bool(''))",
+    "options": [
+      {
+        "id": "a",
+        "text": "False False False False",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "True False True False",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "False False True False",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "True False False False",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "bool() of a string or container tests emptiness: 'False' is a non-empty string (True), `[0]` is a non-empty list (True) and '' is empty (False). bool(0.0) is False.",
+    "distractor_notes": {
+      "a": "Any non-empty string is True, whatever its content.",
+      "c": "The string 'False' is not empty, so it is truthy.",
+      "d": "[0] contains one element; a non-empty list is truthy."
+    },
+    "slides": [
+      107
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0081",
+    "chapter": "S2",
+    "topic": "conversions",
+    "tags": [
+      "ord",
+      "chr",
+      "join"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "codes = [ord(c) + 1 for c in 'HAL']\nprint(''.join(chr(i) for i in codes))",
+    "options": [
+      {
+        "id": "a",
+        "text": "IBM",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "ibm",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "HAL",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "TypeError",
+        "out": "!TypeError"
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "Each character is converted to its code, increased by 1 and converted back with chr: H -> I, A -> B, L -> M.",
+    "distractor_notes": {
+      "b": "Codes of uppercase letters stay in the uppercase range: chr(73) is 'I', not 'i'.",
+      "c": "The codes were increased by 1 before converting back.",
+      "d": "chr returns strings, which join accepts."
+    },
+    "slides": [
+      107
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0082",
+    "chapter": "S2",
+    "topic": "conversions",
+    "tags": [
+      "int",
+      "float",
+      "ValueError"
+    ],
+    "type": "multi",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "Which of the following calls raise a `ValueError`? Select all that apply.",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "int('12')",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "int('twelve')",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "int('0x1f', 16)",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "int(' 7 ')",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "float('3,5')",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b",
+      "e"
+    ],
+    "explanation": "int() and float() raise ValueError when the string is not a valid number: 'twelve', and '3,5' (the decimal separator is a dot). Surrounding whitespace is ignored, and with base 16 an optional '0x' prefix is accepted (`int('0x1f', 16)` is 31).",
+    "distractor_notes": {
+      "a": "'12' is a valid integer string.",
+      "c": "With base 16, an optional 0x prefix is allowed: the result is 31.",
+      "d": "Leading and trailing whitespace is stripped: the result is 7."
+    },
+    "slides": [
+      107
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": "",
+      "probe_template": "try:\n    __OPTION_RAW__\n    print(False)\nexcept ValueError:\n    print(True)"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0083",
+    "chapter": "S2",
+    "topic": "conversions",
+    "tags": [
+      "str",
+      "list",
+      "tuple"
+    ],
+    "type": "multi",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "Which of the following expressions evaluate to `True`? Select all that apply.",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "tuple('ab') == ('a', 'b')",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "str((1, 2)) == '(1, 2)'",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "list(5) == [5]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "str(['a']) == 'a'",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "list({'x': 1, 'y': 2}) == ['x', 'y']",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "b",
+      "e"
+    ],
+    "explanation": "Converting a string iterates over its characters, str() of a container gives its printed representation (with brackets and quotes), and list() of a dict gives its keys. `list(5)` raises TypeError because an int is not iterable.",
+    "distractor_notes": {
+      "c": "list() needs an iterable: list(5) raises TypeError. Write [5].",
+      "d": "str(['a']) is \"['a']\", brackets and quotes included."
+    },
+    "slides": [
+      107,
+      108
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": "",
+      "probe_template": "print((__OPTION_RAW__) is True)"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0084",
+    "chapter": "S2",
+    "topic": "conversions",
+    "tags": [
+      "int",
+      "str",
+      "float",
+      "which-is-false"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "Which of the following is a **false** statement in Python?",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "int('7') + 1 == 8",
+        "mono": true,
+        "probe": "print(not (int('7') + 1 == 8))"
+      },
+      {
+        "id": "b",
+        "text": "str(7) + '1' == '71'",
+        "mono": true,
+        "probe": "print(not (str(7) + '1' == '71'))"
+      },
+      {
+        "id": "c",
+        "text": "'7' * 2 == 14",
+        "mono": true,
+        "probe": "print(not ('7' * 2 == 14))"
+      },
+      {
+        "id": "d",
+        "text": "float('7') == 7",
+        "mono": true,
+        "probe": "print(not (float('7') == 7))"
+      },
+      {
+        "id": "e",
+        "text": "None of the above",
+        "probe": "print(int('7') + 1 == 8 and str(7) + '1' == '71' and float('7') == 7 and '7' * 2 == 14)"
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "`'7' * 2` repeats the string and gives `'77'`, which is not equal to 14. The other statements are true: int('7') is 7, str(7) + '1' concatenates to '71', and 7.0 == 7.",
+    "distractor_notes": {
+      "a": "int('7') is the integer 7, so 7 + 1 == 8 is true.",
+      "b": "str(7) is '7' and + concatenates strings: '71'.",
+      "d": "float('7') is 7.0, which compares equal to 7.",
+      "e": "One statement is false: '7' * 2 is '77'."
+    },
+    "slides": [
+      107
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": ""
+    },
+    "reviewed": 1
+  }
+]

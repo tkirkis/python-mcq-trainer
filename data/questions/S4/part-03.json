@@ -1,0 +1,1137 @@
+[
+  {
+    "id": "S4-0041",
+    "chapter": "S4",
+    "topic": "identity-equality",
+    "tags": [
+      "id",
+      "augmented-assignment",
+      "mutability"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "a = [1]\nbefore = id(a)\na += [2]\nprint(id(a) == before)\na = a + [3]\nprint(id(a) == before)",
+    "options": [
+      {
+        "id": "a",
+        "text": "True\nTrue",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "False\nTrue",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "False\nFalse",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "True\nFalse",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "For a list, `a += [2]` extends the existing object in place, so a keeps the same identity (same id). `a + [3]` builds a new list and `a = ...` rebinds a to it, so its id changes.",
+    "distractor_notes": {
+      "a": "`a + [3]` always creates a new list object.",
+      "b": "Reversed: += keeps the object, + creates a new one.",
+      "c": "+= on a list mutates it in place; no new object is created."
+    },
+    "slides": [
+      173,
+      63,
+      174
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0042",
+    "chapter": "S4",
+    "topic": "identity-equality",
+    "tags": [
+      "true-false",
+      "is",
+      "=="
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "True or False: if `a == b` is `True`, then `a is b` is also `True`.",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "True",
+        "probe": "a = [1]\nb = [1]\nprint(a == b and a is b)"
+      },
+      {
+        "id": "b",
+        "text": "False",
+        "probe": "a = [1]\nb = [1]\nprint(a == b and a is not b)"
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "False. `==` compares values while `is` compares identity. Two distinct lists with the same content (a = [1], b = [1]) are equal but are not the same object.",
+    "distractor_notes": {
+      "a": "Equality of content does not imply identity: [1] == [1], yet they are two different objects."
+    },
+    "slides": [
+      33,
+      173
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": ""
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0043",
+    "chapter": "S4",
+    "topic": "identity-equality",
+    "tags": [
+      "dict",
+      "==",
+      "is",
+      "select-all"
+    ],
+    "type": "multi",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "Which expressions evaluate to `True`? Select all that apply.",
+    "code": "d1 = {'a': 1, 'b': 2}\nd2 = {'b': 2, 'a': 1}",
+    "options": [
+      {
+        "id": "a",
+        "text": "d1 == d2",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "d1 is d2",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "list(d1) == list(d2)",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "d1.items() == d2.items()",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "sorted(d1) == sorted(d2)",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "d",
+      "e"
+    ],
+    "explanation": "Two dicts are equal when they contain the same key/value pairs, whatever the insertion order (a); items() views compare like sets of pairs (d). list(d1) gives the keys in insertion order, ['a', 'b'] vs ['b', 'a'], so (c) is False, whereas sorting removes the order difference (e). They are two distinct objects (b).",
+    "distractor_notes": {
+      "b": "Two dict displays create two distinct objects.",
+      "c": "Dicts remember insertion order, so their key lists differ even though the dicts are equal."
+    },
+    "slides": [
+      33,
+      173
+    ],
+    "verify": {
+      "mode": "truth",
+      "probe_template": "print((__OPTION_RAW__) is True)"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0044",
+    "chapter": "S4",
+    "topic": "identity-equality",
+    "tags": [
+      "None",
+      "is",
+      "append"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "result = [].append(1)\nprint(result is None, [] == [], [] is [])",
+    "options": [
+      {
+        "id": "a",
+        "text": "True True False",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "False True False",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "True True True",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[1] True False",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "list.append mutates the list and returns None, so result is None. Two empty lists are equal (==), but each `[]` creates a new list object, so `[] is []` is False.",
+    "distractor_notes": {
+      "b": "append returns None, so `result is None` is True.",
+      "c": "Each `[]` display creates a distinct list object.",
+      "d": "append returns None, not the list; the list [1] is simply lost."
+    },
+    "slides": [
+      33,
+      63
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0045",
+    "chapter": "S4",
+    "topic": "mutability",
+    "tags": [
+      "int",
+      "immutable",
+      "augmented-assignment"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "x = 5\ny = x\nx += 1\nprint(x, y)",
+    "options": [
+      {
+        "id": "a",
+        "text": "6 6",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "6 5",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "5 5",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "5 6",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "ints are immutable: `x += 1` cannot change the int object 5, so it creates the int 6 and rebinds x to it. y still refers to 5.",
+    "distractor_notes": {
+      "a": "An int cannot be changed in place, so y is unaffected.",
+      "c": "x is rebound to 6.",
+      "d": "Reversed."
+    },
+    "slides": [
+      62,
+      174
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0046",
+    "chapter": "S4",
+    "topic": "mutability",
+    "tags": [
+      "str",
+      "immutable",
+      "TypeError"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What happens in the below code?",
+    "code": "s = 'python'\ns[0] = 'P'\nprint(s)",
+    "options": [
+      {
+        "id": "a",
+        "text": "Python",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "python",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "TypeError",
+        "out": "!TypeError"
+      },
+      {
+        "id": "d",
+        "text": "IndexError",
+        "out": "!IndexError"
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "Strings are immutable: item assignment on a str raises TypeError ('str' object does not support item assignment). Build a new string instead, e.g. s = 'P' + s[1:].",
+    "distractor_notes": {
+      "a": "That needs a new string, e.g. s = 'P' + s[1:].",
+      "b": "The program stops with an error before reaching print.",
+      "d": "Index 0 exists; the problem is the assignment, not the index."
+    },
+    "slides": [
+      62
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0047",
+    "chapter": "S4",
+    "topic": "mutability",
+    "tags": [
+      "tuple",
+      "immutable",
+      "augmented-assignment"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "t = (1, 2)\nu = t\nt += (3,)\nprint(u, t)",
+    "options": [
+      {
+        "id": "a",
+        "text": "(1, 2) (1, 2)",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "(1, 2, 3) (1, 2, 3)",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "TypeError",
+        "out": "!TypeError"
+      },
+      {
+        "id": "d",
+        "text": "(1, 2) (1, 2, 3)",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "Tuples are immutable, so `t += (3,)` cannot extend the tuple in place: it builds a new tuple (1, 2, 3) and rebinds t. u still refers to the original (1, 2). (With lists, += mutates in place and aliases do see the change.)",
+    "distractor_notes": {
+      "a": "t is rebound to the new tuple.",
+      "b": "That is what happens with lists; a tuple cannot be modified in place.",
+      "c": "+= with a tuple on the right is allowed: it behaves like t = t + (3,)."
+    },
+    "slides": [
+      93,
+      62
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0048",
+    "chapter": "S4",
+    "topic": "mutability",
+    "tags": [
+      "list",
+      "augmented-assignment",
+      "rebinding"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "a = [1, 2]\nb = a\na += [3]\na = a + [4]\nprint(a, b)",
+    "options": [
+      {
+        "id": "a",
+        "text": "[1, 2, 3, 4] [1, 2, 3]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[1, 2, 3, 4] [1, 2, 3, 4]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[1, 2, 3, 4] [1, 2]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[1, 2, 3] [1, 2, 3]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "`a += [3]` mutates the shared list in place, so b sees [1, 2, 3]. `a = a + [4]` builds a new list and rebinds only a, so b keeps [1, 2, 3].",
+    "distractor_notes": {
+      "b": "`a + [4]` creates a new list; b is not rebound.",
+      "c": "+= on a list is in place: b sees the 3.",
+      "d": "a is rebound to the new list [1, 2, 3, 4]."
+    },
+    "slides": [
+      174,
+      62
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0049",
+    "chapter": "S4",
+    "topic": "mutability",
+    "tags": [
+      "tuple",
+      "list",
+      "augmented-assignment",
+      "TypeError"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "t = ([1, 2], 3)\ntry:\n    t[0] += [3]\nexcept TypeError:\n    print('error')\nprint(t)",
+    "options": [
+      {
+        "id": "a",
+        "text": "error\n([1, 2, 3], 3)",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "error\n([1, 2], 3)",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "([1, 2, 3], 3)",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "TypeError",
+        "out": "!TypeError"
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "`t[0] += [3]` runs in two steps: the list t[0] is extended in place (this succeeds, lists are mutable), then Python tries to store the result back with t[0] = ..., which fails because tuples do not support item assignment -> TypeError. The exception is caught, but the list inside the tuple has already been modified.",
+    "distractor_notes": {
+      "b": "The in-place extend happens before the failing item assignment.",
+      "c": "The store back into the tuple does raise TypeError, so 'error' is printed.",
+      "d": "The TypeError is caught by the try/except, and the program continues."
+    },
+    "slides": [
+      93,
+      62,
+      174
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0050",
+    "chapter": "S4",
+    "topic": "mutability",
+    "tags": [
+      "tuple",
+      "TypeError",
+      "select-all"
+    ],
+    "type": "multi",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "Starting from the tuple `t` below, which of the following statements run without raising an error (each one tried on its own)? Select all that apply.",
+    "code": "t = ([1], 'ab', 3)",
+    "options": [
+      {
+        "id": "a",
+        "text": "t[0].append(2)",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "t[1] += 'c'",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "t[0] += [2]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "t[0][0] = 9",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "t = t + (4,)",
+        "mono": true
+      },
+      {
+        "id": "f",
+        "text": "t[2] = 4",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "d",
+      "e"
+    ],
+    "explanation": "A tuple's slots cannot be reassigned, but a mutable object stored in it can be mutated: t[0].append(2) and t[0][0] = 9 work (a, d). t = t + (4,) builds a new tuple and rebinds the name, which is fine (e). Every statement that assigns to t[i] raises TypeError: t[2] = 4, t[1] += 'c', and even t[0] += [2] (the list is extended, then the store back into the tuple fails).",
+    "distractor_notes": {
+      "b": "+= ends with an assignment to t[1], which a tuple refuses: TypeError.",
+      "c": "Augmented assignment ends with t[0] = ..., which raises TypeError (even though the list was extended first).",
+      "f": "Tuples do not support item assignment."
+    },
+    "slides": [
+      93,
+      62,
+      174
+    ],
+    "verify": {
+      "mode": "truth",
+      "probe_template": "__OPTION_RAW__\nprint(True)"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0051",
+    "chapter": "S4",
+    "topic": "mutability",
+    "tags": [
+      "mutable-default-argument"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "def add_item(item, basket=[]):\n    basket.append(item)\n    return basket\nadd_item('a')\nprint(add_item('b'))",
+    "options": [
+      {
+        "id": "a",
+        "text": "['b']",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "['a', 'b']",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "['a']",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "TypeError",
+        "out": "!TypeError"
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "Default values are evaluated once, when the def statement runs. Every call that does not pass basket reuses the same list object, so 'a' from the first call is still there when 'b' is appended.",
+    "distractor_notes": {
+      "a": "That needs a fresh list at each call: use basket=None and create the list inside the function.",
+      "c": "The second call appends 'b' to the shared list.",
+      "d": "A list is allowed as a default value (it is just shared between calls)."
+    },
+    "slides": [
+      174,
+      82
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0052",
+    "chapter": "S4",
+    "topic": "mutability",
+    "tags": [
+      "mutable-default-argument"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "def f(x, acc=[]):\n    acc.append(x)\n    return len(acc)\nprint(f(1), f(2, []), f(3))",
+    "options": [
+      {
+        "id": "a",
+        "text": "1 1 1",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "1 1 3",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "1 2 3",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "1 1 2",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "f(1) appends to the shared default list -> length 1. f(2, []) works on the new list passed explicitly -> length 1, and the default list is untouched. f(3) uses the default list again, which already contains 1 -> length 2.",
+    "distractor_notes": {
+      "a": "The default list is created once and keeps its content between calls.",
+      "b": "Only the calls without an explicit list share the default.",
+      "c": "The explicit [] in the second call is a different list, so 2 is not added to the default list."
+    },
+    "slides": [
+      174,
+      82
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0053",
+    "chapter": "S4",
+    "topic": "mutability",
+    "tags": [
+      "mutable-default-argument",
+      "None"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Find the output of the code?",
+    "code": "def f(x, acc=None):\n    if acc is None:\n        acc = []\n    acc.append(x)\n    return acc\nf(1)\nprint(f(2))",
+    "options": [
+      {
+        "id": "a",
+        "text": "[1, 2]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "None",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[2]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[None, 2]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "With the None default idiom, a new empty list is created inside the function at every call that does not provide acc, so the calls do not share state: f(2) returns [2].",
+    "distractor_notes": {
+      "a": "That is the mutable-default bug (acc=[]); the None default avoids it.",
+      "b": "acc is replaced by a new list before append, and the function returns it.",
+      "d": "acc is rebound to [] when it is None; None itself is never appended."
+    },
+    "slides": [
+      174,
+      82
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0054",
+    "chapter": "S4",
+    "topic": "mutability",
+    "tags": [
+      "list",
+      "iteration",
+      "remove"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "nums = [2, 4, 5, 6]\nfor n in nums:\n    if n % 2 == 0:\n        nums.remove(n)\nprint(nums)",
+    "options": [
+      {
+        "id": "a",
+        "text": "[5]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[4, 6]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[4, 5]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "RuntimeError",
+        "out": "!RuntimeError"
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "Removing items from a list while iterating over it shifts the remaining items left, so the loop skips some. Index 0: 2 is removed -> [4, 5, 6]; index 1 is now 5 (4 was skipped), kept; index 2: 6 is removed -> [4, 5]; there is no index 3, the loop ends. Iterate over a copy (for n in nums[:]) or build a new list instead.",
+    "distractor_notes": {
+      "a": "The expected result if every even number were visited; 4 is skipped because of the shift.",
+      "b": "6 is visited and removed; it is 4 that is skipped.",
+      "d": "Lists do not raise when modified during iteration (dicts and sets do)."
+    },
+    "slides": [
+      174,
+      62
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0055",
+    "chapter": "S4",
+    "topic": "mutability",
+    "tags": [
+      "dict",
+      "iteration",
+      "RuntimeError"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What happens in the below code?",
+    "code": "d = {'a': 1, 'b': 2}\nfor k in d:\n    d[k * 2] = 0\nprint(d)",
+    "options": [
+      {
+        "id": "a",
+        "text": "{'a': 1, 'b': 2, 'aa': 0, 'bb': 0}",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "RuntimeError",
+        "out": "!RuntimeError"
+      },
+      {
+        "id": "c",
+        "text": "KeyError",
+        "out": "!KeyError"
+      },
+      {
+        "id": "d",
+        "text": "The loop never ends",
+        "out": null
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "Adding keys to a dictionary while iterating over it changes its size; Python detects this at the next step of the loop and raises RuntimeError (dictionary changed size during iteration). Iterate over a snapshot such as list(d) to modify the dict safely.",
+    "distractor_notes": {
+      "a": "That is the result of iterating over a snapshot, e.g. `for k in list(d):`.",
+      "c": "Assigning to a new key creates it; no missing key is read.",
+      "d": "Python stops the iteration with an error instead of looping forever."
+    },
+    "slides": [
+      174,
+      62
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0056",
+    "chapter": "S4",
+    "topic": "mutability",
+    "tags": [
+      "mutable",
+      "immutable",
+      "types",
+      "select-all"
+    ],
+    "type": "multi",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "Which of the following built-in types are mutable (their objects can be changed in place)? Select all that apply.",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "list",
+        "mono": true,
+        "probe": "x = [1]\ny = x\nx[0] = 2\nprint(y == [2])"
+      },
+      {
+        "id": "b",
+        "text": "tuple",
+        "mono": true,
+        "probe": "x = (1,)\ntry:\n    x[0] = 2\n    print(True)\nexcept TypeError:\n    print(False)"
+      },
+      {
+        "id": "c",
+        "text": "str",
+        "mono": true,
+        "probe": "x = 'a'\ntry:\n    x[0] = 'b'\n    print(True)\nexcept TypeError:\n    print(False)"
+      },
+      {
+        "id": "d",
+        "text": "dict",
+        "mono": true,
+        "probe": "x = {}\ny = x\nx['k'] = 1\nprint(y == {'k': 1})"
+      },
+      {
+        "id": "e",
+        "text": "set",
+        "mono": true,
+        "probe": "x = set()\ny = x\nx.add(1)\nprint(y == {1})"
+      },
+      {
+        "id": "f",
+        "text": "int",
+        "mono": true,
+        "probe": "x = 5\ny = x\nx += 1\nprint(y == 6)"
+      }
+    ],
+    "correct": [
+      "a",
+      "d",
+      "e"
+    ],
+    "explanation": "list, dict and set objects can be modified in place (item assignment, append, add...), and every alias sees the change. tuple, str and int are immutable: operations that seem to modify them actually create a new object.",
+    "distractor_notes": {
+      "b": "A tuple cannot be changed after creation (item assignment raises TypeError).",
+      "c": "Strings are immutable; methods like upper() or replace() return new strings.",
+      "f": "x += 1 on an int creates a new int and rebinds x."
+    },
+    "slides": [
+      62,
+      93,
+      174
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": ""
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0057",
+    "chapter": "S4",
+    "topic": "mutability",
+    "tags": [
+      "str",
+      "immutable",
+      "methods"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "name = '  Ada  '\nname.strip()\nname = name.replace('A', 'E')\nprint('[' + name + ']')",
+    "options": [
+      {
+        "id": "a",
+        "text": "[Eda]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[  Ada  ]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[Ada]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[  Eda  ]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "Strings are immutable, so string methods return new strings. The result of name.strip() is discarded (never assigned), so the spaces remain. The result of replace is assigned back to name, so 'A' becomes 'E'.",
+    "distractor_notes": {
+      "a": "strip() did not change name: its result was not stored.",
+      "b": "replace's result was assigned back to name.",
+      "c": "Neither the strip nor the original 'A' survives: strip's result is lost and replace's result is stored."
+    },
+    "slides": [
+      62
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0058",
+    "chapter": "S4",
+    "topic": "mutability",
+    "tags": [
+      "list",
+      "augmented-assignment",
+      "in-place",
+      "select-all"
+    ],
+    "type": "multi",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "Starting from the code below, which of the following statements also change `b` (each one tried on its own)? Select all that apply.",
+    "code": "a = [1, 2]\nb = a",
+    "options": [
+      {
+        "id": "a",
+        "text": "a += [3]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "a = a + [3]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "a.extend([3])",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "a[len(a):] = [3]",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "a = a * 2",
+        "mono": true
+      },
+      {
+        "id": "f",
+        "text": "a *= 2",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "c",
+      "d",
+      "f"
+    ],
+    "explanation": "b changes only if the shared list object is mutated. +=, *=, extend() and slice assignment all modify the list in place (a, c, d, f). `a = a + [3]` and `a = a * 2` build a new list and rebind only the name a, so b still refers to the unchanged [1, 2].",
+    "distractor_notes": {
+      "b": "`a + [3]` creates a new list; only the name a is rebound.",
+      "e": "`a * 2` creates a new list; only the name a is rebound."
+    },
+    "slides": [
+      174,
+      62
+    ],
+    "verify": {
+      "mode": "truth",
+      "probe_template": "__OPTION_RAW__\nprint(b != [1, 2])"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0059",
+    "chapter": "S4",
+    "topic": "keywords",
+    "tags": [
+      "keywords",
+      "builtins",
+      "SyntaxError",
+      "select-all"
+    ],
+    "type": "multi",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Which of the following lines are syntactically valid in Python 3 (the file compiles)? Select all that apply.",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "list = [1, 2]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "None = 0",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "print = 'x'",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "for = 3",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "sum = 10",
+        "mono": true
+      },
+      {
+        "id": "f",
+        "text": "True = 1",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "c",
+      "e"
+    ],
+    "explanation": "Keywords (None, True, False, for, if, def, class...) are reserved: assigning to them is a SyntaxError. list, print, sum, len... are only built-in *names*: they can be rebound (which hides the built-in - legal, but usually a bad idea).",
+    "distractor_notes": {
+      "b": "None is a keyword in Python 3: it cannot be assigned.",
+      "d": "for is a reserved keyword.",
+      "f": "True is a keyword in Python 3 (it was an ordinary name in Python 2)."
+    },
+    "slides": [
+      179
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": "",
+      "probe_template": "try:\n    compile(__OPTION__, 'q', 'exec')\n    print(True)\nexcept SyntaxError:\n    print(False)"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S4-0060",
+    "chapter": "S4",
+    "topic": "keywords",
+    "tags": [
+      "builtins",
+      "shadowing",
+      "TypeError"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What happens in the below code?",
+    "code": "list = [1, 2, 3]\nletters = list('abc')\nprint(letters)",
+    "options": [
+      {
+        "id": "a",
+        "text": "TypeError",
+        "out": "!TypeError"
+      },
+      {
+        "id": "b",
+        "text": "['a', 'b', 'c']",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "SyntaxError",
+        "out": "!SyntaxError"
+      },
+      {
+        "id": "d",
+        "text": "[1, 2, 3]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "list is a built-in name, not a keyword, so `list = [1, 2, 3]` is legal: it hides the built-in list type in this module. list('abc') then tries to call a list object -> TypeError ('list' object is not callable).",
+    "distractor_notes": {
+      "b": "That would be the output if the name list still referred to the built-in type.",
+      "c": "Rebinding a built-in name is syntactically valid.",
+      "d": "The list object is called, not printed: the call fails."
+    },
+    "slides": [
+      179
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  }
+]

@@ -1,0 +1,39 @@
+{
+  "name": "python-mcq-trainer",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "setup": "bash scripts/setup.sh",
+    "verify": "node scripts/run-python.mjs scripts/verify_questions.py",
+    "verify:strict": "node scripts/run-python.mjs scripts/verify_questions.py --strict",
+    "content": "node scripts/build-content.mjs",
+    "dev": "npm run content && vite",
+    "build": "npm run verify:strict && node scripts/build-content.mjs --strict && tsc --noEmit && vite build",
+    "build:e2e": "node scripts/build-content.mjs && VITE_MOCK_SYNC_URL=http://localhost:8787 vite build --outDir dist-e2e",
+    "build:nocheck": "npm run content && vite build",
+    "preview": "vite preview --port 4173 --strictPort",
+    "test": "vitest run",
+    "e2e": "npm run build:e2e && playwright test",
+    "mock-sync": "node scripts/mock-sync-server.mjs"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "2.45.4",
+    "idb": "8.0.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.48.2",
+    "@types/node": "22.9.0",
+    "@types/react": "18.3.12",
+    "@types/react-dom": "18.3.1",
+    "@vitejs/plugin-react": "4.3.3",
+    "fake-indexeddb": "6.0.0",
+    "marked": "14.1.3",
+    "typescript": "5.6.3",
+    "vite": "5.4.10",
+    "vite-plugin-pwa": "0.20.5",
+    "vitest": "2.1.4"
+  }
+}

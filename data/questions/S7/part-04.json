@@ -1,0 +1,1098 @@
+[
+ {
+  "id": "S7-0061",
+  "chapter": "S7",
+  "topic": "context-managers",
+  "tags": [
+   "with",
+   "__enter__",
+   "__exit__",
+   "exception-propagation"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "class Tracker:\n    def __enter__(self):\n        print('in')\n    def __exit__(self, *args):\n        print('out')\n\ntry:\n    with Tracker() as t:\n        print(t)\n        raise KeyError('k')\nexcept KeyError:\n    print('caught')",
+  "options": [
+   {
+    "id": "a",
+    "text": "in\nNone\ncaught",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "in\nNone\ncaught\nout",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "in\nNone\nout",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "in\nNone\nout\ncaught",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "`as t` receives the return value of `__enter__`, which returns nothing, so t is None. When the KeyError is raised, `__exit__` runs first ('out'); it returns None (a false value), so the exception is **not** suppressed and propagates to the outer `except`, which prints 'caught'.",
+  "distractor_notes": {
+   "a": "__exit__ is always called when the block is left, even because of an exception.",
+   "b": "__exit__ runs as soon as the with block is left, before the exception reaches the outer except.",
+   "c": "Only a *true* return value from __exit__ suppresses the exception; None lets it propagate."
+  },
+  "slides": [
+   256
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0062",
+  "chapter": "S7",
+  "topic": "context-managers",
+  "tags": [
+   "with",
+   "file",
+   "close",
+   "try-finally"
+  ],
+  "type": "multi",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "Which of these snippets leave the file closed right after they have run? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "with open('t.txt', 'w') as f:\n    f.write('a')",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "f = open('t.txt', 'w')\nf.write('a')",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "f = open('t.txt', 'w')\ntry:\n    f.write('a')\nfinally:\n    f.close()",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "f = open('t.txt', 'w')\nf.write('a')\nf.close()",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a",
+   "c",
+   "d"
+  ],
+  "explanation": "A `with` block closes the file automatically when it ends (even after an exception), exactly like the `try/finally: f.close()` pattern. An explicit `f.close()` also closes it (but would be skipped if `write` raised). Snippet (b) never closes the file.",
+  "distractor_notes": {
+   "b": "Nothing closes the file: without with or close(), it stays open."
+  },
+  "slides": [
+   256
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "",
+   "probe_template": "__OPTION_RAW__\nprint(f.closed)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0063",
+  "chapter": "S7",
+  "topic": "logging-debugging",
+  "tags": [
+   "logging",
+   "levels",
+   "default-level",
+   "basicConfig"
+  ],
+  "type": "multi",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "After this configuration (no `level` argument), which of the following calls print something? Select all that apply.",
+  "code": "import logging, sys\nlogging.basicConfig(stream=sys.stdout, format='%(levelname)s:%(message)s')",
+  "options": [
+   {
+    "id": "a",
+    "text": "logging.debug('x')",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "logging.info('x')",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "logging.warning('x')",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "logging.error('x')",
+    "mono": true
+   },
+   {
+    "id": "e",
+    "text": "logging.critical('x')",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c",
+   "d",
+   "e"
+  ],
+  "explanation": "The root logger's default level is **WARNING**: only messages of level WARNING or above (WARNING, ERROR, CRITICAL) are emitted. DEBUG and INFO messages are silently dropped unless you pass e.g. `level=logging.DEBUG`.",
+  "distractor_notes": {
+   "a": "DEBUG is below the default WARNING threshold.",
+   "b": "INFO is below the default WARNING threshold."
+  },
+  "slides": [
+   259
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "import logging, io\nbuf = io.StringIO()\nlogging.basicConfig(stream=buf, format='%(levelname)s:%(message)s')",
+   "probe_template": "__OPTION_RAW__\nprint(buf.getvalue() != '')",
+   "note": "The probes log into a StringIO buffer instead of sys.stdout to detect whether anything was emitted."
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0064",
+  "chapter": "S7",
+  "topic": "logging-debugging",
+  "tags": [
+   "logging",
+   "levels"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "Which line lists the `logging` levels from the least to the most severe?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "DEBUG < INFO < ERROR < WARNING < CRITICAL",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "INFO < DEBUG < WARNING < ERROR < CRITICAL",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "DEBUG < INFO < WARNING < ERROR < CRITICAL",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "DEBUG < WARNING < INFO < ERROR < CRITICAL",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "The standard levels are DEBUG (10) < INFO (20) < WARNING (30) < ERROR (40) < CRITICAL (50). A logger set to a level emits messages of that level and above.",
+  "distractor_notes": {
+   "a": "WARNING (30) is less severe than ERROR (40).",
+   "b": "DEBUG (10) is the lowest level, below INFO (20).",
+   "d": "INFO (20) comes before WARNING (30)."
+  },
+  "slides": [
+   259
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "",
+   "probe_template": "import logging\nnames = __OPTION__.split(' < ')\nvals = [getattr(logging, n) for n in names]\nprint(vals == sorted(vals) and len(set(vals)) == 5)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0065",
+  "chapter": "S7",
+  "topic": "logging-debugging",
+  "tags": [
+   "logging",
+   "handler",
+   "levels",
+   "formatter"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "import logging, sys\nlog = logging.getLogger('app')\nlog.setLevel(logging.DEBUG)\nh = logging.StreamHandler(sys.stdout)\nh.setLevel(logging.WARNING)\nh.setFormatter(logging.Formatter('%(name)s|%(levelname)s|%(message)s'))\nlog.addHandler(h)\nlog.info('saved')\nlog.error('disk full')",
+  "options": [
+   {
+    "id": "a",
+    "text": "app|ERROR|disk full",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "app|INFO|saved\napp|ERROR|disk full",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "Nothing is printed",
+    "out": "",
+    "mono": false
+   },
+   {
+    "id": "d",
+    "text": "app|INFO|saved",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "A record must pass two filters: the logger's level (DEBUG: both records pass) and then the handler's level (WARNING). The INFO record is dropped by the handler; the ERROR record is printed with the given format.",
+  "distractor_notes": {
+   "b": "The handler has its own level, WARNING, which filters out the INFO record.",
+   "c": "ERROR is above both thresholds, so it is printed.",
+   "d": "INFO is below the handler level; ERROR is the one that gets through."
+  },
+  "slides": [
+   259
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0066",
+  "chapter": "S7",
+  "topic": "logging-debugging",
+  "tags": [
+   "logging",
+   "basicConfig",
+   "format",
+   "levels"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "import logging, sys\nlogging.basicConfig(stream=sys.stdout, level=logging.DEBUG, format='%(levelname)s:%(message)s')\ntotal = 3\nlogging.info('processed %d files', total)\nlogging.debug('done')",
+  "options": [
+   {
+    "id": "a",
+    "text": "processed 3 files\ndone",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "INFO:processed %d files 3\nDEBUG:done",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "INFO:processed 3 files",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "INFO:processed 3 files\nDEBUG:done",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "With `level=logging.DEBUG` every message is emitted, including debug ones. Extra arguments are merged into the message with %-formatting, and the format string prefixes each line with the level name.",
+  "distractor_notes": {
+   "a": "The format '%(levelname)s:%(message)s' adds the level name in front.",
+   "b": "logging applies `msg % args`, so %d is replaced by 3.",
+   "c": "The configured level is DEBUG, so the debug message is shown too."
+  },
+  "slides": [
+   259
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0067",
+  "chapter": "S7",
+  "topic": "logging-debugging",
+  "tags": [
+   "logging",
+   "print"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "According to the course, which of the following is **not** an advantage of using the `logging` package instead of `print`?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "Messages have severity levels that can be filtered",
+    "mono": false
+   },
+   {
+    "id": "b",
+    "text": "Logging makes the program run faster than printing",
+    "mono": false
+   },
+   {
+    "id": "c",
+    "text": "Messages can carry context such as the time, module, function or line",
+    "mono": false
+   },
+   {
+    "id": "d",
+    "text": "Messages can be sent to the console or to a file",
+    "mono": false
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "The course recommends logging because it defines several levels, can write to the console or to a file, and adds context (time, module, function, line...). Speed is not the reason: logging is not a faster print.",
+  "distractor_notes": {
+   "a": "Levels (DEBUG ... CRITICAL) are a key advantage of logging.",
+   "c": "Format fields such as %(asctime)s, %(module)s, %(lineno)d add context.",
+   "d": "Handlers can write to the console, files, etc."
+  },
+  "slides": [
+   259
+  ],
+  "verify": {
+   "mode": "manual",
+   "reference": "Slide 259 'Logging, not printing': levels, console or file output, added context"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0068",
+  "chapter": "S7",
+  "topic": "logging-debugging",
+  "tags": [
+   "debugger",
+   "breakpoint"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "In an IDE debugger, what is a **breakpoint**?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "A line that is commented out so that it does not run",
+    "mono": false
+   },
+   {
+    "id": "b",
+    "text": "An exception that makes the program stop",
+    "mono": false
+   },
+   {
+    "id": "c",
+    "text": "A call to sys.exit() that the IDE inserts in the code",
+    "mono": false
+   },
+   {
+    "id": "d",
+    "text": "A marked line where execution pauses so you can inspect variables and step through the code",
+    "mono": false
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "A breakpoint tells the debugger to pause the program when it reaches that line. You can then inspect the variables and execute the code step by step.",
+  "distractor_notes": {
+   "a": "Commenting out code is unrelated to debugging tools.",
+   "b": "An exception is a run-time error, not a debugger feature.",
+   "c": "The debugger does not modify your code nor terminate it."
+  },
+  "slides": [
+   260
+  ],
+  "verify": {
+   "mode": "manual",
+   "reference": "Slide 260 'Debugging': step through code, set breakpoints, inspect variables"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0069",
+  "chapter": "S7",
+  "topic": "efficiency",
+  "tags": [
+   "numpy",
+   "vectorization",
+   "dot"
+  ],
+  "type": "multi",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Which vectorized expressions compute the same single number as `total`? Select all that apply.",
+  "code": "import numpy as np\nx = np.array([1.0, 2.0, 3.0])\nm = np.array([0.5, 0.5, 2.0])\ntotal = 0\nfor j in range(3):\n    total = total + x[j] * m[j]",
+  "options": [
+   {
+    "id": "a",
+    "text": "np.dot(x, m)",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "np.sum(x * m)",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "x * m",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "np.sum(x) * np.sum(m)",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a",
+   "b"
+  ],
+  "explanation": "The loop computes the dot product 1*0.5 + 2*0.5 + 3*2 = 7.5. `np.dot(x, m)` and `np.sum(x * m)` give the same number without a Python loop. `x * m` is the element-wise product (an array, not a number), and the product of the sums (6 * 3 = 18) is a different quantity.",
+  "distractor_notes": {
+   "c": "Element-wise product: an array [0.5, 1.0, 6.0], not its sum.",
+   "d": "sum(x) * sum(m) multiplies all pairs, not matching elements: 18.0 != 7.5."
+  },
+  "slides": [
+   267
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "import numpy as np\nx = np.array([1.0, 2.0, 3.0])\nm = np.array([0.5, 0.5, 2.0])\ntotal = 0\nfor j in range(3):\n    total = total + x[j] * m[j]",
+   "probe_template": "res = __OPTION_RAW__\nprint(bool(np.ndim(res) == 0 and res == total))"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0070",
+  "chapter": "S7",
+  "topic": "efficiency",
+  "tags": [
+   "pandas",
+   "vectorization",
+   "columns"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "import pandas as pd\ndf = pd.DataFrame({'c': [1, 2, 4], 'd': [3, 4, 2]})\ndf['ratio'] = 100 * (df['d'] / df['c'])\nprint(df['ratio'].tolist())",
+  "options": [
+   {
+    "id": "a",
+    "text": "[300, 200, 50]",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "[300.0, 200.0, 50.0]",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "[3.0, 2.0, 0.5]",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "[300, 200, 0]",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "The vectorized expression divides the columns element by element (no `iterrows` loop needed). `/` is true division, so the result is float: 3.0, 2.0, 0.5, multiplied by 100.",
+  "distractor_notes": {
+   "a": "`/` always produces floats, even when the division is exact.",
+   "c": "Forgets the multiplication by 100.",
+   "d": "`/` is not integer division: 2 / 4 is 0.5."
+  },
+  "slides": [
+   265
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0071",
+  "chapter": "S7",
+  "topic": "efficiency",
+  "tags": [
+   "pandas",
+   "vectorization",
+   "loc",
+   "boolean-mask"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "import pandas as pd\ndf = pd.DataFrame({'a': [0, 10, 30], 'b': [5, 5, 5], 'c': [1, 1, 1], 'd': [9, 9, 9]})\ndf['e'] = df['b'] + df['c']\ndf.loc[df['a'] <= 25, 'e'] = df['b'] - df['c']\ndf.loc[df['a'] == 0, 'e'] = df['d']\nprint(df['e'].tolist())",
+  "options": [
+   {
+    "id": "a",
+    "text": "[9, 4, 6]",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "[4, 4, 6]",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "[6, 6, 6]",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "[9, 6, 6]",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "This is the vectorized version of an if/elif/else loop: the general case is set first (b + c = 6), then overwritten for a <= 25 (b - c = 4, rows 0 and 1), then for a == 0 (d = 9, row 0). The most specific rule is applied last, so row 0 -> 9, row 1 -> 4, row 2 -> 6.",
+  "distractor_notes": {
+   "b": "Forgets the last assignment, which overwrites row 0 (a == 0) with d.",
+   "c": "The .loc assignments do modify the selected rows.",
+   "d": "Row 1 (a = 10) satisfies a <= 25, so it becomes b - c = 4."
+  },
+  "slides": [
+   266
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0072",
+  "chapter": "S7",
+  "topic": "efficiency",
+  "tags": [
+   "complexity",
+   "set",
+   "list",
+   "membership"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "`items` holds one million distinct strings, and your program tests `x in items` many times. Which choice is typically much faster, and why?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "Store them in a list: membership is a direct index lookup",
+    "mono": false
+   },
+   {
+    "id": "b",
+    "text": "Store them in a set: membership uses hashing and takes roughly constant time",
+    "mono": false
+   },
+   {
+    "id": "c",
+    "text": "Both are equally fast: `in` always scans the elements one by one",
+    "mono": false
+   },
+   {
+    "id": "d",
+    "text": "Store them in a tuple: tuples are immutable, so `in` uses binary search",
+    "mono": false
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "`x in a_set` computes the hash of x and looks in one bucket: O(1) on average. `x in a_list` (or a tuple) compares x with the elements one by one: O(n), i.e. up to a million comparisons per test.",
+  "distractor_notes": {
+   "a": "`in` on a list searches by value, comparing elements one by one (O(n)).",
+   "c": "Sets and dicts use hash tables; only sequences are scanned.",
+   "d": "Tuples are scanned linearly like lists; nothing is sorted."
+  },
+  "slides": [
+   263
+  ],
+  "verify": {
+   "mode": "manual",
+   "reference": "Python docs (Set types; wiki TimeComplexity): `in` is O(1) average for set/dict, O(n) for list/tuple; slide 263 'Use built-in functions and libraries'"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0073",
+  "chapter": "S7",
+  "topic": "efficiency",
+  "tags": [
+   "vectorization",
+   "multiprocessing",
+   "numba",
+   "cython",
+   "which-is-false"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Which statement about speeding up Python code is **false**?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "`Pool().map(f, items)` from `multiprocessing` spreads the calls of `f` over several processes, so several CPU cores work in parallel.",
+    "mono": false
+   },
+   {
+    "id": "b",
+    "text": "Numba's `@numba.jit(nopython=True)` compiles a Python function to machine code at run time.",
+    "mono": false
+   },
+   {
+    "id": "c",
+    "text": "Cython is a superset of Python that can be compiled into C.",
+    "mono": false
+   },
+   {
+    "id": "d",
+    "text": "Replacing a NumPy vectorized operation by an explicit Python `for` loop usually makes the code faster.",
+    "mono": false
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "It is the opposite: vectorized NumPy/Pandas operations run in optimized compiled code, while a Python loop interprets one element at a time (the course shows speed-ups from about 18x to several hundred times when loops are removed). The other three statements describe multiprocessing, Numba and Cython correctly.",
+  "distractor_notes": {
+   "a": "True: Pool.map distributes the work over worker processes and gathers the results.",
+   "b": "True: Numba is a just-in-time compiler to machine code.",
+   "c": "True: Cython extends Python and compiles to C."
+  },
+  "slides": [
+   263,
+   264,
+   268,
+   269
+  ],
+  "verify": {
+   "mode": "manual",
+   "reference": "Slides 263-269: vectorization ('Say goodbye to loops'), multiprocessing Pool, Numba jit, Cython"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0074",
+  "chapter": "S7",
+  "topic": "efficiency",
+  "tags": [
+   "built-ins",
+   "max",
+   "loops"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "Which built-in call computes the same value as `best`, without an explicit loop?",
+  "code": "values = [15, 4, 42, 8, 23, 16]\nbest = values[0]\nfor v in values:\n    if v > best:\n        best = v",
+  "options": [
+   {
+    "id": "a",
+    "text": "max(values)",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "sorted(values)[0]",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "values[-1]",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "min(values)",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "The loop keeps the largest value seen so far, i.e. it re-implements `max(values)` (42). Built-ins such as max, min and sum are implemented in C: shorter, clearer and faster than a hand-written loop.",
+  "distractor_notes": {
+   "b": "sorted(...)[0] is the smallest value (4).",
+   "c": "values[-1] is simply the last element (16).",
+   "d": "The loop keeps values greater than best, so it finds the maximum, not the minimum."
+  },
+  "slides": [
+   263
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "values = [15, 4, 42, 8, 23, 16]\nbest = values[0]\nfor v in values:\n    if v > best:\n        best = v",
+   "probe_template": "print(__OPTION_RAW__ == best)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0075",
+  "chapter": "S7",
+  "topic": "good-practices",
+  "tags": [
+   "docstring",
+   "__doc__"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "def area(r):\n    \"\"\"Return the area of a circle of radius r.\"\"\"\n    return 3.14 * r * r\n\nprint(area.__doc__)",
+  "options": [
+   {
+    "id": "a",
+    "text": "area",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "None",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "Return the area of a circle of radius r.",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "AttributeError",
+    "mono": true,
+    "out": "!AttributeError"
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "A string literal placed as the first statement of a function is its **docstring**: Python stores it in the function's `__doc__` attribute (that is what `help(area)` displays).",
+  "distractor_notes": {
+   "a": "The name is stored in __name__, not __doc__.",
+   "b": "__doc__ is None only when the function has no docstring.",
+   "d": "Every function has a __doc__ attribute."
+  },
+  "slides": [
+   273
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0076",
+  "chapter": "S7",
+  "topic": "good-practices",
+  "tags": [
+   "type-hints",
+   "annotations",
+   "duck-typing"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "def double(x: int) -> int:\n    return x * 2\n\nprint(double('ab'))",
+  "options": [
+   {
+    "id": "a",
+    "text": "ab ab",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "TypeError",
+    "mono": true,
+    "out": "!TypeError"
+   },
+   {
+    "id": "c",
+    "text": "abab",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "None",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "Type hints are optional annotations meant for the reader (and for tools such as type checkers); Python does **not** check them at run time. `'ab' * 2` is simply evaluated and gives 'abab'.",
+  "distractor_notes": {
+   "a": "String repetition does not insert a space.",
+   "b": "The interpreter does not enforce type hints: no error is raised.",
+   "d": "The function has a return statement, so it does not return None."
+  },
+  "slides": [
+   276
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0077",
+  "chapter": "S7",
+  "topic": "good-practices",
+  "tags": [
+   "zen-of-python",
+   "import-this"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "Which of the following is **not** a line of the Zen of Python (displayed by `import this`)?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "Fast is better than readable.",
+    "mono": false
+   },
+   {
+    "id": "b",
+    "text": "Flat is better than nested.",
+    "mono": false
+   },
+   {
+    "id": "c",
+    "text": "Errors should never pass silently.",
+    "mono": false
+   },
+   {
+    "id": "d",
+    "text": "Explicit is better than implicit.",
+    "mono": false
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "The Zen of Python values readability ('Readability counts.'), explicitness, flat structures and visible errors. There is no line preferring speed over readability.",
+  "distractor_notes": {
+   "b": "It is one of the aphorisms: avoid deep nesting.",
+   "c": "It is an aphorism (followed by 'Unless explicitly silenced.').",
+   "d": "It is the second aphorism of the Zen."
+  },
+  "slides": [
+   271
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "",
+   "probe_template": "import io, contextlib\nbuf = io.StringIO()\nwith contextlib.redirect_stdout(buf):\n    import this\nprint(__OPTION__ not in buf.getvalue())"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0078",
+  "chapter": "S7",
+  "topic": "good-practices",
+  "tags": [
+   "pep8",
+   "naming"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "According to PEP 8, which name follows the naming convention for a **class**?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "vendingMachine",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "vending_machine",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "VENDING_MACHINE",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "VendingMachine",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "PEP 8 uses CapWords (each word capitalised, no underscores) for class names, `lower_case_with_underscores` for functions, variables and modules, and `UPPER_CASE` for constants.",
+  "distractor_notes": {
+   "a": "mixedCase (camelCase) is not used for classes in PEP 8.",
+   "b": "snake_case is the convention for functions, variables and modules.",
+   "c": "UPPER_CASE is reserved for constants."
+  },
+  "slides": [
+   272
+  ],
+  "verify": {
+   "mode": "manual",
+   "reference": "PEP 8, 'Naming Conventions' (class names use the CapWords convention); slide 272 (PEP8 style guide)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0079",
+  "chapter": "S7",
+  "topic": "good-practices",
+  "tags": [
+   "docstring",
+   "google-style"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "In the docstring convention used in the course, in which section do you document the exceptions a function can raise?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "Returns:",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "Raises:",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "Args:",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "Attributes:",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "The course's docstrings contain a one-line summary, a longer description, then sections: `Args:` (parameters and types), `Returns:` (returned value and type), `Raises:` (only if the function can raise an exception) and `Attributes:` for classes.",
+  "distractor_notes": {
+   "a": "Returns: describes the returned value.",
+   "c": "Args: describes the parameters.",
+   "d": "Attributes: is used in class docstrings."
+  },
+  "slides": [
+   273
+  ],
+  "verify": {
+   "mode": "manual",
+   "reference": "Slide 273 'Writing comments: pydocs' (sections Args, Returns, Raises, Attributes)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0080",
+  "chapter": "S7",
+  "topic": "good-practices",
+  "tags": [
+   "project-structure",
+   "__init__",
+   "README",
+   "requirements"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Which statement about organising a Python project, as recommended in the course, is **false**?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "Each package directory should contain an `__init__.py` file.",
+    "mono": false
+   },
+   {
+    "id": "b",
+    "text": "A `requirements.txt` file lists the packages the project depends on.",
+    "mono": false
+   },
+   {
+    "id": "c",
+    "text": "A `README.md` file explains what the project is about.",
+    "mono": false
+   },
+   {
+    "id": "d",
+    "text": "Putting the whole project in one single module makes the code easier to reuse in other projects.",
+    "mono": false
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "The course advises against a single big module: it is unreadable, forces several people to edit the same file and makes the code hard to reuse. Splitting into packages (each with `__init__.py`), plus a README.md and a requirements.txt, is the recommended layout.",
+  "distractor_notes": {
+   "a": "True: __init__.py marks the directory as a package so that `from pkg.sub import module` works.",
+   "b": "True: requirements.txt specifies the dependencies (pip install -r requirements.txt).",
+   "c": "True: the README explains what the project is about."
+  },
+  "slides": [
+   277,
+   278
+  ],
+  "verify": {
+   "mode": "manual",
+   "reference": "Slides 277-278 'Project file architecture' and 'Project architecture'"
+  },
+  "reviewed": 1
+ }
+]

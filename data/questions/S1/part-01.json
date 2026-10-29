@@ -1,0 +1,1199 @@
+[
+ {
+  "id": "S1-0001",
+  "chapter": "S1",
+  "topic": "strings",
+  "tags": [
+   "slicing",
+   "indexing"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "s = \"DATASCIENCE\"\nprint(s[4:7])",
+  "options": [
+   {
+    "id": "a",
+    "text": "CIE",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "SCI",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "SCIE",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "ASC",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "`s[start:stop]` takes the characters from index `start` up to but **not including** `stop`. Indices start at 0, so the slice holds s[4], s[5], s[6] = 'S', 'C', 'I'.",
+  "distractor_notes": {
+   "a": "That is s[5:8]: shifted one character to the right.",
+   "c": "Includes index 7 as well: the stop index of a slice is excluded.",
+   "d": "That is s[3:6]: the slice starts one character too early (counting from 1 instead of 0)."
+  },
+  "slides": [
+   30,
+   31
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0002",
+  "chapter": "S1",
+  "topic": "strings",
+  "tags": [
+   "slicing",
+   "negative-index"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "word = \"notebook\"\nprint(word[-4:])",
+  "options": [
+   {
+    "id": "a",
+    "text": "boo",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "book",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "ebook",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "note",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "A negative index counts from the end: -1 is the last character, so -4 is the 'b' of 'book'. With the stop omitted, the slice runs to the end of the string.",
+  "distractor_notes": {
+   "a": "That is word[-4:-1]. An omitted stop means 'up to the end', the last character included.",
+   "c": "That is word[-5:]: off by one when counting from the end.",
+   "d": "That is word[:4], the first four characters."
+  },
+  "slides": [
+   30,
+   31
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0003",
+  "chapter": "S1",
+  "topic": "strings",
+  "tags": [
+   "immutability",
+   "TypeError"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "s = \"hello\"\ns[0] = \"H\"\nprint(s)",
+  "options": [
+   {
+    "id": "a",
+    "text": "Hello",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "hello",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "TypeError",
+    "out": "!TypeError"
+   },
+   {
+    "id": "d",
+    "text": "SyntaxError",
+    "out": "!SyntaxError"
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "Strings are immutable: you cannot change one of their characters. `s[0] = 'H'` raises TypeError ('str' object does not support item assignment). Build a new string instead, e.g. `s = 'H' + s[1:]`.",
+  "distractor_notes": {
+   "a": "Would require strings to be mutable.",
+   "b": "The program never reaches print: the assignment fails first.",
+   "d": "The statement is syntactically valid (it works on a list); the error happens at run time."
+  },
+  "slides": [
+   30,
+   62
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0004",
+  "chapter": "S1",
+  "topic": "strings",
+  "tags": [
+   "methods",
+   "immutability"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "name = \"python\"\nname.upper()\nprint(name)",
+  "options": [
+   {
+    "id": "a",
+    "text": "Python",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "PYTHON",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "python",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "None",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "String methods never modify the string (strings are immutable): `name.upper()` returns a new string 'PYTHON', which is thrown away here because it is not assigned. `name` still refers to 'python'. Write `name = name.upper()` to keep the result.",
+  "distractor_notes": {
+   "a": "That is what `capitalize()` would return - and it would not change `name` either.",
+   "b": "Would only happen with `name = name.upper()`.",
+   "d": "`upper()` returns a new string, not None, and its result is not printed anyway."
+  },
+  "slides": [
+   29,
+   31
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0005",
+  "chapter": "S1",
+  "topic": "strings",
+  "tags": [
+   "escape-sequences",
+   "len"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "s = \"a\\tb\\nc\"\nprint(len(s))",
+  "options": [
+   {
+    "id": "a",
+    "text": "5",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "3",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "7",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "9",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "An escape sequence such as `\\t` (tab) or `\\n` (newline) is written with two characters in the source but is **one** character in the string. The string holds a, tab, b, newline, c: 5 characters.",
+  "distractor_notes": {
+   "b": "Forgets that the tab and the newline are characters too.",
+   "c": "Counts the backslash and the letter of each escape as two characters.",
+   "d": "Also counts the two quotes, which only delimit the literal."
+  },
+  "slides": [
+   30,
+   31
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0006",
+  "chapter": "S1",
+  "topic": "strings",
+  "tags": [
+   "split",
+   "methods"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "s = \"  a  b \"\nprint(len(s.split()), len(s.split(\" \")))",
+  "options": [
+   {
+    "id": "a",
+    "text": "2 4",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "2 6",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "6 6",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "2 2",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "Without argument, `split()` splits on runs of whitespace and ignores leading/trailing spaces: ['a', 'b']. With an explicit separator `split(' ')` cuts at **every** single space, producing empty strings between consecutive spaces and at the ends: ['', '', 'a', '', 'b', ''] (6 items).",
+  "distractor_notes": {
+   "a": "Miscounts the empty strings: there are 4 of them (two at the start, one between a and b, one at the end).",
+   "c": "split() without argument does not keep empty strings.",
+   "d": "Assumes split(' ') also drops the empty strings; only split() without argument does."
+  },
+  "slides": [
+   31
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0007",
+  "chapter": "S1",
+  "topic": "strings",
+  "tags": [
+   "immutability",
+   "case-sensitivity",
+   "which-is-false"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "Which of the following statements about Python strings is **false**?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "`len('a\\nb')` is 3: an escape sequence counts as one character.",
+    "probe": "print(len('a\\nb') != 3)"
+   },
+   {
+    "id": "b",
+    "text": "A string can be delimited by single or double quotes.",
+    "probe": "print(not ('ab' == \"ab\"))"
+   },
+   {
+    "id": "c",
+    "text": "String comparison ignores case, so `'a' == 'A'` is `True`.",
+    "probe": "print('a' != 'A')"
+   },
+   {
+    "id": "d",
+    "text": "Strings are immutable: `s[0] = 'x'` raises an error.",
+    "probe": "s = 'ab'\ntry:\n    s[0] = 'x'\n    print(True)\nexcept TypeError:\n    print(False)"
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "Comparisons between strings are case-sensitive: 'a' (code 97) and 'A' (code 65) are different characters. The other statements are true: both kinds of quotes create the same str, strings cannot be modified in place, and `\\n` is a single newline character.",
+  "distractor_notes": {
+   "a": "True: the string holds a, newline, b.",
+   "b": "True: 'ab' and \"ab\" are the same string.",
+   "d": "True: item assignment on a str raises TypeError."
+  },
+  "slides": [
+   30,
+   31
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": ""
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0008",
+  "chapter": "S1",
+  "topic": "strings",
+  "tags": [
+   "replace",
+   "immutability"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "s = \"banana\"\nt = s.replace(\"a\", \"o\", 2)\nprint(s, t)",
+  "options": [
+   {
+    "id": "a",
+    "text": "bonona bonona",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "banana bonono",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "banana bonona",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "bonono bonono",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "`replace(old, new, count)` returns a **new** string where only the first `count` occurrences are replaced: 'bonona'. The original `s` is unchanged because strings are immutable.",
+  "distractor_notes": {
+   "a": "replace does not modify s; it returns a new string.",
+   "b": "The third argument limits the replacement to the first 2 occurrences.",
+   "d": "Both mistakes: s is unchanged, and only 2 'a' are replaced."
+  },
+  "slides": [
+   29,
+   31
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0009",
+  "chapter": "S1",
+  "topic": "strings",
+  "tags": [
+   "find",
+   "index",
+   "ValueError"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "s = \"hello\"\nprint(s.find(\"z\"))\nprint(s.index(\"z\"))",
+  "options": [
+   {
+    "id": "a",
+    "text": "None, then ValueError",
+    "out": "None\n!ValueError"
+   },
+   {
+    "id": "b",
+    "text": "ValueError",
+    "out": "!ValueError"
+   },
+   {
+    "id": "c",
+    "text": "-1, then ValueError",
+    "out": "-1\n!ValueError"
+   },
+   {
+    "id": "d",
+    "text": "-1\n-1",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "`find` returns -1 when the substring is absent, while `index` raises ValueError. Both return the same position when the substring is found. The first print runs before the error.",
+  "distractor_notes": {
+   "a": "find() returns -1, not None, when nothing is found.",
+   "b": "The first line already printed -1 before index() raised.",
+   "d": "index() does not return -1: it raises ValueError."
+  },
+  "slides": [
+   31
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0010",
+  "chapter": "S1",
+  "topic": "strings",
+  "tags": [
+   "count",
+   "methods"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "print(\"Mississippi\".count(\"ss\"))",
+  "options": [
+   {
+    "id": "a",
+    "text": "4",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "True"
+   },
+   {
+    "id": "c",
+    "text": "1",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "2",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "`count(sub)` returns how many non-overlapping times `sub` occurs: 'ss' appears twice in Mi**ss**i**ss**ippi.",
+  "distractor_notes": {
+   "a": "That is the number of single 's' characters, count('s').",
+   "b": "count returns an int, not a membership test (`'ss' in s` would give True).",
+   "c": "count does not stop at the first match (that is what find does, returning a position)."
+  },
+  "slides": [
+   29,
+   31
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0011",
+  "chapter": "S1",
+  "topic": "strings",
+  "tags": [
+   "repetition",
+   "precedence"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "print(\"ab\" * 3 + \"c\")",
+  "options": [
+   {
+    "id": "a",
+    "text": "abcabcabc",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "TypeError",
+    "out": "!TypeError"
+   },
+   {
+    "id": "c",
+    "text": "ab3c",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "abababc",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "`str * int` repeats the string, and `*` has priority over `+`: ('ab' * 3) + 'c' = 'ababab' + 'c'.",
+  "distractor_notes": {
+   "a": "That would be ('ab' + 'c') * 3: * is evaluated before +.",
+   "b": "Multiplying a str by an int is allowed (repetition); only str + int or str * str are errors.",
+   "c": "The 3 is not converted to text; it is a repetition count."
+  },
+  "slides": [
+   27,
+   28,
+   30
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0012",
+  "chapter": "S1",
+  "topic": "strings",
+  "tags": [
+   "f-string"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "x = 7\ny = 2\nprint(f\"{x}/{y} = {x/y}\")",
+  "options": [
+   {
+    "id": "a",
+    "text": "{x}/{y} = {x/y}",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "7/2 = 3.5",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "7/2 = 3",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "3.5 = 3.5",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "In an f-string each `{expression}` is evaluated and inserted; the text outside the braces (including the `/` and `=`) is kept literally. `x/y` is true division: 3.5.",
+  "distractor_notes": {
+   "a": "That is what you get **without** the f prefix.",
+   "c": "`/` is true division (3.5); `//` would give 3.",
+   "d": "Only the third pair of braces contains a division; `{x}/{y}` just inserts 7, '/', 2."
+  },
+  "slides": [
+   30
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0013",
+  "chapter": "S1",
+  "topic": "strings",
+  "tags": [
+   "f-string",
+   "print"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "name = \"Ada\"\nprint(f\"Hi {name}!\", \"Hi {name}!\")",
+  "options": [
+   {
+    "id": "a",
+    "text": "Hi Ada! Hi Ada!",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "Hi {name}! Hi {name}!",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "Hi Ada! Hi {name}!",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "Hi Ada!Hi {name}!",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "Only the first literal has the `f` prefix, so only it replaces `{name}` by the value. The second is an ordinary string and keeps the braces. print separates its arguments with one space.",
+  "distractor_notes": {
+   "a": "Braces are only interpreted in f-strings; a plain string prints them as they are.",
+   "b": "The first string is an f-string, so {name} is replaced by Ada.",
+   "d": "print puts a space (sep=' ') between its arguments."
+  },
+  "slides": [
+   30
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0014",
+  "chapter": "S1",
+  "topic": "strings",
+  "tags": [
+   "quotes",
+   "escape-sequences"
+  ],
+  "type": "multi",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Which of the following are valid string literals? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "'It's fine'",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "'He said: \"hi!\"'",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "\"He said: \"hi!\"\"",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "\"He said: \\\"hi!\\\"\"",
+    "mono": true
+   },
+   {
+    "id": "e",
+    "text": "\"\"\"It's \"fine\" \"\"\"",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b",
+   "d",
+   "e"
+  ],
+  "explanation": "A quote of the same kind as the delimiter ends the string, unless it is escaped with a backslash (`\\\"`). Using the other kind of quote inside is fine, and triple-quoted strings may contain both single and double quotes.",
+  "distractor_notes": {
+   "a": "The apostrophe in It's closes the single-quoted string: SyntaxError. Use \"It's fine\" or 'It\\'s fine'.",
+   "c": "The second \" closes the string after 'He said: ', and `hi!` then follows: SyntaxError."
+  },
+  "slides": [
+   30
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "",
+   "probe_template": "try:\n    compile(__OPTION__, 'q', 'eval')\n    print(True)\nexcept SyntaxError:\n    print(False)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0015",
+  "chapter": "S1",
+  "topic": "strings",
+  "tags": [
+   "max",
+   "unicode"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "print(max(\"Python\"))",
+  "options": [
+   {
+    "id": "a",
+    "text": "t",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "n",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "P",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "y",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "`max` on a string compares its characters by Unicode code point. Uppercase letters come before all lowercase letters ('P' is 80, 'y' is 121), and 'y' is the greatest character of 'Python'.",
+  "distractor_notes": {
+   "a": "'t' (116) is smaller than 'y' (121).",
+   "b": "max does not return the last character.",
+   "c": "Uppercase letters have *smaller* codes than lowercase ones: 'P' is actually the minimum."
+  },
+  "slides": [
+   31,
+   28
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0016",
+  "chapter": "S1",
+  "topic": "strings",
+  "tags": [
+   "slicing",
+   "IndexError"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "s = \"code\"\nprint(s[2:10])\nprint(s[10])",
+  "options": [
+   {
+    "id": "a",
+    "text": "de, then IndexError",
+    "out": "de\n!IndexError"
+   },
+   {
+    "id": "b",
+    "text": "de\ne",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "IndexError",
+    "out": "!IndexError"
+   },
+   {
+    "id": "d",
+    "text": "None of the above",
+    "out": null
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "Slices are forgiving: a stop beyond the end is clipped, so s[2:10] is 'de'. Indexing a single position is strict: s[10] does not exist and raises IndexError (after 'de' was printed).",
+  "distractor_notes": {
+   "b": "s[10] is not clipped to the last character; only slices are clipped.",
+   "c": "The slice does not raise: out-of-range slice bounds are clipped to the string length.",
+   "d": "One of the listed options is exactly what happens: 'de' is printed, then IndexError."
+  },
+  "slides": [
+   30,
+   31
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0017",
+  "chapter": "S1",
+  "topic": "strings",
+  "tags": [
+   "methods",
+   "find",
+   "case-sensitivity"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "s = \"Hello, World\"\nprint(s.lower().count(\"w\") + s.find(\"w\"))",
+  "options": [
+   {
+    "id": "a",
+    "text": "0",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "8",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "7",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "ValueError",
+    "out": "!ValueError"
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "`s.lower()` is a new string 'hello, world' containing one 'w', so the count is 1. But `find` is called on the original `s`, which only has an uppercase 'W': the search is case-sensitive and returns -1. 1 + (-1) = 0.",
+  "distractor_notes": {
+   "b": "1 + 7 assumes find also works on the lowercased string; it is called on the original s.",
+   "c": "Assumes find is case-insensitive.",
+   "d": "find never raises: it returns -1. index() would raise ValueError."
+  },
+  "slides": [
+   29,
+   31
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0018",
+  "chapter": "S1",
+  "topic": "strings",
+  "tags": [
+   "join",
+   "TypeError"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "nums = [1, 2, 3]\nprint(\"-\".join(nums))",
+  "options": [
+   {
+    "id": "a",
+    "text": "1-2-3",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "123",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "TypeError",
+    "out": "!TypeError"
+   },
+   {
+    "id": "d",
+    "text": "[1-2-3]",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "`sep.join(iterable)` only accepts an iterable of **strings**; the ints 1, 2, 3 are not converted automatically, so a TypeError is raised. `'-'.join(str(n) for n in nums)` would give '1-2-3'.",
+  "distractor_notes": {
+   "a": "That needs the items converted to str first.",
+   "b": "The separator is '-', and anyway join refuses ints.",
+   "d": "join returns a plain string, never a list."
+  },
+  "slides": [
+   31
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0019",
+  "chapter": "S1",
+  "topic": "strings",
+  "tags": [
+   "split",
+   "concatenation"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "date = \"2024-03-15\"\nparts = date.split(\"-\")\nprint(parts[1] + parts[2])",
+  "options": [
+   {
+    "id": "a",
+    "text": "03-15",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "315",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "0315",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "18",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "`split('-')` returns the list of strings ['2024', '03', '15']. The pieces are still strings, so `+` concatenates them: '03' + '15' = '0315'.",
+  "distractor_notes": {
+   "a": "The separator is removed by split and not put back.",
+   "b": "Strings keep their leading zero; nothing converts '03' to a number.",
+   "d": "Would require converting with int(): + on strings concatenates."
+  },
+  "slides": [
+   31
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0020",
+  "chapter": "S1",
+  "topic": "strings",
+  "tags": [
+   "comparison",
+   "in"
+  ],
+  "type": "multi",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "Which of the following expressions evaluate to `True`? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "\"Py\" in \"python\"",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "\"abc\" < \"ab\"",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "\"Zebra\" < \"apple\"",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "\"apple\" < \"banana\"",
+    "mono": true
+   },
+   {
+    "id": "e",
+    "text": "\"py\" in \"python\"",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c",
+   "d",
+   "e"
+  ],
+  "explanation": "Strings are compared character by character using Unicode code points. All uppercase letters come before all lowercase ones, so 'Zebra' < 'apple'. A string that is a prefix of another is smaller ('ab' < 'abc'). `in` tests for a substring and is case-sensitive.",
+  "distractor_notes": {
+   "a": "Membership is case-sensitive: 'Py' does not occur in 'python'.",
+   "b": "'ab' is a prefix of 'abc', so 'ab' < 'abc', not the reverse."
+  },
+  "slides": [
+   28,
+   31
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "",
+   "probe_template": "print((__OPTION_RAW__) is True)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0021",
+  "chapter": "S1",
+  "topic": "strings",
+  "tags": [
+   "startswith",
+   "endswith",
+   "lower",
+   "upper"
+  ],
+  "type": "multi",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Given the code below, which expressions evaluate to `True`? Select all that apply.",
+  "code": "f = \"report.TXT\"",
+  "options": [
+   {
+    "id": "a",
+    "text": "f.lower().endswith(\".txt\")",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "f.upper() == \"REPORT.TXT\"",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "f.startswith(\"rep\")",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "f.endswith(\".txt\")",
+    "mono": true
+   },
+   {
+    "id": "e",
+    "text": "f.find(\".\") == 7",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a",
+   "b",
+   "c"
+  ],
+  "explanation": "String methods are case-sensitive: '.TXT' does not end with '.txt' unless you lowercase first. `upper()` returns an uppercased copy. 'report' has 6 letters (indices 0-5), so the dot is at index 6.",
+  "distractor_notes": {
+   "d": "endswith is case-sensitive: '.TXT' != '.txt'.",
+   "e": "Off by one: indices start at 0, the dot is at index 6."
+  },
+  "slides": [
+   31
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "f = \"report.TXT\"",
+   "probe_template": "print((__OPTION_RAW__) is True)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0022",
+  "chapter": "S1",
+  "topic": "strings",
+  "tags": [
+   "methods",
+   "join",
+   "slicing"
+  ],
+  "type": "multi",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Which of the following expressions are equal to the string `'abc'`? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "\"a\" + \"bc\"",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "\"abc\".upper().lower().strip(\"c\")",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "\"ABC\".lower()",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "\"abcabc\"[0:3]",
+    "mono": true
+   },
+   {
+    "id": "e",
+    "text": "\"-\".join([\"a\", \"b\", \"c\"])",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a",
+   "c",
+   "d"
+  ],
+  "explanation": "Concatenation, lower() and the slice [0:3] (indices 0, 1, 2) all give 'abc'. join puts the separator between items, and strip('c') removes 'c' characters from both ends.",
+  "distractor_notes": {
+   "b": "upper().lower() gives back 'abc', but strip('c') then removes the trailing 'c': 'ab'.",
+   "e": "join inserts '-' between the items: 'a-b-c'."
+  },
+  "slides": [
+   29,
+   30,
+   31
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "",
+   "probe_template": "print((__OPTION_RAW__) == 'abc')"
+  },
+  "reviewed": 1
+ }
+]

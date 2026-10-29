@@ -1,0 +1,1116 @@
+[
+ {
+  "id": "S7-0041",
+  "chapter": "S7",
+  "topic": "iterators",
+  "tags": [
+   "iter",
+   "for-loop",
+   "break",
+   "state"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "it = iter([1, 2, 3, 4])\nfor x in it:\n    if x == 2:\n        break\nprint(list(it))",
+  "options": [
+   {
+    "id": "a",
+    "text": "[3, 4]",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "[1, 2, 3, 4]",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "[2, 3, 4]",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "[]",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "A for loop over an iterator calls `next()` on that same object. After 1 and 2 have been consumed the loop breaks; the iterator keeps its position, so `list(it)` collects the remaining 3 and 4.",
+  "distractor_notes": {
+   "b": "Iterating an iterator consumes it; it does not restart from the beginning.",
+   "c": "2 was already consumed by the loop before the break.",
+   "d": "break stops the loop early, so the iterator is not exhausted."
+  },
+  "slides": [
+   251,
+   252
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0042",
+  "chapter": "S7",
+  "topic": "iterators",
+  "tags": [
+   "iter",
+   "zip",
+   "shared-iterator"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "it = iter([1, 2, 3, 4, 5, 6])\nprint(list(zip(it, it)))",
+  "options": [
+   {
+    "id": "a",
+    "text": "[(1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6)]",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "[(1, 4), (2, 5), (3, 6)]",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "[(1, 2), (2, 3), (3, 4), (4, 5), (5, 6)]",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "[(1, 2), (3, 4), (5, 6)]",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "Both arguments of `zip` are the *same* iterator. To build each pair, zip calls `next()` on its first argument and then on its second, i.e. twice on the same iterator, so consecutive items are paired: (1, 2), (3, 4), (5, 6).",
+  "distractor_notes": {
+   "a": "Would be the case with two independent iterators, e.g. zip(lst, lst).",
+   "b": "The list is not split in two halves; the items are taken alternately.",
+   "c": "Items are consumed, never reused: each value appears in only one pair."
+  },
+  "slides": [
+   252,
+   253
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0043",
+  "chapter": "S7",
+  "topic": "testing",
+  "tags": [
+   "unittest",
+   "test-discovery",
+   "naming"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "The last three lines run the test case and print the number of tests run, of failures and of errors. What is printed?",
+  "code": "import unittest, io\n\nclass T(unittest.TestCase):\n    def test_add(self):\n        self.assertEqual(1 + 1, 2)\n    def check_sub(self):\n        self.assertEqual(2 - 1, 1)\n    def test_mul(self):\n        self.assertEqual(2 * 2, 5)\n\nsuite = unittest.defaultTestLoader.loadTestsFromTestCase(T)\nr = unittest.TextTestRunner(stream=io.StringIO()).run(suite)\nprint(r.testsRun, len(r.failures), len(r.errors))",
+  "options": [
+   {
+    "id": "a",
+    "text": "3 1 0",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "2 1 0",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "2 0 1",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "3 2 0",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "The test loader only collects methods whose name starts with `test`, so `check_sub` is ignored: 2 tests run. `test_mul` fails because 4 != 5 (a failed assertion is counted as a *failure*, not an error).",
+  "distractor_notes": {
+   "a": "check_sub is not a test: its name does not start with 'test'.",
+   "c": "A failed assertEqual is a failure; errors are other exceptions raised in a test.",
+   "d": "Only test_mul fails, and check_sub is not run at all."
+  },
+  "slides": [
+   257,
+   258
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0044",
+  "chapter": "S7",
+  "topic": "testing",
+  "tags": [
+   "unittest",
+   "failure-vs-error",
+   "assertTrue"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "The last three lines run the test case and print the number of tests run, of failures and of errors. What is printed?",
+  "code": "import unittest, io\n\nclass T(unittest.TestCase):\n    def test_a(self):\n        self.assertTrue([])\n    def test_b(self):\n        self.assertEqual(int('x'), 0)\n    def test_c(self):\n        self.assertIn(3, [1, 2, 3])\n\nsuite = unittest.defaultTestLoader.loadTestsFromTestCase(T)\nr = unittest.TextTestRunner(stream=io.StringIO()).run(suite)\nprint(r.testsRun, len(r.failures), len(r.errors))",
+  "options": [
+   {
+    "id": "a",
+    "text": "3 2 0",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "3 0 1",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "3 1 0",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "3 1 1",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "`test_a` fails: an empty list is falsy, so `assertTrue([])` raises AssertionError (a **failure**). In `test_b`, `int('x')` raises ValueError before any assertion is checked: an unexpected exception is counted as an **error**. `test_c` passes.",
+  "distractor_notes": {
+   "a": "test_b does not fail an assertion: it crashes with ValueError, which unittest reports as an error.",
+   "b": "assertTrue([]) fails because [] is falsy.",
+   "c": "The ValueError in test_b is not ignored: it is reported as an error."
+  },
+  "slides": [
+   257,
+   258
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0045",
+  "chapter": "S7",
+  "topic": "testing",
+  "tags": [
+   "unittest",
+   "assertRaises",
+   "dict.get"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "The last three lines run the test case and print the number of tests run, of failures and of errors. What is printed?",
+  "code": "import unittest, io\n\nclass T(unittest.TestCase):\n    def test_div(self):\n        with self.assertRaises(ZeroDivisionError):\n            1 / 0\n    def test_key(self):\n        with self.assertRaises(KeyError):\n            {}.get('k')\n\nsuite = unittest.defaultTestLoader.loadTestsFromTestCase(T)\nr = unittest.TextTestRunner(stream=io.StringIO()).run(suite)\nprint(r.testsRun, len(r.failures), len(r.errors))",
+  "options": [
+   {
+    "id": "a",
+    "text": "2 0 0",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "2 0 1",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "2 1 0",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "1 0 0",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "`assertRaises` passes only if the block raises the given exception. `1 / 0` raises ZeroDivisionError -> test_div passes. `{}.get('k')` returns None and raises nothing, so test_key **fails** ('KeyError not raised').",
+  "distractor_notes": {
+   "a": "dict.get never raises KeyError (only d['k'] does), so test_key fails.",
+   "b": "No unexpected exception escapes; the missing exception makes assertRaises fail (a failure).",
+   "d": "Both methods start with 'test', so both are run."
+  },
+  "slides": [
+   257,
+   258
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0046",
+  "chapter": "S7",
+  "topic": "testing",
+  "tags": [
+   "unittest",
+   "assertEqual"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "Which `unittest.TestCase` method checks that two values are equal (with `==`)?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "assertSame",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "assertEqual",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "checkEqual",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "assertIs",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "`self.assertEqual(a, b)` passes when `a == b` and fails with an AssertionError otherwise, e.g. `self.assertEqual(d, 0.0)` in the course's Euclidean distance test.",
+  "distractor_notes": {
+   "a": "There is no assertSame method in unittest.",
+   "c": "unittest assertion methods start with 'assert'; checkEqual does not exist.",
+   "d": "assertIs checks identity (`is`), not equality: assertIs([1], [1]) fails."
+  },
+  "slides": [
+   258
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "",
+   "probe_template": "import unittest\nclass _T(unittest.TestCase):\n    def runTest(self):\n        pass\nt = _T()\nm = getattr(t, __OPTION__, None)\nok = m is not None\nif ok:\n    try:\n        m([1], [1])\n    except AssertionError:\n        ok = False\nif ok:\n    try:\n        m([1], [2])\n        ok = False\n    except AssertionError:\n        pass\nprint(ok)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0047",
+  "chapter": "S7",
+  "topic": "testing",
+  "tags": [
+   "unittest",
+   "test-discovery",
+   "assertTrue",
+   "assertEqual"
+  ],
+  "type": "multi",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Which statements about the `unittest` module are true? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "By default, only methods whose name starts with `test` are run as tests.",
+    "mono": false,
+    "probe": "import unittest\nclass T(unittest.TestCase):\n    def test_x(self):\n        pass\n    def check_y(self):\n        pass\n    def testz(self):\n        pass\nn = unittest.defaultTestLoader.loadTestsFromTestCase(T).countTestCases()\nprint(n == 2)"
+   },
+   {
+    "id": "b",
+    "text": "`self.assertEqual(a, b)` passes when `a == b`, even if `a` and `b` are different objects.",
+    "mono": false,
+    "probe": "import unittest, io\nclass _T(unittest.TestCase):\n    def runTest(self):\n        pass\nt = _T()\na, b = [1, 2], [1, 2]\ntry:\n    t.assertEqual(a, b)\n    print(a is not b)\nexcept AssertionError:\n    print(False)"
+   },
+   {
+    "id": "c",
+    "text": "When one test method fails, the other test methods of the class are not run.",
+    "mono": false,
+    "probe": "import unittest, io\nclass T(unittest.TestCase):\n    def test_1(self):\n        self.assertEqual(1, 2)\n    def test_2(self):\n        self.assertEqual(3, 4)\nsuite = unittest.defaultTestLoader.loadTestsFromTestCase(T)\nr = unittest.TextTestRunner(stream=io.StringIO()).run(suite)\nprint(r.testsRun == 1)"
+   },
+   {
+    "id": "d",
+    "text": "`self.assertTrue(x)` passes only when `x` is exactly the boolean `True`.",
+    "mono": false,
+    "probe": "import unittest, io\nclass _T(unittest.TestCase):\n    def runTest(self):\n        pass\nt = _T()\ntry:\n    t.assertTrue([1])\n    print(False)\nexcept AssertionError:\n    print(True)"
+   }
+  ],
+  "correct": [
+   "a",
+   "b"
+  ],
+  "explanation": "The default loader collects methods whose name starts with `test`. `assertEqual` compares with `==`, so equal but distinct objects pass. Each test method runs independently: one failure does not stop the others. `assertTrue(x)` checks `bool(x)`, so any truthy value (e.g. `[1]`) passes.",
+  "distractor_notes": {
+   "c": "Every test method is run and reported separately, whatever the outcome of the others.",
+   "d": "assertTrue tests truthiness (bool(x) is True), so assertTrue([1]) or assertTrue(5) pass."
+  },
+  "slides": [
+   257,
+   258
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": ""
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0048",
+  "chapter": "S7",
+  "topic": "testing",
+  "tags": [
+   "coverage",
+   "testing"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What does the `coverage` package measure?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "How long each unit test takes to run",
+    "mono": false
+   },
+   {
+    "id": "b",
+    "text": "How much of the code base is executed by at least one test",
+    "mono": false
+   },
+   {
+    "id": "c",
+    "text": "How many bugs remain in the program",
+    "mono": false
+   },
+   {
+    "id": "d",
+    "text": "Whether the code follows the PEP 8 style guide",
+    "mono": false
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "Test coverage measures which lines (or branches) of your code are executed when the test suite runs, i.e. how much of the code base is exercised by at least one test. Uncovered code is code that no test checks.",
+  "distractor_notes": {
+   "a": "That is profiling/timing, not coverage.",
+   "c": "No tool can count remaining bugs; coverage only shows which code the tests execute.",
+   "d": "Style checking is the job of linters such as pycodestyle/flake8."
+  },
+  "slides": [
+   257
+  ],
+  "verify": {
+   "mode": "manual",
+   "reference": "Slide 257: the coverage package measures how much of the codebase is covered by at least one unit test"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0049",
+  "chapter": "S7",
+  "topic": "testing",
+  "tags": [
+   "unittest",
+   "setUp",
+   "test-order"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "import unittest, io\nlog = []\n\nclass T(unittest.TestCase):\n    def setUp(self):\n        log.append('setup')\n    def test_two(self):\n        log.append('two')\n    def test_one(self):\n        log.append('one')\n\nsuite = unittest.defaultTestLoader.loadTestsFromTestCase(T)\nunittest.TextTestRunner(stream=io.StringIO()).run(suite)\nprint(log)",
+  "options": [
+   {
+    "id": "a",
+    "text": "['setup', 'two', 'setup', 'one']",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "['setup', 'one', 'two']",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "['setup', 'two', 'one']",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "['setup', 'one', 'setup', 'two']",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "`setUp` runs before **each** test method, so it appears twice. The default loader sorts test methods by name, so `test_one` runs before `test_two`, regardless of their order in the class.",
+  "distractor_notes": {
+   "a": "Test methods are run in alphabetical order of their names, not in definition order.",
+   "b": "setUp is executed before every test, not once per class.",
+   "c": "setUp is executed before every test, not once per class (that is setUpClass)."
+  },
+  "slides": [
+   257,
+   258
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0050",
+  "chapter": "S7",
+  "topic": "testing",
+  "tags": [
+   "unittest",
+   "assertEqual",
+   "assertGreater"
+  ],
+  "type": "multi",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Inside a `unittest.TestCase` test method, which of these assertions **pass** for the `distance` function below? Select all that apply.",
+  "code": "import math\n\ndef distance(x, y):\n    return math.sqrt((x[0] - y[0])**2 + (x[1] - y[1])**2)",
+  "options": [
+   {
+    "id": "a",
+    "text": "self.assertEqual(distance((0.0, 0.0), (0.0, 0.0)), 0.0)",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "self.assertGreater(distance((0.0, 0.0), (1.0, 1.0)), 1.0)",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "self.assertEqual(distance((0.0, 0.0), (3.0, 4.0)), 7.0)",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "self.assertEqual(distance((1.0, 2.0), (4.0, 6.0)), distance((4.0, 6.0), (1.0, 2.0)))",
+    "mono": true
+   },
+   {
+    "id": "e",
+    "text": "self.assertLess(distance((0.0, 0.0), (1.0, 1.0)), 1.0)",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a",
+   "b",
+   "d"
+  ],
+  "explanation": "The distance from a point to itself is 0.0; from (0, 0) to (1, 1) it is sqrt(2) ~ 1.414 > 1; the distance is symmetric. From (0, 0) to (3, 4) it is 5.0, not 7.0, and sqrt(2) is not less than 1, so (c) and (e) fail.",
+  "distractor_notes": {
+   "c": "sqrt(3**2 + 4**2) = 5.0: the distance is not the sum of the coordinate differences.",
+   "e": "sqrt(2) ~ 1.414 is greater than 1, so assertLess fails."
+  },
+  "slides": [
+   258
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "import math\n\ndef distance(x, y):\n    return math.sqrt((x[0] - y[0])**2 + (x[1] - y[1])**2)\n\nimport unittest\nclass _T(unittest.TestCase):\n    def runTest(self):\n        pass\nself = _T()",
+   "probe_template": "try:\n    __OPTION_RAW__\n    print(True)\nexcept AssertionError:\n    print(False)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0051",
+  "chapter": "S7",
+  "topic": "assertions",
+  "tags": [
+   "assert",
+   "AssertionError"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "def isqrt(n):\n    assert n >= 0, 'n must be non-negative'\n    i = 0\n    while i * i < n:\n        i += 1\n    return i\n\nprint(isqrt(16))\nprint(isqrt(-4))",
+  "options": [
+   {
+    "id": "a",
+    "text": "4\n0",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "4, then ValueError",
+    "out": "4\n!ValueError",
+    "mono": false
+   },
+   {
+    "id": "c",
+    "text": "4, then AssertionError",
+    "out": "4\n!AssertionError",
+    "mono": false
+   },
+   {
+    "id": "d",
+    "text": "4\n-2",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "`isqrt(16)` passes the check and returns 4. For -4 the condition `n >= 0` is False, so the assert raises `AssertionError: n must be non-negative` and the program stops.",
+  "distractor_notes": {
+   "a": "That is what would happen without the assert: the while loop never runs and 0 is returned.",
+   "b": "A failing assert always raises AssertionError, whatever the message says.",
+   "d": "The function never computes a negative root; the assert stops it first."
+  },
+  "slides": [
+   255
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0052",
+  "chapter": "S7",
+  "topic": "assertions",
+  "tags": [
+   "assert",
+   "truthiness"
+  ],
+  "type": "multi",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Which of the following statements raise an `AssertionError`? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "assert []",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "assert 'False'",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "assert 0.0",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "assert None is None",
+    "mono": true
+   },
+   {
+    "id": "e",
+    "text": "assert len('abc') == 3, 'bad length'",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a",
+   "c"
+  ],
+  "explanation": "`assert expr` fails when `expr` is falsy. An empty list and `0.0` are falsy. The string `'False'` is non-empty, hence truthy; `None is None` and `len('abc') == 3` are True.",
+  "distractor_notes": {
+   "b": "Any non-empty string is truthy, even the text 'False'.",
+   "d": "`None is None` is True.",
+   "e": "The condition is True, so the message is never used."
+  },
+  "slides": [
+   255
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "",
+   "probe_template": "try:\n    __OPTION_RAW__\n    print(False)\nexcept AssertionError:\n    print(True)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0053",
+  "chapter": "S7",
+  "topic": "assertions",
+  "tags": [
+   "assert",
+   "-O",
+   "optimize"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "The following script is run with `python -O script.py` (optimizations enabled). What is the output?",
+  "code": "def withdraw(balance, amount):\n    assert amount <= balance, 'insufficient funds'\n    return balance - amount\n\nprint(withdraw(10, 25))",
+  "options": [
+   {
+    "id": "a",
+    "text": "-15",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "AssertionError",
+    "mono": true,
+    "out": "!AssertionError"
+   },
+   {
+    "id": "c",
+    "text": "insufficient funds",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "10",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "With `-O`, Python removes all `assert` statements (and `__debug__` is False). The check is therefore skipped and the function returns 10 - 25 = -15. This is why asserts are meant for sanity checks during development, not for validating input in production.",
+  "distractor_notes": {
+   "b": "Would be the output without -O; the -O flag disables assertions.",
+   "c": "The message is only used when an AssertionError is raised.",
+   "d": "The function returns balance - amount, not balance."
+  },
+  "slides": [
+   255
+  ],
+  "verify": {
+   "mode": "output",
+   "code": "src = \"def withdraw(balance, amount):\\n    assert amount <= balance, 'insufficient funds'\\n    return balance - amount\\n\\nprint(withdraw(10, 25))\"\nexec(compile(src, 'script.py', 'exec', optimize=1))",
+   "note": "compile(..., optimize=1) reproduces python -O (assert statements are removed)."
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0054",
+  "chapter": "S7",
+  "topic": "assertions",
+  "tags": [
+   "assert",
+   "tuple",
+   "truthiness",
+   "SyntaxWarning"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is printed when the following code runs? (Ignore any warning written on stderr.)",
+  "code": "x = -1\nassert (x > 0, 'x must be positive')\nprint('ok')",
+  "options": [
+   {
+    "id": "a",
+    "text": "SyntaxError",
+    "mono": true,
+    "out": "!SyntaxError"
+   },
+   {
+    "id": "b",
+    "text": "AssertionError",
+    "mono": true,
+    "out": "!AssertionError"
+   },
+   {
+    "id": "c",
+    "text": "x must be positive",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "ok",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "The parentheses turn the condition and the message into one 2-element **tuple**. A non-empty tuple is always truthy, so this assert can never fail and 'ok' is printed (CPython even emits a SyntaxWarning: 'assertion is always true'). The correct form is `assert x > 0, 'x must be positive'`.",
+  "distractor_notes": {
+   "a": "It is legal syntax (only a warning): `assert` accepts any expression, including a tuple.",
+   "b": "The asserted object is the tuple, which is truthy; x > 0 alone is never tested.",
+   "c": "The message is only shown when an AssertionError is raised, which never happens here."
+  },
+  "slides": [
+   255
+  ],
+  "verify": {
+   "mode": "output",
+   "code": "import warnings\nwarnings.simplefilter('ignore')\nsrc = \"x = -1\\nassert (x > 0, 'x must be positive')\\nprint('ok')\"\nexec(compile(src, 'q', 'exec'))",
+   "note": "Warnings are silenced because the SyntaxWarning would go to stderr."
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0055",
+  "chapter": "S7",
+  "topic": "assertions",
+  "tags": [
+   "assert",
+   "-O",
+   "which-is-false"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Which of the following statements about `assert` is **false**?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "A failing `assert` raises `AssertionError`.",
+    "mono": false,
+    "probe": "try:\n    assert False\n    print(True)\nexcept AssertionError:\n    print(False)"
+   },
+   {
+    "id": "b",
+    "text": "Assertions are always executed, even when Python runs with the `-O` option.",
+    "mono": false,
+    "probe": "ns = {}\nexec(compile('assert False\\nok = 1', 'q', 'exec', optimize=1), ns)\nprint(ns.get('ok') == 1)"
+   },
+   {
+    "id": "c",
+    "text": "The expression after the comma becomes the message of the `AssertionError`.",
+    "mono": false,
+    "probe": "try:\n    assert 1 > 2, 'msg'\n    print(True)\nexcept AssertionError as e:\n    print(str(e) != 'msg')"
+   },
+   {
+    "id": "d",
+    "text": "`assert cond` does nothing when `cond` is truthy.",
+    "mono": false,
+    "probe": "assert [1]\nassert 'x'\nprint(False)"
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "Running Python with `-O` strips assert statements, so assertions can be disabled - they must never be the only protection against bad input. The three other statements describe `assert` correctly.",
+  "distractor_notes": {
+   "a": "True: that is exactly what a failing assert does.",
+   "c": "True: `assert cond, msg` raises AssertionError(msg).",
+   "d": "True: a passing assert has no effect."
+  },
+  "slides": [
+   255
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": ""
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0056",
+  "chapter": "S7",
+  "topic": "assertions",
+  "tags": [
+   "assert",
+   "AssertionError",
+   "message",
+   "except"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "def mean(values):\n    assert values, 'empty list'\n    return sum(values) / len(values)\n\ntry:\n    print(mean([]))\nexcept ZeroDivisionError:\n    print('zero')\nexcept AssertionError as e:\n    print('assert:', e)",
+  "options": [
+   {
+    "id": "a",
+    "text": "zero",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "assert: values",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "0.0",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "assert: empty list",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "An empty list is falsy, so the assert fails before the division is reached and raises `AssertionError('empty list')`. It is caught by the second except clause, and printing the exception shows its message.",
+  "distractor_notes": {
+   "a": "The division is never executed: the assert fails first.",
+   "b": "str(e) is the message given after the comma, not the asserted expression.",
+   "c": "No value is returned; an exception is raised."
+  },
+  "slides": [
+   255
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0057",
+  "chapter": "S7",
+  "topic": "context-managers",
+  "tags": [
+   "with",
+   "file",
+   "close"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "with open('notes.txt', 'w') as f:\n    f.write('hi')\nprint(f.closed)",
+  "options": [
+   {
+    "id": "a",
+    "text": "NameError",
+    "mono": true,
+    "out": "!NameError"
+   },
+   {
+    "id": "b",
+    "text": "False",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "True",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "ValueError",
+    "mono": true,
+    "out": "!ValueError"
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "Leaving the `with` block automatically calls `f.close()`, so `f.closed` is True. The name `f` still exists after the block (there is no block scope); only the file is closed.",
+  "distractor_notes": {
+   "a": "Variables bound by `as` remain defined after the block.",
+   "b": "with closes the file automatically when the block ends.",
+   "d": "Reading the `closed` attribute of a closed file is allowed; only I/O operations fail."
+  },
+  "slides": [
+   256
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0058",
+  "chapter": "S7",
+  "topic": "context-managers",
+  "tags": [
+   "with",
+   "file",
+   "closed-file",
+   "ValueError"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "The file `data.txt` contains two lines, `line1` and `line2`. What is the output of the following code?",
+  "code": "with open('data.txt') as f:\n    first = f.readline()\nprint(first.strip())\nprint(f.read())",
+  "options": [
+   {
+    "id": "a",
+    "text": "line1\nline2",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "line1, then ValueError",
+    "out": "line1\n!ValueError",
+    "mono": false
+   },
+   {
+    "id": "c",
+    "text": "line1\nline1\nline2",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "line1",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "`first` was read inside the block, so it is printed normally. But the file was closed when the `with` block ended, and `f.read()` on a closed file raises `ValueError: I/O operation on closed file`.",
+  "distractor_notes": {
+   "a": "The read happens after the with block, when the file is already closed.",
+   "c": "readline() only reads one line, and the second read fails anyway.",
+   "d": "Reading a closed file does not return an empty string: it raises ValueError."
+  },
+  "slides": [
+   256
+  ],
+  "verify": {
+   "mode": "output",
+   "files": {
+    "data.txt": "line1\nline2\n"
+   }
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0059",
+  "chapter": "S7",
+  "topic": "context-managers",
+  "tags": [
+   "with",
+   "__enter__",
+   "__exit__",
+   "as"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "class Ctx:\n    def __enter__(self):\n        print('enter')\n        return 'resource'\n    def __exit__(self, exc_type, exc, tb):\n        print('exit')\n\nwith Ctx() as r:\n    print(r)\nprint('after')",
+  "options": [
+   {
+    "id": "a",
+    "text": "enter\nresource\nexit\nafter",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "resource\nenter\nexit\nafter",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "enter\nexit\nresource\nafter",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "enter\nresource\nafter\nexit",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "`with` calls `__enter__` first and binds its **return value** to the `as` target (r = 'resource'), then runs the block, then calls `__exit__` when the block ends - before the next statement.",
+  "distractor_notes": {
+   "b": "__enter__ runs before the body of the with block.",
+   "c": "__exit__ runs after the block, not right after __enter__.",
+   "d": "__exit__ is called as soon as the block ends, before the code that follows."
+  },
+  "slides": [
+   256
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S7-0060",
+  "chapter": "S7",
+  "topic": "context-managers",
+  "tags": [
+   "with",
+   "__exit__",
+   "suppress-exception"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "class Quiet:\n    def __enter__(self):\n        return self\n    def __exit__(self, exc_type, exc, tb):\n        print('closing', exc_type.__name__)\n        return True\n\nwith Quiet():\n    print('start')\n    1 / 0\n    print('never')\nprint('end')",
+  "options": [
+   {
+    "id": "a",
+    "text": "start, closing ZeroDivisionError, then a ZeroDivisionError traceback",
+    "out": "start\nclosing ZeroDivisionError\n!ZeroDivisionError",
+    "mono": false
+   },
+   {
+    "id": "b",
+    "text": "start\nclosing ZeroDivisionError\nend",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "start\nnever\nend",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "start\nclosing ZeroDivisionError\nnever\nend",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "The exception interrupts the block (so 'never' is not printed) and `__exit__` receives its type. Because `__exit__` returns a true value, the exception is **suppressed** and execution continues after the with statement.",
+  "distractor_notes": {
+   "a": "Returning True from __exit__ swallows the exception; it does not propagate.",
+   "c": "The exception still interrupts the block, and __exit__ prints its message.",
+   "d": "Suppressing the exception does not resume the block where it stopped."
+  },
+  "slides": [
+   256
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ }
+]

@@ -1,0 +1,1105 @@
+[
+ {
+  "id": "S6-0081",
+  "chapter": "S6",
+  "topic": "pandas-selection",
+  "tags": [
+   "brackets",
+   "loc",
+   "iloc",
+   "all-of-the-above"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "Given `df = pd.DataFrame({'apples': [3, 2, 0, 1], 'oranges': [0, 3, 7, 2]})`, which expression selects the `apples` column as a Series?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "df['apples']",
+    "mono": true,
+    "out": null
+   },
+   {
+    "id": "b",
+    "text": "df.iloc[:, 0]",
+    "mono": true,
+    "out": null
+   },
+   {
+    "id": "c",
+    "text": "df.loc[:, 'apples']",
+    "mono": true,
+    "out": null
+   },
+   {
+    "id": "d",
+    "text": "All of the above",
+    "out": null
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "All three return the same Series: brackets with the column name, `loc` with all rows (`:`) and the column label, and `iloc` with all rows and the column position 0.",
+  "distractor_notes": {
+   "a": "Correct but incomplete: the two other expressions return the same Series.",
+   "c": "Correct but incomplete: `df['apples']` and `df.iloc[:, 0]` return the same Series.",
+   "b": "Correct but incomplete: position 0 is the apples column, and the other two forms work as well."
+  },
+  "slides": [
+   235
+  ],
+  "verify": {
+   "mode": "output",
+   "code": "import pandas as pd\ndf = pd.DataFrame({'apples': [3, 2, 0, 1], 'oranges': [0, 3, 7, 2]})\nfor s in (df['apples'], df.loc[:, 'apples'], df.iloc[:, 0]):\n    print(type(s).__name__, s.name, s.tolist())"
+  },
+  "reviewed": 1,
+  "expected_output": "Series apples [3, 2, 0, 1]\nSeries apples [3, 2, 0, 1]\nSeries apples [3, 2, 0, 1]"
+ },
+ {
+  "id": "S6-0082",
+  "chapter": "S6",
+  "topic": "pandas-selection",
+  "tags": [
+   "boolean-filtering",
+   "precedence",
+   "parentheses",
+   "ValueError"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "import pandas as pd\ndf = pd.DataFrame({'apples': [3, 2, 0, 1], 'oranges': [0, 3, 7, 2]},\n                  index=['June', 'Robert', 'Lily', 'David'])\nprint(df[df['apples'] > 0 & df['oranges'] > 0].index.tolist())",
+  "options": [
+   {
+    "id": "a",
+    "text": "['Robert', 'David']",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "TypeError",
+    "out": "!TypeError"
+   },
+   {
+    "id": "c",
+    "text": "ValueError",
+    "out": "!ValueError"
+   },
+   {
+    "id": "d",
+    "text": "['June', 'Robert', 'Lily', 'David']",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "`&` has a higher precedence than `>`, so the condition is read as `df['apples'] > (0 & df['oranges']) > 0`, a chained comparison that needs the truth value of a whole Series: ValueError (truth value of a Series is ambiguous). With parentheses, `(df['apples'] > 0) & (df['oranges'] > 0)` gives ['Robert', 'David'].",
+  "distractor_notes": {
+   "a": "That is the result only when each condition is wrapped in parentheses.",
+   "d": "No filtering happens at all: the expression raises before indexing.",
+   "b": "`0 & df['oranges']` is a valid bitwise AND; the chained comparison raises a ValueError."
+  },
+  "slides": [
+   236
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0083",
+  "chapter": "S6",
+  "topic": "pandas-selection",
+  "tags": [
+   "isin",
+   "boolean-filtering"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "Find the output of the code?",
+  "code": "import pandas as pd\ndf = pd.DataFrame({'director': ['Nolan', 'Scott', 'Bay', 'Nolan'],\n                   'rating': [8.8, 8.0, 6.2, 9.0]})\nprint(df[df['director'].isin(['Nolan', 'Bay'])]['rating'].tolist())",
+  "options": [
+   {
+    "id": "a",
+    "text": "[True, False, True, True]",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "[8.0]",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "[8.8, 6.2, 9.0]",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "[8.8, 9.0]",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "`isin(list)` is True for each row whose value is one of the listed values (a shortcut for several `==` joined by `|`). Rows 0, 2 and 3 match and their ratings are kept in order.",
+  "distractor_notes": {
+   "d": "`isin` matches any value of the list, 'Bay' included.",
+   "b": "Those are the rows NOT in the list (`~df['director'].isin(...)`).",
+   "a": "That is the mask itself, before it is used to filter the rows."
+  },
+  "slides": [
+   236
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0084",
+  "chapter": "S6",
+  "topic": "pandas-selection",
+  "tags": [
+   "boolean-filtering",
+   "and-vs-&",
+   "ValueError"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following snippet?",
+  "code": "import pandas as pd\ndf = pd.DataFrame({'year': [2004, 2008, 2012],\n                   'rating': [8.1, 8.5, 7.9]})\nsel = df[(df['year'] >= 2005) and (df['rating'] > 8.0)]\nprint(len(sel))",
+  "options": [
+   {
+    "id": "a",
+    "text": "ValueError",
+    "out": "!ValueError"
+   },
+   {
+    "id": "b",
+    "text": "0",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "2",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "1",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "`and`, `or` and `not` need a single True/False, but a comparison on a column gives a whole Series of booleans: pandas raises ValueError (truth value of a Series is ambiguous). With `&` instead of `and`, one row (2008) would be selected.",
+  "distractor_notes": {
+   "d": "That is the result with `&`.",
+   "c": "That counts the rows matching only one of the conditions.",
+   "b": "The expression raises before any filtering, so there is no empty result."
+  },
+  "slides": [
+   236
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0085",
+  "chapter": "S6",
+  "topic": "pandas-selection",
+  "tags": [
+   "loc",
+   "iloc",
+   "KeyError"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "import pandas as pd\ndf = pd.DataFrame({'apples': [3, 2], 'oranges': [0, 3]},\n                  index=['June', 'Robert'])\nprint(df.iloc[0, 1])\nprint(df.loc[0, 'apples'])",
+  "options": [
+   {
+    "id": "a",
+    "text": "0\nKeyError",
+    "mono": true,
+    "out": "0\n!KeyError"
+   },
+   {
+    "id": "b",
+    "text": "0\n3",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "3\n3",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "3\nKeyError",
+    "mono": true,
+    "out": "3\n!KeyError"
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "`iloc[0, 1]` is position-based: first row, second column, i.e. June's oranges = 0. `loc` is label-based: there is no row labelled 0 (the labels are 'June' and 'Robert'), so it raises KeyError.",
+  "distractor_notes": {
+   "b": "`loc` never falls back to positions when the label does not exist.",
+   "c": "Column position 1 is 'oranges', not 'apples'; and `loc[0, ...]` fails.",
+   "d": "Column position 1 is 'oranges' (0), not 'apples' (3)."
+  },
+  "slides": [
+   235
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0086",
+  "chapter": "S6",
+  "topic": "pandas-selection",
+  "tags": [
+   "Series-vs-DataFrame",
+   "loc",
+   "boolean-filtering"
+  ],
+  "type": "multi",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Given `df` below, which expressions return a **DataFrame** (not a Series)? Select all that apply.",
+  "code": "import pandas as pd\ndf = pd.DataFrame({'apples': [3, 2, 0, 1], 'oranges': [0, 3, 7, 2]},\n                  index=['June', 'Robert', 'Lily', 'David'])",
+  "options": [
+   {
+    "id": "a",
+    "text": "df['apples']",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "df[['apples']]",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "df.loc['June']",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "df.loc[['June']]",
+    "mono": true
+   },
+   {
+    "id": "e",
+    "text": "df[df['apples'] > 1]",
+    "mono": true
+   },
+   {
+    "id": "f",
+    "text": "df.iloc[0]",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b",
+   "d",
+   "e"
+  ],
+  "explanation": "Selecting a single label (one column with `[]`, one row with `loc`/`iloc`) returns a Series. Passing a list of labels, even a list of one, or filtering rows with a boolean mask returns a DataFrame.",
+  "distractor_notes": {
+   "a": "One column name in single brackets: Series.",
+   "c": "One row label: the row comes back as a Series.",
+   "f": "One row position: Series."
+  },
+  "slides": [
+   235,
+   236
+  ],
+  "verify": {
+   "mode": "truth",
+   "probe_template": "print(isinstance(__OPTION_RAW__, pd.DataFrame))"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0087",
+  "chapter": "S6",
+  "topic": "pandas-cleaning",
+  "tags": [
+   "isnull",
+   "missing-values"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "import pandas as pd\ndf = pd.DataFrame({'a': [1, None, 3],\n                   'b': [None, None, 6]})\nprint(df.isnull().sum().tolist())",
+  "options": [
+   {
+    "id": "a",
+    "text": "[1, 2, 0]",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "[2, 1]",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "[1, 2]",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "3",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "`isnull()` marks each missing cell with True; `.sum()` then adds the Trues column by column: 1 missing value in a, 2 in b.",
+  "distractor_notes": {
+   "a": "That counts per row (`sum(axis=1)`); the default sums each column.",
+   "d": "That is the grand total, `.sum().sum()`.",
+   "b": "The columns are in the order a, b."
+  },
+  "slides": [
+   234
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0088",
+  "chapter": "S6",
+  "topic": "pandas-cleaning",
+  "tags": [
+   "dropna",
+   "axis",
+   "missing-values"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "Find the output of the code?",
+  "code": "import pandas as pd\ndf = pd.DataFrame({'a': [1, None, 3],\n                   'b': [None, None, 6]})\nprint(df.dropna().shape, df.dropna(axis=1).shape)",
+  "options": [
+   {
+    "id": "a",
+    "text": "(2, 2) (3, 1)",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "(1, 2) (3, 0)",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "(1, 2) (3, 1)",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "(3, 2) (3, 2)",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "`dropna()` removes every row that contains at least one NaN: only the last row (3, 6) survives -> (1, 2). `dropna(axis=1)` removes every column that contains a NaN: both a and b do, so no column is left -> (3, 0).",
+  "distractor_notes": {
+   "c": "Column a also contains a NaN, so it is dropped too.",
+   "a": "That is `how='all'` (drop only the rows/columns that are entirely missing); the default drops on any NaN.",
+   "d": "`dropna` returns a DataFrame without the incomplete rows/columns; it is not a no-op."
+  },
+  "slides": [
+   234
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0089",
+  "chapter": "S6",
+  "topic": "pandas-cleaning",
+  "tags": [
+   "dropna",
+   "fillna",
+   "return-value"
+  ],
+  "type": "multi",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Starting each time from `df = pd.DataFrame({'x': [1.0, None, 3.0]})`, after which statements does `df` contain **no** missing value? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "df = df.dropna()",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "df.dropna()",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "df = df.fillna(0)",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "df.fillna(df['x'].mean())",
+    "mono": true
+   },
+   {
+    "id": "e",
+    "text": "df['x'] = df['x'].fillna(2.0)",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a",
+   "c",
+   "e"
+  ],
+  "explanation": "`dropna` and `fillna` return a **new** object and leave the original unchanged: the result has to be assigned back (to `df`, or to the column). (`inplace=True` also exists but is being phased out in recent pandas versions.)",
+  "distractor_notes": {
+   "b": "The cleaned copy is discarded; `df` still contains its NaN.",
+   "d": "Same mistake: the filled copy is not stored anywhere."
+  },
+  "slides": [
+   234
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "import pandas as pd\ndf = pd.DataFrame({'x': [1.0, None, 3.0]})",
+   "probe_template": "__OPTION_RAW__\nprint(int(df.isnull().sum().sum()) == 0)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0090",
+  "chapter": "S6",
+  "topic": "pandas-cleaning",
+  "tags": [
+   "fillna",
+   "mean",
+   "imputation"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "import pandas as pd\ns = pd.Series([2.0, None, 4.0, None])\ns = s.fillna(s.mean())\nprint(s.tolist())",
+  "options": [
+   {
+    "id": "a",
+    "text": "[2.0, 0.0, 4.0, 0.0]",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "[2.0, 1.5, 4.0, 1.5]",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "[2.0, 3.0, 4.0, 3.0]",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "[2.0, nan, 4.0, nan]",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "`mean()` skips missing values: (2 + 4) / 2 = 3.0. `fillna` then replaces each NaN by 3.0 (imputation) and the result is assigned back to `s`.",
+  "distractor_notes": {
+   "b": "The NaNs are skipped by `mean()`, not counted as 0 (6 / 4 = 1.5).",
+   "d": "The result of `fillna` is assigned back to `s`, so the NaNs are gone.",
+   "a": "`fillna` uses the value it is given (the mean), not 0."
+  },
+  "slides": [
+   234
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0091",
+  "chapter": "S6",
+  "topic": "pandas-cleaning",
+  "tags": [
+   "concat",
+   "drop_duplicates"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What will be the output of the code?",
+  "code": "import pandas as pd\ndf = pd.DataFrame({'title': ['Up', 'Heat', 'Up'],\n                   'year': [2009, 1995, 2009]})\ntemp = pd.concat([df, df])\nprint(temp.shape, temp.drop_duplicates().shape)",
+  "options": [
+   {
+    "id": "a",
+    "text": "(6, 4) (3, 4)",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "(6, 2) (3, 2)",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "(6, 2) (2, 2)",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "(3, 2) (2, 2)",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "`pd.concat([df, df])` stacks the rows of both frames: 6 rows, 2 columns (the slides' `df.append(df)` did the same but was removed in pandas 2.0). `drop_duplicates()` keeps only the first occurrence of each identical row: ('Up', 2009) and ('Heat', 1995).",
+  "distractor_notes": {
+   "b": "`df` itself already contained ('Up', 2009) twice.",
+   "d": "Concatenating along the rows doubles the number of rows.",
+   "a": "The rows are stacked, not the columns (that would need `axis=1`)."
+  },
+  "slides": [
+   233
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0092",
+  "chapter": "S6",
+  "topic": "pandas-cleaning",
+  "tags": [
+   "rename",
+   "columns",
+   "return-value"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "import pandas as pd\ndf = pd.DataFrame({'Runtime (Minutes)': [120], 'Rating': [8.1]})\ndf.rename(columns={'Runtime (Minutes)': 'runtime'})\ndf.columns = [col.lower() for col in df]\nprint(list(df.columns))",
+  "options": [
+   {
+    "id": "a",
+    "text": "['runtime (minutes)', 'rating']",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "['runtime', 'rating']",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "['Runtime (Minutes)', 'Rating']",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "['runtime', 'Rating']",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "`rename` returns a new DataFrame; its result is not assigned (and `inplace=True` is not used), so `df` keeps its column names. Iterating over a DataFrame yields its column names, so the comprehension lowercases them and assigning the list to `df.columns` renames every column.",
+  "distractor_notes": {
+   "b": "The result of `rename` was discarded.",
+   "c": "Assigning a list to `df.columns` does rename the columns.",
+   "d": "Both mistakes: `rename` had no effect, and the lowercasing applies to every column."
+  },
+  "slides": [
+   233
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0093",
+  "chapter": "S6",
+  "topic": "pandas-analysis",
+  "tags": [
+   "mean",
+   "NaN",
+   "value_counts",
+   "len"
+  ],
+  "type": "multi",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "Given `s = pd.Series([3, None, 5, 3])`, which statements are true? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "`s.mean()` is `nan` because of the missing value",
+    "probe": "import math\nprint(math.isnan(s.mean()))"
+   },
+   {
+    "id": "b",
+    "text": "`s.mean()` equals `11 / 3`",
+    "probe": "print(bool(abs(s.mean() - 11 / 3) < 1e-9))"
+   },
+   {
+    "id": "c",
+    "text": "`len(s)` is 4",
+    "probe": "print(len(s) == 4)"
+   },
+   {
+    "id": "d",
+    "text": "`s.value_counts().index[0]` is `3.0`, the most frequent value",
+    "probe": "print(bool(s.value_counts().index[0] == 3.0))"
+   },
+   {
+    "id": "e",
+    "text": "`s.isnull().sum()` is 0 because `None` is not NaN",
+    "probe": "print(bool(s.isnull().sum() == 0))"
+   }
+  ],
+  "correct": [
+   "b",
+   "c",
+   "d"
+  ],
+  "explanation": "Aggregations such as `mean()` skip missing values: (3 + 5 + 3) / 3 = 11/3. `len` counts every row, missing ones included. `value_counts` sorts by frequency, most frequent first. In a numeric Series, None is stored as NaN and `isnull` detects it.",
+  "distractor_notes": {
+   "a": "`mean()` skips NaN by default (`skipna=True`).",
+   "e": "None becomes NaN in a numeric Series and counts as missing: the sum is 1."
+  },
+  "slides": [
+   234,
+   235
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "import pandas as pd\ns = pd.Series([3, None, 5, 3])"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0094",
+  "chapter": "S6",
+  "topic": "pandas-analysis",
+  "tags": [
+   "value_counts"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following snippet?",
+  "code": "import pandas as pd\ns = pd.Series(['fig', 'kiwi', 'apple', 'kiwi', 'kiwi', 'apple'])\nvc = s.value_counts()\nprint(vc.index.tolist(), vc.tolist())",
+  "options": [
+   {
+    "id": "a",
+    "text": "['apple', 'fig', 'kiwi'] [2, 1, 3]",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "['fig', 'kiwi', 'apple'] [1, 3, 2]",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "['kiwi', 'apple', 'fig'] [3, 2, 1]",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "['fig', 'apple', 'kiwi'] [1, 2, 3]",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "`value_counts()` counts each distinct value and sorts the result by count, most frequent first: kiwi (3), apple (2), fig (1). The values become the index.",
+  "distractor_notes": {
+   "a": "The result is sorted by count, not alphabetically.",
+   "b": "The result is sorted by count, not by order of first appearance.",
+   "d": "The default order is descending (most frequent first)."
+  },
+  "slides": [
+   235
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0095",
+  "chapter": "S6",
+  "topic": "pandas-analysis",
+  "tags": [
+   "apply",
+   "function"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "import pandas as pd\ndf = pd.DataFrame({'rating': [8.5, 6.0, 8.0, 7.9]})\n\ndef category(x):\n    if x >= 8.0:\n        return 'good'\n    else:\n        return 'bad'\n\ndf['cat'] = df['rating'].apply(category)\nprint(df['cat'].tolist())",
+  "options": [
+   {
+    "id": "a",
+    "text": "ValueError",
+    "out": "!ValueError"
+   },
+   {
+    "id": "b",
+    "text": "['good', 'bad', 'good', 'bad']",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "['good', 'bad', 'good', 'good']",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "['good', 'bad', 'bad', 'bad']",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "`Series.apply(f)` calls `f` on each value separately and collects the results in a new Series. 8.5 and 8.0 satisfy `x >= 8.0`; 6.0 and 7.9 do not.",
+  "distractor_notes": {
+   "d": "8.0 >= 8.0 is True, so 8.0 is 'good'.",
+   "a": "`apply` passes the values one by one, so the `if` receives a single float, not a whole Series.",
+   "c": "7.9 is not rounded: 7.9 >= 8.0 is False."
+  },
+  "slides": [
+   236
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0096",
+  "chapter": "S6",
+  "topic": "pandas-analysis",
+  "tags": [
+   "vectorization",
+   "loc-assignment",
+   "boolean-mask"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What will be the output of the code?",
+  "code": "import pandas as pd\ndf = pd.DataFrame({'a': [0, 10, 30], 'b': [5, 5, 5],\n                   'c': [1, 2, 3], 'd': [7, 8, 9]})\ndf['e'] = df['b'] + df['c']\ndf.loc[df['a'] <= 25, 'e'] = df['b'] - df['c']\ndf.loc[df['a'] == 0, 'e'] = df['d']\nprint(df['e'].tolist())",
+  "options": [
+   {
+    "id": "a",
+    "text": "[7, 8, 9]",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "[7, 3, 8]",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "[4, 3, 8]",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "[6, 7, 8]",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "Each `loc[mask, 'e'] = ...` line only updates the rows selected by the mask. Start with b + c = [6, 7, 8]; the rows with a <= 25 (rows 0 and 1) get b - c -> [4, 3, 8]; the row with a == 0 (row 0) gets d -> [7, 3, 8]. This is how the slides vectorize an if/elif/else loop over `iterrows`.",
+  "distractor_notes": {
+   "c": "The last line overwrites row 0 with d = 7.",
+   "d": "The two `loc` assignments do modify the selected rows.",
+   "a": "The last mask selects only row 0, not every row."
+  },
+  "slides": [
+   265,
+   266
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0097",
+  "chapter": "S6",
+  "topic": "visualization",
+  "tags": [
+   "subplots",
+   "axes",
+   "figure"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "import matplotlib.pyplot as plt\nfig, axes = plt.subplots(3, 2)\nprint(axes.shape)\nprint(len(fig.axes))",
+  "options": [
+   {
+    "id": "a",
+    "text": "(3, 2)\n1",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "(6,)\n6",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "(2, 3)\n6",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "(3, 2)\n6",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "`plt.subplots(nrows, ncols)` returns the figure and a NumPy array of Axes of shape (nrows, ncols): `axes[i, j]` is the subplot in row i, column j. The figure therefore holds 3 x 2 = 6 axes.",
+  "distractor_notes": {
+   "c": "The first argument is the number of rows.",
+   "a": "A figure contains one Axes per subplot.",
+   "b": "With more than one row and more than one column, the axes array is 2D."
+  },
+  "slides": [
+   241
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0098",
+  "chapter": "S6",
+  "topic": "visualization",
+  "tags": [
+   "subplots",
+   "axes",
+   "shape"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Find the output of the code?",
+  "code": "import matplotlib.pyplot as plt\nfig, axes = plt.subplots(1, 3)\nprint(axes.shape)",
+  "options": [
+   {
+    "id": "a",
+    "text": "(3, 1)",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "3",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "(1, 3)",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "(3,)",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "When one of the two dimensions is 1, `plt.subplots` squeezes it by default: the axes array is 1D with shape (3,), so the subplots are `axes[0]`, `axes[1]`, `axes[2]` (`axes[0, 1]` would raise IndexError).",
+  "distractor_notes": {
+   "c": "The size-1 dimension is squeezed away by default (`squeeze=True`).",
+   "a": "1 row and 3 columns, not 3 rows; and the size-1 axis is squeezed anyway.",
+   "b": "`axes` is a NumPy array: its shape is a tuple."
+  },
+  "slides": [
+   241
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0099",
+  "chapter": "S6",
+  "topic": "visualization",
+  "tags": [
+   "subplots",
+   "pandas-plot",
+   "seaborn",
+   "pairplot"
+  ],
+  "type": "multi",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Which of the following statements are true? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "`plt.subplots(2, 2)` returns a tuple `(figure, 2x2 array of axes)`",
+    "probe": "r = plt.subplots(2, 2)\nprint(isinstance(r, tuple) and len(r) == 2 and r[1].shape == (2, 2))"
+   },
+   {
+    "id": "b",
+    "text": "`pd.Series([1, 2, 2, 3]).plot(kind='hist')` returns a Matplotlib `Axes` object",
+    "probe": "import matplotlib.axes\nax = pd.Series([1, 2, 2, 3]).plot(kind='hist')\nprint(isinstance(ax, matplotlib.axes.Axes))"
+   },
+   {
+    "id": "c",
+    "text": "`sns.pairplot(df)` on a DataFrame with 2 numeric columns draws a 2x2 grid of plots",
+    "probe": "g = sns.pairplot(pd.DataFrame({'x': [1.0, 2.0, 3.0, 4.0], 'y': [3.0, 1.0, 2.0, 5.0]}))\nprint(g.axes.shape == (2, 2))"
+   },
+   {
+    "id": "d",
+    "text": "Matplotlib cannot plot NumPy arrays: they must be converted to lists first",
+    "probe": "try:\n    x = np.arange(5)\n    plt.plot(x, x ** 2)\n    print(False)\nexcept Exception:\n    print(True)"
+   },
+   {
+    "id": "e",
+    "text": "The array returned by `plt.subplots(3, 2)` is indexed `axes[column, row]`",
+    "probe": "fig, axes = plt.subplots(3, 2)\nprint(axes.shape == (2, 3))"
+   }
+  ],
+  "correct": [
+   "a",
+   "b",
+   "c"
+  ],
+  "explanation": "`plt.subplots` returns `(fig, axes)` with axes indexed `[row, column]`. Pandas plotting is built on Matplotlib and returns the Axes it drew on. Seaborn's `pairplot` draws one plot per pair of numeric columns (distributions on the diagonal), hence a 2x2 grid for 2 columns. Matplotlib is built on NumPy and takes arrays directly.",
+  "distractor_notes": {
+   "d": "Matplotlib is fully integrated with NumPy: all plotting functions accept arrays.",
+   "e": "The axes array has shape (nrows, ncols) and is indexed `axes[row, column]`."
+  },
+  "slides": [
+   240,
+   241,
+   242,
+   244
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S6-0100",
+  "chapter": "S6",
+  "topic": "visualization",
+  "tags": [
+   "plt.show",
+   "notebook",
+   "script"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "You run a script `plot.py` from the terminal (not in a notebook). It builds a figure with `plt.plot(x, y)`. What must the script do so that the figure is displayed?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "Call `plt.show()`"
+   },
+   {
+    "id": "b",
+    "text": "Nothing: the figure is displayed as soon as `plt.plot` is called"
+   },
+   {
+    "id": "c",
+    "text": "Call `print(plt)`"
+   },
+   {
+    "id": "d",
+    "text": "Call `plt.legend()`"
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "In a notebook, figures are rendered automatically at the end of the cell. In a plain script, the plotting calls only build the figure in memory; `plt.show()` opens the window(s) and displays them.",
+  "distractor_notes": {
+   "b": "That is the notebook behaviour; a script needs `plt.show()`.",
+   "d": "`plt.legend()` adds a legend to the current axes; it displays nothing.",
+   "c": "That prints the repr of the module object, not the figure."
+  },
+  "slides": [
+   241
+  ],
+  "verify": {
+   "mode": "manual",
+   "reference": "Slide 241: outside of a notebook, plt.show() must be called to show the plots; inside a notebook it is not necessary."
+  },
+  "reviewed": 1
+ }
+]

@@ -1,0 +1,658 @@
+[
+ {
+  "id": "S1-0139",
+  "chapter": "S1",
+  "topic": "types",
+  "tags": [
+   "None",
+   "type"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "print(type(None))",
+  "options": [
+   {
+    "id": "a",
+    "text": "<class 'null'>",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "None",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "<class 'NoneType'>",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "<class 'None'>",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "None is the only value of the type NoneType (a singleton). type() returns the class of an object, printed as <class '...'>.",
+  "distractor_notes": {
+   "a": "Python has no null; its 'no value' object is None.",
+   "b": "That is print(None); here we print the type of None.",
+   "d": "None is the value; its type is called NoneType."
+  },
+  "slides": [
+   23,
+   24,
+   62
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0140",
+  "chapter": "S1",
+  "topic": "types",
+  "tags": [
+   "float",
+   "precision"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "True or False: in Python, the expression `0.1 + 0.2 == 0.3` evaluates to `True`.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "True",
+    "probe": "print((0.1 + 0.2 == 0.3) is True)"
+   },
+   {
+    "id": "b",
+    "text": "False",
+    "probe": "print((0.1 + 0.2 == 0.3) is False)"
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "Floats are stored in binary with 53 bits of precision, and 0.1, 0.2, 0.3 have no exact binary representation. 0.1 + 0.2 gives 0.30000000000000004, which is not equal to the float 0.3. Compare floats with a tolerance (abs(a - b) < 1e-9, or math.isclose).",
+  "distractor_notes": {
+   "a": "Decimal intuition: in binary floating point the sum is 0.30000000000000004."
+  },
+  "slides": [
+   24,
+   70
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": ""
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0141",
+  "chapter": "S1",
+  "topic": "types",
+  "tags": [
+   "int",
+   "infinite-precision"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "x = 2 ** 64\nprint(x + 1)",
+  "options": [
+   {
+    "id": "a",
+    "text": "1.8446744073709552e+19",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "18446744073709551617",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "OverflowError",
+    "out": "!OverflowError"
+   },
+   {
+    "id": "d",
+    "text": "0",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "Python ints have infinite precision: they grow as needed and never overflow. 2 ** 64 + 1 is computed exactly.",
+  "distractor_notes": {
+   "a": "No float is involved, so the result is an exact int.",
+   "c": "ints never overflow in Python (only floats can).",
+   "d": "There is no wrap-around as with 64-bit integers in C."
+  },
+  "slides": [
+   24
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0142",
+  "chapter": "S1",
+  "topic": "types",
+  "tags": [
+   "OverflowError",
+   "ZeroDivisionError",
+   "float"
+  ],
+  "type": "multi",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "Which of the following expressions raise an exception? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "float(\"inf\") * 2",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "1.0 / 0",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "2.0 ** 10000",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "10 ** 400 * 1.0",
+    "mono": true
+   },
+   {
+    "id": "e",
+    "text": "2 ** 10000",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b",
+   "c",
+   "d"
+  ],
+  "explanation": "ints are unbounded, but floats are 64-bit numbers limited to about 1.8e308: 2.0 ** 10000 and the conversion of 10 ** 400 to float raise OverflowError. Dividing by zero raises ZeroDivisionError even with floats. Arithmetic on the special value inf simply gives inf.",
+  "distractor_notes": {
+   "a": "inf * 2 is inf: no exception.",
+   "e": "An int power is computed exactly, however large."
+  },
+  "slides": [
+   24
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "",
+   "probe_template": "try:\n    _v = (__OPTION_RAW__)\n    print(False)\nexcept Exception:\n    print(True)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0143",
+  "chapter": "S1",
+  "topic": "types",
+  "tags": [
+   "complex",
+   "abs"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "z = complex(3, 4)\nprint(z, abs(z))",
+  "options": [
+   {
+    "id": "a",
+    "text": "(3+4j) 5.0",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "(3, 4) 5.0",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "(3+4i) 5.0",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "(3+4j) 7",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "complex(re, im) builds a complex number; Python writes the imaginary unit as j and prints the number in parentheses. abs() of a complex is its modulus sqrt(3**2 + 4**2) = 5.0 (a float).",
+  "distractor_notes": {
+   "b": "A complex number is not printed as a tuple.",
+   "c": "Python uses j, not i, for the imaginary unit.",
+   "d": "abs gives the modulus, not the sum of the parts."
+  },
+  "slides": [
+   24,
+   28
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0144",
+  "chapter": "S1",
+  "topic": "types",
+  "tags": [
+   "type",
+   "bool",
+   "None"
+  ],
+  "type": "multi",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "Which of the following expressions evaluate to `True`? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "type(3.0) == int",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "type(\"3\") == str",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "type(3) == int",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "type(None) == None",
+    "mono": true
+   },
+   {
+    "id": "e",
+    "text": "type(1j) == complex",
+    "mono": true
+   },
+   {
+    "id": "f",
+    "text": "type(True) == int",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b",
+   "c",
+   "e"
+  ],
+  "explanation": "type() returns the exact class of a value: int, float, str, complex... True is a bool (bool is a subclass of int, but its type is bool), and the type of None is NoneType, not None itself.",
+  "distractor_notes": {
+   "a": "3.0 is a float, even though its value is whole.",
+   "d": "type(None) is the class NoneType, which is not the value None.",
+   "f": "type(True) is bool. (isinstance(True, int) would be True, but type() gives the exact class.)"
+  },
+  "slides": [
+   23,
+   24,
+   62
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "",
+   "probe_template": "print((__OPTION_RAW__) is True)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0145",
+  "chapter": "S1",
+  "topic": "types",
+  "tags": [
+   "int",
+   "conversion",
+   "ValueError"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "x = \"3.5\"\nprint(int(x))",
+  "options": [
+   {
+    "id": "a",
+    "text": "3",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "ValueError",
+    "out": "!ValueError"
+   },
+   {
+    "id": "c",
+    "text": "3.5",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "4",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "int() accepts a string only if it contains an integer literal. '3.5' is not one, so int raises ValueError. Convert in two steps if needed: int(float('3.5')) is 3.",
+  "distractor_notes": {
+   "a": "int() truncates a **float** 3.5, but it does not parse a decimal string.",
+   "c": "int() cannot return a float.",
+   "d": "int() never rounds."
+  },
+  "slides": [
+   24,
+   26,
+   31
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0146",
+  "chapter": "S1",
+  "topic": "types",
+  "tags": [
+   "conversion",
+   "type-promotion"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "x = \"7\"\ny = int(x) + float(x)\nprint(y, str(y) + x)",
+  "options": [
+   {
+    "id": "a",
+    "text": "14.0 14.07",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "14 147",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "14.0 21.0",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "TypeError",
+    "out": "!TypeError"
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "int('7') + float('7') is 7 + 7.0: the int is promoted to float, giving 14.0. str(14.0) is '14.0', and + between two strings concatenates: '14.07'.",
+  "distractor_notes": {
+   "b": "int + float gives a float (14.0).",
+   "c": "str(y) + x concatenates strings; it does not add numbers.",
+   "d": "Both operands of each + have compatible types."
+  },
+  "slides": [
+   24,
+   26,
+   31
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0147",
+  "chapter": "S1",
+  "topic": "types",
+  "tags": [
+   "round",
+   "float"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "print(round(2.5), round(3.5), round(-0.5))",
+  "options": [
+   {
+    "id": "a",
+    "text": "2 4 0",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "2 3 0",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "3 4 -1",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "3 4 0",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "round() uses banker's rounding: a value exactly halfway between two integers is rounded to the **even** one. 2.5 -> 2, 3.5 -> 4, -0.5 -> 0. With one argument round returns an int.",
+  "distractor_notes": {
+   "b": "3.5 rounds to the even neighbour 4.",
+   "c": "Python does not round halves away from zero.",
+   "d": "2.5 rounds to the even neighbour 2, and -0.5 to 0."
+  },
+  "slides": [
+   24,
+   28
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0148",
+  "chapter": "S1",
+  "topic": "types",
+  "tags": [
+   "type-promotion",
+   "type"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "a = 5\nb = 2.0\nc = a * b\nprint(c, type(c) == type(a))",
+  "options": [
+   {
+    "id": "a",
+    "text": "10 True",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "10.0 True",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "10.0 False",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "10 False",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "When an int and a float are combined, the int is promoted to float: 5 * 2.0 = 10.0, a float, so its type differs from the type of a (int).",
+  "distractor_notes": {
+   "a": "Mixing int and float gives a float.",
+   "b": "c is a float and a is an int.",
+   "d": "The result is printed as a float: 10.0."
+  },
+  "slides": [
+   24
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0149",
+  "chapter": "S1",
+  "topic": "types",
+  "tags": [
+   "float",
+   "int",
+   "which-is-false"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Which of the following statements is **false**?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "Python has no separate character type: `'a'` is a `str` of length 1.",
+    "probe": "print(not (type('a') is str and len('a') == 1))"
+   },
+   {
+    "id": "b",
+    "text": "`None` is the only value of type `NoneType`.",
+    "probe": "print(not (type(None)() is None))"
+   },
+   {
+    "id": "c",
+    "text": "A Python float can store arbitrarily many significant digits, like an int.",
+    "probe": "print(float(2 ** 60 + 1) == float(2 ** 60))"
+   },
+   {
+    "id": "d",
+    "text": "Python ints have no fixed maximum value.",
+    "probe": "print(not (2 ** 200 > 2 ** 64 and type(2 ** 200) is int))"
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "A float is a 64-bit number with about 15-16 significant decimal digits (53 bits): float(2 ** 60 + 1) == float(2 ** 60). Only ints have unlimited precision. Python has no char type, and None is a singleton.",
+  "distractor_notes": {
+   "a": "True: single characters are just strings of length 1.",
+   "b": "True: None is a singleton.",
+   "d": "True: ints have infinite precision."
+  },
+  "slides": [
+   23,
+   24,
+   62
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": ""
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S1-0150",
+  "chapter": "S1",
+  "topic": "types",
+  "tags": [
+   "int",
+   "float",
+   "conversion"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "print(int(3.99), int(\"  42  \"), float(\"1e3\"))",
+  "options": [
+   {
+    "id": "a",
+    "text": "4 42 1000.0",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "ValueError",
+    "out": "!ValueError"
+   },
+   {
+    "id": "c",
+    "text": "3 42 1000.0",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "3 42 1e3",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "int() truncates a float towards zero (3.99 -> 3), and accepts a string containing an integer surrounded by whitespace. float() understands scientific notation: '1e3' is 1000.0, printed in decimal form.",
+  "distractor_notes": {
+   "a": "int() truncates; it does not round.",
+   "b": "Surrounding spaces are allowed by int(), and '1e3' is a valid float literal.",
+   "d": "float() returns a number, printed as 1000.0."
+  },
+  "slides": [
+   24,
+   26,
+   31
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ }
+]

@@ -1,0 +1,1512 @@
+[
+  {
+    "id": "S2-0151",
+    "chapter": "S2",
+    "topic": "sets",
+    "tags": [
+      "duplicates",
+      "len"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "s = {1, 2, 2, 3, 3, 3}\nprint(len(s))",
+    "options": [
+      {
+        "id": "a",
+        "text": "TypeError",
+        "out": "!TypeError"
+      },
+      {
+        "id": "b",
+        "text": "6",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "4",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "3",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "A set keeps each value only once, so the duplicates written in the literal are merged: {1, 2, 3} has 3 elements.",
+    "distractor_notes": {
+      "a": "Duplicates in a set literal are allowed; they are just merged.",
+      "b": "Duplicates are removed when the set is built.",
+      "c": "There are exactly 3 distinct values."
+    },
+    "slides": [
+      100
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0152",
+    "chapter": "S2",
+    "topic": "sets",
+    "tags": [
+      "empty-set",
+      "which-is-false"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "Which of the following statements about sets is **false**?",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "`{}` creates an empty set",
+        "probe": "print(not (type({}) is set))"
+      },
+      {
+        "id": "b",
+        "text": "A set never contains duplicate elements",
+        "probe": "print(not (len({1, 1, 2}) == 2))"
+      },
+      {
+        "id": "c",
+        "text": "`set('aab')` has 2 elements",
+        "probe": "print(not (len(set('aab')) == 2))"
+      },
+      {
+        "id": "d",
+        "text": "Two sets with the same elements written in a different order are equal",
+        "probe": "print(not ({1, 2, 3} == {3, 1, 2}))"
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "`{}` is an empty **dict** (dicts got the braces first); an empty set must be written `set()`. The other statements are true: sets drop duplicates, set('aab') is the set of 'a' and 'b', and set equality ignores order.",
+    "distractor_notes": {
+      "b": "True: duplicates are merged.",
+      "c": "True: the characters a, a, b give 2 distinct elements.",
+      "d": "True: sets are unordered, so == ignores the order."
+    },
+    "slides": [
+      100
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": ""
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0153",
+    "chapter": "S2",
+    "topic": "sets",
+    "tags": [
+      "intersection",
+      "difference"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "a = {1, 2, 3, 4}\nb = {3, 4, 5}\nprint(a & b, a - b)",
+    "options": [
+      {
+        "id": "a",
+        "text": "{3, 4} {1, 2, 5}",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "{1, 2, 3, 4, 5} {1, 2}",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "{3, 4} {1, 2}",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "{3, 4} {5}",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "`&` is the intersection (elements in both sets) and `a - b` is the difference (elements of a that are not in b).",
+    "distractor_notes": {
+      "a": "That is the symmetric difference a ^ b.",
+      "b": "| is the union; & is the intersection.",
+      "d": "a - b keeps elements of a, not of b."
+    },
+    "slides": [
+      100
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0154",
+    "chapter": "S2",
+    "topic": "sets",
+    "tags": [
+      "symmetric-difference",
+      "union"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "a = {1, 2, 3}\nb = {2, 3, 4}\nprint(a ^ b, len(a | b))",
+    "options": [
+      {
+        "id": "a",
+        "text": "TypeError",
+        "out": "!TypeError"
+      },
+      {
+        "id": "b",
+        "text": "{2, 3} 4",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "{1, 4} 6",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "{1, 4} 4",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "`^` is the symmetric difference (elements in exactly one of the two sets): {1, 4}. The union `|` contains 1, 2, 3, 4 - common elements are counted once.",
+    "distractor_notes": {
+      "a": "^ and | are set operators.",
+      "b": "{2, 3} is the intersection a & b.",
+      "c": "The union keeps no duplicates: 4 elements, not 6."
+    },
+    "slides": [
+      100
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0155",
+    "chapter": "S2",
+    "topic": "sets",
+    "tags": [
+      "discard",
+      "add"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "s = {10, 20}\ns.discard(30)\ns.add(20)\nprint(len(s))",
+    "options": [
+      {
+        "id": "a",
+        "text": "2",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "3",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "KeyError",
+        "out": "!KeyError"
+      },
+      {
+        "id": "d",
+        "text": "1",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "`discard` removes an element if it is present and does nothing otherwise (no error, unlike `remove`). Adding 20, which is already there, changes nothing.",
+    "distractor_notes": {
+      "b": "20 is already in the set, so add does not create a second copy.",
+      "c": "discard never raises; remove would raise KeyError.",
+      "d": "Nothing is removed: 30 was not in the set."
+    },
+    "slides": [
+      100
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0156",
+    "chapter": "S2",
+    "topic": "sets",
+    "tags": [
+      "remove-duplicates",
+      "sorted",
+      "hands-on"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "words = ['b', 'a', 'b', 'c', 'a']\nprint(sorted(set(words)))",
+    "options": [
+      {
+        "id": "a",
+        "text": "['a', 'a', 'b', 'b', 'c']",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "['a', 'b', 'c']",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "{'a', 'b', 'c'}",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "['b', 'a', 'c']",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "`set(words)` removes the duplicates and `sorted()` returns a new **list** in ascending order.",
+    "distractor_notes": {
+      "a": "The set has already removed the duplicates.",
+      "c": "sorted() always returns a list.",
+      "d": "sorted() sorts the elements; it does not keep the order of first appearance."
+    },
+    "slides": [
+      101
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0157",
+    "chapter": "S2",
+    "topic": "sets",
+    "tags": [
+      "find-duplicates",
+      "membership",
+      "hands-on"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "nums = [1, 2, 3, 2, 4, 3, 2]\nseen = set()\ndups = set()\nfor n in nums:\n    if n in seen:\n        dups.add(n)\n    seen.add(n)\nprint(sorted(dups), len(seen))",
+    "options": [
+      {
+        "id": "a",
+        "text": "[2, 3] 7",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[2, 3, 2] 4",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[2, 3] 4",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[1, 4] 4",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "A value is added to dups when it has already been seen; since dups is a set, 2 is stored only once. seen ends up with the 4 distinct values 1, 2, 3 and 4.",
+    "distractor_notes": {
+      "a": "seen is a set: duplicates are not counted.",
+      "b": "Adding 2 again to a set does nothing.",
+      "d": "1 and 4 are the values that appear only once."
+    },
+    "slides": [
+      101
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0158",
+    "chapter": "S2",
+    "topic": "sets",
+    "tags": [
+      "subset"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "x = set('abc')\ny = set('abcd')\nprint(x <= y, y <= x, x < x)",
+    "options": [
+      {
+        "id": "a",
+        "text": "TypeError",
+        "out": "!TypeError"
+      },
+      {
+        "id": "b",
+        "text": "True False True",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "False True False",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "True False False",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "`<=` tests inclusion: every element of x is in y, but not the reverse. `<` tests **strict** inclusion, so a set is never a strict subset of itself.",
+    "distractor_notes": {
+      "a": "Comparison operators are defined on sets as subset tests.",
+      "b": "x < x is False: a strict subset must be smaller.",
+      "c": "x is the smaller set, so x <= y is True."
+    },
+    "slides": [
+      100
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0159",
+    "chapter": "S2",
+    "topic": "sets",
+    "tags": [
+      "indexing",
+      "TypeError"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What happens in the below code?",
+    "code": "s = {5, 6, 7}\nprint(s[0])",
+    "options": [
+      {
+        "id": "a",
+        "text": "5",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "IndexError",
+        "out": "!IndexError"
+      },
+      {
+        "id": "c",
+        "text": "TypeError",
+        "out": "!TypeError"
+      },
+      {
+        "id": "d",
+        "text": "KeyError",
+        "out": "!KeyError"
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "Sets are unordered and do not support indexing: `s[0]` raises TypeError ('set' object is not subscriptable). Use a loop, `in`, or convert to a list first.",
+    "distractor_notes": {
+      "a": "A set has no positions.",
+      "b": "IndexError means a bad position in a sequence; a set is not a sequence at all.",
+      "d": "A set is not a dict; s[0] is not a key lookup."
+    },
+    "slides": [
+      100
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0160",
+    "chapter": "S2",
+    "topic": "sets",
+    "tags": [
+      "methods"
+    ],
+    "type": "multi",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Which of the following are methods of set objects? Select all that apply.",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "add",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "append",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "discard",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "insert",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "union",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "c",
+      "e"
+    ],
+    "explanation": "Sets have add, remove, discard, pop, union, intersection, difference... but no append or insert: those are list methods that need an order or a position.",
+    "distractor_notes": {
+      "b": "append is a list method; sets use add.",
+      "d": "insert needs a position, and sets have no positions."
+    },
+    "slides": [
+      100
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": "",
+      "probe_template": "print(hasattr(set(), __OPTION__))"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0161",
+    "chapter": "S2",
+    "topic": "sets",
+    "tags": [
+      "operators",
+      "union",
+      "intersection"
+    ],
+    "type": "multi",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "Which of the following expressions evaluate to `True`? Select all that apply.",
+    "code": "a = {1, 2, 3}\nb = {3, 4}",
+    "options": [
+      {
+        "id": "a",
+        "text": "a | b == {1, 2, 3, 4}",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "a & b == {3}",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "a - b == b - a",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "a ^ b == (a | b) - (a & b)",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "len(a | b) == len(a) + len(b)",
+        "mono": true
+      },
+      {
+        "id": "f",
+        "text": "a + b == {1, 2, 3, 4}",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "b",
+      "d"
+    ],
+    "explanation": "The union is {1, 2, 3, 4}, the intersection {3}, and the symmetric difference is the union minus the intersection. The difference is not symmetric ({1, 2} vs {4}), the union counts the common element 3 once (4, not 5), and sets do not support `+` (TypeError).",
+    "distractor_notes": {
+      "c": "a - b is {1, 2} while b - a is {4}.",
+      "e": "3 is in both sets and is counted once: 4 is not 5.",
+      "f": "+ is not defined for sets (TypeError); use |."
+    },
+    "slides": [
+      100
+    ],
+    "verify": {
+      "mode": "truth",
+      "probe_template": "print((__OPTION_RAW__) is True)"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0162",
+    "chapter": "S2",
+    "topic": "sets",
+    "tags": [
+      "subset",
+      "pangram",
+      "hands-on"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "import string\n\ndef is_pangram(s):\n    return set(string.ascii_lowercase) <= set(s.lower())\n\nprint(is_pangram('The quick brown fox jumps over the lazy dog'), is_pangram('Hello world'))",
+    "options": [
+      {
+        "id": "a",
+        "text": "False False",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "True False",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "True True",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "TypeError",
+        "out": "!TypeError"
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "The function checks that the set of the 26 lowercase letters is a subset of the set of characters of the sentence. Lowering the case first makes 'T' count as 't'; extra characters such as spaces do not matter.",
+    "distractor_notes": {
+      "a": "The sentence contains every letter; spaces and case do not prevent the subset test.",
+      "c": "'Hello world' lacks most letters.",
+      "d": "<= between two sets is a valid subset test."
+    },
+    "slides": [
+      100,
+      113
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0163",
+    "chapter": "S2",
+    "topic": "comprehensions",
+    "tags": [
+      "list-comprehension",
+      "range"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "squares = [x ** 2 for x in range(1, 5)]\nprint(squares)",
+    "options": [
+      {
+        "id": "a",
+        "text": "[1, 4, 9, 16]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[0, 1, 4, 9, 16]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[1, 4, 9, 16, 25]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[2, 4, 6, 8]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "range(1, 5) gives 1, 2, 3, 4 (5 is excluded), and each value is squared.",
+    "distractor_notes": {
+      "b": "range(1, 5) starts at 1, not 0.",
+      "c": "The stop value 5 is excluded.",
+      "d": "** is the power operator, not a multiplication by 2."
+    },
+    "slides": [
+      103,
+      105
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0164",
+    "chapter": "S2",
+    "topic": "comprehensions",
+    "tags": [
+      "list-comprehension",
+      "filter"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "nums = [3, 8, 5, 12, 7]\nprint([n * 2 for n in nums if n % 2 == 1])",
+    "options": [
+      {
+        "id": "a",
+        "text": "[6, 16, 10, 24, 14]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[16, 24]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[3, 5, 7]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[6, 10, 14]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "The `if` clause keeps only the odd numbers (3, 5, 7), then the expression `n * 2` is applied to each kept value.",
+    "distractor_notes": {
+      "a": "The condition filters out the even numbers before doubling.",
+      "b": "n % 2 == 1 selects the odd numbers, not the even ones.",
+      "c": "The kept values are also doubled."
+    },
+    "slides": [
+      103
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0165",
+    "chapter": "S2",
+    "topic": "comprehensions",
+    "tags": [
+      "conditional-expression"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "print([x if x > 2 else 0 for x in range(5)])",
+    "options": [
+      {
+        "id": "a",
+        "text": "[3, 4]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[0, 0, 0, 3, 4]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "SyntaxError",
+        "out": "!SyntaxError"
+      },
+      {
+        "id": "d",
+        "text": "[0, 3, 4]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "`x if x > 2 else 0` placed **before** `for` is a conditional expression: every element is kept and transformed. (A filtering `if` would be placed after the `for`.)",
+    "distractor_notes": {
+      "a": "That is the filter form [x for x in range(5) if x > 2].",
+      "c": "A conditional expression (with else) before for is valid.",
+      "d": "Nothing is filtered: there is one output per input value (5 values)."
+    },
+    "slides": [
+      103
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0166",
+    "chapter": "S2",
+    "topic": "comprehensions",
+    "tags": [
+      "syntax",
+      "conditional-expression",
+      "filter"
+    ],
+    "type": "multi",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "Which of the following are valid list comprehensions (no SyntaxError)? Select all that apply.",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "[x for x in range(5) if x > 2]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[x if x > 2 else 0 for x in range(5)]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[x for x in range(5) if x > 2 else 0]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[x if x > 2 for x in range(5)]",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "[x * y for x in range(3) for y in range(2)]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "b",
+      "e"
+    ],
+    "explanation": "A filtering `if` (without else) goes **after** the for; a conditional expression `a if cond else b` goes **before** the for and must have an else. Several for clauses are allowed.",
+    "distractor_notes": {
+      "c": "A filter cannot have an else part.",
+      "d": "A conditional expression placed before for needs an else part."
+    },
+    "slides": [
+      103
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": "",
+      "probe_template": "try:\n    compile(__OPTION__, 'q', 'exec')\n    print(True)\nexcept SyntaxError:\n    print(False)"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0167",
+    "chapter": "S2",
+    "topic": "comprehensions",
+    "tags": [
+      "generator-expression",
+      "exhaustion"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "g = (x * 10 for x in range(3))\nprint(sum(g), sum(g))",
+    "options": [
+      {
+        "id": "a",
+        "text": "30 0",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "30 30",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "0 30",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "TypeError",
+        "out": "!TypeError"
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "Parentheses create a generator expression, which produces its values only once. The first sum consumes 0, 10 and 20 (30); the generator is then exhausted and the second sum gets nothing (0).",
+    "distractor_notes": {
+      "b": "A generator cannot be iterated twice (a list could).",
+      "c": "The first sum consumes the values.",
+      "d": "sum accepts any iterable, generators included."
+    },
+    "slides": [
+      103
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0168",
+    "chapter": "S2",
+    "topic": "comprehensions",
+    "tags": [
+      "generator-expression",
+      "list-comprehension",
+      "slide-imprecision"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "a = [c.upper() for c in 'abc']\nb = (c.upper() for c in 'abc')\nprint(type(a).__name__, type(b).__name__)",
+    "options": [
+      {
+        "id": "a",
+        "text": "generator generator",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "list tuple",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "list generator",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "list list",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "Square brackets build a list immediately. Parentheses around a comprehension give a **generator expression**, not a tuple (there is no tuple comprehension); use `tuple(...)` to get a tuple. (A course slide says comprehensions return generators in Python 3: only the parenthesised form does.)",
+    "distractor_notes": {
+      "a": "A comprehension in square brackets is a list, in Python 3 too.",
+      "b": "There is no tuple comprehension: (... for ...) is a generator.",
+      "d": "Parentheses do not build a list."
+    },
+    "slides": [
+      103
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0169",
+    "chapter": "S2",
+    "topic": "comprehensions",
+    "tags": [
+      "nested",
+      "order-of-for"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "pairs = [(i, j) for i in range(2) for j in range(3) if i != j]\nprint(pairs)",
+    "options": [
+      {
+        "id": "a",
+        "text": "[(0, 1), (1, 0), (0, 2), (1, 2)]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[(0, 1), (0, 2), (1, 0), (1, 2)]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[(0, 0), (1, 1)]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[(0, 1), (0, 2), (1, 0), (1, 2), (2, 0), (2, 1)]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "Several for clauses nest like loops written in the same order: i is the outer loop and j the inner one. Pairs with i == j are filtered out.",
+    "distractor_notes": {
+      "a": "The last for (j) varies fastest, like an inner loop.",
+      "c": "The condition keeps the pairs where i != j.",
+      "d": "i only takes the values 0 and 1 (range(2))."
+    },
+    "slides": [
+      104
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0170",
+    "chapter": "S2",
+    "topic": "comprehensions",
+    "tags": [
+      "dict-comprehension",
+      "duplicate-keys"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "Find the output of the code?",
+    "code": "d = {x % 3: x for x in range(7)}\nprint(d)",
+    "options": [
+      {
+        "id": "a",
+        "text": "{0: [0, 3, 6], 1: [1, 4], 2: [2, 5]}",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "{0: 0, 1: 1, 2: 2}",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "{0: 6, 1: 4, 2: 5}",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "{0: 0, 1: 1, 2: 2, 0: 3, 1: 4, 2: 5, 0: 6}",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "The comprehension performs `d[x % 3] = x` for x = 0 to 6. Keys repeat, and each new assignment overwrites the previous value: 0 -> 6, 1 -> 4, 2 -> 5.",
+    "distractor_notes": {
+      "a": "A dict comprehension does not group values into lists.",
+      "b": "Later values overwrite earlier ones for the same key.",
+      "d": "A dict cannot contain the same key twice."
+    },
+    "slides": [
+      104
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0171",
+    "chapter": "S2",
+    "topic": "comprehensions",
+    "tags": [
+      "dict-comprehension",
+      "items"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "prices = {'tea': 2, 'cake': 5}\ndoubled = {k: v * 2 for k, v in prices.items()}\nprint(doubled)",
+    "options": [
+      {
+        "id": "a",
+        "text": "ValueError",
+        "out": "!ValueError"
+      },
+      {
+        "id": "b",
+        "text": "{'teatea': 2, 'cakecake': 5}",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[4, 10]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "{'tea': 4, 'cake': 10}",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "`items()` yields (key, value) pairs; the comprehension keeps each key and doubles its value, building a new dict.",
+    "distractor_notes": {
+      "a": "items() gives pairs, which unpack correctly into k and v.",
+      "b": "Only the value part (v * 2) is doubled.",
+      "c": "Curly braces with key: value build a dict, not a list."
+    },
+    "slides": [
+      104
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0172",
+    "chapter": "S2",
+    "topic": "comprehensions",
+    "tags": [
+      "set-comprehension"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "s = {n % 4 for n in [1, 5, 9, 2, 6]}\nprint(sorted(s))",
+    "options": [
+      {
+        "id": "a",
+        "text": "[1, 2]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[1, 1, 1, 2, 2]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[1, 2, 5, 6, 9]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[1, 5, 9, 2, 6]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "Curly braces without `key:` build a **set**: the remainders are 1, 1, 1, 2, 2, and the set keeps each value once.",
+    "distractor_notes": {
+      "b": "A set comprehension removes duplicates.",
+      "c": "The value stored is n % 4, not n.",
+      "d": "The comprehension stores n % 4, and sorted() orders the result."
+    },
+    "slides": [
+      100,
+      103
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0173",
+    "chapter": "S2",
+    "topic": "comprehensions",
+    "tags": [
+      "nested",
+      "transpose",
+      "hands-on"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "m = [(1, 2, 3), (4, 5, 6)]\nt = [[row[i] for row in m] for i in range(3)]\nprint(t)",
+    "options": [
+      {
+        "id": "a",
+        "text": "[[1, 2, 3], [4, 5, 6]]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[[1, 4], [2, 5], [3, 6]]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[1, 4, 2, 5, 3, 6]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "IndexError",
+        "out": "!IndexError"
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "The outer comprehension runs over the column indices 0, 1, 2; for each of them the inner comprehension collects that column from every row. The result is the transposed matrix as a list of lists.",
+    "distractor_notes": {
+      "a": "Each inner list collects one column, not one row.",
+      "c": "A comprehension nested inside the brackets creates a list of lists, not a flat list.",
+      "d": "i only goes up to 2, a valid index in each 3-tuple."
+    },
+    "slides": [
+      112
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0174",
+    "chapter": "S2",
+    "topic": "comprehensions",
+    "tags": [
+      "nested",
+      "order-of-for",
+      "NameError"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What happens in the below code?",
+    "code": "grid = [[1, 2], [3, 4]]\nflat = [x for x in row for row in grid]\nprint(flat)",
+    "options": [
+      {
+        "id": "a",
+        "text": "[1, 2, 3, 4]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[[1, 2], [3, 4]]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "NameError",
+        "out": "!NameError"
+      },
+      {
+        "id": "d",
+        "text": "[1, 3, 2, 4]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "for clauses are read from left to right like nested loops: the first one, `for x in row`, runs before `row` is defined, so Python raises NameError. The correct order is `[x for row in grid for x in row]`.",
+    "distractor_notes": {
+      "a": "That is the output of [x for row in grid for x in row].",
+      "b": "The comprehension does not run at all.",
+      "d": "No transposition happens; the code fails first."
+    },
+    "slides": [
+      104
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0175",
+    "chapter": "S2",
+    "topic": "comprehensions",
+    "tags": [
+      "pattern",
+      "slicing",
+      "hands-on"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "n = 3\nrows = ['*' * i for i in range(1, n + 1)]\nprint(rows + rows[-2::-1])",
+    "options": [
+      {
+        "id": "a",
+        "text": "['*', '**', '***', '**']",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "['*', '**', '***', '***', '**', '*']",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "['*', '**', '***', '*', '**']",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "['*', '**', '***', '**', '*']",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "rows is `['*', '**', '***']`. `rows[-2::-1]` starts at the second-to-last element and walks backwards to the beginning: `['**', '*']`. Concatenating gives the up-and-down pattern.",
+    "distractor_notes": {
+      "a": "The slice goes all the way to the beginning (stop omitted), so '*' is included.",
+      "b": "Starting at -2 skips the last element, so '***' is not repeated.",
+      "c": "A step of -1 reverses the order."
+    },
+    "slides": [
+      106
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0176",
+    "chapter": "S2",
+    "topic": "comprehensions",
+    "tags": [
+      "filter",
+      "truthiness",
+      "hands-on"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "print([x ** 2 for x in range(1, 11) if x % 2])",
+    "options": [
+      {
+        "id": "a",
+        "text": "[1, 9, 25, 49, 81]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[4, 16, 36, 64, 100]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "TypeError",
+        "out": "!TypeError"
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "`x % 2` is 1 (truthy) for odd x and 0 (falsy) for even x, so `if x % 2` keeps only the odd numbers 1, 3, 5, 7, 9 before squaring them.",
+    "distractor_notes": {
+      "b": "0 is falsy: the even numbers are filtered out, not kept.",
+      "c": "The if clause does filter.",
+      "d": "Any value can be used as a condition; ints are tested for truthiness."
+    },
+    "slides": [
+      105
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0177",
+    "chapter": "S2",
+    "topic": "comprehensions",
+    "tags": [
+      "list-comprehension",
+      "generator-expression"
+    ],
+    "type": "multi",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Which of the following expressions evaluate to the list `[0, 2, 4]`? Select all that apply.",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "[x for x in range(5) if x % 2 == 0]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[2 * x for x in range(3)]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[x for x in range(0, 4, 2)]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "(x * 2 for x in range(3))",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "[x for x in range(6)][::2]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "b",
+      "e"
+    ],
+    "explanation": "Filtering the even numbers of range(5), doubling 0, 1, 2 and taking every 2nd element of 0..5 all give [0, 2, 4]. range(0, 4, 2) stops before 4, and parentheses give a generator, which never equals a list.",
+    "distractor_notes": {
+      "c": "range(0, 4, 2) excludes 4: [0, 2].",
+      "d": "This is a generator expression, not a list; a generator never compares equal to a list."
+    },
+    "slides": [
+      103
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": "",
+      "probe_template": "print((__OPTION_RAW__) == [0, 2, 4])"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0178",
+    "chapter": "S2",
+    "topic": "comprehensions",
+    "tags": [
+      "generator-expression",
+      "concepts"
+    ],
+    "type": "multi",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Which of the following statements are true? Select all that apply.",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "A list comprehension builds the whole list as soon as it is evaluated",
+        "probe": "calls = []\nres = [calls.append(i) for i in range(3)]\nprint(len(calls) == 3)"
+      },
+      {
+        "id": "b",
+        "text": "A generator expression computes its values only when they are requested",
+        "probe": "calls = []\ng = (calls.append(i) for i in range(3))\nbefore = len(calls)\nnext(g)\nprint(before == 0 and len(calls) == 1)"
+      },
+      {
+        "id": "c",
+        "text": "`{x for x in 'aab'}` is a dict comprehension",
+        "probe": "print(type({x for x in 'aab'}) is dict)"
+      },
+      {
+        "id": "d",
+        "text": "Printing a generator expression displays the values it will produce",
+        "probe": "g = (i for i in range(3))\nprint(str(g) in ('(0, 1, 2)', '[0, 1, 2]', '0 1 2'))"
+      },
+      {
+        "id": "e",
+        "text": "A comprehension can contain several `for` clauses",
+        "probe": "print([(a, b) for a in 'xy' for b in 'z'] == [('x', 'z'), ('y', 'z')])"
+      }
+    ],
+    "correct": [
+      "a",
+      "b",
+      "e"
+    ],
+    "explanation": "List comprehensions are eager; generator expressions are lazy and produce a value only when asked (by next, a loop, list()...). Braces without `key:` give a set comprehension, and printing a generator shows `<generator object <genexpr> at 0x...>`, not its values: convert it with list() or tuple() first.",
+    "distractor_notes": {
+      "c": "Without a key: value pair, braces build a set.",
+      "d": "print shows something like <generator object <genexpr> at 0x...>; the values are not computed."
+    },
+    "slides": [
+      103
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": ""
+    },
+    "reviewed": 1
+  }
+]

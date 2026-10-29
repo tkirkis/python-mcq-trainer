@@ -1,0 +1,1178 @@
+[
+  {
+    "id": "S2-0031",
+    "chapter": "S2",
+    "topic": "slicing",
+    "tags": [
+      "slice",
+      "stop-excluded"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "nums = [10, 20, 30, 40, 50, 60]\nprint(nums[1:4])",
+    "options": [
+      {
+        "id": "a",
+        "text": "[10, 20, 30, 40]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[20, 30, 40, 50]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[20, 30, 40]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[10, 20, 30]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "A slice `start:stop` starts at index start (included) and stops **before** index stop: indices 1, 2 and 3.",
+    "distractor_notes": {
+      "a": "Index 1 is the second element; the slice does not start at 0.",
+      "b": "The stop index is excluded.",
+      "d": "That is nums[0:3] (or nums[:3])."
+    },
+    "slides": [
+      90
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0032",
+    "chapter": "S2",
+    "topic": "slicing",
+    "tags": [
+      "negative-step"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "l = list(range(8))\nprint(l[6:1:-2])",
+    "options": [
+      {
+        "id": "a",
+        "text": "[2, 4, 6]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[6, 4]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[6, 4, 2]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "With step -2 the slice walks from right to left, starting at index 6 and stopping before index 1: 6, 4, 2.",
+    "distractor_notes": {
+      "a": "A negative step produces the elements from right to left.",
+      "b": "Index 2 comes before the stop (1) in this direction, so it is included.",
+      "d": "With a negative step, a start greater than the stop is exactly what is needed."
+    },
+    "slides": [
+      90
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0033",
+    "chapter": "S2",
+    "topic": "slicing",
+    "tags": [
+      "reverse",
+      "copy"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "data = [1, 2, 3]\nprint(data[::-1], data)",
+    "options": [
+      {
+        "id": "a",
+        "text": "[3, 2, 1] [3, 2, 1]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[] [1, 2, 3]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[1, 2, 3] [1, 2, 3]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[3, 2, 1] [1, 2, 3]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "`data[::-1]` builds a **new** reversed list; the original is not modified (unlike `data.reverse()`).",
+    "distractor_notes": {
+      "a": "Slicing never modifies the original list.",
+      "b": "With a negative step, the omitted start and stop default to the two ends of the list, so the slice is complete.",
+      "c": "Step -1 walks from the end to the beginning."
+    },
+    "slides": [
+      90,
+      91
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0034",
+    "chapter": "S2",
+    "topic": "slicing",
+    "tags": [
+      "out-of-range",
+      "IndexError"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What happens when the following code is run?",
+    "code": "items = ['a', 'b', 'c']\nprint(items[1:100], items[5:])",
+    "options": [
+      {
+        "id": "a",
+        "text": "['b', 'c'] []",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "IndexError",
+        "out": "!IndexError"
+      },
+      {
+        "id": "c",
+        "text": "['b', 'c'] None",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "['b', 'c'] ['c']",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "Slice bounds are clipped to the length of the list, so a slice never raises IndexError: `items[1:100]` is `['b', 'c']` and `items[5:]` is an empty list.",
+    "distractor_notes": {
+      "b": "Only indexing a single element (items[5]) raises IndexError; slices do not.",
+      "c": "A slice always returns a list (possibly empty), never None.",
+      "d": "Start 5 is past the end, so nothing is selected."
+    },
+    "slides": [
+      90
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0035",
+    "chapter": "S2",
+    "topic": "slicing",
+    "tags": [
+      "slice-assignment"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "l = [0, 1, 2, 3, 4, 5]\nl[1:4] = ['x']\nprint(l, len(l))",
+    "options": [
+      {
+        "id": "a",
+        "text": "[0, ['x'], 4, 5] 4",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[0, 'x', 2, 3, 4, 5] 6",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "ValueError",
+        "out": "!ValueError"
+      },
+      {
+        "id": "d",
+        "text": "[0, 'x', 4, 5] 4",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "Assigning to a simple slice replaces the selected elements (indices 1, 2, 3) with the elements of the right-hand list, which may have a different length: the list shrinks to 4 elements.",
+    "distractor_notes": {
+      "a": "The elements of the right-hand list are inserted, not the list itself.",
+      "b": "The whole slice 1:4 is replaced, not only index 1.",
+      "c": "Only extended slices (with a step) require the same number of elements."
+    },
+    "slides": [
+      90
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0036",
+    "chapter": "S2",
+    "topic": "slicing",
+    "tags": [
+      "slice-assignment",
+      "extended-slice",
+      "ValueError"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "l = [0, 1, 2, 3, 4, 5]\nl[::2] = ['a', 'b']\nprint(l)",
+    "options": [
+      {
+        "id": "a",
+        "text": "['a', 1, 'b', 3, 4, 5]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "ValueError",
+        "out": "!ValueError"
+      },
+      {
+        "id": "c",
+        "text": "['a', 1, 'b', 3]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "IndexError",
+        "out": "!IndexError"
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "`l[::2]` selects 3 elements (indices 0, 2, 4). An extended slice (one with a step) must receive exactly as many values as it selects, so assigning 2 values raises ValueError.",
+    "distractor_notes": {
+      "a": "Python does not fill only the first positions; the sizes must match.",
+      "c": "Assigning to an extended slice never removes elements.",
+      "d": "The error is a size mismatch, which Python reports as a ValueError."
+    },
+    "slides": [
+      90
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0037",
+    "chapter": "S2",
+    "topic": "slicing",
+    "tags": [
+      "del",
+      "step"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "l = [1, 2, 3, 4, 5]\ndel l[::2]\nprint(l)",
+    "options": [
+      {
+        "id": "a",
+        "text": "[2, 4]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[1, 3, 5]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "TypeError",
+        "out": "!TypeError"
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "`l[::2]` designates indices 0, 2 and 4 (values 1, 3, 5); `del` removes them, leaving `[2, 4]`.",
+    "distractor_notes": {
+      "b": "Those are the elements selected by l[::2] - the ones deleted, not the ones kept.",
+      "c": "Only every second element is deleted.",
+      "d": "del works on slices, including slices with a step."
+    },
+    "slides": [
+      90
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0038",
+    "chapter": "S2",
+    "topic": "slicing",
+    "tags": [
+      "copy",
+      "all-of-the-above"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "Given `l = [1, 2, 3]`, which of the following creates a new list equal to `l` (a copy, not the same object)?",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "l[:]",
+        "mono": true,
+        "probe": "print(ok(l[:]) and not all_ok)"
+      },
+      {
+        "id": "b",
+        "text": "list(l)",
+        "mono": true,
+        "probe": "print(ok(list(l)) and not all_ok)"
+      },
+      {
+        "id": "c",
+        "text": "l.copy()",
+        "mono": true,
+        "probe": "print(ok(l.copy()) and not all_ok)"
+      },
+      {
+        "id": "d",
+        "text": "All of the above",
+        "probe": "print(all_ok)"
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "`l[:]` (a full slice), `list(l)` and `l.copy()` all build a new list containing the same elements (a shallow copy). A plain assignment `m = l` would not copy anything.",
+    "distractor_notes": {
+      "a": "Correct, but not the only one: the two other forms copy as well.",
+      "b": "Correct, but not the only one: l[:] and l.copy() copy as well.",
+      "c": "Correct, but not the only one: l[:] and list(l) copy as well."
+    },
+    "slides": [
+      90
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": "l = [1, 2, 3]\ndef ok(c):\n    return c == l and c is not l\nall_ok = ok(l[:]) and ok(list(l)) and ok(l.copy())"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0039",
+    "chapter": "S2",
+    "topic": "slicing",
+    "tags": [
+      "slice-assignment",
+      "insert"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "l = [1, 2, 3]\nl[1:1] = [7, 8]\nprint(l)",
+    "options": [
+      {
+        "id": "a",
+        "text": "[1, 7, 8, 3]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[1, [7, 8], 2, 3]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[1, 7, 8, 2, 3]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[7, 8, 2, 3]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "`l[1:1]` is an empty slice located just before index 1. Assigning to it removes nothing and inserts the new elements at that position.",
+    "distractor_notes": {
+      "a": "The slice 1:1 is empty, so the element 2 is not replaced.",
+      "b": "Slice assignment inserts the elements of the list, not the list as one element.",
+      "d": "Index 0 is not part of the slice and stays in place."
+    },
+    "slides": [
+      90
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0040",
+    "chapter": "S2",
+    "topic": "slicing",
+    "tags": [
+      "empty-slice"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Find the output of the code?",
+    "code": "nums = [5, 6, 7, 8, 9]\nprint(nums[4:1])",
+    "options": [
+      {
+        "id": "a",
+        "text": "[]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[9, 8, 7]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[8, 7, 6]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "IndexError",
+        "out": "!IndexError"
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "With the default step +1, a slice goes from left to right; when start (4) is after stop (1) there is nothing to take, so the result is an empty list - no error.",
+    "distractor_notes": {
+      "b": "Going backwards needs a negative step: nums[4:1:-1].",
+      "c": "Even with step -1 the slice would start at index 4 (the value 9).",
+      "d": "Slices never raise IndexError."
+    },
+    "slides": [
+      90
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0041",
+    "chapter": "S2",
+    "topic": "slicing",
+    "tags": [
+      "step",
+      "defaults"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "l = list(range(10))\nprint(l[1::3])",
+    "options": [
+      {
+        "id": "a",
+        "text": "[0, 3, 6, 9]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[1, 4, 7, 10]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[1, 4, 7]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[1, 3, 5, 7, 9]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "Start at index 1, go to the end (stop omitted) and take every 3rd element: 1, 4, 7 (10 is not in range(10)).",
+    "distractor_notes": {
+      "a": "The slice starts at index 1, not 0.",
+      "b": "range(10) stops at 9; there is no 10 in the list.",
+      "d": "The step is 3, not 2."
+    },
+    "slides": [
+      90
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0042",
+    "chapter": "S2",
+    "topic": "slicing",
+    "tags": [
+      "reverse",
+      "negative-step"
+    ],
+    "type": "multi",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "Which of the following expressions evaluate to `[3, 2, 1]`? Select all that apply.",
+    "code": "l = [1, 2, 3]",
+    "options": [
+      {
+        "id": "a",
+        "text": "l[::-1]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "l.reverse()",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "list(reversed(l))",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "l[3:0:-1]",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "l[-1:-4:-1]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "c",
+      "e"
+    ],
+    "explanation": "`l[::-1]` and `list(reversed(l))` build reversed copies, and `l[-1:-4:-1]` walks from the last element down to index 0 (stop -4 lies before the beginning). `l.reverse()` reverses in place but evaluates to None, and `l[3:0:-1]` stops before index 0, giving `[3, 2]`.",
+    "distractor_notes": {
+      "b": "reverse() works in place and returns None.",
+      "d": "The stop index 0 is excluded, so the first element is missing: [3, 2]."
+    },
+    "slides": [
+      90,
+      91
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": "l = [1, 2, 3]",
+      "probe_template": "print((__OPTION_RAW__) == [3, 2, 1])"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0043",
+    "chapter": "S2",
+    "topic": "slicing",
+    "tags": [
+      "concepts",
+      "tuple",
+      "string"
+    ],
+    "type": "multi",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Which of the following statements about slicing are true? Select all that apply.",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "Slicing a list with a stop index larger than its length raises IndexError",
+        "probe": "try:\n    [1, 2][0:10]\n    print(False)\nexcept IndexError:\n    print(True)"
+      },
+      {
+        "id": "b",
+        "text": "`l[:]` returns a new list equal to `l`",
+        "probe": "l = [1, 2]\nprint(l[:] == l and l[:] is not l)"
+      },
+      {
+        "id": "c",
+        "text": "Slicing a tuple returns a tuple",
+        "probe": "print(type((1, 2, 3)[1:]) is tuple)"
+      },
+      {
+        "id": "d",
+        "text": "`l[a:b]` includes the element at index `b`",
+        "probe": "l = [0, 1, 2, 3]\nprint(3 in l[1:3])"
+      },
+      {
+        "id": "e",
+        "text": "Slicing a string returns a string",
+        "probe": "print(type('hello'[1:3]) is str)"
+      }
+    ],
+    "correct": [
+      "b",
+      "c",
+      "e"
+    ],
+    "explanation": "Slice bounds are clipped (no IndexError), the stop index is excluded, and a slice returns an object of the same type as the sequence: list -> list, tuple -> tuple, str -> str. `l[:]` is a new list with the same elements.",
+    "distractor_notes": {
+      "a": "Out-of-range slice bounds are clipped; only single-element indexing raises IndexError.",
+      "d": "The stop index is always excluded."
+    },
+    "slides": [
+      90,
+      93
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": ""
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0044",
+    "chapter": "S2",
+    "topic": "slicing",
+    "tags": [
+      "palindrome",
+      "hands-on",
+      "string"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "def is_pal(s):\n    s = s.lower().replace(' ', '')\n    return s == s[::-1]\n\nprint(is_pal('Never odd or even'), is_pal('Python'))",
+    "options": [
+      {
+        "id": "a",
+        "text": "False False",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "True False",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "True True",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "False True",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "After lowering the case and removing the spaces, 'neveroddoreven' reads the same backwards, so the first call returns True; 'python' reversed is 'nohtyp', so the second returns False.",
+    "distractor_notes": {
+      "a": "Case and spaces are normalised before the comparison, so the sentence is a palindrome.",
+      "c": "'python' is not equal to its reverse.",
+      "d": "The two results are swapped."
+    },
+    "slides": [
+      91
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0045",
+    "chapter": "S2",
+    "topic": "slicing",
+    "tags": [
+      "chained-slices"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "l = list(range(10))\nprint(l[::2][::-1][1:3])",
+    "options": [
+      {
+        "id": "a",
+        "text": "[6, 4, 2]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[4, 6]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[6, 4]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[2, 4]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "The slices apply from left to right: `l[::2]` is `[0, 2, 4, 6, 8]`, reversing it gives `[8, 6, 4, 2, 0]`, and `[1:3]` then takes indices 1 and 2: `[6, 4]`.",
+    "distractor_notes": {
+      "a": "The stop index 3 is excluded: only 2 elements are taken.",
+      "b": "The reversal happens before the last slice, so the order is descending.",
+      "d": "That would be [1:3] applied before the reversal."
+    },
+    "slides": [
+      90
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0046",
+    "chapter": "S2",
+    "topic": "slicing",
+    "tags": [
+      "defaults",
+      "slide-imprecision"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "When the **stop** of a slice is omitted and the step is positive (as in `l[2:]`), which stop value does Python use?",
+    "code": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "len(l) + 1",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "len(l)",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "len(l) - 1",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "-1",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "An omitted stop means 'up to the end', i.e. `len(l)`; since the stop is excluded, the last element (index len(l) - 1) is included. `slice(2, None).indices(len(l))` shows this normalised value. (A course slide writes len()+1: any stop >= len(l) selects the same elements because slices are clipped, but the default is len(l).)",
+    "distractor_notes": {
+      "a": "It selects the same elements because slices are clipped, but it is not the value Python uses.",
+      "c": "A stop of len(l) - 1 would exclude the last element.",
+      "d": "A stop of -1 would exclude the last element: l[2:-1] is [30] for l = [10, 20, 30, 40]."
+    },
+    "slides": [
+      90
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": "l = [10, 20, 30, 40]\nnorm_stop = slice(2, None).indices(len(l))[1]",
+      "probe_template": "print(norm_stop == __OPTION_RAW__ and l[2:] == l[2:__OPTION_RAW__])"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0047",
+    "chapter": "S2",
+    "topic": "enumerate-zip",
+    "tags": [
+      "enumerate"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "for i, c in enumerate(['a', 'b', 'c']):\n    print(i, c, end=' ')",
+    "options": [
+      {
+        "id": "a",
+        "text": "(0, 'a') (1, 'b') (2, 'c')",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "1 a 2 b 3 c",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "a 0 b 1 c 2",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "0 a 1 b 2 c",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "enumerate yields `(index, element)` pairs starting at 0; each pair is unpacked into i and c.",
+    "distractor_notes": {
+      "a": "The pair is unpacked into i and c, so print receives two separate values.",
+      "b": "The default start is 0.",
+      "c": "The index comes first in each pair."
+    },
+    "slides": [
+      92
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0048",
+    "chapter": "S2",
+    "topic": "enumerate-zip",
+    "tags": [
+      "enumerate",
+      "start"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "names = ['Ann', 'Bob']\nprint(list(enumerate(names, start=1)))",
+    "options": [
+      {
+        "id": "a",
+        "text": "[(1, 'Ann'), (2, 'Bob')]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[(0, 'Ann'), (1, 'Bob')]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[('Ann', 1), ('Bob', 2)]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[(1, 'Bob')]",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "`start=1` only changes the first number produced; every element is still visited.",
+    "distractor_notes": {
+      "b": "start=1 shifts the counter to begin at 1.",
+      "c": "enumerate produces (index, element): index first.",
+      "d": "start does not skip elements; it is the value of the first counter."
+    },
+    "slides": [
+      92
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0049",
+    "chapter": "S2",
+    "topic": "enumerate-zip",
+    "tags": [
+      "zip",
+      "shortest"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "a = [1, 2, 3, 4]\nb = ['x', 'y']\nprint(list(zip(a, b)))",
+    "options": [
+      {
+        "id": "a",
+        "text": "ValueError",
+        "out": "!ValueError"
+      },
+      {
+        "id": "b",
+        "text": "[(1, 'x'), (2, 'y'), (3, None), (4, None)]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[(1, 'x'), (2, 'y')]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "[1, 'x', 2, 'y']",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "zip stops as soon as the **shortest** iterable is exhausted; the extra elements of the longer one are ignored.",
+    "distractor_notes": {
+      "a": "By default, zip accepts iterables of different lengths.",
+      "b": "zip does not pad with None (itertools.zip_longest does).",
+      "d": "zip produces tuples; it does not flatten them."
+    },
+    "slides": [
+      92
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0050",
+    "chapter": "S2",
+    "topic": "enumerate-zip",
+    "tags": [
+      "zip",
+      "iterator",
+      "exhaustion"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "z = zip([1, 2], [3, 4])\nprint(list(z))\nprint(list(z))",
+    "options": [
+      {
+        "id": "a",
+        "text": "[(1, 3), (2, 4)]\n[(1, 3), (2, 4)]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "[(1, 3), (2, 4)]\n[]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "[(1, 2), (3, 4)]\n[]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "`[(1, 3), (2, 4)]` then a StopIteration error",
+        "out": "[(1, 3), (2, 4)]\n!StopIteration"
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "A zip object is an iterator: it can be consumed only once. The first `list(z)` uses up all the pairs, so the second call finds nothing and returns an empty list (no exception).",
+    "distractor_notes": {
+      "a": "zip returns a one-shot iterator, not a list.",
+      "c": "zip pairs the elements found at the same position: (1, 3) and (2, 4).",
+      "d": "list() stops silently on an exhausted iterator; it does not raise."
+    },
+    "slides": [
+      92
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0051",
+    "chapter": "S2",
+    "topic": "enumerate-zip",
+    "tags": [
+      "enumerate",
+      "start"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "total = 0\nfor i, v in enumerate([10, 20, 30], 1):\n    total += i * v\nprint(total)",
+    "options": [
+      {
+        "id": "a",
+        "text": "140",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "80",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "60",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "200",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "The second argument of enumerate is the start value: the pairs are (1, 10), (2, 20), (3, 30), so total = 10 + 40 + 90 = 140.",
+    "distractor_notes": {
+      "b": "That is the result with the default start 0 (0 + 20 + 60).",
+      "c": "That is just the sum of the values; each value is multiplied by its counter.",
+      "d": "That would be counters 2, 3, 4: the second argument is the first counter value, not an offset added to 1."
+    },
+    "slides": [
+      92
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S2-0052",
+    "chapter": "S2",
+    "topic": "enumerate-zip",
+    "tags": [
+      "enumerate",
+      "zip",
+      "range"
+    ],
+    "type": "multi",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "Which of the following loops print `0 x`, `1 y` and `2 z` (one pair per line)? Select all that apply.",
+    "code": "letters = ['x', 'y', 'z']",
+    "options": [
+      {
+        "id": "a",
+        "text": "for i, c in enumerate(letters):\n    print(i, c)",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "for i in range(len(letters)):\n    print(i, letters[i])",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "for c, i in enumerate(letters):\n    print(i, c)",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "for i, c in zip(range(3), letters):\n    print(i, c)",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "for i, c in enumerate(letters, 1):\n    print(i, c)",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "b",
+      "d"
+    ],
+    "explanation": "enumerate yields (index, element) in that order starting at 0; `range(len(...))` with indexing and zipping with `range(3)` produce the same pairs. Unpacking as `c, i` swaps the names (it prints `x 0`), and a start of 1 numbers the lines 1 to 3.",
+    "distractor_notes": {
+      "c": "The first value of each pair is the index, so c gets the index and i the letter: it prints 'x 0'.",
+      "e": "The counter starts at 1, giving '1 x', '2 y', '3 z'."
+    },
+    "slides": [
+      92
+    ],
+    "verify": {
+      "mode": "truth",
+      "setup": "letters = ['x', 'y', 'z']",
+      "probe_template": "import io, contextlib\nbuf = io.StringIO()\ntry:\n    with contextlib.redirect_stdout(buf):\n        exec(__OPTION__)\n    ok = buf.getvalue() == '0 x\\n1 y\\n2 z\\n'\nexcept Exception:\n    ok = False\nprint(ok)"
+    },
+    "reviewed": 1
+  }
+]

@@ -1,0 +1,1083 @@
+[
+ {
+  "id": "S8-0021",
+  "chapter": "S8",
+  "topic": "urls",
+  "tags": [
+   "port",
+   "default-port"
+  ],
+  "type": "multi",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Which of the following (service: default port) pairs are correct? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "MySQL: 3306"
+   },
+   {
+    "id": "b",
+    "text": "SSH: 22"
+   },
+   {
+    "id": "c",
+    "text": "SMTP: 443"
+   },
+   {
+    "id": "d",
+    "text": "HTTP: 80"
+   },
+   {
+    "id": "e",
+    "text": "MongoDB: 6379"
+   },
+   {
+    "id": "f",
+    "text": "DNS: 53"
+   }
+  ],
+  "correct": [
+   "a",
+   "b",
+   "d",
+   "f"
+  ],
+  "explanation": "Usual default ports: HTTP 80 (HTTPS 443), SSH 22, SMTP 25 (SMTPS 465), DNS 53, MySQL 3306, MongoDB 27017, Redis 6379. When a URL omits the port, the default one of the scheme is used.",
+  "distractor_notes": {
+   "c": "443 is HTTPS; SMTP (sending email) uses 25 (465 for SMTPS).",
+   "e": "6379 is the Redis port; MongoDB uses 27017."
+  },
+  "slides": [
+   316
+  ],
+  "verify": {
+   "mode": "manual",
+   "reference": "Slide 316 'Port': 80 HTTP (443 HTTPS), 22 SSH, 25 SMTP (465 SMTPS), 53 DNS, 3306 MySQL, 27017 MongoDB, 6379 redis"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0022",
+  "chapter": "S8",
+  "topic": "urls",
+  "tags": [
+   "urlparse",
+   "user-info",
+   "netloc"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "from urllib.parse import urlparse\n\nu = urlparse('ftp://bob:secret@files.example.com:2121/pub/data.csv')\nprint(u.netloc)",
+  "options": [
+   {
+    "id": "a",
+    "text": "files.example.com",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "files.example.com:2121",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "bob:secret@files.example.com:2121",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "bob@files.example.com",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "`netloc` is everything between `//` and the path: it keeps the user info (`bob:secret@`) and the explicit port. The separate parts are available as `u.username`, `u.password`, `u.hostname` and `u.port`.",
+  "distractor_notes": {
+   "a": "That is `u.hostname`, not netloc.",
+   "b": "netloc also keeps the user info written before `@`.",
+   "d": "The password and the port are part of netloc too."
+  },
+  "slides": [
+   312,
+   314,
+   315
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0023",
+  "chapter": "S8",
+  "topic": "urls",
+  "tags": [
+   "query",
+   "escaping",
+   "urlencode"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What does the following code print?",
+  "code": "from urllib.parse import urlencode\n\nprint(urlencode({'q': 'ip address', 'page': 2}))",
+  "options": [
+   {
+    "id": "a",
+    "text": "?q=ip+address&page=2",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "q=ip address&page=2",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "q=ip+address,page=2",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "q=ip+address&page=2",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "urlencode builds a query string: each pair becomes `name=value` (values converted to str and escaped, spaces -> `+`) and the pairs are joined with `&`. The `?` is not included: it only separates the path from the query.",
+  "distractor_notes": {
+   "a": "urlencode returns only the query; the `?` is added when it is glued to the path.",
+   "b": "Spaces must be escaped in a URL.",
+   "c": "Query parameters are separated by `&`."
+  },
+  "slides": [
+   318
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0024",
+  "chapter": "S8",
+  "topic": "urls",
+  "tags": [
+   "urlparse",
+   "port",
+   "query",
+   "fragment"
+  ],
+  "type": "multi",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "Given the code below, which statements are true? Select all that apply.",
+  "code": "from urllib.parse import urlparse\n\nu = urlparse('http://127.0.0.1:5000/custom/Ana?lang=fr#top')",
+  "options": [
+   {
+    "id": "a",
+    "text": "`u.hostname` is `'127.0.0.1'`",
+    "probe": "print(u.hostname == '127.0.0.1')"
+   },
+   {
+    "id": "b",
+    "text": "`u.port` is the string `'5000'`",
+    "probe": "print(u.port == '5000')"
+   },
+   {
+    "id": "c",
+    "text": "`u.path` is `'/custom/Ana'`",
+    "probe": "print(u.path == '/custom/Ana')"
+   },
+   {
+    "id": "d",
+    "text": "`u.query` is `'?lang=fr'`",
+    "probe": "print(u.query == '?lang=fr')"
+   },
+   {
+    "id": "e",
+    "text": "`u.fragment` is `'top'`",
+    "probe": "print(u.fragment == 'top')"
+   }
+  ],
+  "correct": [
+   "a",
+   "c",
+   "e"
+  ],
+  "explanation": "`hostname` is '127.0.0.1', `path` is '/custom/Ana' and `fragment` is 'top'. But `port` is converted to the **int** 5000, and `query` does not contain the `?` separator: it is 'lang=fr'.",
+  "distractor_notes": {
+   "b": "`u.port` is an int (5000), not a string.",
+   "d": "`?` is a separator, not part of the query."
+  },
+  "slides": [
+   312,
+   315,
+   316,
+   318,
+   319
+  ],
+  "verify": {
+   "mode": "truth"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0025",
+  "chapter": "S8",
+  "topic": "http",
+  "tags": [
+   "http-methods",
+   "get"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "When you type a URL in the address bar of your browser and press Enter, which HTTP method does the browser normally use?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "GET",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "POST",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "PUT",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "DELETE",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "Typing a URL asks to retrieve a resource, so the browser sends a GET request. POST is typically used when a form is submitted, with the form data sent along with the request.",
+  "distractor_notes": {
+   "b": "POST is used when the request comes from a form with data.",
+   "c": "PUT is used by APIs to create or replace a resource, not by the address bar.",
+   "d": "DELETE asks to remove a resource; the address bar never sends it."
+  },
+  "slides": [
+   294,
+   300
+  ],
+  "verify": {
+   "mode": "manual",
+   "reference": "Slide 300: when you type a URL the browser performs GET requests, POST if it comes from a form"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0026",
+  "chapter": "S8",
+  "topic": "http",
+  "tags": [
+   "status-code",
+   "404",
+   "HTTPStatus"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "from http import HTTPStatus\n\nprint(HTTPStatus(404).phrase)",
+  "options": [
+   {
+    "id": "a",
+    "text": "Bad Request",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "Forbidden",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "Not Found",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "Internal Server Error",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "404 Not Found: the server has no resource at the requested path (in Flask, no route matches the path).",
+  "distractor_notes": {
+   "a": "Bad Request is 400.",
+   "b": "Forbidden is 403.",
+   "d": "Internal Server Error is 500."
+  },
+  "slides": [
+   295
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0027",
+  "chapter": "S8",
+  "topic": "http",
+  "tags": [
+   "status-code",
+   "500"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "What does an HTTP status code in the **5xx** range (e.g. 500) indicate?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "The request succeeded"
+   },
+   {
+    "id": "b",
+    "text": "The resource has moved and the client should follow a redirection"
+   },
+   {
+    "id": "c",
+    "text": "The client sent an invalid or unauthorized request"
+   },
+   {
+    "id": "d",
+    "text": "The server failed while processing a request"
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "Status classes: 2xx success (200 OK, 201 Created), 3xx redirection (301, 302), 4xx client error (400, 401, 403, 404, 405), 5xx server error (500 Internal Server Error, e.g. an exception raised in a handler).",
+  "distractor_notes": {
+   "a": "That is 2xx.",
+   "b": "That is 3xx.",
+   "c": "That is 4xx."
+  },
+  "slides": [
+   295
+  ],
+  "verify": {
+   "mode": "manual",
+   "reference": "Slide 295 (status in the HTTP response); standard HTTP status classes (RFC 9110 section 15)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0028",
+  "chapter": "S8",
+  "topic": "http",
+  "tags": [
+   "status-code",
+   "HTTPStatus"
+  ],
+  "type": "multi",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "Which of the following status codes are paired with their correct standard reason phrase? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "200 OK",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "201 Created",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "302 Moved Permanently",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "403 Unauthorized",
+    "mono": true
+   },
+   {
+    "id": "e",
+    "text": "405 Method Not Allowed",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a",
+   "b",
+   "e"
+  ],
+  "explanation": "200 OK, 201 Created and 405 Method Not Allowed are correct. 302 is 'Found' (a temporary redirection; 301 is 'Moved Permanently') and 403 is 'Forbidden' (401 is 'Unauthorized', i.e. not authenticated).",
+  "distractor_notes": {
+   "c": "302 is Found (temporary redirect); 301 is Moved Permanently.",
+   "d": "403 is Forbidden; 401 is Unauthorized."
+  },
+  "slides": [
+   295
+  ],
+  "verify": {
+   "mode": "truth",
+   "probe_template": "from http import HTTPStatus\ncode, phrase = __OPTION__.split(' ', 1)\nprint(HTTPStatus(int(code)).phrase == phrase)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0029",
+  "chapter": "S8",
+  "topic": "http",
+  "tags": [
+   "status-code",
+   "4xx"
+  ],
+  "type": "multi",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Which of the following status codes indicate an error on the **client** side? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "301",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "401",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "403",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "405",
+    "mono": true
+   },
+   {
+    "id": "e",
+    "text": "500",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b",
+   "c",
+   "d"
+  ],
+  "explanation": "4xx codes mean the request itself is at fault: 401 Unauthorized (not authenticated), 403 Forbidden (not allowed), 405 Method Not Allowed (e.g. GET on a POST-only route). 301 is a redirection (3xx) and 500 a server error (5xx).",
+  "distractor_notes": {
+   "a": "3xx = redirection (301 Moved Permanently).",
+   "e": "5xx = server error (500 Internal Server Error)."
+  },
+  "slides": [
+   295
+  ],
+  "verify": {
+   "mode": "truth",
+   "probe_template": "print(400 <= int(__OPTION__) < 500)",
+   "note": "4xx = client error class (RFC 9110 section 15.5)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0030",
+  "chapter": "S8",
+  "topic": "http",
+  "tags": [
+   "http-response",
+   "all-of-the-above"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "Which of the following is correct about an HTTP response?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "It contains a status, such as `200 OK`."
+   },
+   {
+    "id": "b",
+    "text": "It contains headers, such as `Content-Type: text/html; charset=utf-8`."
+   },
+   {
+    "id": "c",
+    "text": "It can contain a body, for instance the full HTML of the requested page."
+   },
+   {
+    "id": "d",
+    "text": "All of the above."
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "An HTTP response is a string sent back by the server that contains a status, headers describing the content (Content-Type, Set-Cookie, Date, Server...) and usually a body (the HTML for a web page, serialized data for an API server).",
+  "distractor_notes": {
+   "a": "True, but not the only true statement.",
+   "b": "True, but not the only true statement.",
+   "c": "True, but not the only true statement."
+  },
+  "slides": [
+   295,
+   298
+  ],
+  "verify": {
+   "mode": "manual",
+   "reference": "Slide 295 'HTTP Response': headers, status, full HTML of the page"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0031",
+  "chapter": "S8",
+  "topic": "http",
+  "tags": [
+   "headers",
+   "http-request"
+  ],
+  "type": "multi",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Which of the following headers are typically sent by the **client** in an HTTP request? Select all that apply.",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "Accept-Language",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "Server",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "User-Agent",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "Set-Cookie",
+    "mono": true
+   },
+   {
+    "id": "e",
+    "text": "Host",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a",
+   "c",
+   "e"
+  ],
+  "explanation": "Request headers describe the request and the client: `Host` (the domain requested, e.g. github.com), `User-Agent` (the browser or program), `Accept-Language`... `Set-Cookie` and `Server` are response headers.",
+  "distractor_notes": {
+   "b": "Server identifies the server software, in the response.",
+   "d": "Set-Cookie is sent by the server to store a cookie; the client sends it back later in a `Cookie` header."
+  },
+  "slides": [
+   294,
+   295
+  ],
+  "verify": {
+   "mode": "manual",
+   "reference": "Slide 294 (request headers Host, User-Agent, Accept-Language) vs slide 295 (response headers Set-Cookie, Server)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0032",
+  "chapter": "S8",
+  "topic": "http",
+  "tags": [
+   "headers",
+   "content-type"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "A response contains the header `Content-Type: text/html; charset=utf-8`. What does it tell the client?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "The body is an HTML document encoded in UTF-8"
+   },
+   {
+    "id": "b",
+    "text": "The request must be sent again in HTML"
+   },
+   {
+    "id": "c",
+    "text": "The body is compressed with the utf-8 algorithm"
+   },
+   {
+    "id": "d",
+    "text": "The page has already been rendered by the server"
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "Content-Type describes the body of the message: its media type (text/html, application/json, image/png...) and, for text, the character encoding.",
+  "distractor_notes": {
+   "b": "A response header describes the response; it does not ask anything about the request.",
+   "c": "Compression is described by Content-Encoding (e.g. gzip); utf-8 is a character encoding.",
+   "d": "Rendering is done by the browser, on the client side."
+  },
+  "slides": [
+   295
+  ],
+  "verify": {
+   "mode": "manual",
+   "reference": "Slide 295: response headers 'Content-Type: text/html; charset=utf-8', 'Content-Encoding: gzip'"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0033",
+  "chapter": "S8",
+  "topic": "http",
+  "tags": [
+   "ajax",
+   "rendering"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is an AJAX call?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "An asynchronous HTTP request sent by JavaScript running in the browser, for example while the page is being rendered"
+   },
+   {
+    "id": "b",
+    "text": "A DNS query sent by the ISP"
+   },
+   {
+    "id": "c",
+    "text": "An HTTP response sent by the server without any request"
+   },
+   {
+    "id": "d",
+    "text": "A Python function decorated with `@app.route`"
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "While rendering a page, the browser may send further HTTP requests: for images, and AJAX calls - asynchronous HTTP requests made from JavaScript, e.g. to fetch data without reloading the page.",
+  "distractor_notes": {
+   "b": "DNS resolution translates names; AJAX is HTTP.",
+   "c": "HTTP works by request/response: the server only answers requests.",
+   "d": "That is a Flask handler, which may answer an AJAX request but is not one."
+  },
+  "slides": [
+   297
+  ],
+  "verify": {
+   "mode": "manual",
+   "reference": "Slide 297 'HTML rendering': AJAX calls are asynchronous http requests sent from javascript"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0034",
+  "chapter": "S8",
+  "topic": "http",
+  "tags": [
+   "rendering",
+   "browser"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "Which program turns the HTML string received in an HTTP response into the visual web page you see?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "The web server"
+   },
+   {
+    "id": "b",
+    "text": "The DNS server"
+   },
+   {
+    "id": "c",
+    "text": "The web browser"
+   },
+   {
+    "id": "d",
+    "text": "curl"
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "The server only sends a string (the HTML); rendering it into a page (layout, images, styles) is the browser's job. Command-line tools such as wget and curl do not render anything: they return the raw HTML.",
+  "distractor_notes": {
+   "a": "The server builds and sends the HTML but does not display it.",
+   "b": "DNS only maps names to IP addresses.",
+   "d": "curl returns pure HTML strings without rendering."
+  },
+  "slides": [
+   297,
+   301
+  ],
+  "verify": {
+   "mode": "manual",
+   "reference": "Slide 297 'The browser now turns this html string into a nice webpage'; slide 301 (no rendering in wget/curl)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0035",
+  "chapter": "S8",
+  "topic": "http",
+  "tags": [
+   "http-methods",
+   "which-is-false"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "Which statement about HTTP methods is **false**?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "GET is used to retrieve a resource."
+   },
+   {
+    "id": "b",
+    "text": "POST is typically used to send form data to the server."
+   },
+   {
+    "id": "c",
+    "text": "DELETE asks the server to delete a resource."
+   },
+   {
+    "id": "d",
+    "text": "The method (GET, POST...) is indicated in the HTTP response, not in the request."
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "The method is part of the **request** (e.g. `Request Method: GET`): it tells the server what the client wants to do with the resource. The response carries a status code instead. Statements a, b and c are true.",
+  "distractor_notes": {
+   "a": "True: GET retrieves a resource.",
+   "b": "True: browsers send a POST request when a form is submitted.",
+   "c": "True: DELETE asks for the removal of a resource."
+  },
+  "slides": [
+   294,
+   300
+  ],
+  "verify": {
+   "mode": "manual",
+   "reference": "Slide 294 'HTTP Request': contains the type of request GET, POST, PUT...; slide 300"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0036",
+  "chapter": "S8",
+  "topic": "http",
+  "tags": [
+   "status-code",
+   "500",
+   "flask"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What does the following code print?",
+  "code": "import flask\n\napp = flask.Flask(__name__)\n\n@app.route('/average')\ndef average():\n    sales = []\n    return str(sum(sales) / len(sales))\n\nclient = app.test_client()\nprint(client.get('/average').status_code)",
+  "options": [
+   {
+    "id": "a",
+    "text": "500",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "404",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "200",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "ZeroDivisionError",
+    "mono": true,
+    "out": "!ZeroDivisionError"
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "The handler raises ZeroDivisionError. Flask catches exceptions raised in handlers and answers with **500 Internal Server Error** - a server-side error; the client receives a normal (error) response and does not crash.",
+  "distractor_notes": {
+   "b": "The route exists: 404 would mean that no route matches the path.",
+   "c": "The handler never returns a value, so there is no successful response.",
+   "d": "The exception happens inside the server application and is turned into a 500 response (it would only propagate in testing/debug mode)."
+  },
+  "slides": [
+   295,
+   305
+  ],
+  "verify": {
+   "mode": "output",
+   "setup": "import logging\nlogging.disable(logging.CRITICAL)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0037",
+  "chapter": "S8",
+  "topic": "http",
+  "tags": [
+   "status-code",
+   "HTTPStatus"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "What is the output of the following code?",
+  "code": "from http import HTTPStatus\n\nprint(HTTPStatus.OK.value, HTTPStatus.NOT_FOUND == 404)",
+  "options": [
+   {
+    "id": "a",
+    "text": "200 True",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "OK True",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "200 False",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "HTTPStatus.OK False",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "a"
+  ],
+  "explanation": "`HTTPStatus` members are integer enums: `.value` is the number (200) and a member compares equal to its integer code, so `HTTPStatus.NOT_FOUND == 404` is True. The text 'OK' is `.phrase`.",
+  "distractor_notes": {
+   "b": "'OK' is `HTTPStatus.OK.phrase`, not `.value`.",
+   "c": "HTTPStatus members are ints: they are equal to their codes.",
+   "d": "`.value` gives the number, and the comparison with 404 is True."
+  },
+  "slides": [
+   295
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0038",
+  "chapter": "S8",
+  "topic": "http",
+  "tags": [
+   "rendering",
+   "http-request"
+  ],
+  "type": "single",
+  "difficulty": 3,
+  "source": "generated",
+  "stem": "A browser loads an HTML page that contains three `<img>` tags pointing to three different image URLs, and no other resources. Ignoring caching and the site icon (favicon), how many HTTP requests does the browser send in total?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "1"
+   },
+   {
+    "id": "b",
+    "text": "3"
+   },
+   {
+    "id": "c",
+    "text": "4"
+   },
+   {
+    "id": "d",
+    "text": "It depends on the number of packets of the response"
+   }
+  ],
+  "correct": [
+   "c"
+  ],
+  "explanation": "One request for the HTML page, then, while rendering it, one additional request per image: 1 + 3 = 4. Packets are a lower-level transport detail: a response split into many packets is still a single HTTP request/response.",
+  "distractor_notes": {
+   "a": "Images are not inside the HTML string: each one is fetched with its own request during rendering.",
+   "b": "Forgets the first request, for the HTML page itself.",
+   "d": "Packets split a response for transport; they do not create new HTTP requests."
+  },
+  "slides": [
+   296,
+   297
+  ],
+  "verify": {
+   "mode": "manual",
+   "reference": "Slide 297: other HTTP requests are sent during rendering (images, AJAX); slide 296 (packets)"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0039",
+  "chapter": "S8",
+  "topic": "requests-lib",
+  "tags": [
+   "requests",
+   "params",
+   "query"
+  ],
+  "type": "single",
+  "difficulty": 2,
+  "source": "generated",
+  "stem": "The following code builds (but does not send) a request with the `requests` package. What does it print?",
+  "code": "import requests\n\nreq = requests.Request('GET', 'https://www.google.com/search',\n                       params={'q': 'ip address'})\nprint(req.prepare().url)",
+  "options": [
+   {
+    "id": "a",
+    "text": "https://www.google.com/search#q=ip+address",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "https://www.google.com/search?q=ip address",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "https://www.google.com/search/q=ip+address",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "https://www.google.com/search?q=ip+address",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "d"
+  ],
+  "explanation": "`params` is turned into the query string, appended after `?` with the value escaped (space -> `+`). `requests.get(url, params=...)` builds exactly this URL before sending the request.",
+  "distractor_notes": {
+   "a": "`#` introduces a fragment, which is never sent to the server.",
+   "b": "Spaces cannot appear in a URL: they are escaped.",
+   "c": "The query is separated from the path by `?`, not `/`."
+  },
+  "slides": [
+   302,
+   318
+  ],
+  "verify": {
+   "mode": "output"
+  },
+  "reviewed": 1
+ },
+ {
+  "id": "S8-0040",
+  "chapter": "S8",
+  "topic": "requests-lib",
+  "tags": [
+   "requests",
+   "status_code"
+  ],
+  "type": "single",
+  "difficulty": 1,
+  "source": "generated",
+  "stem": "After `resp = requests.get(url)`, which expression gives the numeric HTTP status code of the response (e.g. 200)?",
+  "code": null,
+  "options": [
+   {
+    "id": "a",
+    "text": "resp.status",
+    "mono": true
+   },
+   {
+    "id": "b",
+    "text": "resp.status_code",
+    "mono": true
+   },
+   {
+    "id": "c",
+    "text": "resp.code",
+    "mono": true
+   },
+   {
+    "id": "d",
+    "text": "resp.ok",
+    "mono": true
+   }
+  ],
+  "correct": [
+   "b"
+  ],
+  "explanation": "`resp.status_code` holds the integer status (200, 404...). `resp.ok` is only a boolean (True when the status is below 400).",
+  "distractor_notes": {
+   "a": "Response objects have no `status` attribute (AttributeError).",
+   "c": "Response objects have no `code` attribute (AttributeError).",
+   "d": "`resp.ok` is a bool (True for codes < 400), not the code itself."
+  },
+  "slides": [
+   302
+  ],
+  "verify": {
+   "mode": "truth",
+   "setup": "import requests\nresp = requests.models.Response()\nresp.status_code = 200\nresp._content = b'hello'",
+   "probe_template": "print((__OPTION_RAW__) == 200)",
+   "note": "The Response is built offline (no network), as requests.get would return it for a 200 answer."
+  },
+  "reviewed": 1
+ }
+]

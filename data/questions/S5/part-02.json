@@ -1,0 +1,1114 @@
+[
+  {
+    "id": "S5-0021",
+    "chapter": "S5",
+    "topic": "methods",
+    "tags": [
+      "self",
+      "method-calls-method",
+      "NameError"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "class Circle:\n    def __init__(self, r):\n        self.r = r\n    def diameter(self):\n        return 2 * self.r\n    def describe(self):\n        return 'd=' + str(diameter())\n\nprint(Circle(4).describe())",
+    "options": [
+      {
+        "id": "a",
+        "text": "d=8",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "AttributeError",
+        "mono": true,
+        "out": "!AttributeError"
+      },
+      {
+        "id": "c",
+        "text": "TypeError",
+        "mono": true,
+        "out": "!TypeError"
+      },
+      {
+        "id": "d",
+        "text": "NameError",
+        "mono": true,
+        "out": "!NameError"
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "Inside a method, the other methods of the class are not visible as bare names: `diameter` is looked up as a local, global, then built-in name and is not found, so NameError is raised. It must be called as `self.diameter()`.",
+    "distractor_notes": {
+      "a": "That needs `self.diameter()`.",
+      "c": "No call with wrong arguments happens: the name itself is not found.",
+      "b": "There is no attribute lookup on an object here (`diameter`, not `self.diameter`), so the error is a NameError."
+    },
+    "slides": [
+      190,
+      191
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0022",
+    "chapter": "S5",
+    "topic": "methods",
+    "tags": [
+      "bound-method",
+      "callback"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "class Counter:\n    def __init__(self):\n        self.n = 0\n    def inc(self):\n        self.n += 1\n        return self.n\n\nc = Counter()\nf = c.inc\nf()\nf()\nprint(c.n)",
+    "options": [
+      {
+        "id": "a",
+        "text": "0",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "1",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "2",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "TypeError",
+        "mono": true,
+        "out": "!TypeError"
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "`c.inc` without parentheses is a bound method: it remembers the instance c. Each `f()` therefore runs `Counter.inc(c)` and increments `c.n`, giving 2. This is how a GUI callback such as `command=c.inc` works.",
+    "distractor_notes": {
+      "a": "`f()` does call the method on c.",
+      "b": "The method is called twice.",
+      "d": "A bound method already carries its instance, so `f()` needs no argument."
+    },
+    "slides": [
+      190,
+      191,
+      205
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0023",
+    "chapter": "S5",
+    "topic": "methods",
+    "tags": [
+      "attribute-vs-method",
+      "shadowing",
+      "TypeError"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What happens in the below code?",
+    "code": "class Player:\n    def __init__(self, name):\n        self.name = name\n        self.score = 0\n    def score(self):\n        return 10\n\np = Player('Max')\nprint(p.score())",
+    "options": [
+      {
+        "id": "a",
+        "text": "10",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "TypeError",
+        "mono": true,
+        "out": "!TypeError"
+      },
+      {
+        "id": "c",
+        "text": "0",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "AttributeError",
+        "mono": true,
+        "out": "!AttributeError"
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "Attribute lookup on an instance checks the instance's own attributes before the class. `self.score = 0` stores an int on p that hides the method `score`, so `p.score()` tries to call 0: TypeError ('int' object is not callable).",
+    "distractor_notes": {
+      "a": "The method is hidden (shadowed) by the instance attribute with the same name.",
+      "d": "The attribute exists (it is the int 0); the error is calling it.",
+      "c": "`p.score` alone would be 0, but the parentheses try to call that int."
+    },
+    "slides": [
+      190,
+      191
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0024",
+    "chapter": "S5",
+    "topic": "methods",
+    "tags": [
+      "bank-account",
+      "state"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "class BankAccount:\n    def __init__(self, balance=0):\n        self.balance = balance\n    def withdraw(self, amount):\n        if amount > self.balance:\n            return False\n        self.balance -= amount\n        return True\n\nacc = BankAccount(100)\nprint(acc.withdraw(30), acc.withdraw(80), acc.balance)",
+    "options": [
+      {
+        "id": "a",
+        "text": "True False 70",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "True True -10",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "True False -10",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "False False 100",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "The first withdrawal (30 <= 100) succeeds: balance 70, returns True. The second asks 80 > 70, so the method returns False before subtracting. print's arguments are evaluated left to right, so `acc.balance` is read after both calls: 70.",
+    "distractor_notes": {
+      "b": "The guard `amount > self.balance` refuses the second withdrawal.",
+      "c": "`return False` leaves the method before the subtraction.",
+      "d": "The first withdrawal is allowed (30 is not greater than 100)."
+    },
+    "slides": [
+      190,
+      191,
+      213
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0025",
+    "chapter": "S5",
+    "topic": "methods",
+    "tags": [
+      "vending-machine",
+      "state",
+      "dict.get"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "class Machine:\n    def __init__(self):\n        self.stock = {}\n    def refill(self, product, qty):\n        self.stock[product] = min(10, self.stock.get(product, 0) + qty)\n    def buy(self, product):\n        if self.stock.get(product, 0) > 0:\n            self.stock[product] -= 1\n            return product\n        return None\n\nm = Machine()\nm.refill('soda', 8)\nm.refill('soda', 5)\nm.buy('soda')\nprint(m.stock['soda'], m.buy('chips'))",
+    "options": [
+      {
+        "id": "a",
+        "text": "12 None",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "KeyError",
+        "mono": true,
+        "out": "!KeyError"
+      },
+      {
+        "id": "c",
+        "text": "10 None",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "9 None",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "`refill` caps the quantity at 10: first 8, then min(10, 13) = 10. One soda is bought, leaving 9. `buy('chips')` uses `.get(product, 0)`, which returns 0 for a missing key instead of raising, so the method returns None.",
+    "distractor_notes": {
+      "a": "Forgets the `min(10, ...)` cap: 8 + 5 - 1.",
+      "c": "Forgets that `m.buy('soda')` removed one item.",
+      "b": "`dict.get` never raises KeyError; it returns the default 0."
+    },
+    "slides": [
+      190,
+      191,
+      212
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0026",
+    "chapter": "S5",
+    "topic": "methods",
+    "tags": [
+      "mutating-method",
+      "aliasing",
+      "Point2D"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "class Point2D:\n    def __init__(self, x, y):\n        self.x = x\n        self.y = y\n    def translate(self, dx, dy):\n        self.x += dx\n        self.y += dy\n\np = Point2D(1, 2)\nq = p\nq.translate(3, 3)\nprint(p.x, p.y)",
+    "options": [
+      {
+        "id": "a",
+        "text": "1 2",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "3 3",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "4 5",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "None None",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "q and p name the same object, and `translate` mutates that object in place through `self`. So p also sees x = 1 + 3 = 4 and y = 2 + 3 = 5.",
+    "distractor_notes": {
+      "a": "`q = p` copies the reference, not the point: there is a single object.",
+      "d": "translate returns None, but the code prints the attributes, not the return value.",
+      "b": "translate adds dx and dy to the coordinates, it does not replace them."
+    },
+    "slides": [
+      190,
+      191,
+      210
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0027",
+    "chapter": "S5",
+    "topic": "methods",
+    "tags": [
+      "b.f(x)",
+      "default-argument",
+      "Point2D"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "import math\n\nclass Point2D:\n    def __init__(self, x, y):\n        self.x, self.y = x, y\n    def distance(self, other=None):\n        if other is None:\n            other = Point2D(0, 0)\n        return math.hypot(self.x - other.x, self.y - other.y)\n\na = Point2D(3, 4)\nb = Point2D(6, 8)\nprint(a.distance(), Point2D.distance(b, a))",
+    "options": [
+      {
+        "id": "a",
+        "text": "5 5",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "5.0 5.0",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "TypeError",
+        "mono": true,
+        "out": "!TypeError"
+      },
+      {
+        "id": "d",
+        "text": "5.0 10.0",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "`a.distance()` uses the origin as default: hypot(3, 4) = 5.0. `Point2D.distance(b, a)` is the explicit form of `b.distance(a)`: self is b and other is a, so the result is hypot(3, 4) = 5.0. `math.hypot` returns a float.",
+    "distractor_notes": {
+      "c": "Calling a method through the class with the instance as first argument is valid.",
+      "d": "10.0 is b's distance to the origin; here `other` is a.",
+      "a": "`math.hypot` returns a float, printed as 5.0."
+    },
+    "slides": [
+      190,
+      191,
+      210
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0028",
+    "chapter": "S5",
+    "topic": "methods",
+    "tags": [
+      "forgot-self",
+      "class-call",
+      "TypeError"
+    ],
+    "type": "multi",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "Given the code, which calls raise a TypeError? (Select all that apply.)",
+    "code": "class Net:\n    def ping(self):\n        return 'ping'\n    def pong():\n        return 'pong'\n\nn = Net()",
+    "options": [
+      {
+        "id": "a",
+        "text": "n.ping()",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "Net.ping(n)",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "n.pong()",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "Net.pong()",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "Net.ping()",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c",
+      "e"
+    ],
+    "explanation": "Through an instance, the instance is always passed as first argument: `n.pong()` gives one argument to a function with no parameter → TypeError. Through the class nothing is inserted: `Net.pong()` works (returns 'pong') but `Net.ping()` is missing `self` → TypeError. `n.ping()` and `Net.ping(n)` are two equivalent correct forms.",
+    "distractor_notes": {
+      "a": "Normal call: n becomes self.",
+      "b": "Explicit form of `n.ping()`: n is passed as self by hand.",
+      "d": "Called on the class, no instance is inserted, so a function without parameters works."
+    },
+    "slides": [
+      190,
+      191
+    ],
+    "verify": {
+      "mode": "truth",
+      "probe_template": "try:\n    __OPTION_RAW__\n    print(False)\nexcept TypeError:\n    print(True)"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0029",
+    "chapter": "S5",
+    "topic": "special-methods",
+    "tags": [
+      "__str__",
+      "print"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "class Temp:\n    def __init__(self, deg):\n        self.deg = deg\n    def __str__(self):\n        return f'{self.deg} C'\n\nt = Temp(21)\nprint(t)",
+    "options": [
+      {
+        "id": "a",
+        "text": "21 C",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "21",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "Temp(21)",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "A text like `<__main__.Temp object at 0x...>`",
+        "out": null
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "`print(obj)` converts the object with `str(obj)`, which calls the class's `__str__`. Here it returns '21 C'.",
+    "distractor_notes": {
+      "b": "`__str__` appends ' C' to the number.",
+      "c": "Nothing builds 'Temp(21)'; that would require such a `__str__` or `__repr__`.",
+      "d": "That default text appears only when the class defines neither `__str__` nor `__repr__`."
+    },
+    "slides": [
+      192,
+      193
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0030",
+    "chapter": "S5",
+    "topic": "special-methods",
+    "tags": [
+      "__str__",
+      "__repr__",
+      "containers"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "class Temp:\n    def __str__(self):\n        return 'str'\n    def __repr__(self):\n        return 'repr'\n\nt = Temp()\nprint(t, [t], str(t), repr(t))",
+    "options": [
+      {
+        "id": "a",
+        "text": "str [str] str repr",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "repr [repr] str repr",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "str [repr] str repr",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "str [repr] repr repr",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "print converts each argument with `str()`: for t this calls `__str__` → 'str'. The str of a list shows its elements with `repr()`, so `[t]` prints as [repr]. `str(t)` and `repr(t)` call `__str__` and `__repr__` respectively.",
+    "distractor_notes": {
+      "a": "Containers display their elements with `__repr__`, not `__str__`.",
+      "d": "`str(t)` calls `__str__`.",
+      "b": "When `__str__` is defined, print uses it for the object itself."
+    },
+    "slides": [
+      192,
+      193
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0031",
+    "chapter": "S5",
+    "topic": "special-methods",
+    "tags": [
+      "__str__",
+      "print-vs-return",
+      "TypeError"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What happens in the below code?",
+    "code": "class Score:\n    def __init__(self, v):\n        self.v = v\n    def __str__(self):\n        print('Score', self.v)\n\ns = Score(3)\nprint(s)",
+    "options": [
+      {
+        "id": "a",
+        "text": "Score 3",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "Score 3\nTypeError",
+        "mono": true,
+        "out": "Score 3\n!TypeError"
+      },
+      {
+        "id": "c",
+        "text": "Score 3\nNone",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "TypeError",
+        "mono": true,
+        "out": "!TypeError"
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "`print(s)` calls `__str__`, which prints 'Score 3' as a side effect but returns None. `__str__` must return a string, so Python then raises TypeError (__str__ returned non-string).",
+    "distractor_notes": {
+      "a": "The text is printed, but the missing `return` then causes an error.",
+      "d": "'Score 3' is printed inside `__str__` before the check fails.",
+      "c": "None is not accepted as the result of `__str__`; nothing prints 'None'."
+    },
+    "slides": [
+      192,
+      193
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0032",
+    "chapter": "S5",
+    "topic": "special-methods",
+    "tags": [
+      "__eq__",
+      "identity"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "class Coin:\n    def __init__(self, value):\n        self.value = value\n\na = Coin(2)\nb = Coin(2)\nprint(a == b, a.value == b.value)",
+    "options": [
+      {
+        "id": "a",
+        "text": "False True",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "True True",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "False False",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "TypeError",
+        "mono": true,
+        "out": "!TypeError"
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "Without `__eq__`, `==` between two objects falls back to identity (like `is`). a and b are two distinct objects, so `a == b` is False even though their attributes are equal. Comparing the int attributes gives True.",
+    "distractor_notes": {
+      "c": "2 == 2 is True.",
+      "d": "`==` always works between objects; by default it tests identity.",
+      "b": "Python does not compare attributes automatically; you must define `__eq__`."
+    },
+    "slides": [
+      192,
+      193
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0033",
+    "chapter": "S5",
+    "topic": "special-methods",
+    "tags": [
+      "__eq__",
+      "in",
+      "is"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "class Coin:\n    def __init__(self, value):\n        self.value = value\n    def __eq__(self, other):\n        return self.value == other.value\n\npurse = [Coin(1), Coin(2)]\nprint(Coin(2) in purse, Coin(2) is purse[1])",
+    "options": [
+      {
+        "id": "a",
+        "text": "False True",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "False False",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "True True",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "True False",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "d"
+    ],
+    "explanation": "`in` on a list compares the elements with `==`, which now calls `__eq__` and compares values: a new Coin(2) is found → True. `is` still tests identity and cannot be overridden: a brand-new object is never the object stored in the list → False.",
+    "distractor_notes": {
+      "b": "`in` uses `==`, which is overridden here to compare values.",
+      "c": "`is` compares identity, and `Coin(2)` creates a new object.",
+      "a": "Reversed: the value test succeeds, the identity test fails."
+    },
+    "slides": [
+      192,
+      193
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0034",
+    "chapter": "S5",
+    "topic": "special-methods",
+    "tags": [
+      "__len__",
+      "truthiness"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "class Playlist:\n    def __init__(self, songs):\n        self.songs = songs\n    def __len__(self):\n        return len(self.songs)\n\np = Playlist(['a', 'b', 'c'])\nprint(len(p), bool(Playlist([])))",
+    "options": [
+      {
+        "id": "a",
+        "text": "TypeError",
+        "mono": true,
+        "out": "!TypeError"
+      },
+      {
+        "id": "b",
+        "text": "3 True",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "3 False",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "3 None",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "`len(p)` calls `p.__len__()` → 3. When a class has no `__bool__`, truth testing uses `__len__`: a length of 0 means False.",
+    "distractor_notes": {
+      "b": "Objects are always truthy only when they define neither `__bool__` nor `__len__`.",
+      "d": "`bool()` always returns True or False.",
+      "a": "`len()` works because `__len__` is defined."
+    },
+    "slides": [
+      192,
+      193
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0035",
+    "chapter": "S5",
+    "topic": "special-methods",
+    "tags": [
+      "__len__",
+      "TypeError"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What happens in the below code?",
+    "code": "class Team:\n    def __init__(self, members):\n        self.members = members\n\nt = Team(['Ana', 'Bob'])\nprint(len(t))",
+    "options": [
+      {
+        "id": "a",
+        "text": "2",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "TypeError",
+        "mono": true,
+        "out": "!TypeError"
+      },
+      {
+        "id": "c",
+        "text": "0",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "AttributeError",
+        "mono": true,
+        "out": "!AttributeError"
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "`len(obj)` only works if the object's class defines `__len__`. Team does not, so Python raises TypeError (object of type 'Team' has no len()). Python does not look inside the attributes: you would write `len(t.members)`.",
+    "distractor_notes": {
+      "a": "That is `len(t.members)`.",
+      "d": "`len()` reports a missing `__len__` as a TypeError.",
+      "c": "There is no default length of 0."
+    },
+    "slides": [
+      192,
+      193
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0036",
+    "chapter": "S5",
+    "topic": "special-methods",
+    "tags": [
+      "__getitem__",
+      "__setitem__",
+      "negative-index"
+    ],
+    "type": "single",
+    "difficulty": 2,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "class Shelf:\n    def __init__(self, n):\n        self._slots = [None] * n\n    def __setitem__(self, i, item):\n        self._slots[i] = item\n    def __getitem__(self, i):\n        return self._slots[i]\n\ns = Shelf(3)\ns[0] = 'cup'\ns[-1] = 'pot'\nprint(s[2], s[1])",
+    "options": [
+      {
+        "id": "a",
+        "text": "pot None",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "None None",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "cup None",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "IndexError",
+        "mono": true,
+        "out": "!IndexError"
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "`s[i] = v` calls `s.__setitem__(i, v)` and `s[i]` calls `s.__getitem__(i)`. Both forward the index to the inner list, so negative indices behave as for a list: `s[-1]` is slot 2. Slot 1 was never set and is still None.",
+    "distractor_notes": {
+      "b": "`s[-1] = 'pot'` wrote into slot 2.",
+      "c": "'cup' is in slot 0, not slot 2.",
+      "d": "-1 is a valid list index; it is forwarded to the list."
+    },
+    "slides": [
+      192,
+      193
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0037",
+    "chapter": "S5",
+    "topic": "special-methods",
+    "tags": [
+      "__getitem__",
+      "__setitem__",
+      "__len__",
+      "slice"
+    ],
+    "type": "multi",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "Given the code, which statements run without raising an error? (Select all that apply.)",
+    "code": "class Shelf:\n    def __init__(self, items):\n        self._items = items\n    def __getitem__(self, i):\n        return self._items[i]\n\ns = Shelf(['cup', 'pot', 'pan'])",
+    "options": [
+      {
+        "id": "a",
+        "text": "s[0]",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "s[-1]",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "s[1:]",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "s[0] = 'mug'",
+        "mono": true
+      },
+      {
+        "id": "e",
+        "text": "len(s)",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a",
+      "b",
+      "c"
+    ],
+    "explanation": "Reading with `[]` only needs `__getitem__`, which forwards its argument to the list: an int, a negative int, or even a slice object (`s[1:]` passes `slice(1, None)` and returns ['pot', 'pan']). Assignment needs `__setitem__` and `len()` needs `__len__`: both raise TypeError here.",
+    "distractor_notes": {
+      "d": "Item assignment needs `__setitem__` → TypeError (does not support item assignment).",
+      "e": "`len()` needs `__len__` → TypeError."
+    },
+    "slides": [
+      192,
+      193
+    ],
+    "verify": {
+      "mode": "truth",
+      "probe_template": "try:\n    __OPTION_RAW__\n    print(True)\nexcept Exception:\n    print(False)"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0038",
+    "chapter": "S5",
+    "topic": "special-methods",
+    "tags": [
+      "__call__",
+      "callable-object"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What is the output of the following code?",
+    "code": "class Multiplier:\n    def __init__(self, k):\n        self.k = k\n    def __call__(self, x):\n        return self.k * x\n\ndouble = Multiplier(2)\nprint(double(21))",
+    "options": [
+      {
+        "id": "a",
+        "text": "TypeError",
+        "mono": true,
+        "out": "!TypeError"
+      },
+      {
+        "id": "b",
+        "text": "2",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "42",
+        "mono": true
+      },
+      {
+        "id": "d",
+        "text": "21",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "c"
+    ],
+    "explanation": "Defining `__call__` makes the instances callable like functions: `double(21)` runs `double.__call__(21)`, which returns 2 * 21 = 42.",
+    "distractor_notes": {
+      "b": "2 is the stored factor, but the call multiplies it by x.",
+      "d": "x is multiplied by k, not returned unchanged.",
+      "a": "Objects whose class defines `__call__` are callable."
+    },
+    "slides": [
+      192,
+      193
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0039",
+    "chapter": "S5",
+    "topic": "special-methods",
+    "tags": [
+      "__add__",
+      "operator-overloading"
+    ],
+    "type": "single",
+    "difficulty": 1,
+    "source": "generated",
+    "stem": "What will be the output of the code?",
+    "code": "class Vector:\n    def __init__(self, x, y):\n        self.x, self.y = x, y\n    def __add__(self, other):\n        return Vector(self.x + other.x, self.y + other.y)\n    def __str__(self):\n        return f'({self.x}, {self.y})'\n\nprint(Vector(1, 2) + Vector(3, 4))",
+    "options": [
+      {
+        "id": "a",
+        "text": "(1, 2, 3, 4)",
+        "mono": true
+      },
+      {
+        "id": "b",
+        "text": "(4, 6)",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "TypeError",
+        "mono": true,
+        "out": "!TypeError"
+      },
+      {
+        "id": "d",
+        "text": "(3, 8)",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "`v1 + v2` is executed as `v1.__add__(v2)`, which returns a new Vector(1 + 3, 2 + 4). print then uses `__str__`: (4, 6).",
+    "distractor_notes": {
+      "c": "`+` works because `__add__` is defined.",
+      "d": "That is component-wise multiplication; `__add__` adds.",
+      "a": "That would be tuple concatenation; here `+` runs `__add__`."
+    },
+    "slides": [
+      192,
+      193
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  },
+  {
+    "id": "S5-0040",
+    "chapter": "S5",
+    "topic": "special-methods",
+    "tags": [
+      "__add__",
+      "sum",
+      "__radd__",
+      "TypeError"
+    ],
+    "type": "single",
+    "difficulty": 3,
+    "source": "generated",
+    "stem": "What happens in the below code?",
+    "code": "class Money:\n    def __init__(self, amount):\n        self.amount = amount\n    def __add__(self, other):\n        return Money(self.amount + other.amount)\n\nwallet = [Money(5), Money(7)]\ntotal = sum(wallet)\nprint(total.amount)",
+    "options": [
+      {
+        "id": "a",
+        "text": "TypeError",
+        "mono": true,
+        "out": "!TypeError"
+      },
+      {
+        "id": "b",
+        "text": "12",
+        "mono": true
+      },
+      {
+        "id": "c",
+        "text": "AttributeError",
+        "mono": true,
+        "out": "!AttributeError"
+      },
+      {
+        "id": "d",
+        "text": "0",
+        "mono": true
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "`sum()` starts from 0 and first computes `0 + Money(5)`. int does not know how to add a Money, and Money has no `__radd__` for the reflected operation, so TypeError is raised. `Money(5) + Money(7)` works, and so does `sum(wallet, Money(0))`.",
+    "distractor_notes": {
+      "c": "Python reports an unsupported `+` as TypeError (unsupported operand type(s)).",
+      "d": "sum does not skip items it cannot add.",
+      "b": "That needs a Money start value: `sum(wallet, Money(0))`."
+    },
+    "slides": [
+      192,
+      193
+    ],
+    "verify": {
+      "mode": "output"
+    },
+    "reviewed": 1
+  }
+]
