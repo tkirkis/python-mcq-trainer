@@ -1,5 +1,5 @@
 import type { Question } from '../types';
-import { highlightPython, inlineMd, slidesLabel } from '../lib/text';
+import { codeSpans, highlightPython, inlineMd, slidesLabel } from '../lib/text';
 import { getBank } from '../lib/app';
 
 export function Code({ code }: { code: string }) {
@@ -69,9 +69,9 @@ export function QuestionView({ q, selected, onToggle, reveal, disabled, showMeta
               >
                 <span className={`mark ${multi ? 'box' : 'radio'}`} aria-hidden="true" />
                 <span className={`otext${o.mono ? ' mono' : ''}`}>
-                  {o.text}
-                  {reveal && isRight && <span className="note">✓ correct{note ? ` — ${note}` : ''}</span>}
-                  {note && !isRight && <span className="note">{note}</span>}
+                  {o.mono ? o.text : <span dangerouslySetInnerHTML={{ __html: codeSpans(o.text) }} />}
+                  {reveal && isRight && <span className="note" dangerouslySetInnerHTML={{ __html: `✓ correct${note ? ` — ${codeSpans(note)}` : ''}` }} />}
+                  {note && !isRight && <span className="note" dangerouslySetInnerHTML={{ __html: codeSpans(note) }} />}
                 </span>
                 <span className="key" aria-hidden="true">
                   {i + 1}

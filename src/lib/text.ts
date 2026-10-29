@@ -43,6 +43,14 @@ export function highlightPython(code: string): string {
   return out + escapeHtml(code.slice(last));
 }
 
+/** Only `code` spans (safe for option texts that contain *args / **kwargs). */
+export function codeSpans(s: string): string {
+  return s
+    .split(/(`[^`\n]+`)/g)
+    .map((p) => (p.length > 2 && p.startsWith('`') && p.endsWith('`') ? `<code>${escapeHtml(p.slice(1, -1))}</code>` : escapeHtml(p)))
+    .join('');
+}
+
 /** Inline markdown: `code`, **bold**, *italic*, line breaks / paragraphs. Input is escaped first. */
 export function inlineMd(s: string): string {
   const parts = s.split(/(`[^`]+`)/g);

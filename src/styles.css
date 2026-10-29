@@ -181,7 +181,7 @@ input[type='checkbox'] { min-height: auto; width: 20px; height: 20px; }
 /* ---------------------------------------------------------------- questions */
 .q-meta { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); margin-bottom: 8px; flex-wrap: wrap; }
 .q-stem { font-size: 17px; margin: 0 0 12px; overflow-wrap: anywhere; }
-.q-stem code, .expl code, .lesson code { font-size: 0.9em; background: var(--code-bg); color: var(--code-text); padding: 1px 5px; border-radius: 5px; }
+.q-stem code, .expl code, .lesson code, .otext code, .note code { font-size: 0.9em; background: var(--code-bg); color: var(--code-text); padding: 1px 5px; border-radius: 5px; }
 pre.code {
   margin: 0 0 14px; padding: 12px 14px; background: var(--code-bg); color: var(--code-text);
   border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; font-size: 14px; line-height: 1.5;
